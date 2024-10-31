@@ -6,39 +6,37 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/10/30 19:01:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:50:04 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+#include "include/minishell.h"
 
 int	main(int argc, char **argv)
 {
 	char	*input;
-
+	printf("ARGC: %d, ARGV:%s\n", argc, argv[0]); // added this just to avoid compilation error
 	while (1)
 	{
-		// Display the shell prompt and wait for user input
-		input = readline("Minishell> ");
+		input = readline("Minishell> "); // suppression file (.supp) is needed to suppress readline leaks
 
-		// Check for end-of-file (EOF) or "exit" command to terminate
-		if (!input || strcmp(input, "exit") == 0) {
+		if (!input || ft_strncmp(input, "exit", 4) == 0)
+		{
 			free(input);
 			printf("Exiting Minishell...\n");
-			exit(0); // Terminate the program immediately
+			exit (0); // Terminate the program immediately
 		}
-		// Process the input (replace this with actual parsing and execution)
-		if (strlen(input) > 0) {
-			add_history(input); // Adds to command history
+		if (ft_strlen(input) > 0)
+		{
+			add_history(input);
 			printf("You entered: %s\n", input); // Placeholder for command processing
+		}
+		if (ft_strncmp(input, "echo ", 5) == 0)
+		{
+			printf("%s\n", input + 5);
 		}
 		free(input);
 	}
-
+	rl_clear_history(); // shouldn't this run in the while loop? (outside if statements)
 	return (0);
 }
