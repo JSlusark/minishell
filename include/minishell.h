@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/10/31 18:17:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/01 08:44:19 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include	<unistd.h>
 #include	<readline/readline.h>
 #include	<readline/history.h>
+#include	"../libft/libft.h"
+#include	"tree_struct.h"
 
-size_t	ft_strlen(char const *s);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 
 #endif

@@ -1,3 +1,6 @@
+#ifndef TREE_STRUCT_H
+# define TREE_STRUCT_H
+
 /*
 STRUCTS ARE AT END OF FILE.
 
@@ -90,3 +93,5 @@ typedef struct s_tree
 	int tree_len;        // Total length of the command sequence/tree, could be tracked elsewhere too
 	struct s_tree *next;
 } t_tree;
+
+#endif
