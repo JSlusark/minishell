@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/01 08:44:19 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:01:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 #include	<readline/history.h>
 #include	"../libft/libft.h"
 #include	"tree_struct.h"
-
-
+// CALL VALGRIND SUPPRESSION:
+// valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
 
 #endif
 
