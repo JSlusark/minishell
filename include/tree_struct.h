@@ -1,6 +1,8 @@
 #ifndef TREE_STRUCT_H
 # define TREE_STRUCT_H
 
+#define MAXARGS 10
+
 /*
 STRUCTS ARE AT END OF FILE.
 
@@ -83,6 +85,15 @@ typedef enum e_token_type // check how many times we actually need
 } t_token_type;
 
 
+typedef enum s_node_type
+{
+	N_EXEC,
+	N_REDIR,
+	N_PIPE,
+	N_LIST, //for `;` `&&` and `||`
+	N_BACK
+} t_node_type;
+
 typedef struct s_tree
 {
 	struct s_tree *prev;
@@ -93,5 +104,50 @@ typedef struct s_tree
 	int tree_len;        // Total length of the command sequence/tree, could be tracked elsewhere too
 	struct s_tree *next;
 } t_tree;
+
+typedef struct s_cmd
+{
+	t_node_type type;
+} t_cmd;
+
+typedef struct s_execcmd
+{
+	t_node_type type;
+	char *argv[MAXARGS];
+	char *eargv[MAXARGS];
+}
+
+typedef struct s_pipecmd
+{
+	t_node_type type;
+	t_cmd *left;
+	t_cmd *right;
+} t_pipecmd;
+
+typedef struct s_redircmd
+{
+	t_node_type type;
+	t_cmd *cmd;
+	char *file;
+	char *efile;
+	int mode;
+	int fd;
+}
+
+typedef struct s_listcmd
+{
+	t_node_type type;
+	t_cmd *left;
+	t_cmd *right;
+} t_listcmd;
+
+typedef struct s_backcmd
+{
+	t_node_type type;
+	t_cmd *cmd;
+} t_backcmd;
+
+
+
 
 #endif
