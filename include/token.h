@@ -1,3 +1,10 @@
+/*
+
+Defines the types of tokens and the structure of a token used in the shell
+
+ */
+
+
 #ifndef TOKEN_H
 #define TOKEN_H
 
