@@ -28,7 +28,14 @@ typedef enum e_token_type
 typedef struct s_token
 {
 	t_token_type type;
-	char lexeme; //this needs to be an slice. To hold more than a char.
+	//char lexeme; //this needs to be an slice. To hold more than a char.
+	t_slice slice;
 } t_token;
 
 #endif
+
+typedef struct s_slice
+{
+	char *start; //Pointer to the start of the lexeme. (For 'echo' start is pointing to the 'e')
+	char *end; //Pointer to the last character of the lexeme
+} t_slice;
