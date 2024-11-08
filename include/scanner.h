@@ -12,7 +12,7 @@
 typedef struct s_scanner
 {
 	t_char_itr char_itr;
-	char next; //In real scanner this will be a token... like the next token?
+	//char next; //In real scanner this will be a token... like the next token?
 	t_token next; // Like this one?
 } t_scanner;
 

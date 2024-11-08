@@ -1,3 +1,10 @@
+
+/* I think we can delete this file as it is
+already contained in the other files like node.h */
+
+
+
+
 #ifndef TREE_STRUCT_H
 # define TREE_STRUCT_H
 

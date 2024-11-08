@@ -24,6 +24,11 @@ typedef enum e_token_type
 	UNKNOWN         // Any unrecognized or invalid token
 } t_token_type;
 
+typedef struct s_slice
+{
+	char *start; //Pointer to the start of the lexeme. (For 'echo' start is pointing to the 'e')
+	size_t length; //Lexeme length.
+} t_slice;
 
 typedef struct s_token
 {
@@ -34,8 +39,4 @@ typedef struct s_token
 
 #endif
 
-typedef struct s_slice
-{
-	char *start; //Pointer to the start of the lexeme. (For 'echo' start is pointing to the 'e')
-	char *end; //Pointer to the last character of the lexeme
-} t_slice;
+

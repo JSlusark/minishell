@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/06 16:50:51 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/08 12:09:04 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CHAR_ITR_H
 
 #include <stdlib.h>
-#include <stdbool.h>
+#include <stdio.h>
 
 typedef struct s_chart_itr
 {
@@ -23,7 +23,7 @@ typedef struct s_chart_itr
 } t_char_itr;
 
 // value lifetime dependes of the start reference
-t_char_itr chart_itr_value(const char *star, size_t length);
+t_char_itr char_itr_value(const char *star, size_t length);
 
 //Returns pointer to the current location of iterator cursor porinter.
 const char* char_itr_cursor(const t_char_itr *self);
