@@ -3,6 +3,8 @@
 
 typedef enum e_token_type
 {
+	OPERATOR,        // Operators like '>', '|'... etc. Not sure.
+	WORD,           //Any string that can be classify later as cmd, or file or string...
 	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
 	PATH,           // Path values (e.g., "/usr/bin", "../")
 	//INTEGER,        // Integer literals (e.g., "123")

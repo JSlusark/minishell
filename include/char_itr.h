@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/08 12:09:04 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/08 14:50:21 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,10 @@ char char_itr_peek(const t_char_itr *self);
 
 //read next char and advance cursor. Will crash out of bound if no more chars to consume
 char char_itr_next(t_char_itr *self);
+
+//Function to skip whitespaces
+
+	while(char_itr.cursor == ' ')
+		char_itr.cursor += 1;
 
 #endif
