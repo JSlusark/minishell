@@ -5,10 +5,10 @@ typedef enum e_token_type
 {
 	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
 	PATH,           // Path values (e.g., "/usr/bin", "../")
-	INTEGER,        // Integer literals (e.g., "123")
+	//INTEGER,        // Integer literals (e.g., "123")
 	OPTION,         // Command options (e.g., "-l", "-a")
-	REDIRECT_IN,    // Input redirection ("<")
-	REDIRECT_OUT,   // Output redirection (">")
+	REDIR_IN,    // Input redirection ("<")
+	REDIR_OUT,   // Output redirection (">")
 	APPEND_OUT,     // Append redirection (">>")
 	HEREDOC,        // Here-document redirection ("<<")
 	PIPE,           // Pipe operator ("|")
@@ -21,6 +21,8 @@ typedef enum e_token_type
 	//SEMICOLON,      // Command separator (";")
 	DELIMITERS,
 	FILENAME,
+	D_QUOTES,
+	S_QUOTES,
 	UNKNOWN         // Any unrecognized or invalid token
 } t_token_type;
 
@@ -34,8 +36,18 @@ typedef struct s_token
 {
 	t_token_type type;
 	//char lexeme; //this needs to be an slice. To hold more than a char.
-	t_slice slice;
+	t_slice lexeme;
 } t_token;
+
+
+t_token take_command();
+t_token take_redir_in();
+t_token take_redir_out();
+t_token take_pipe();
+
+
+void print_token(const t_token token);
+
 
 #endif
 
