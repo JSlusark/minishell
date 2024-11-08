@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 18:17:51 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:37:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ For example, "echo hello" where:
 - next represents the next tokens that are used following echo (e.g. "hello"). */
 typedef struct s_command_node
 {
-	t_token	curr; // Main command token (type:"COMMAND" lexeme:"echo")
-	t_token	next; // Argument or option that follows the command (type:"STRING" lexeme:"hello")
+	t_token	*curr; // Main command token (type:"COMMAND" lexeme:"echo")
+	t_token	*next; // Argument or option that follows the command (type:"STRING" lexeme:"hello")
 }	t_command_node;
 
 
@@ -51,7 +51,7 @@ This allows a node to be either a simple command or a binary operation. */
 typedef union s_node_value
 {
 	t_binary_node	pair_node; // Stores a binary operation node
-	t_command_node	command_sequence; // Stores a single command sequence node
+	t_command_node	*command_sequence; // Stores a single command sequence node
 }	t_node_value;
 
 
