@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:49:20 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 16:53:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:54:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ t_node	*parse_tree(t_scanner *scanner)
 			}
 		}
 	}
-	// // Add more token handling as needed (e.g., APPEND_OUT, HEREDOC, etc.)
+	// moe token handling as needed (e.g., APPEND_OUT, HEREDOC, etc.)
 
 	return (node);
 }
