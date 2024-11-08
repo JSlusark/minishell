@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 18:46:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:50:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /* Defines two types of nodes for the tree structure:
 - BINARY: For operations with two sides (like pipes and redirections).
-- SINGLE: For simple command sequences (like "echo hello"). */
+- COMMAND: For simple command sequences (like "echo hello"). */
 typedef enum s_node_type
 {
 	BINARY,
@@ -56,11 +56,11 @@ typedef union s_node_value
 
 
 /* Main node structure:
-- node_type specifies if it's a BINARY or SINGLE node.
+- node_type specifies if it's a BINARY or COMMAND node.
 - data stores the actual node data, either a command sequence or a binary operation. */
 typedef struct s_node
 {
-	t_node_type				node_type; // Type of node (BINARY or SINGLE)
+	t_node_type				node_type; // Type of node (BINARY or COMMMAND)
 	t_node_value			data; // Actual data for the node
 }	t_node;
 
