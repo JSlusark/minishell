@@ -1,7 +1,7 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-SRC	= main.c src.c
+SRC	= main.c
 
 HEADERS	= ./include/minishell.h ./include/tree_struct.h
 
