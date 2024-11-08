@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/08 14:50:21 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:36:07 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_char_itr char_itr_value(const char *star, size_t length);
 const char* char_itr_cursor(const t_char_itr *self);
 
 //Returns true when there are aditional chars to consume on the iterable range
-int chart_itr_has_next(const t_char_itr *self);
+int char_itr_has_next(const t_char_itr *self);
 
 //peek and return the next character. Do not advance the cursor. Will crash out of bound if no more chars to consume
 char char_itr_peek(const t_char_itr *self);
@@ -38,8 +38,6 @@ char char_itr_peek(const t_char_itr *self);
 char char_itr_next(t_char_itr *self);
 
 //Function to skip whitespaces
-
-	while(char_itr.cursor == ' ')
-		char_itr.cursor += 1;
+void whitespaces (t_char_itr *self);
 
 #endif

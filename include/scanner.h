@@ -33,7 +33,7 @@ int scanner_has_next(const t_scanner *self);
 //This returns the token without advancind the iterator.
 t_token scanner_peek(const t_scanner *self);
 
-//This returns the token advancind the iterator.
+//This returns the token advancing the iterator.
 t_token scanner_next(t_scanner *self);
 
 // This functions returns the tokens. Not sure about this one.

@@ -1,6 +1,8 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+#include <stdlib.h>
+
 typedef enum e_token_type
 {
 	OPERATOR,        // Operators like '>', '|'... etc. Not sure.
@@ -30,7 +32,7 @@ typedef enum e_token_type
 
 typedef struct s_slice
 {
-	char *start; //Pointer to the start of the lexeme. (For 'echo' start is pointing to the 'e')
+	const char *start; //Pointer to the start of the lexeme. (For 'echo' start is pointing to the 'e')
 	size_t length; //Lexeme length.
 } t_slice;
 
@@ -41,6 +43,7 @@ typedef struct s_token
 	t_slice lexeme;
 } t_token;
 
+t_token new_token (t_token_type type, char *start, size_t length);
 
 t_token take_command();
 t_token take_redir_in();
