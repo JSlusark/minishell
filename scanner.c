@@ -12,7 +12,7 @@ t_token scanner_peek(const t_scanner *self)
 t_token scanner_next(t_scanner *self)
 {}
 
-// This functions returns the tokens.
+// This functions returns the tokens. Not sure...
 void parse(t_scanner *scanner)
 {
 	t_token next = scanner_peek(scanner);

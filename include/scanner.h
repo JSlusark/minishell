@@ -24,7 +24,7 @@ typedef struct s_scanner
 	t_token next; // Like this one?
 } t_scanner;
 
-
+//Initializing the scanner struct.
 t_scanner scanner_value(t_char_itr char_itr);
 
 //Returns 1 if there is more tokens to read, and 0 is not.
