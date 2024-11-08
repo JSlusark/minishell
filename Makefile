@@ -3,7 +3,7 @@ LIBFT = libft/libft.a
 
 SRC	= main.c
 
-HEADERS	= ./include/minishell.h ./include/tree_struct.h
+HEADERS	= ./include/minishell.h ./include/tree_struct.h ./include/node.h ./include/scanner.h
 
 OBJS	= $(SRC:.c=.o)
 

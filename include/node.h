@@ -6,12 +6,16 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 13:18:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/08 16:18:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
+
+
+// taken from following step by step kris jordan's
+// video, this needs a more specific approach based on our minishell requirements
 
 typedef enum s_node_type
 {
@@ -37,7 +41,7 @@ typedef struct s_node
 {
 	t_node_type				node_type;
 	t_node_value			data;
-}	t_node;
 
+}	t_node;
 
 #endif
