@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 18:37:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/08 18:46:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 typedef enum s_node_type
 {
 	BINARY,
-	SINGLE,
+	COMMAND,
 }	t_node_type;
 
 /* Represents a single command or a command sequence with arguments/options.
