@@ -20,7 +20,7 @@ clasifying nodes.
 typedef struct s_scanner
 {
 	t_char_itr char_itr;
-	//char next; //In real scanner this will be a token... like the next token?
+	char char_next; //I do not know for what we could use this... but for know let's use it for storing the char when using scanner_next()
 	t_token next; // Like this one?
 } t_scanner;
 

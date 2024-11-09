@@ -1,4 +1,5 @@
 #include "include/char_itr.h"
+#include "include/minishell.h" // to Include libft, right?
 
 // value lifetime dependes of the start reference
 t_char_itr char_itr_value(const char *star, size_t length)
@@ -8,12 +9,25 @@ t_char_itr char_itr_value(const char *star, size_t length)
 	itr.sentinel1 = star + length;
 	return(itr);
 }
-//Whitespaces function
-void whitespaces (t_char_itr *self)
+//skip_ function
+void skip_whitespaces (t_char_itr *self)
 {
-	char whitespaces[] = " \t\r\n\a\""; //token delimiters
-	while(self->cursor < self->sentinel1 && ft_strchr(whitespaces), *self->cursor)
-		char_itr_next(self);
+	char whitespaces[] = WHITESPACES; //token delimiters
+	const char *start = self->cursor;
+	int count = 0;
+	while(self->cursor && self->cursor < self->sentinel1 && ft_strchr(whitespaces, *self->cursor))
+	{
+			self->cursor++;
+			count++;
+	}
+	if (count > 0)
+		printf("Skipped %d whitespaces from %p to %p\n", count, start, self->cursor);
+	}
+
+int is_whitespace (t_char_itr *self)
+{
+	char whitespaces[] = WHITESPACES; //token delimiters
+	return(self->cursor && self->cursor < self->sentinel1 && ft_strchr(whitespaces, *self->cursor));
 }
 
 //Returns true when there are aditional chars to consume on the iterable range

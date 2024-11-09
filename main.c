@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 13:09:15 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/09 18:49:47 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 {
 	char	*input;
 	t_char_itr itr;
+	t_scanner scanner;
 	int i;
 
 	printf("ARGC: %d, ARGV:%s\n", argc, argv[0]); // added this just to avoid compilation error
@@ -42,14 +43,16 @@ int	main(int argc, char **argv)
 		}
 		// The itr struct is initialized with the input and the length of it.
 		itr = char_itr_value(input, ft_strlen(input));
+		scanner = scanner_value(itr);
 		// We need to initialize the scanner, with scanner_value(itr);
+
 		printf("Printing pointers input via itr\n");
 		printf("Original cursor: %p\n", itr.cursor);
 		i = 0;
 		while((size_t)i < ft_strlen(input))
 		{
 			char_itr_cursor (&itr);
-			chart_itr_has_next(&itr);
+			char_itr_has_next(&itr);
 			char_itr_peek(&itr);
 			char_itr_next(&itr);
 			char_itr_cursor (&itr);
