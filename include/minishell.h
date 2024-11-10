@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/10 16:37:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:06:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 
 // PARSING STRUCTS
-#include	"tree_struct.h"
 #include	"token.h"
 #include	"node.h"
 #include	"scanner.h"
