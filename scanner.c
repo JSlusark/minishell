@@ -8,12 +8,16 @@ iterator located at the first token and the first token.
 t_scanner scanner_value(t_char_itr char_itr)
 {
 	t_scanner scanner;
-	t_token next; // we really need to have the token in the t_scanner struct?
+	t_token token; // we really need to have the token in the t_scanner struct?
 
-	//skip_whitespaces(&char_itr); //ya se hace en scanner_next()
-	next = scanner_next(&scanner);
+	//skip_whitespaces(&char_itr); //It's already done in scanner_next()
+	ft_memset(&token, 0, sizeof(t_token));
 	scanner.char_itr = char_itr;
-	scanner.next = next;
+	scanner.next = token; //Here I am assigning the token initialized with memset.
+	token = scanner_next(&scanner); //Then I use scanner_next to produce the token.
+	scanner.next = token; //Here I make sure that the token is saved in the scanner struct.
+
+
 	return(scanner);
 }
 
@@ -37,8 +41,10 @@ t_token scanner_next(t_scanner *self)
 	while (*self->char_itr.cursor != '\0' && self->char_itr.cursor < self->char_itr.sentinel1)
 	if (*self->char_itr.cursor == '|')
 		{
+			//printf("I found a pipe!\n");
 			token = new_token (PIPE, (char *)self->char_itr.cursor, 1);
 			print_token(token);
+			printf("Iterator advance, after printing token\n");
 			self->char_next = char_itr_next(&self->char_itr); //we need to advance the iterator anyway... but the return is a char, what we should do... not sure if later we can use this char.
 		}
 	return (token);

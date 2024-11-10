@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/09 18:49:47 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/10 16:22:47 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	main(int argc, char **argv)
 		printf("Printing pointers input via itr\n");
 		printf("Original cursor: %p\n", itr.cursor);
 		i = 0;
+		//printf("second skip whitespaces\n");
+		//skip_whitespaces(&itr);
 		while((size_t)i < ft_strlen(input))
 		{
 			char_itr_cursor (&itr);

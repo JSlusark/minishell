@@ -17,7 +17,8 @@ void skip_whitespaces (t_char_itr *self)
 	int count = 0;
 	while(self->cursor && self->cursor < self->sentinel1 && ft_strchr(whitespaces, *self->cursor))
 	{
-			self->cursor++;
+			char_itr_next(self);
+			//self->cursor++; //++ is not updating the pointer!
 			count++;
 	}
 	if (count > 0)
@@ -33,6 +34,7 @@ int is_whitespace (t_char_itr *self)
 //Returns true when there are aditional chars to consume on the iterable range
 int char_itr_has_next(const t_char_itr *self)
 {
+	//I have some doubts about this function... Not sure if instead of self->cursor i need to go fo self->cursor + 1. To see what is the next one... But when doing so Am i advancing the iterator? Should i create a copy?
 	printf("Itr has more chars? R: %i\n", *self->cursor != '\n' && *self->cursor != '\0');
 	return(*self->cursor != '\n' && *self->cursor != '\0');
 }
@@ -63,7 +65,7 @@ char char_itr_next(t_char_itr *self)
 	else
 	{
 		fprintf(stderr, "%s:%d - Out of Bounds", __FILE__, __LINE__);
-		exit(EXIT_FAILURE);exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 }
 
