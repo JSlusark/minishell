@@ -1,43 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_from_scanner.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 18:28:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:58:14 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h" // For token definitions and scanner function declarations
 
-// Forward declaration for helper parsing functions
-static t_node *parse_command(t_scanner *scanner);
-// static t_node *parse_binary(t_scanner *scanner, t_token operator);
-
-
-/* Primary parsing function that initiates parsing based on the first token.
-It checks if there is a next token and determines the node type based on the token returned from scanner. */
-t_node	*parse(t_scanner *scanner) // called recursiveli i suppose?
+/* Parses a binary operation (pipe or redirection).
+This function creates a pair node, sepatared by the operator in the middle recursively parsing
+the left and right sides of the operator. */
+static t_node	*parse_binary(t_scanner *scanner, t_token operator)
 {
-	t_token	token;
+	t_binary_node	*pair;
+	t_node *container_node;
 
-	if (!scanner_has_next(scanner))
-		return (NULL); // No tokens left to parse
-	token = scanner_peek(scanner); 	// To see if token is present
-	switch (token.type)
+	// Advance past the operator token
+	scanner_next(scanner);
+	// Allocate memory for the binary node structure
+	pair = malloc(sizeof(t_binary_node));
+	if (!pair)
+		return NULL; // Handle memory allocation failure
+	pair->node_l = parse(scanner);  // Recursively parse for the left command or expression
+	pair->pair_operator = operator; // Store the operator token "| "
+	pair->node_r = parse(scanner);  // Recursively parse for the right command, expression, or file
+
+	// Create a main node for the binary operation and assign the binary node to it
+	container_node = malloc(sizeof(t_node));
+	if (!node)
 	{
-		case COMMAND:
-			return (parse_command(scanner)); // Handles command nodes, whall we also pass token?
-		// case PIPE:
-		// case REDIR_IN:
-		// case REDIR_OUT:
-		// case APPEND_OUT:
-		// 	return (parse_binary(scanner, token)); // Handles binary operations - COMMAND LINES CAN NEVER START WITH THESE TOKENS THOUGH NO?
-		default:
-			return (NULL); // Placeholder for unsupported tokens or error handling
+		free(pair); // Clean up pair memory on failure
+		return NULL;
 	}
+	container_node->node_type = BINARY_N; // UNION BIT?
+	container_node->data.binary_node = *pair; // Assign the binary operation node data
+	free(pair); // Free bin_node after copying data to the main node
+	return node;
 }
 
 
@@ -85,35 +88,25 @@ static t_node	*parse_command(t_scanner *scanner)
 } // we will then have to check what is the command token type and based on that and then act upon it?
 
 
+/* Primary parsing function that initiates parsing based on the first token.
+It checks if there is a next token and determines the node type based on the token returned from scanner. */
+t_node	*parse(t_scanner *scanner) // called recursiveli i suppose?
+{
+	t_token	token;
 
-/// BINARY FOR LATER
-/* Parses a binary operation (pipe or redirection).
-This function creates a pair node, sepatared by the operator in the middle recursively parsing
-the left and right sides of the operator. */
-// static t_node	*parse_binary(t_scanner *scanner, t_token operator)
-// {
-// 	t_binary_node	*pair;
-// 	t_node *container_node;
-
-// 	// Advance past the operator token
-// 	scanner_next(scanner);
-// 	// Allocate memory for the binary node structure
-// 	pair = malloc(sizeof(t_binary_node));
-// 	if (!pair)
-// 		return NULL; // Handle memory allocation failure
-// 	pair->node_l = parse(scanner);  // Recursively parse for the left command or expression
-// 	pair->pair_operator = operator; // Store the operator token "| "
-// 	pair->node_r = parse(scanner);  // Recursively parse for the right command, expression, or file
-
-// 	// Create a main node for the binary operation and assign the binary node to it
-// 	container_node = malloc(sizeof(t_node));
-// 	if (!node)
-// 	{
-// 		free(pair); // Clean up pair memory on failure
-// 		return NULL;
-// 	}
-// 	container_node->node_type = BINARY_N; // UNION BIT?
-// 	container_node->data.binary_node = *pair; // Assign the binary operation node data
-// 	free(pair); // Free bin_node after copying data to the main node
-// 	return node;
-// }
+	if (!scanner_has_next(scanner))
+		return (NULL); // No tokens left to parse
+	token = scanner_peek(scanner); 	// To see if token is present
+	switch (token.type)
+	{
+		case COMMAND:
+			return (parse_command(scanner)); // Handles command nodes, whall we also pass token?
+		// case PIPE:
+		// case REDIR_IN:
+		// case REDIR_OUT:
+		// case APPEND_OUT:
+		// 	return (parse_binary(scanner, token)); // Handles binary operations - COMMAND LINES CAN NEVER START WITH THESE TOKENS THOUGH NO?
+		default:
+			return (NULL); // Placeholder for unsupported tokens or error handling
+	}
+}
