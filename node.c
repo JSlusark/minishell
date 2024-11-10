@@ -1,14 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:49:20 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/08 16:54:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 14:19:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// THIS WAS A VERY INITIAL LOGIC THAT MAY NOT COMFORM MUCH TO THE
+// STRUCT I DID IN NODE.H.
+// WORKING OUT ON A BETTER ONE IN PARSING.C AND THEN MIGHT DIVIDE IT IN 2 FILES
+// DEPENDING HOW LONG OR DETAILED IT COMES :D
 
 #include "minishell.h"
 

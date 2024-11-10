@@ -3,10 +3,13 @@
 
 typedef enum e_token_type
 {
+	// CREATES COMMAND NODES
 	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
 	PATH,           // Path values (e.g., "/usr/bin", "../")
 	//INTEGER,        // Integer literals (e.g., "123")
 	OPTION,         // Command options (e.g., "-l", "-a")
+
+	// CREATES BINARY NODES
 	REDIR_IN,    // Input redirection ("<")
 	REDIR_OUT,   // Output redirection (">")
 	APPEND_OUT,     // Append redirection (">>")
