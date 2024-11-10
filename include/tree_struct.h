@@ -1,5 +1,5 @@
-#ifndef TREE_STRUCT_H
-# define TREE_STRUCT_H
+// #ifndef TREE_STRUCT_H
+// # define TREE_STRUCT_H
 
 /*
 STRUCTS ARE AT END OF FILE.
@@ -58,40 +58,40 @@ t_token_type determine_token_type(char *token)
     return UNKNOWN;
 }
 
-*/
+// */
 
 
-typedef enum e_token_type // check how many times we actually need
-{
-	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
-	PATH,           // Path values (e.g., "/usr/bin", "../")
-	INTEGER,        // Integer literals (e.g., "123")
-	OPTION,         // Command options (e.g., "-l", "-a")
-	REDIRECT_IN,    // Input redirection ("<")
-	REDIRECT_OUT,   // Output redirection (">")
-	APPEND_OUT,     // Append redirection (">>")
-	HEREDOC,        // Here-document redirection ("<<")
-	PIPE,           // Pipe operator ("|")
-	ENV_VAR,        // Environment variable (e.g., "$HOME", "$USER")
-	SUBSHELL,       // Subshell commands or groupings (e.g., "(command)")
-	STRING_LITERAL, // String literals in quotes (e.g., "hello world")
-	BUILTIN,        // Built-in shell commands (e.g., "exit", "pwd", "export")
-	LOGICAL_AND,    // Logical AND ("&&")
-	LOGICAL_OR,     // Logical OR ("||")
-	SEMICOLON,      // Command separator (";")
-	UNKNOWN         // Any unrecognized or invalid token
-} t_token_type;
+// typedef enum e_token_type // check how many times we actually need
+// {
+// 	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
+// 	PATH,           // Path values (e.g., "/usr/bin", "../")
+// 	INTEGER,        // Integer literals (e.g., "123")
+// 	OPTION,         // Command options (e.g., "-l", "-a")
+// 	REDIRECT_IN,    // Input redirection ("<")
+// 	REDIRECT_OUT,   // Output redirection (">")
+// 	APPEND_OUT,     // Append redirection (">>")
+// 	HEREDOC,        // Here-document redirection ("<<")
+// 	PIPE,           // Pipe operator ("|")
+// 	ENV_VAR,        // Environment variable (e.g., "$HOME", "$USER")
+// 	SUBSHELL,       // Subshell commands or groupings (e.g., "(command)")
+// 	STRING_LITERAL, // String literals in quotes (e.g., "hello world")
+// 	BUILTIN,        // Built-in shell commands (e.g., "exit", "pwd", "export")
+// 	LOGICAL_AND,    // Logical AND ("&&")
+// 	LOGICAL_OR,     // Logical OR ("||")
+// 	SEMICOLON,      // Command separator (";")
+// 	UNKNOWN         // Any unrecognized or invalid token
+// } t_token_type;
 
 
-typedef struct s_tree
-{
-	struct s_tree *prev;
-	char *token;         // The actual token string (e.g., "cd", "..", etc.)
-	t_token_type type;   // Token type defined by the enum
-	// struct s_related *related_tokens; // PROBABLY NOT NEEDED CHECK NOTES ON OBSIDIAN ABOUT IT
-	int position;        // Position in the command sequence, useful for certain evaluations
-	int tree_len;        // Total length of the command sequence/tree, could be tracked elsewhere too
-	struct s_tree *next;
-} t_tree;
+// typedef struct s_tree
+// {
+// 	struct s_tree *prev;
+// 	char *token;         // The actual token string (e.g., "cd", "..", etc.)
+// 	t_token_type type;   // Token type defined by the enum
+// 	// struct s_related *related_tokens; // PROBABLY NOT NEEDED CHECK NOTES ON OBSIDIAN ABOUT IT
+// 	int position;        // Position in the command sequence, useful for certain evaluations
+// 	int tree_len;        // Total length of the command sequence/tree, could be tracked elsewhere too
+// 	struct s_tree *next;
+// } t_tree;
 
-#endif
+// #endif
