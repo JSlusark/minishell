@@ -37,6 +37,6 @@ t_token scanner_peek(const t_scanner *self);
 t_token scanner_next(t_scanner *self);
 
 // This functions returns the tokens. Not sure about this one.
-void parse(t_scanner *scanner);
+t_node	*parse(t_scanner *scanner);
 
 #endif

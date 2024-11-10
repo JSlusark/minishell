@@ -6,12 +6,18 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 16:13:27 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:28:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
+
+#include "char_itr.h"
+#include "token.h"
+#include "minishell.h"
+#include "guards.h"
+#include "scanner.h"
 
 /* Defines two types of nodes for the tree structure:
 - BINARY_N: For operations with two sides (like pipes and redirections).

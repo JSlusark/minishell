@@ -6,13 +6,15 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 18:37:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 18:28:03 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-/* NEED TO TEST THIS WITHOUT SCANNER_PEEK BECAUSE NOT READY
-(the correct parsing to be used once scan_peek is ready is parsing_2) */
+#include "minishell.h" // For token definitions and scanner function declarations
+
+// Forward declaration for helper parsing functions
+static t_node *parse_command(t_scanner *scanner);
+// static t_node *parse_binary(t_scanner *scanner, t_token operator);
 
 
 /* Primary parsing function that initiates parsing based on the first token.
@@ -23,66 +25,64 @@ t_node	*parse(t_scanner *scanner) // called recursiveli i suppose?
 
 	if (!scanner_has_next(scanner))
 		return (NULL); // No tokens left to parse
-
-
-	// token = scanner_peek(scanner); 	// To see if token is present
-	// switch (token.type)
-	// {
-	// 	case COMMAND:
-	// 		return (parse_command(scanner)); // Handles command nodes, whall we also pass token?
-	// 	// case PIPE:
-	// 	// case REDIR_IN:
-	// 	// case REDIR_OUT:
-	// 	// case APPEND_OUT:
-	// 	// 	return (parse_binary(scanner, token)); // Handles binary operations - COMMAND LINES CAN NEVER START WITH THESE TOKENS THOUGH NO?
-	// 	default:
-	// 		return (NULL); // Placeholder for unsupported tokens or error handling
-	// }
+	token = scanner_peek(scanner); 	// To see if token is present
+	switch (token.type)
+	{
+		case COMMAND:
+			return (parse_command(scanner)); // Handles command nodes, whall we also pass token?
+		// case PIPE:
+		// case REDIR_IN:
+		// case REDIR_OUT:
+		// case APPEND_OUT:
+		// 	return (parse_binary(scanner, token)); // Handles binary operations - COMMAND LINES CAN NEVER START WITH THESE TOKENS THOUGH NO?
+		default:
+			return (NULL); // Placeholder for unsupported tokens or error handling
+	}
 }
 
 
-// /* If we peek and COMMAND Parses and returns a single command node with optional arguments or options. */
-// static t_node	*parse_command(t_scanner *scanner)
-// {
-// 	// Creates a linked list that stores the cmd_node and following options
-// 	t_command_node	*sequence;
-// 	t_node			*node;
-// 	t_token			command_token;
-// 	t_token			next_token;
+/* If we peek and COMMAND Parses and returns a single command node with optional arguments or options. */
+static t_node	*parse_command(t_scanner *scanner)
+{
+	// Creates a linked list that stores the cmd_node and following options
+	t_command_node	*sequence;
+	t_node			*node;
+	t_token			command_token;
+	t_token			next_token;
 
-// 	// Allocate memory for the command node structure
-// 	sequence = malloc(sizeof(t_command_node));
-// 	if (!sequence)
-// 		return (NULL); // Handle memory allocation failure
+	// Allocate memory for the command node structure
+	sequence = malloc(sizeof(t_command_node));
+	if (!sequence)
+		return (NULL); // Handle memory allocation failure
 
-// 	// Consume the command token
-// 	command_token = scanner_next(scanner);
-// 	sequence->curr = &command_token; // we could but function directly in here instead
+	// Consume the command token
+	command_token = scanner_next(scanner);
+	sequence->curr = &command_token; // we could but function directly in here instead
 
-// 	// Check if there’s a next token for an argument or option
-// 	// we could probably add something that handles also other unexpected stuff like "echo |"?
-// 	if (scanner_has_next(scanner))
-// 	{
-// 		next_token = scanner_peek(scanner);
-// 		if (next_token.type == STRING_LITERAL || next_token.type == OPTION)
-// 		{
-// 			next_token = scanner_next(scanner);
-// 			sequence->next = &next_token; // Set the next token if it's a valid argument or option
-// 		}
-// 		else
-// 			sequence->next = NULL; // No valid next token
-// 	}
-// 	// Creates a main node for storing the command sequence and its sequential tokens
-// 	node = malloc(sizeof(t_node));
-// 	if (!node)
-// 	{
-// 		free(sequence);
-// 		return (NULL);
-// 	}
-// 	node->node_type = COMMAND_N; // UNION BIT?
-// 	node->data.command_sequence = sequence;
-// 	return (node);
-// } // we will then have to check what is the command token type and based on that and then act upon it?
+	// Check if there’s a next token for an argument or option
+	// we could probably add something that handles also other unexpected stuff like "echo |"?
+	if (scanner_has_next(scanner))
+	{
+		next_token = scanner_peek(scanner);
+		if (next_token.type == STRING_LITERAL || next_token.type == OPTION)
+		{
+			next_token = scanner_next(scanner);
+			sequence->next = &next_token; // Set the next token if it's a valid argument or option
+		}
+		else
+			sequence->next = NULL; // No valid next token
+	}
+	// Creates a main node for storing the command sequence and its sequential tokens
+	node = malloc(sizeof(t_node));
+	if (!node)
+	{
+		free(sequence);
+		return (NULL);
+	}
+	node->node_type = COMMAND_N; // UNION BIT?
+	node->data.command_sequence = sequence;
+	return (node);
+} // we will then have to check what is the command token type and based on that and then act upon it?
 
 
 
