@@ -3,117 +3,163 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 18:37:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:19:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/* NEED TO TEST THIS WITHOUT SCANNER_PEEK BECAUSE NOT READY
-(the correct parsing to be used once scan_peek is ready is parsing_2) */
+#include	"node.h"
 
+
+/* Parses a single command with an optional argument or option.
+ * Example: "echo hello" */
+// static t_node *parse_command(t_mock *mock_token)
+// {
+//     t_command_node *sequence;
+//     t_node *node;
+
+//     // Allocate memory for the command node structure
+//     sequence = malloc(sizeof(t_command_node));
+//     if (!sequence) {
+//         return NULL; // Memory allocation failure
+//     }
+
+//     // Set the current command token
+//     sequence->curr = malloc(sizeof(t_token));
+//     if (!sequence->curr) {
+//         free(sequence);
+//         return NULL;
+//     }
+//     sequence->curr->type = mock_token->mock_type;
+//     sequence->curr->lexeme.start = mock_token->mock_value;
+//     sequence->curr->lexeme.length = strlen(mock_token->mock_value);
+
+//     // Move to the next token
+//     mock_token = mock_token->next_token;
+
+//     // Check if there’s a valid argument or option following the command
+//     if (mock_token && (mock_token->mock_type == STRING_LITERAL || mock_token->mock_type == OPTION))
+//     {
+//         sequence->next = malloc(sizeof(t_token));
+//         if (!sequence->next) {
+//             free(sequence->curr);
+//             free(sequence);
+//             return NULL;
+//         }
+//         sequence->next->type = mock_token->mock_type;
+//         sequence->next->lexeme.start = mock_token->mock_value;
+//         sequence->next->lexeme.length = strlen(mock_token->mock_value);
+//     }
+//     else
+//     {
+//         sequence->next = NULL; // No valid next token
+//     }
+
+//     // Create the main node for the command sequence
+//     node = malloc(sizeof(t_node));
+//     if (!node) {
+//         free(sequence->curr);
+//         free(sequence->next);
+//         free(sequence);
+//         return NULL;
+//     }
+
+//     node->node_type = COMMAND_N;
+//     node->data.command_sequence = sequence;
+
+// 	// printf("COMMAND NODE!!!!\n");
+//     return node;
+// }
 
 /* Primary parsing function that initiates parsing based on the first token.
-It checks if there is a next token and determines the node type based on the token returned from scanner. */
-t_node	*parse(t_scanner *scanner) // called recursiveli i suppose?
+ * It checks if there is a token and determines the node type based on the token in `mock_token`. */
+t_node *parse(t_mock *mock_token)
 {
-	t_token	token;
+	while (mock_token)
+	{ // Loop through each token in the linked list
+		switch (mock_token->mock_type) {
+			case COMMAND:
+				printf("\nFOUND TOKEN - COMMAND\n");
+				break;
+			case PIPE:
+				printf("\nFOUND TOKEN - OPERATOR\n");
+				break;
+			default:
+				printf("\nFOUND TOKEN - OTHER\n");
+				break;
+		}
+		// Print the value for each token to verify it updates
+		printf("Value: %s\n", mock_token->mock_value);
+		printf("Type: %d\n\n", mock_token->mock_type);
+		// Move to the next token in the list
+		mock_token = mock_token->next_token;
+	}
 
-	if (!scanner_has_next(scanner))
-		return (NULL); // No tokens left to parse
-
-
-	// token = scanner_peek(scanner); 	// To see if token is present
-	// switch (token.type)
-	// {
-	// 	case COMMAND:
-	// 		return (parse_command(scanner)); // Handles command nodes, whall we also pass token?
-	// 	// case PIPE:
-	// 	// case REDIR_IN:
-	// 	// case REDIR_OUT:
-	// 	// case APPEND_OUT:
-	// 	// 	return (parse_binary(scanner, token)); // Handles binary operations - COMMAND LINES CAN NEVER START WITH THESE TOKENS THOUGH NO?
-	// 	default:
-	// 		return (NULL); // Placeholder for unsupported tokens or error handling
-	// }
+	return NULL; // Currently just returning NULL as no actual node structure is created
 }
 
-
-// /* If we peek and COMMAND Parses and returns a single command node with optional arguments or options. */
-// static t_node	*parse_command(t_scanner *scanner)
+// /* Parses a pipe command with two commands on each side of the pipe.
+//  * Example: "echo hello | cat" */
+// static t_node *parse_pipe_command(t_mock *mock_token)
 // {
-// 	// Creates a linked list that stores the cmd_node and following options
-// 	t_command_node	*sequence;
-// 	t_node			*node;
-// 	t_token			command_token;
-// 	t_token			next_token;
+//     t_binary_node *pair;
+//     t_node *container_node;
 
-// 	// Allocate memory for the command node structure
-// 	sequence = malloc(sizeof(t_command_node));
-// 	if (!sequence)
-// 		return (NULL); // Handle memory allocation failure
+//     // Move past the PIPE token
+//     mock_token = mock_token->next_token;
 
-// 	// Consume the command token
-// 	command_token = scanner_next(scanner);
-// 	sequence->curr = &command_token; // we could but function directly in here instead
+//     // Allocate memory for the binary node structure
+//     pair = malloc(sizeof(t_binary_node));
+//     if (!pair)
+//         return NULL;
 
-// 	// Check if there’s a next token for an argument or option
-// 	// we could probably add something that handles also other unexpected stuff like "echo |"?
-// 	if (scanner_has_next(scanner))
-// 	{
-// 		next_token = scanner_peek(scanner);
-// 		if (next_token.type == STRING_LITERAL || next_token.type == OPTION)
-// 		{
-// 			next_token = scanner_next(scanner);
-// 			sequence->next = &next_token; // Set the next token if it's a valid argument or option
-// 		}
-// 		else
-// 			sequence->next = NULL; // No valid next token
-// 	}
-// 	// Creates a main node for storing the command sequence and its sequential tokens
-// 	node = malloc(sizeof(t_node));
-// 	if (!node)
-// 	{
-// 		free(sequence);
-// 		return (NULL);
-// 	}
-// 	node->node_type = COMMAND_N; // UNION BIT?
-// 	node->data.command_sequence = sequence;
-// 	return (node);
-// } // we will then have to check what is the command token type and based on that and then act upon it?
+//     // Parse left command node
+//     pair->node_l = parse_command(mock_token); // Left command
+//     if (!pair->node_l) {
+//         free(pair);
+//         return NULL; // Failed to parse left command
+//     }
 
+//     // Set the operator for the binary node (PIPE)
+//     pair->binary_operator.type = PIPE;
+//     pair->binary_operator.lexeme.start = "|";
+//     pair->binary_operator.lexeme.length = 1;
 
+//     // Move to the next command after the pipe operator
+//     mock_token = mock_token->next_token;
 
-/// BINARY FOR LATER
-/* Parses a binary operation (pipe or redirection).
-This function creates a pair node, sepatared by the operator in the middle recursively parsing
-the left and right sides of the operator. */
-// static t_node	*parse_binary(t_scanner *scanner, t_token operator)
-// {
-// 	t_binary_node	*pair;
-// 	t_node *container_node;
+//     // Parse the right command node
+//     if (mock_token && mock_token->mock_type == COMMAND)
+//     {
+//         pair->node_r = parse_command(mock_token); // Right command after the pipe
+//         if (!pair->node_r) {
+//             free(pair->node_l);
+//             free(pair);
+//             return NULL; // Failed to parse right command
+//         }
+//     }
+//     else
+//     {
+//         free(pair->node_l);
+//         free(pair);
+//         return NULL; // No right command present
+//     }
 
-// 	// Advance past the operator token
-// 	scanner_next(scanner);
-// 	// Allocate memory for the binary node structure
-// 	pair = malloc(sizeof(t_binary_node));
-// 	if (!pair)
-// 		return NULL; // Handle memory allocation failure
-// 	pair->node_l = parse(scanner);  // Recursively parse for the left command or expression
-// 	pair->pair_operator = operator; // Store the operator token "| "
-// 	pair->node_r = parse(scanner);  // Recursively parse for the right command, expression, or file
+//     // Create the container node for the binary operation
+//     container_node = malloc(sizeof(t_node));
+//     if (!container_node)
+//     {
+//         free(pair->node_l);
+//         free(pair->node_r);
+//         free(pair);
+//         return NULL;
+//     }
 
-// 	// Create a main node for the binary operation and assign the binary node to it
-// 	container_node = malloc(sizeof(t_node));
-// 	if (!node)
-// 	{
-// 		free(pair); // Clean up pair memory on failure
-// 		return NULL;
-// 	}
-// 	container_node->node_type = BINARY_N; // UNION BIT?
-// 	container_node->data.binary_node = *pair; // Assign the binary operation node data
-// 	free(pair); // Free bin_node after copying data to the main node
-// 	return node;
+//     container_node->node_type = BINARY_N;
+//     container_node->data.binary_node = *pair;
+//     free(pair); // Free the pair structure after copying its data
+//     return container_node;
 // }

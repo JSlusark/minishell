@@ -3,21 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   node.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 18:28:51 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:27:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
 
-#include "char_itr.h"
-#include "token.h"
-#include "minishell.h"
-#include "guards.h"
-#include "scanner.h"
 
 /* Defines two types of nodes for the tree structure:
 - BINARY_N: For operations with two sides (like pipes and redirections).
@@ -69,6 +64,16 @@ typedef struct s_node
 	t_node_type				node_type; // Type of node (BINARY_N or COMMMAND_N)
 	t_node_value			data; // Actual data for the node
 }	t_node;
+
+
+// FUNCTIONS AND DATA USED FOR MOCKED PARSING - I will need you to provide me the following struct of tokens perhaps
+typedef struct s_mock {
+    int mock_type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
+    char *mock_value;      // Value of the token, e.g., "echo", "hello"
+    struct s_mock *next_token; // Pointer to the next token in the linked list
+} t_mock;
+t_node	*parse(t_mock *mock_token); // mock version
+t_mock *create_mock_tokens(char *input);
 
 
 #endif

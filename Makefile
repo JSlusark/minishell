@@ -1,13 +1,16 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-SRC	= main.c \
-	char_itr.c \
-	scanner.c \
-	token.c \
-	parsing.c
+MOCK_TOKENS = ./mock_data/create_mock_tokens.c
 
-HEADERS	= ./include/minishell.h ./include/char_itr.h ./include/guards.h ./include/scanner.h ./include/token.h ./include/node.h
+SRC	= main.c \
+	parsing.c \
+	$(MOCK_TOKENS)
+
+
+HEADERS	= ./include/minishell.h \
+		./include/token.h \
+		./include/node.h
 
 OBJS	= $(SRC:.c=.o)
 

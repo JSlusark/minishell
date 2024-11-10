@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/10 18:06:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/10 22:27:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 // PARSING STRUCTS
 #include	"token.h"
 #include	"node.h"
-#include	"scanner.h"
-
 
 // CALL VALGRIND SUPPRESSION:
 // valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
