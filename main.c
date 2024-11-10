@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 16:22:47 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:42:01 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	char	*input;
 	t_char_itr itr;
 	t_scanner scanner;
-	int i;
+	//int i;
 
 	printf("ARGC: %d, ARGV:%s\n", argc, argv[0]); // added this just to avoid compilation error
 	while (1)
@@ -46,12 +46,10 @@ int	main(int argc, char **argv)
 		scanner = scanner_value(itr);
 		// We need to initialize the scanner, with scanner_value(itr);
 
-		printf("Printing pointers input via itr\n");
-		printf("Original cursor: %p\n", itr.cursor);
-		i = 0;
-		//printf("second skip whitespaces\n");
-		//skip_whitespaces(&itr);
-		while((size_t)i < ft_strlen(input))
+		//printf("Printing pointers input via itr\n");
+		//printf("Original cursor: %p\n", itr.cursor);
+		//i = 0;
+/* 		while((size_t)i < ft_strlen(input))
 		{
 			char_itr_cursor (&itr);
 			char_itr_has_next(&itr);
@@ -59,7 +57,7 @@ int	main(int argc, char **argv)
 			char_itr_next(&itr);
 			char_itr_cursor (&itr);
 			i++;
-		}
+		} */
 /* 		if (ft_strncmp(input, "echo ", 5) == 0)
 		{
 			printf("%s\n", input + 5);

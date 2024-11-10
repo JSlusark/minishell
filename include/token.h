@@ -27,6 +27,7 @@ typedef enum e_token_type
 	FILENAME,
 	D_QUOTES,
 	S_QUOTES,
+	END,
 	UNKNOWN         // Any unrecognized or invalid token
 } t_token_type;
 

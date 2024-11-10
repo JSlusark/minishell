@@ -31,7 +31,7 @@ t_scanner scanner_value(t_char_itr char_itr);
 int scanner_has_next(const t_scanner *self);
 
 //This returns the token without advancind the iterator.
-t_token scanner_peek(const t_scanner *self);
+t_token scanner_peek(t_scanner *self);
 
 //This returns the token advancing the iterator.
 t_token scanner_next(t_scanner *self);

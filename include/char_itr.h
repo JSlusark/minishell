@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/09 16:45:47 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/10 17:41:38 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#define WHITESPACES " \t\r\n\a\""
+#define WHITESPACES " \t\r\n\a\"" //Space, tab, carriage return, newline, bell, double quote.
+#define SYMBOLS "<|>&;()"
 
 typedef struct s_chart_itr
 {

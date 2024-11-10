@@ -18,3 +18,5 @@ void print_token(const t_token token)
 	printf("Token Type: %d\n", token.type);
 	printf("Token Lexeme: %.*s\n", (int)token.lexeme.length, token.lexeme.start);
 }
+
+t_token collect_word
