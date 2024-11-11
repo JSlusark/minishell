@@ -52,7 +52,7 @@ t_token scanner_next(t_scanner *self)
 		if (*self->char_itr.cursor == '|')
 			{
 				//printf("I found a pipe!\n");
-				self->next = new_token (PIPE, (char *)self->char_itr.cursor, 1);
+				self->next = new_token (PIPE, (char *)self->char_itr.cursor, 1);// <-------- WILL BE COMING FROM PEEK
 				print_token(self->next);
 				printf("Iterator advance, after printing token\n");
 				self->char_next = char_itr_next(&self->char_itr); //we need to advance the iterator anyway... but the return is a char, what we should do... not sure if later we can use this char.

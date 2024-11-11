@@ -16,7 +16,7 @@ clasifying nodes.
 //Char itr is producing a char at a time, the scanner is producing a token at a time
 
 
-
+// It looks like the mock token linked list? Can we create a linked list here?
 typedef struct s_scanner
 {
 	t_char_itr char_itr;
