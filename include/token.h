@@ -2,6 +2,7 @@
 #define TOKEN_H
 
 #include <stdlib.h>
+#include "scanner.h"
 
 typedef enum e_token_type
 {
@@ -46,14 +47,20 @@ typedef struct s_token
 
 t_token new_token (t_token_type type, char *start, size_t length);
 
-t_token take_command();
+/* t_token take_command();
 t_token take_redir_in();
 t_token take_redir_out();
-t_token take_pipe();
+t_token take_pipe(); */
 
 
 void print_token(const t_token token);
 
+t_token end_token (t_scanner *self);
+t_token pipe_token (t_scanner *self);
+t_token redir_out_token (t_scanner *self);
+t_token redir_in_token (t_scanner *self);
+t_token word_token (t_scanner *self);
+t_token unknown_token (t_scanner *self);
 
 #endif
 

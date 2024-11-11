@@ -12,6 +12,7 @@ clasifying nodes.
 #include "char_itr.h"
 #include "token.h"
 
+
 //The scanner is like an interator
 //Char itr is producing a char at a time, the scanner is producing a token at a time
 

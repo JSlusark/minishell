@@ -47,7 +47,7 @@ t_token scanner_next(t_scanner *self)
 	}
 	else // Does not have next
 
-	while (*self->char_itr.cursor != '\0' && self->char_itr.cursor < self->char_itr.sentinel1)
+/* 	while (*self->char_itr.cursor != '\0' && self->char_itr.cursor < self->char_itr.sentinel1)
 	{
 		if (*self->char_itr.cursor == '|')
 			{
@@ -57,49 +57,37 @@ t_token scanner_next(t_scanner *self)
 				printf("Iterator advance, after printing token\n");
 				self->char_next = char_itr_next(&self->char_itr); //we need to advance the iterator anyway... but the return is a char, what we should do... not sure if later we can use this char.
 			}
-	}
+	} */
 	return (self->next);
 }
 
 t_token scanner_peek(t_scanner *self)
 {
 	char c;
-	t_token_type type;
 
 	c = *self->char_itr.cursor;
 	while(1)
 	{
 		if (c == EOF || c == '\n' || c == '\0')
-		{
-			type = END;
-			break ;
-		}
+			return (end_token(self));
 		else if (c == '|')
-		{
-			type = PIPE;
-			break ;
-		}
+			return (pipe_token(self));
 		else if (c == '>')
-		{
-			type = REDIR_OUT;
-			break ;
-		}
+			return (redir_out_token(self));
 		else if (c == '<')
-		{
-			type = REDIR_IN;
-			break ;
-		}
+			return (redir_in_token(self));
 		else if (ft_isalnum(c))
-		{
-			type = WORD;
-			break ;
-		}
+			return (word_token(self));
+		else
+			return (unknown_token(self));
 	}
-	self->next.type = type;
-	self->next.lexeme.length = 1;
-	self->next.lexeme.start = self->char_itr.cursor;
-
 }
+
+
+
+
+
+
 
 
 // This functions returns the tokens. Not sure...
