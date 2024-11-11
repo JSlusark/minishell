@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 22:28:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:33:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ int main(int argc, char **argv) {
 		if (strlen(input) > 0) {
 			add_history(input);
 		}
-		// Parse and process tokens
+		// Parse and process tokens - temp for now
 		parse(create_mock_tokens(input));
+		/*
+		// THIS SHOULD BE MY FINAL GOAL
+		t_node *ast = parse(mock_tokens);
+		// You would now have a parse tree in `ast` representing the commands and pipes
+		print_ast(ast); // Implement a print function to verify structure (you can create `print_ast` based on your needs)
+ 		*/
 		free(input);
 	}
 	clear_history();

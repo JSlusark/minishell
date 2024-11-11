@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   node.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 22:27:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:32:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
 
+// PREVIOUS NODES, WILL CHANGE AND IMPROVE AS I MAKE A SENSE OUT OF WHAT I AM
+// DOING WITH HANDLING TOKENS AND BUILDING NODES
 
 /* Defines two types of nodes for the tree structure:
 - BINARY_N: For operations with two sides (like pipes and redirections).
@@ -75,5 +77,35 @@ typedef struct s_mock {
 t_node	*parse(t_mock *mock_token); // mock version
 t_mock *create_mock_tokens(char *input);
 
+// FINDING OUT NODES FROM ANOTHER PROJECT
+
+//Sources:
+//https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100
+//https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c
+
+// typedef struct s_redir // can we use this instead than t_list inside t_cmd?
+// {
+//   int type;
+// //   struct cmd *cmd;
+//   char *file;
+//   char *efile;
+//   int mode;
+//   int fd;
+// }	t_redir;
+
+// typedef struct s_cmd // contains tokensare r
+// {
+// 	t_list	*tokens;
+// 	t_redir	*redirections;
+// }			t_cmd;
+
+// typedef struct s_list
+// {
+// 	void		*data;
+// 	t_list		*next;
+
+// }			t_list;
+
+// void add_to_list(t_redir redirection_list, ft_lstnew(redir));
 
 #endif
