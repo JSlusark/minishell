@@ -1,8 +1,6 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-#include <stdlib.h>
-#include "scanner.h"
 
 typedef enum e_token_type
 {
@@ -55,12 +53,12 @@ t_token take_pipe(); */
 
 void print_token(const t_token token);
 
-t_token end_token (t_scanner *self);
-t_token pipe_token (t_scanner *self);
-t_token redir_out_token (t_scanner *self);
-t_token redir_in_token (t_scanner *self);
-t_token word_token (t_scanner *self);
-t_token unknown_token (t_scanner *self);
+//t_token end_token (t_scanner *self);
+//t_token pipe_token (t_scanner *self);
+//t_token redir_out_token (t_scanner *self);
+//t_token redir_in_token (t_scanner *self);
+//t_token word_token (t_scanner *self);
+//t_token unknown_token (t_scanner *self);
 
 #endif
 

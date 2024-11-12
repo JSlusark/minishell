@@ -6,15 +6,13 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/10 17:41:38 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/12 12:37:09 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHAR_ITR_H
 #define CHAR_ITR_H
 
-#include <stdlib.h>
-#include <stdio.h>
 
 #define WHITESPACES " \t\r\n\a\"" //Space, tab, carriage return, newline, bell, double quote.
 #define SYMBOLS "<|>&;()"

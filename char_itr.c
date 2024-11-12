@@ -1,4 +1,4 @@
-#include "include/char_itr.h"
+
 #include "include/minishell.h" // to Include libft, right?
 
 // value lifetime dependes of the start reference
@@ -9,7 +9,7 @@ t_char_itr char_itr_value(const char *star, size_t length)
 	itr.sentinel1 = star + length;
 	return(itr);
 }
-//skip_ function
+//skip_ function advances the cursor to the first non whitespace occurrence.
 void skip_whitespaces (t_char_itr *self)
 {
 	char whitespaces[] = WHITESPACES; //token delimiters
@@ -17,8 +17,10 @@ void skip_whitespaces (t_char_itr *self)
 	int count = 0;
 	while(self->cursor && self->cursor < self->sentinel1 && ft_strchr(whitespaces, *self->cursor))
 	{
+			printf("Space found at %p\n", self->cursor);
+			//if (char_itr_has_next(self) == 1)
 			char_itr_next(self);
-			//self->cursor++; //++ is not updating the pointer!
+			 // We need to validate for END, because the cursor is advancing even after the last space from the input string.
 			count++;
 	}
 	if (count > 0)
@@ -46,10 +48,16 @@ char char_itr_peek(const t_char_itr *self)
 		printf("Cursor peek: %p | char %c\n", self->cursor, *self->cursor);
 		return(*self->cursor);
 	}
+	else if(self->cursor == self->sentinel1)
+	{
+		printf("cursor and sentinel are equals\n");
+		return(*self->cursor);
+	}
 	else
 	{
-		fprintf(stderr, "%s:%d - Out of Bounds", __FILE__, __LINE__);
-		exit(EXIT_FAILURE);exit(EXIT_FAILURE);
+		printf("Cursor %p, Sentinel %p", self->cursor, self->sentinel1);
+		fprintf(stderr, "%s:%d - Out of Bounds\n", __FILE__, __LINE__);
+		exit(EXIT_FAILURE);
 	}
 
 }
@@ -59,12 +67,12 @@ char char_itr_next(t_char_itr *self)
 {
 	if(char_itr_has_next(self))
 	{
-		printf("Cursor next: %p | char %c\n", self->cursor, *self->cursor);
+		printf("Cursor current: %p | char %c\n", self->cursor, *self->cursor);
 		return(*self->cursor++);
 	}
 	else
 	{
-		fprintf(stderr, "%s:%d - Out of Bounds", __FILE__, __LINE__);
+		fprintf(stderr, "%s:%d - Out of Bounds\n", __FILE__, __LINE__);
 		exit(EXIT_FAILURE);
 	}
 }

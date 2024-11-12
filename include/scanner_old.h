@@ -37,13 +37,4 @@ t_token scanner_next(t_scanner *self);
 // This functions returns the tokens. Not sure about this one.
 void parse(t_scanner *scanner);
 
-
-//I would like to move these functions to the token.h file but I got an error doing so...
-t_token end_token (t_scanner *self);
-t_token pipe_token (t_scanner *self);
-t_token redir_out_token (t_scanner *self);
-t_token redir_in_token (t_scanner *self);
-t_token word_token (t_scanner *self);
-t_token unknown_token (t_scanner *self);
-
 #endif

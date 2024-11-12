@@ -6,17 +6,13 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/10 17:42:01 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:18:35 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
-#include "include/char_itr.h"
-#include "include/guards.h"
+#include "./include/minishell.h"
 //#include "include/node.h"
 //#include "include/parser.h"
-#include "include/scanner.h"
-#include "include/token.h"
 
 int	main(int argc, char **argv)
 {

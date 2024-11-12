@@ -1,4 +1,3 @@
-#include "./include/token.h"
 #include "./include/minishell.h"
 
 
@@ -54,6 +53,7 @@ t_token redir_in_token (t_scanner *self)
 
 t_token word_token (t_scanner *self)
 {
+	self->next.lexeme.start = self->char_itr.cursor;
 	while(self->char_itr.cursor && ft_isalnum(*self->char_itr.cursor))
 	{
 		self->next.lexeme.length++;
@@ -61,7 +61,6 @@ t_token word_token (t_scanner *self)
 	}
 	self->next.type = WORD;
 	//self->next.lexeme.length = 1; //Is already defined in the while
-	self->next.lexeme.start = self->char_itr.cursor;
 	return (self->next);
 }
 

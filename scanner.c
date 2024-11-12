@@ -1,6 +1,6 @@
-#include "./include/scanner.h"
+
 #include "./include/minishell.h"
-//#include "./include/token.h"
+
 
 /*
 We need to initialize the first scanner structure with its
@@ -17,8 +17,7 @@ t_scanner scanner_value(t_char_itr char_itr)
 	scanner.next = token; //Here I am assigning the token initialized with memset.
 	token = scanner_next(&scanner); //Then I use scanner_next to produce the token.
 	scanner.next = token; //Here I make sure that the token is saved in the scanner struct.
-
-
+	print_token(scanner.next);
 	return(scanner);
 }
 
@@ -26,7 +25,8 @@ int scanner_has_next(const t_scanner *self)
 {
 	char c;
 	c = char_itr_peek(&self->char_itr);
-	return (c == EOF || c == '\n' || c == '\0');
+	printf("scanner has next? R: %i\n", (c != EOF || c != '\n' || c != '\0'));
+	return (c != EOF || c != '\n' || c != '\0');
 }
 
 /* t_token scanner_peek(const t_scanner *self)
@@ -38,15 +38,17 @@ t_token scanner_next(t_scanner *self)
 	/* t_token token;
 	ft_memset(&token, 0, sizeof(t_token)); */
 
-	//print_token(token); //Imprimer aqui genera segfaults
 	skip_whitespaces(&self->char_itr);
-	self->next = scanner_peek(self);
-	if (scanner_has_next(self))
+	//self->next = scanner_peek(self);
+	if (scanner_has_next(self)) //ok this is if there is next, but what about the current? Next is the current!
 	{
-
+		self->next = scanner_peek(self);
 	}
-	else // Does not have next
-
+	else
+	{
+		printf("Scanner next end token\n");
+		self->next = end_token(self); // Does not have next, returns the END_TOKEN.
+	}
 /* 	while (*self->char_itr.cursor != '\0' && self->char_itr.cursor < self->char_itr.sentinel1)
 	{
 		if (*self->char_itr.cursor == '|')
@@ -64,14 +66,17 @@ t_token scanner_next(t_scanner *self)
 t_token scanner_peek(t_scanner *self)
 {
 	char c;
-
+	printf("scanner_peek");
 	c = *self->char_itr.cursor;
 	while(1)
 	{
 		if (c == EOF || c == '\n' || c == '\0')
 			return (end_token(self));
 		else if (c == '|')
+		{
+			printf("I see a pipe\n");
 			return (pipe_token(self));
+		}
 		else if (c == '>')
 			return (redir_out_token(self));
 		else if (c == '<')
