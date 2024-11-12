@@ -66,7 +66,6 @@ t_token scanner_next(t_scanner *self)
 t_token scanner_peek(t_scanner *self)
 {
 	char c;
-	printf("scanner_peek");
 	c = *self->char_itr.cursor;
 	while(1)
 	{
