@@ -1,26 +1,31 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-typedef enum e_token_type
+typedef enum e_token_type // good to have an order like below
 {
-	OPERATOR,        // Operators like '>', '|'... etc. Not sure.
-	WORD,           //Any string that can be classify later as cmd, or file or string...
 	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
+	BUILTIN,        // Built-in shell commands (e.g., "exit", "pwd", "export")
+	ENV_VAR,        // Environment variable (e.g., "$HOME", "$USER")
 	PATH,           // Path values (e.g., "/usr/bin", "../")
 	OPTION,         // Command options (e.g., "-l", "-a")
-	REDIR_IN,    // Input redirection ("<")
-	REDIR_OUT,   // Output redirection (">")
+
+	REDIR_IN,       // Input redirection ("<")
+	REDIR_OUT,      // Output redirection (">")
 	APPEND_OUT,     // Append redirection (">>")
 	HEREDOC,        // Here-document redirection ("<<")
+
 	PIPE,           // Pipe operator ("|")
-	ENV_VAR,        // Environment variable (e.g., "$HOME", "$USER")
-	STRING_LITERAL, // String literals in quotes (e.g., "hello world")
-	BUILTIN,        // Built-in shell commands (e.g., "exit", "pwd", "export")
-	DELIMITERS,
-	FILENAME,
-	D_QUOTES,
-	S_QUOTES,
-	UNKNOWN         // Any unrecognized or invalid token
+	STRING,         // String literals in quotes (e.g., "hello world")
+	DELIMITER,      // Command separators (e.g., ";")
+
+	FILENAME,           // File arguments (e.g., "output.txt" in `echo hello > output.txt`)
+
+	OPERATOR,       // Logical operators for `&&` and `||` (used in bonus part only)
+
+	// Additional useful types for completeness
+	SUBSHELL,       // Subshell groupings like `(command)`
+	COMMENT,        // Comments (usually `#` followed by text)
+	UNKNOWN         // Any unrecognized or invalid token type
 } t_token_type;
 
 typedef struct s_slice

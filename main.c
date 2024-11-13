@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/11 16:33:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/13 15:39:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
 
 	printf("ARGC: %d, ARGV: %s\n", argc, argv[0]);
 	while (1) {
-		input = readline("Minishell> ");
+		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		if (!input || strcmp(input, "exit") == 0) {
 			free(input);
 			printf("Exiting Minishell...\n");
