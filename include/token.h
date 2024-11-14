@@ -18,7 +18,11 @@ typedef enum e_token_type // good to have an order like below
 	STRING,         // String literals in quotes (e.g., "hello world")
 	DELIMITER,      // Command separators (e.g., ";")
 
-	FILENAME,           // File arguments (e.g., "output.txt" in `echo hello > output.txt`)
+	//UNSURE ABOUT HAVING THIS TOKEN TYPE BUT ALSO UNSURE OF MY REASON XD
+	D_QUOTE, // i think we should not use these as tokens and instead just do a check in the tokenizer to see if what is inside a string or $var
+	S_QUOTE, // i think we should not use these as tokens and instead just do a check in the tokenizer, anything that is in between '' is see as string
+
+	FILENAME,           // probably not needed as the token that follows redir is always considered a file
 
 	OPERATOR,       // Logical operators for `&&` and `||` (used in bonus part only)
 
