@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/01 08:44:19 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/12 13:49:08 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 #include	<readline/readline.h>
 #include	<readline/history.h>
 #include	"../libft/libft.h"
-#include	"tree_struct.h"
-
+#include "../include/token.h"
+#include "../include/char_itr.h"
+#include "../include/guards.h"
+#include "../include/scanner.h"
 
 
 #endif
