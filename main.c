@@ -6,7 +6,7 @@
 /*   By: alejandroramirez <alejandroramirez@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/16 08:02:01 by alejandrora      ###   ########.fr       */
+/*   Updated: 2024/11/16 10:31:13 by alejandrora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,10 @@ int	main(int argc, char **argv)
 		scanner = scanner_value(itr);
 		while (scanner_has_next(&scanner))
 		{
-			t_token token = scanner_next(&scanner);
-			print_token(token);
+			scanner.next = scanner_next(&scanner);
+			print_token(scanner.next);
 		}
-		// We need to initialize the scanner, with scanner_value(itr);
-
-		//printf("Printing pointers input via itr\n");
-		//printf("Original cursor: %p\n", itr.cursor);
-		//i = 0;
-/* 		while((size_t)i < ft_strlen(input))
-		{
-			char_itr_cursor (&itr);
-			char_itr_has_next(&itr);
-			char_itr_peek(&itr);
-			char_itr_next(&itr);
-			char_itr_cursor (&itr);
-			i++;
-		} */
-/* 		if (ft_strncmp(input, "echo ", 5) == 0)
-		{
-			printf("%s\n", input + 5);
-		} */
-
+		print_token(scanner.next); //This is printing the END token
 		free(input);
 	}
 	clear_history(); //Before I had this: rl_clear_history(); shouldn't this run in the while loop? (outside if statements)

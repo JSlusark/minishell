@@ -60,6 +60,8 @@ t_token take_pipe(); */
 
 void print_token(const t_token token);
 
+int compare_token(const t_token *token, const char *str);
+
 //t_token end_token (t_scanner *self);
 //t_token pipe_token (t_scanner *self);
 //t_token redir_out_token (t_scanner *self);

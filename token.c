@@ -15,8 +15,8 @@ t_token new_token (t_token_type type, char *start, size_t length)
 void print_token(const t_token token)
 {
 	//print all token data
-	printf("Token Type: %d\n", token.type);
-	printf("Token Lexeme: %.*s\n", (int)token.lexeme.length, token.lexeme.start);
+	printf("[Token Type]: %d\n", token.type);
+	printf("[Token Lexeme]: %.*s\n", (int)token.lexeme.length, token.lexeme.start);
 }
 
 t_token end_token (t_scanner *self)
@@ -54,13 +54,12 @@ t_token redir_in_token (t_scanner *self)
 t_token word_token (t_scanner *self)
 {
 	self->next.lexeme.start = self->char_itr.cursor;
+	check_cmd(self);
 	while(self->char_itr.cursor && ft_isalnum(*self->char_itr.cursor))
 	{
 		self->next.lexeme.length++;
-		self->char_itr.cursor++; //There is any difference between advancing with char_itr_next() vs this way?
+		self->char_itr.cursor++;
 	}
-	self->next.type = WORD;
-	//self->next.lexeme.length = 1; //Is already defined in the while
 	return (self->next);
 }
 
