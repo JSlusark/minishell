@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandroramirez <alejandroramirez@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/12 16:18:35 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/16 08:02:01 by alejandrora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	main(int argc, char **argv)
 		// The itr struct is initialized with the input and the length of it.
 		itr = char_itr_value(input, ft_strlen(input));
 		scanner = scanner_value(itr);
+		while (scanner_has_next(&scanner))
+		{
+			t_token token = scanner_next(&scanner);
+			print_token(token);
+		}
 		// We need to initialize the scanner, with scanner_value(itr);
 
 		//printf("Printing pointers input via itr\n");
@@ -61,6 +66,6 @@ int	main(int argc, char **argv)
 
 		free(input);
 	}
-	rl_clear_history(); // shouldn't this run in the while loop? (outside if statements)
+	clear_history(); //Before I had this: rl_clear_history(); shouldn't this run in the while loop? (outside if statements)
 	return (0);
 }
