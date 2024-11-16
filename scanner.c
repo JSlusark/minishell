@@ -27,7 +27,13 @@ int scanner_has_next(const t_scanner *self)
 	c = char_itr_peek(&self->char_itr);
 	printf("Character peeked: %c (ASCII: %d)\n", c, c);
 	printf("scanner has next? R: %i\n", !(c == EOF || c == '\n' || c == '\0'));
-	return (!(c == EOF || c == '\n' || c == '\0'));
+	if (!(c == EOF || c == '\n' || c == '\0'))
+		return (!(c == EOF || c == '\n' || c == '\0'));
+	else
+	{
+		end_token((t_scanner *)self);
+		return (!(c == EOF || c == '\n' || c == '\0'));
+	}
 }
 
 /* t_token scanner_peek(const t_scanner *self)
