@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 14:01:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:34:17 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,11 @@ t_mock *create_mock_tokens(char *input);
 #endif
 
 
+// NOTES FOR ME:
+// defining the diff redirs data ✅
+// fix pipe handling
+// adding commands and args?? <- doing now
 
-// adding commands and args??
+// creating nodes, what i print in the parsing.c has to be printed actually AFTER i build these node
+// what I am doing now is making sure i get the structure right before creating my nodes
+// so printing the outcome i hve in my head will allow me to no do premature decisions in my code
