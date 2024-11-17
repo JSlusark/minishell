@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 18:34:17 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:05:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ typedef struct s_mock
 
 typedef struct s_redirection
 {
-	int	redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC, Error redir etc.)
-	char *file;          // Target file for input and append
+	int	redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
+	char *file;          // Target file for input, output and append
 
 	// other elements thayt we might need if we consider heredoc and other redirs;
-	char *delimiter; // EOF - which is the first arg of the redir (not the cmd)
-	char **input; // JUST FOR HERE_DOC: array that stores every heredoc line as a array[i] or the cmd_token args inside array[0]
+	char *delimiter; // we use this for HEREDOC instead than *file
+	char **file_input; // array that stores every heredoc line as a array[i] or the cmd_token args inside array[0]
 	int flags; // flags that we pass to open(), depends on the redir type
-	int fd; //if fd is null error and exit?
+	int fd; //we can store fd here for future use?
 	struct s_redirection *next; // we need this as a redirection can be followed by other redirections and interact with them
 } t_redirection;
 
@@ -41,27 +41,31 @@ typedef struct s_args // list of tokens that follow the command token in the nod
 	struct s_args *arg_next;   // Pointer to the next argument in the list
 } t_args;
 
-typedef struct s_cmd
+typedef struct s_cmd // the the first token thas is not redirection data (redirection symbol and file name) or pipe is seen by bash as the command of the node
 {
-	int		cmd_type;         // builtin or command token, if not any of these we have error?
-	char	*cmd_value;   // Pointer to the next argument in the list
+	int		cmd_type;         // type of the token given us from the tokenizer, this will help us with execution and error handling (if the command is not an actual command)
+	char	*cmd_value;       // what is the value of the commmand (echo, cd, exit, string_value etc)
 } t_cmd;
 
-typedef struct s_node // see if this works based on redi findings
+typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe
 {
-	t_cmd *cmd_token; // created its own struct for the command token to keep things tidy and separate, the shell sees the first token as a command unless a redir is found
-	t_redirection *redir;  // Input redirection, e.g., "< input.txt"
-	t_args *cmd_args; // List of arguments following the command (list of tokens coming after the command)
+	// example: `echo hi > hello.txt bye bye`
+	t_cmd *cmd_token; // the shell sees the first token as a command unless a redir is found (echo)
+	t_redirection *redir;  // Input redirection, e.g., "< input.txt" (> hello.txt)
+	t_args *cmd_args; // List of arguments following the command (hi, bye, bye)
 	int pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
-	// `echo hi > hello.txt  bye bye` <--- basically hi and byebye are part of the echo args here
 } t_node;
 
 typedef	struct  s_node_table //if next token is PIPE we create this
 {
-	t_node	curr_node;
-	t_node	*next_node; // Pointer to the next command in the pipeline and its pipe(if it has one) - using struct keyword for recursive structs
-	//if pipe true and next_cmds is null it is error (we cannot END a node table with a pipe)
-	// if pipe true and next_cmd_node->next is null and cmd_node->next->pipe is false it means we have just one command following the first pipe and not more we need to consider after
+	// example: "echo hi > hello.txt bye bye | cat"
+	t_node	curr_node; // Current node of teh table "echo hi > hello.txt bye bye |" (the node has a command "echo", 3 args "echo, bye, bye", redir data "> file.txt" and a pipe "|")
+	t_node	*next_node; // Pointer to the next node "cat"  (the node has only a command cat, no args, redirections or pipes)
+
+	// example: "echo hi > hello.txt bye bye |"
+	// here curr_node->pipe == true and next_node == NULL, so bash asks input fro the use to write the next commands
+	// example: "echo hi > hello.txt bye bye"
+	//here curr_node->pipe == false and next_node == NULL it means we have just one node in the node table
 }	t_node_table;
 
 // IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE TABLES THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
@@ -88,11 +92,12 @@ t_mock *create_mock_tokens(char *input);
 #endif
 
 
-// NOTES FOR ME:
-// defining the diff redirs data ✅
-// fix pipe handling
-// adding commands and args?? <- doing now
+// DOING NOW:
+// showing how bash interprets redirections ✅ (need to check better for input redir)
+// showing how bash inteprets commans and args in a node ✅
+// fix pipe handling (if node starts with pipe it is error, but if nod ends with pipe it is not an error unless pipe comes right after redir symbol)
 
-// creating nodes, what i print in the parsing.c has to be printed actually AFTER i build these node
-// what I am doing now is making sure i get the structure right before creating my nodes
-// so printing the outcome i hve in my head will allow me to no do premature decisions in my code
+
+// TO DO LATER, after making sure about bash token interpretation:
+// Use the logic in parsing.c to create nodes in the command table
+// print the nodes that we create from the parsin in a similar style i have now

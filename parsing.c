@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 18:37:58 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/17 19:07:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_node_table *parse(t_mock *mock_token)
 {
 	int node_n = 1;
 	int token_n = 0;
+	int is_node_command = true;
 	int print_node_number = 1;   // Flag to print node number only once per node
 	bool pipe_at_start = true;   // Flag to see if we start with a pipe and therefore error ->
 
@@ -56,6 +57,7 @@ t_node_table *parse(t_mock *mock_token)
 				printf(COLOR_RED"		TOKEN %d: PIPE\n"COLOR_RESET, token_n);
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
 				node_n++;
+				is_node_command = true;
 				print_node_number = 1;      // Reset to print new node number
 			}
 		}
@@ -65,8 +67,8 @@ t_node_table *parse(t_mock *mock_token)
 			if (mock_token->mock_type == REDIR_IN || mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT || mock_token->mock_type == HEREDOC)
 			{
 				int redir_type = mock_token->mock_type;
-				printf(COLOR_BLUE"			- REDIR STRUCT:\n"COLOR_RESET);
-				printf(COLOR_BLUE"			  TOKEN %d - Redirection:"COLOR_RESET, token_n);
+				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
+				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
 				printf("%s\n", mock_token->mock_value);
 				if(mock_token->next_token == NULL) // important: every redir type has to be always followed by a token and the token that follows it will always be considered a file (for <, >, >>) or delimiter (for HEREDOC <<)
 				{
@@ -87,9 +89,9 @@ t_node_table *parse(t_mock *mock_token)
 					else
 					{
 						if(redir_type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-							printf(COLOR_BLUE"			  TOKEN %d - delimiter:"COLOR_RESET, token_n); // this is either
+							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n); // this is either
 						else // if redir is <, > and >> the next token is seen as file
-							printf(COLOR_BLUE"			  TOKEN %d - file:"COLOR_RESET, token_n);
+							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
 						printf("%s\n", mock_token->mock_value);
 					}
 				}
@@ -97,7 +99,17 @@ t_node_table *parse(t_mock *mock_token)
 			else
 			{
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
-				printf("%s\n", mock_token->mock_value);
+				if (is_node_command)
+				{
+					printf("%s", mock_token->mock_value);
+					printf(COLOR_RED" (command)\n"COLOR_RESET);
+					is_node_command = false;
+				}
+				else
+				{
+					printf("%s", mock_token->mock_value);
+					printf(COLOR_RED" (arg)\n"COLOR_RESET);
+				}
 			}
 		}
 		mock_token = mock_token->next_token; // Move to the next token
