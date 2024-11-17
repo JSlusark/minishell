@@ -24,15 +24,15 @@ int scanner_has_next(const t_scanner *self)
 {
 	char c;
 	c = char_itr_peek(&self->char_itr);
-	printf("Character peeked: %c (ASCII: %d)\n", c, c);
-	printf("scanner has next? R: %i\n", !(c == EOF || c == '\n' || c == '\0'));
+	//printf("Character peeked: %c (ASCII: %d)\n", c, c);
+	//printf("scanner has next? R: %i\n", !(c == EOF || c == '\n' || c == '\0'));
 	if (!(c == EOF || c == '\n' || c == '\0'))
 	{
 		return (!(c == EOF || c == '\n' || c == '\0'));
 	}
 	else
 	{
-		printf("End token\n");
+		//printf("End token\n");
 		end_token((t_scanner *)self);
 		return (!(c == EOF || c == '\n' || c == '\0'));
 	}
@@ -51,11 +51,12 @@ t_token scanner_next(t_scanner *self)
 	//self->next = scanner_peek(self);
 	if (scanner_has_next(self)) //ok this is if there is next, but what about the current? Next is the current!
 	{
+		self->next.lexeme.length = 0;
 		self->next = scanner_peek(self);
 	}
 	else
 	{
-		printf("Scanner next end token\n");
+		//printf("Scanner next end token\n");
 		self->next = end_token(self); // Does not have next, returns the END_TOKEN.
 	}
 	return (self->next);
@@ -71,7 +72,7 @@ t_token scanner_peek(t_scanner *self)
 			return (end_token(self));
 		else if (c == '|')
 		{
-			printf("I see a pipe\n");
+			//printf("I see a pipe\n");
 			return (pipe_token(self));
 		}
 		else if (c == '>')

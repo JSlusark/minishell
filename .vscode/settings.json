@@ -1,4 +1,7 @@
 {
 	"C_Cpp.default.compilerPath": "/usr/bin/clang++",
+	"files.associations": {
+		"minishell.h": "c"
+	},
 	//"C_Cpp.default.configurationProvider": "ms-vscode.cpptools"
 }

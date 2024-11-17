@@ -32,6 +32,7 @@ t_token pipe_token (t_scanner *self)
 	self->next.type = PIPE;
 	self->next.lexeme.length = 1;
 	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor++;
 	return (self->next);
 }
 
@@ -40,6 +41,7 @@ t_token redir_out_token (t_scanner *self)
 	self->next.type = REDIR_OUT;
 	self->next.lexeme.length = 1;
 	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor++;
 	return (self->next);
 }
 
@@ -48,18 +50,21 @@ t_token redir_in_token (t_scanner *self)
 	self->next.type = REDIR_IN;
 	self->next.lexeme.length = 1;
 	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor++;
 	return (self->next);
 }
 
 t_token word_token (t_scanner *self)
 {
 	self->next.lexeme.start = self->char_itr.cursor;
-	check_cmd(self);
+
 	while(self->char_itr.cursor && ft_isalnum(*self->char_itr.cursor))
 	{
 		self->next.lexeme.length++;
+		//printf("self->next.lexeme.length: %zu\n", self->next.lexeme.length);
 		self->char_itr.cursor++;
 	}
+	check_cmd(self);
 	return (self->next);
 }
 
@@ -68,5 +73,6 @@ t_token unknown_token (t_scanner *self)
 	self->next.type = UNKNOWN;
 	self->next.lexeme.length = 1;
 	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor++;
 	return (self->next);
 }
