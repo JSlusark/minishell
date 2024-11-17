@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/14 16:29:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/17 14:01:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ typedef struct s_mock
 typedef struct s_redirection
 {
 	int	redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC, Error redir etc.)
-	char *file;          // Target file for redirection - if fd is null error and exit?
-	// unsure if we need to add other things
+	char *file;          // Target file for input and append
+
+	// other elements thayt we might need if we consider heredoc and other redirs;
+	char *delimiter; // EOF - which is the first arg of the redir (not the cmd)
+	char **input; // JUST FOR HERE_DOC: array that stores every heredoc line as a array[i] or the cmd_token args inside array[0]
+	int flags; // flags that we pass to open(), depends on the redir type
+	int fd; //if fd is null error and exit?
+	struct s_redirection *next; // we need this as a redirection can be followed by other redirections and interact with them
 } t_redirection;
 
 typedef struct s_args // list of tokens that follow the command token in the node and considered its arguments
@@ -37,24 +43,23 @@ typedef struct s_args // list of tokens that follow the command token in the nod
 
 typedef struct s_cmd
 {
-	int		cmd_type;         // builtin or command token
+	int		cmd_type;         // builtin or command token, if not any of these we have error?
 	char	*cmd_value;   // Pointer to the next argument in the list
 } t_cmd;
 
-typedef struct s_node
+typedef struct s_node // see if this works based on redi findings
 {
-	t_cmd *cmd_token; // created its own struct for the command token to keep things tidy and separate
-	// We might need to use union here in case we get command nodes that are not followed by redirs or args?
+	t_cmd *cmd_token; // created its own struct for the command token to keep things tidy and separate, the shell sees the first token as a command unless a redir is found
 	t_redirection *redir;  // Input redirection, e.g., "< input.txt"
 	t_args *cmd_args; // List of arguments following the command (list of tokens coming after the command)
+	int pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
 	// `echo hi > hello.txt  bye bye` <--- basically hi and byebye are part of the echo args here
 } t_node;
 
 typedef	struct  s_node_table //if next token is PIPE we create this
 {
-	t_node  cmd_node;
-	int pipe; // true or false
-	struct s_node_table *next_cmd_node; // Pointer to the next command in the pipeline and its pipe(if it has one) - using struct keyword for recursive structs
+	t_node	curr_node;
+	t_node	*next_node; // Pointer to the next command in the pipeline and its pipe(if it has one) - using struct keyword for recursive structs
 	//if pipe true and next_cmds is null it is error (we cannot END a node table with a pipe)
 	// if pipe true and next_cmd_node->next is null and cmd_node->next->pipe is false it means we have just one command following the first pipe and not more we need to consider after
 }	t_node_table;
@@ -64,9 +69,10 @@ typedef	struct  s_node_table //if next token is PIPE we create this
 // WITHOUT THE BONUS, ANY OF OUR COMMANDS ARE GROUPED IN NODE COMMANDS IN A SINGLE NODE TABLE: so we do not need to return the ast struct written below.
 /* typedef	struct s_ast // wrote this just to better clarify my node structure
 {
-	t_node_table	cmd_table; // the cmd table made of nodes and pipes
+	t_node_table	curr_table; // the cmd table made of nodes and pipes
 	// if we do the bonus the actual tree is built by considering the
 	t_conjuction		table_conjunction_op; // the && and || operators and ; // the ; delimeter (contais the operator type and value and node to the next cmd table)
+	t_node_table	*next_table;
 }	t_ast; // without bonus  t_ast will only return 1 cmd_table while the rest of the data is empty */
 
 
@@ -80,3 +86,7 @@ t_mock *create_mock_tokens(char *input);
 
 
 #endif
+
+
+
+// adding commands and args??
