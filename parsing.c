@@ -6,18 +6,19 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/14 18:35:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/17 13:55:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// we cannot start a node with pipes but we can start a node with redirections!!!
 t_node_table *parse(t_mock *mock_token)
 {
 	int node_n = 1;
 	int token_n = 0;
 	int print_node_number = 1;   // Flag to print node number only once per node
-	bool pipe_at_start = true;   // Flag to see if we start with a pipe and therefore error, we also have to include redir into this flag!!!
+	bool pipe_at_start = true;   // Flag to see if we start with a pipe and therefore error ->
 
 	while (mock_token)
 	{
@@ -43,10 +44,10 @@ t_node_table *parse(t_mock *mock_token)
 		}
 		else
 		{
-			pipe_at_start = false; // needs to change as also we cannot start with redir as well
+			pipe_at_start = false; // we can actually start a node with redir commands (in that case the input we pass to the redir is null/empty and still overwrites and does stuff!!!!)
 			if (mock_token->mock_type == REDIR_IN || mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT || mock_token->mock_type == HEREDOC)
 			{
-				// printing this by just considering output redirection outome but
+				// printing this by just considering output redirection outcome but
 				// we might probably need differnet cases for every redir type
 				printf(COLOR_BLUE"			- REDIR:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			  TOKEN %d:"COLOR_RESET, token_n);
