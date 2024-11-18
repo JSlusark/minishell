@@ -4,25 +4,25 @@
 typedef enum e_token_type // good to have an order like below
 {
 	BUILT_IN,        		// 0 These are the commands we need to create ("echo, cd, pwd, export, unset, env, exit")
-	ENV_VAR,        		// 2 Environment variable that starts with $ (e.g., "$HOME", "$USER")
-	EXPANSION,				// 3 unsure we have to handle this "~"
-	ABS_PATH,           	// 4 A path starting with / (e.g., /directory/directory/  or /directory/file ) is an absolute path and refers to the exact location of the file or command file system staring from root directory
-	REL_PATH,           	// 5 A path that doesn’t start with ./ or ../ It is relative to the current working directory. (example ./directory/directory/  or ../directory/directory/  or ../directory/directory/ or ../directory/file )
-	OPTION,         		// 7 Command options (e.g., "-l", "-a")
+	ENV_VAR,        		// 1 Environment variable are words that start with $ (e.g., "$HOME", "$USER"), we do error handling for this after the tokenizing and node creation
+	ABS_PATH,           	// 2 A path starting with / (e.g., /directory/directory/  or /directory/file ) is an absolute path and refers to the exact location of the file or command file system staring from root directory
+	REL_PATH,           	// 3 A path that doesn’t start with ./ or ../ It is relative to the current working directory. (example ./directory/directory/  or ../directory/directory/  or ../directory/directory/ or ../directory/file )
+	PATH_EXP,				// 4 Not sure that we have to handle path expansion with "~" but leaving it here for now
+	OPTION,         		// 5 Command options (e.g., "-l", "-a")
 
-	REDIR_IN,       		// 8 Input redirection ("<")
-	REDIR_OUT,      		// 9 Output redirection (">")
-	APPEND_OUT,     		// 10 Append redirection (">>")
-	HEREDOC,        		// 11 Here-document redirection ("<<")
+	REDIR_IN,       		// 6 Input redirection ("<")
+	REDIR_OUT,      		// 7 Output redirection (">")
+	APPEND_OUT,     		// 8 Append redirection (">>")
+	HEREDOC,        		// 9 Here-document redirection ("<<")
 
-	PIPE,           		// 12 Pipe operator ("|")
-	STRING_D_QUOTES,        // 13 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
-	STRING_S_QUOTES,        // 14 String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
+	PIPE,           		// 10 Pipe operator ("|")
+	STRING_D_QUOTES,        // 11 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
+	STRING_S_QUOTES,        // 12 String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
 
-	WORD,         			// 15 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
-	UNKNOWN,         		// 16 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*" etc.. --- what about tilde?
+	WORD,         			// 13 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
+	UNKNOWN,         		// 14 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*" etc.. --- what about tilde?
 
-	// WE DON'T NEED THESE
+	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
 	//EXTERNAL_COMMAND      // commands like grp or ls that we do not have to create, we can access these as binaries in /bin or /usr/bin, we do not need to create tokens for these, after we create our tokens and nodes we will then see if word is a external command
 	// D_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
 	// S_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
