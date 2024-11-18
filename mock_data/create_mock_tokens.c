@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/13 16:47:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:38:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,38 +31,53 @@ t_mock *create_mock_tokens(char *input)
 			perror("malloc failed");
 			exit(EXIT_FAILURE);
 		}
-
-		// Determine the token type based on the word content
-		if (strcmp(word, "echo") == 0 || strcmp(word, "cd") == 0 || strcmp(word, "ls") == 0) {
-			new_token->mock_type = COMMAND;
-		} else if (strcmp(word, "exit") == 0 || strcmp(word, "pwd") == 0 || strcmp(word, "export") == 0) {
-			new_token->mock_type = BUILTIN;
-		} else if (strcmp(word, "|") == 0) {
-			new_token->mock_type = PIPE;
-		} else if (strcmp(word, "&&") == 0 || strcmp(word, "||") == 0) {
-			new_token->mock_type = OPERATOR; // Handle for bonus
-		} else if (strcmp(word, "<") == 0) {
-			new_token->mock_type = REDIR_IN;
-		} else if (strcmp(word, ">") == 0) {
-			new_token->mock_type = REDIR_OUT;
-		} else if (strcmp(word, ">>") == 0) {
-			new_token->mock_type = APPEND_OUT;
-		} else if (strcmp(word, "<<") == 0) {
-			new_token->mock_type = HEREDOC;
-		} else if (word[0] == '$') {
-			new_token->mock_type = ENV_VAR; // Environment variable
-		} else if (word[0] == '/' || strstr(word, "./") == word) {
-			new_token->mock_type = PATH; // Path or relative path
-		} else if (word[0] == '-') {
-			new_token->mock_type = OPTION; // Command option
-		} else {
-			new_token->mock_type = STRING; // General string or file
-		}
+		if (strcmp(word, "exit") == 0
+			|| strcmp(word, "unset") == 0
+			|| strcmp(word, "cd") == 0
+			|| strcmp(word, "pwd") == 0
+			|| strcmp(word, "export") == 0
+			|| strcmp(word, "echo") == 0
+			|| strcmp(word, "cd") == 0
+			|| strcmp(word, "env") == 0)
+			new_token->mock_type = BUILT_IN; // COMMANDS WE NEED TO CREATE
+		else if (strcmp(word, "|") == 0)
+			new_token->mock_type = PIPE; // PIPE (when outside quotes)
+		else if (strcmp(word, "&&") == 0
+				|| strcmp(word, "||") == 0
+				|| word[0] == '\\' // checks 1 backslash not 2
+				|| word[0] == ';'
+				|| word[0] == '('
+				|| word[0] == ')'
+				|| word[0] == '#'
+				|| word[0] == '&'
+				|| word[0] == '`'
+				|| word[0] == '*'
+				)
+			new_token->mock_type = UNKNOWN; // THESE SYMBOLS IF USED OUTSIDE QUOTES SHOULD NOT BE PROCESSED
+		else if (strcmp(word, "<") == 0)
+			new_token->mock_type = REDIR_IN; // REDIR_IN (when outside quotes)
+		else if (strcmp(word, ">") == 0)
+			new_token->mock_type = REDIR_OUT; // REDIR_OUT (when outside quotes)
+		else if (strcmp(word, ">>") == 0)
+			new_token->mock_type = APPEND_OUT; // APPEND_OUT (when outside quotes)
+		else if (strcmp(word, "<<") == 0)
+			new_token->mock_type = HEREDOC; // HEREDOC (when outside quotes)
+		else if (word[0] == '$')
+			new_token->mock_type = ENV_VAR; // $environment variable (when outside quotes)
+		else if (word[0] == '/')
+			new_token->mock_type = ABS_PATH; // ABSOLUTE PATH
+		else if (strstr(word, "./") == word)
+			new_token->mock_type = REL_PATH; // RELATIVE PATH
+		else if (word[0] == '~')
+			new_token->mock_type = EXPANSION; // PATH EXPANSION <- unsure we need this
+		else if (word[0] == '-')
+			new_token->mock_type = OPTION; // OPTION <- i don't know if we need this
+		else
+			new_token->mock_type = WORD; // any thing else
 
 		// Set the value and initialize the next pointer
 		new_token->mock_value = strdup(word); // Duplicate the word for storage
 		new_token->next_token = NULL;
-
 		// Add the new token to the linked list
 		if (!head) {
 			head = new_token;  // First token becomes the head

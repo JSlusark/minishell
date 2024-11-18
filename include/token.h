@@ -3,33 +3,34 @@
 
 typedef enum e_token_type // good to have an order like below
 {
-	COMMAND,        // Shell commands (e.g., "cd", "echo", "ls")
-	BUILTIN,        // Built-in shell commands (e.g., "exit", "pwd", "export")
-	ENV_VAR,        // Environment variable (e.g., "$HOME", "$USER")
-	PATH,           // Path values (e.g., "/usr/bin", "../")
-	OPTION,         // Command options (e.g., "-l", "-a")
+	BUILT_IN,        		// 0 These are the commands we need to create ("echo, cd, pwd, export, unset, env, exit")
+	ENV_VAR,        		// 2 Environment variable that starts with $ (e.g., "$HOME", "$USER")
+	EXPANSION,				// 3 unsure we have to handle this "~"
+	ABS_PATH,           	// 4 A path starting with / (e.g., /directory/directory/  or /directory/file ) is an absolute path and refers to the exact location of the file or command file system staring from root directory
+	REL_PATH,           	// 5 A path that doesn’t start with ./ or ../ It is relative to the current working directory. (example ./directory/directory/  or ../directory/directory/  or ../directory/directory/ or ../directory/file )
+	OPTION,         		// 7 Command options (e.g., "-l", "-a")
 
-	REDIR_IN,       // Input redirection ("<")
-	REDIR_OUT,      // Output redirection (">")
-	APPEND_OUT,     // Append redirection (">>")
-	HEREDOC,        // Here-document redirection ("<<")
+	REDIR_IN,       		// 8 Input redirection ("<")
+	REDIR_OUT,      		// 9 Output redirection (">")
+	APPEND_OUT,     		// 10 Append redirection (">>")
+	HEREDOC,        		// 11 Here-document redirection ("<<")
 
-	PIPE,           // Pipe operator ("|")
-	STRING,         // String literals in quotes (e.g., "hello world")
-	DELIMITER,      // Command separators (e.g., ";")
+	PIPE,           		// 12 Pipe operator ("|")
+	STRING_D_QUOTES,        // 13 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
+	STRING_S_QUOTES,        // 14 String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
 
-	//UNSURE ABOUT HAVING THIS TOKEN TYPE BUT ALSO UNSURE OF MY REASON XD
-	D_QUOTE, // i think we should not use these as tokens and instead just do a check in the tokenizer to see if what is inside a string or $var
-	S_QUOTE, // i think we should not use these as tokens and instead just do a check in the tokenizer, anything that is in between '' is see as string
+	WORD,         			// 15 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
+	UNKNOWN,         		// 16 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*" etc.. --- what about tilde?
 
-	FILENAME,           // probably not needed as the token that follows redir is always considered a file
-
-	OPERATOR,       // Logical operators for `&&` and `||` (used in bonus part only)
-
-	// Additional useful types for completeness
-	SUBSHELL,       // Subshell groupings like `(command)`
-	COMMENT,        // Comments (usually `#` followed by text)
-	UNKNOWN         // Any unrecognized or invalid token type
+	// WE DON'T NEED THESE
+	//EXTERNAL_COMMAND      // commands like grp or ls that we do not have to create, we can access these as binaries in /bin or /usr/bin, we do not need to create tokens for these, after we create our tokens and nodes we will then see if word is a external command
+	// D_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
+	// S_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
+	// DELIMITER,      		// we don't hav  to handle ; as a delimiter as it is required by the bonus, the symbol ; be seen as error if not inside a string
+	// OPERATOR,       		// we don't hav  to handle logical operators for `&&` and `||` as they are required by the bonus, these symbols will be seen as an error if not inside a string
+	// FILENAME,       		// i don't think we need this as we will check if something is a file based on the commands we find in our nodes
+	// SUBSHELL,       		// we do not need to handle subshell
+	// COMMENT,        		// we do not need to handle comments
 } t_token_type;
 
 typedef struct s_slice

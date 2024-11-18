@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 19:07:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:24:30 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,23 @@ t_node_table *parse(t_mock *mock_token)
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 			print_node_number = 0; // Reset flag after printing the node number
 		}
+		if (mock_token->mock_type == UNKNOWN) // checks invalid tokens: symbols outside of string like (&&, ;, \, /, ?, unclosed ", unclosed ' etc..)
+		{
+			printf("Error: invalid tokens \n");
+			break;
+		}
+
 		if (mock_token->mock_type == PIPE)
 		{
-			if (!mock_token->next_token || pipe_at_start) // i have to change this, because we can end input with a pipe in bash
-				printf("ERROR: Cannot start or end node with a pipe!\n"); // Check for invalid pipe position
+			if (!mock_token->next_token || pipe_at_start || mock_token->next_token->mock_type == PIPE) // minishell does not require to handle
+			{
+				printf("Error: cannot start/end pipe and cannot have consecutive pipes\n"); // If the input ends with pipe, user is promped to write more input
+				break;
+			}
 			else
 			{
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
-				printf(COLOR_RED"		TOKEN %d: PIPE\n"COLOR_RESET, token_n);
+				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->mock_type);
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
 				node_n++;
 				is_node_command = true;
@@ -69,7 +78,7 @@ t_node_table *parse(t_mock *mock_token)
 				int redir_type = mock_token->mock_type;
 				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
-				printf("%s\n", mock_token->mock_value);
+				printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
 				if(mock_token->next_token == NULL) // important: every redir type has to be always followed by a token and the token that follows it will always be considered a file (for <, >, >>) or delimiter (for HEREDOC <<)
 				{
 					printf(COLOR_RED"ERROR: redirections need to be followed by a file! \n"COLOR_RESET);
@@ -92,7 +101,7 @@ t_node_table *parse(t_mock *mock_token)
 							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n); // this is either
 						else // if redir is <, > and >> the next token is seen as file
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
-						printf("%s\n", mock_token->mock_value);
+						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
 					}
 				}
 			}
@@ -101,13 +110,13 @@ t_node_table *parse(t_mock *mock_token)
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
 				if (is_node_command)
 				{
-					printf("%s", mock_token->mock_value);
+					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
 					is_node_command = false;
 				}
 				else
 				{
-					printf("%s", mock_token->mock_value);
+					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);
 				}
 			}
@@ -115,11 +124,11 @@ t_node_table *parse(t_mock *mock_token)
 		mock_token = mock_token->next_token; // Move to the next token
 	}
 	// Summary of AST structure
-	if (node_n == 1)
-	{
-		printf("\n Our TREE is made of just one node:\n a node is a command followed by arguments (strings, redirections, options, etc.)\n");
-	} else if (node_n > 1) {
-		printf("\n Our TREE is made of %d nodes connected by pipes within a single node table.\n", node_n);
-	}
+	// if (node_n == 1)
+	// {
+	// 	printf("\n Our TREE is made of just one node:\n a node is a command followed by arguments (strings, redirections, options, etc.)\n");
+	// } else if (node_n > 1) {
+	// 	printf("\n Our TREE is made of %d nodes connected by pipes within a single node table.\n", node_n);
+	// }
 	return NULL;
 }

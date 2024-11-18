@@ -70,4 +70,27 @@ REDIRECTIONS:
 		"echo this is still a redir›sillyfile.txt" will not tokenise this way - THIS IS WRONG:
 		Token 6: redir>sillyfile.txt (word)
 
+PATHS:
+	For now the tokenizer should only see that when a word in the input starts with / it is an absolute path
+	when word starts with ./ or ../ it is a relative path.
+	After creating nodes we can create a function that checks the folders and files of the path and error handles before executing the node it is part of
+
+	ABSOLUTE PATH:
+	this will always be the structure, relative path starts with /
+	/directory/directory/directory/file
+	/directory/directory/directory/
+	/directory/ <- when we end a path with / it means the last element is a directory
+	/directory/file <- when we end a path without it means the last element is a file
+
+	RELATIVE PATH:
+	this will always be the structure, relative path starts with ./ or ../
+	./directory/directory/file
+	../directory/directory/file
+	./directory/directory/
+	../directory/directory/
+
+	./ <- means current directory
+	../ <- means parent directory
+	./directory/ <- when we end a path with / it means the last element is a directory
+	./directory/file <- when we end a path without it means the last element is a file
 */
