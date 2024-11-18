@@ -12,7 +12,7 @@ typedef struct s_token_list
 } t_token_list;
 
 
-t_token_list *init_token_list(const t_scanner *self);
+t_token_list *init_token_list(t_scanner *self);
 
 /*
 

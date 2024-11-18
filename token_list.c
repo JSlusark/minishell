@@ -1,7 +1,7 @@
 #include "./include/minishell.h"
 
 
-t_token_list *init_token_list(const t_scanner *scanner)
+t_token_list *init_token_list(t_scanner *scanner)
 {
 	t_token_list *new_token;
 	t_token_list *head;    // Head of the linked list
@@ -11,6 +11,7 @@ t_token_list *init_token_list(const t_scanner *scanner)
 	current = NULL;
 	while (scanner_has_next(scanner))
 	{
+		scanner->next = scanner_next(scanner);
 		new_token = OOM_GUARDS(malloc(sizeof(t_token_list)), __FILE__, __LINE__);
 		new_token->token_type = scanner->next.type;
 		new_token->token_value = ft_strndup(scanner->next.lexeme.start, scanner->next.lexeme.length);

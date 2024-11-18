@@ -6,7 +6,7 @@
 /*   By: alejandroramirez <alejandroramirez@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/18 11:05:05 by alejandrora      ###   ########.fr       */
+/*   Updated: 2024/11/18 11:57:12 by alejandrora      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	main(int argc, char **argv)
 		// The itr struct is initialized with the input and the length of it.
 		itr = char_itr_value(input, ft_strlen(input));
 		scanner = scanner_value(itr);
-		while (scanner_has_next(&scanner))
+		init_token_list(&scanner);
+/* 		while (scanner_has_next(&scanner))
 		{
 			scanner.next = scanner_next(&scanner);
-			init_token_list(scanner.next); //save every token in to the list of tokens.
 			print_token(scanner.next);
-		}
+		} */
 		print_token(scanner.next); //This is printing the END token
 		free(input);
 	}
