@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/13 16:09:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:33:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@
 #define COLOR_BLUE "\x1b[34m"
 #define COLOR_RESET  "\x1b[0m"
 
-// PARSING STRUCTS
-#include	"token.h"
-#include	"node.h"
-
+// Stages
+#include	"token.h" // token structs and functions
+#include	"node.h" // node structs and node handling functions
 
 
 // CALL VALGRIND SUPPRESSION:

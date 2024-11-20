@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/19 14:13:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:35:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int main(int argc, char **argv) {
 			add_history(input);
 		}
 		// Parse and process tokens - temp for now
-		parse(create_mock_tokens(input));
+		t_mock	*tokens = create_mock_tokens(input);
+		parse(tokens);
+		free_mock_tokens(tokens);
 		/*
 		// THIS SHOULD BE MY FINAL GOAL
 		t_node *ast = parse(mock_tokens);

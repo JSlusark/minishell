@@ -6,47 +6,81 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/19 17:57:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:04:24 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-The current parsing function doesn't actually build nodes yet.
-Instead, it is designed to analyze and show how Bash interprets the input we pass to it and create our nodes.
-I think this is essential for us so that we can both agree on how things will work before we build our data structures and execution functions.
-I left some notes for you in a folder called how_bash_parses_tokens:
-	- bash_parse_explained.c
-	- parsing_rules.c
-
-I decided to do this so that we can already see a structure and understand how to progress within our project, improve our code and avoid special
-cases that will make things harder for us to fix. It's been a bit hard at the beginning but I feel that i needed to do this
-to avoid impulsive decisions in building our parsing structure and finding myself with a mess that would make things more confusing for all of us.
-
-I just need to add some other small details to this code today.
-Once i am done I will use this same logic to build our nodes and another file called print_nodes.c
-which will print the nodes that I created.
- */
-
 #include "minishell.h"
+
+// create node --- if token loop happens and when node flag is true
+// create redir struct
+// create command struct
+// create arg liked list sruct and collect args in the loop
+// free functions
+
+// create table --- before loop allocate memory for the table ()
+
+// t_args	init_collect_args()
+// {
+
+// }
+
+// t_cmd	init_collect_cmd()
+// {
+
+// }
+
+// t_redirection	init_redirection_struct()
+// {
+
+// }
+
+// t_node	init_node_struct()
+// {
+
+// }
+
+// t_node_table	add_node_to_table()
+// {
+
+// }
+
+
+//converting my logic to node creation
 t_node_table *parse(t_mock *mock_token)
 {
-	int node_n = 1;					// We may need this for knowing how many nodes we have for piping and forking? prob also for malloc?
+	int node_n = 1;					// We may need this for knowing how many nodes we have for piping? prob also for malloc?
 	int token_n = 0;				// We may not need this
 	bool start_node = true;			// Flag to indicate if we have to start a node at start or after pipe
 	bool get_command = true;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start = true;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
+
+	//_______ allocate table memory______
+	// t_node_table *node_table = calloc(1, sizeof(t_node_table));
+	// if (!node_table)
+	// 	perror("calloc failed for node_table");
+	//_________________________________
 
 	while (mock_token) // We iterate through every token in our list
 	{
 		token_n++; // use to print the position of the token in our node - start from 0 instead than 1 perhaps?
 		if (start_node == true) // flag that will make us start
 		{
+
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-			start_node = false; // we started the node so what happens next is grabbing the node data
+				//_____ allocate node memory________
+				// t_node *node = calloc(1, sizeof(t_node));
+				// if (!node)
+				// 	perror("calloc failed for node");
+
+				// node->node_i = node_n;
+				//_________________________________
+			start_node = false; // we started the node so what happens next is grabbing the node data until we find |
 		}
 		if (mock_token->mock_type == UNKNOWN) // interrupts node creation as it checks invalid tokens: symbols outside of string like (&&, ;, \, /, ?, unclosed ", unclosed ', ~, and * etc..) <- can we avoid tokens
 		{
 			printf("Error: invalid tokens \n");
+			// free nodes and element inside the structs
 			break;
 		}
 		if (mock_token->mock_type == PIPE) // checks pipe to end/start node and command or trigger error
@@ -54,16 +88,23 @@ t_node_table *parse(t_mock *mock_token)
 			if (!mock_token->next_token || pipe_at_start || mock_token->next_token->mock_type == PIPE) // interrupts node creation
 			{
 				printf("Error: cannot start/end pipe and cannot have consecutive pipes\n"); // Starting with pipe is error and we do not have to handle when a command ends with pipe
+				// free nodes and elements inside structs
 				break;
 			}
 			else // we end the node, flag to start a new one and its command
 			{
+				// node->pipe = true;
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
 				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->mock_type);
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
+
+				node_n++;			// As we start a new node we increase the node number,
+				// POINT: ----> here we end the node and reactivate a flag to create a new one on top of the loop
+					// node->node_i = node_n; // give an index to the node
+					// node->token_n = token_n; // collect number of tokens in node, if it can help
+					// add node to node table
 				start_node = true;  // Node created, we have to start a new node
 				get_command = true; // As we start a new node we reset this flag to true
-				node_n++;			// As we start a new node we increase the node number,
 			}
 		}
 		else //sets pipeflag to false as if pipe is not 1st then it's not an error
@@ -80,6 +121,7 @@ t_node_table *parse(t_mock *mock_token)
 				if(mock_token->next_token == NULL)
 				{
 					printf(COLOR_RED"ERROR: redirections need to be followed by a file! \n"COLOR_RESET);
+					// free nodes and struct data
 					break; // we break the loop
 				}
 				// If we have a token after redir, trigger error if redir symbol is followed by redir symbol or pipe, if not we grab the file
@@ -92,12 +134,17 @@ t_node_table *parse(t_mock *mock_token)
 						|| mock_token->mock_type == HEREDOC) // if redir symbol is followed by |, >, >>, < and << this is considered an error
 					{
 						printf(COLOR_RED"ERROR: redirection cannot be immediately followed by pipes or other redirections \n"COLOR_RESET);
+						// free nodes and struct
 						break; // we break the loop as there is no point in continuing to build a node if it's an error
 					}
 					else
 					{
+						//----------->  create the redir struct with token and file/delimeter
 						if(redir_type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n); // this is either
+						{
+							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
+							//node->
+						}
 						else // if redir is <, > and >> the next token is seen as file
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
 						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
@@ -106,6 +153,7 @@ t_node_table *parse(t_mock *mock_token)
 			}
 			else // everything that is not redir is either node command or args
 			{
+				//------------> initiate command struct and args struct to see if command and args are filled of null
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
 				if (get_command) // triggers command storing if true
 				{
@@ -122,6 +170,13 @@ t_node_table *parse(t_mock *mock_token)
 		}
 		mock_token = mock_token->next_token; // Move to the next token
 	}
+	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?
+		//if node == 0 -- either malloc failed, or node error, or input is empty, free everything?
+		//if node == 1, means we have 1 node no pipes
+		//if node > 1, means we have to pipe
+
+
+
 	// Summary of AST structure
 	// if (node_n == 1)
 	// {

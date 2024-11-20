@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 14:26:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:35:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_node // A node typically has this data: command, command argume
 	t_redirection *redir;  // Input redirection, e.g., "< input.txt" (> hello.txt)
 	t_args *cmd_args; // List of arguments following the command (hi, bye, bye)
 	bool pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
-	//int	node_index; //??
+	int	node_i; //??
 } t_node;
 
 typedef	struct  s_node_table //if next token is PIPE we create this
@@ -82,8 +82,9 @@ typedef	struct  s_node_table //if next token is PIPE we create this
 
 
 t_node_table	*parse(t_mock *mock_token); // mock version
-t_mock *create_mock_tokens(char *input);
-
+// t_node_table	*parse(t_tokens *tokens); // definitive version
+t_mock			*create_mock_tokens(char *input);
+void			free_mock_tokens(t_mock *head);
 
 //Good resources that helped getting me into this and that will allow us to expand our logic:
 //https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100

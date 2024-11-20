@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/19 13:52:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 15:28:26 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+
+void free_mock_tokens(t_mock *head) {
+	t_mock *current = head;
+	t_mock *next;
+
+	while (current != NULL) {
+		next = current->next_token; // Store the next token
+		free(current->mock_value); // Free the duplicated string
+		free(current);             // Free the current node
+		current = next;            // Move to the next token
+	}
+}
 
 // Splits the input into words and assigns enum types
 t_mock *create_mock_tokens(char *input)
@@ -74,7 +87,6 @@ t_mock *create_mock_tokens(char *input)
 			new_token->mock_type = OPTION; // OPTION <- i don't know if we need this
 		else
 			new_token->mock_type = WORD; // any thing else
-
 		// Set the value and initialize the next pointer
 		new_token->mock_value = strdup(word); // Duplicate the word for storage
 		new_token->next_token = NULL;
