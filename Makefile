@@ -5,6 +5,7 @@ MOCK_TOKENS = ./mock_data/create_mock_tokens.c
 
 SRC	= main.c \
 	parsing.c \
+	parsing_free.c \
 	$(MOCK_TOKENS)
 
 

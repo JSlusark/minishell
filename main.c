@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 15:35:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 19:59:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@ int main(int argc, char **argv) {
 	printf("ARGC: %d, ARGV: %s\n", argc, argv[0]);
 	while (1) {
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-		if (strlen(input) > 0) {
+		if (strlen(input) > 0)
+		{
 			add_history(input);
+		}
+		if(ft_strcmp(input, "exit") == 0)
+		{
+			free(input);
+			clear_history();
+			printf("Exiting Minishell..\n");
+			exit (0);
 		}
 		// Parse and process tokens - temp for now
 		t_mock	*tokens = create_mock_tokens(input);

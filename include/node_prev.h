@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 19:00:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:24:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ typedef struct s_mock
 
 typedef struct s_redirection
 {
-	struct s_redirection *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
 	int	redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
-	char *file_name;          // Target file for input, output and append
+	char *file;          // Target file for input, output and append
 
 	// other elements thayt we might need if we consider heredoc and other redirs;
 	// char *delimiter; // we use this for HEREDOC instead than *file
@@ -36,7 +35,6 @@ typedef struct s_redirection
 
 typedef struct s_args // list of tokens that follow the command token in the node and considered its arguments
 {
-	struct s_args *arg_prev;   // Pointer to the next argument in the list
 	int arg_type;         //anything that is not a command/builtin token or part of the redirection struct (file, redir type)
 	char *arg_value;      // Value of the token (strings.. could it be also expandables and env variables?)
 	struct s_args *arg_next;   // Pointer to the next argument in the list
@@ -48,32 +46,28 @@ typedef struct s_cmd // the the first token thas is not redirection data (redire
 	char	*cmd_value;       // what is the value of the commmand (echo, cd, exit, string_value etc)
 } t_cmd;
 
-//a node table is a linked list of nodes, we traverse each node as a double linked list.. why?
-// we do it so that when we have to execure we can access each node
 typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe
 {
-	struct s_node *prev; // prev nodes can help
-	t_cmd *cmd_token;
-	t_redirection *redir;
-	t_args *cmd_args;
-	bool pipe;
-	int	node_i;
-	// int	node_amout;// we cannot store this as it will change at every iteration
-	struct s_node *next;
+	// example: `echo hi > hello.txt bye bye`
+	t_cmd *cmd_token; // the shell sees the first token as a command unless a redir is found (echo)
+	t_redirection *redir;  // Input redirection, e.g., "< input.txt" (> hello.txt)
+	t_args *cmd_args; // List of arguments following the command (hi, bye, bye)
+	bool pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
+	int	node_i; //??
 } t_node;
 
-// typedef	struct  s_node_table //if next token is PIPE we create this
-// {
-// 	// example: "echo hi > hello.txt bye bye | cat"
-// 	t_node	curr_node; // Current node of teh table "echo hi > hello.txt bye bye |" (the node has a command "echo", 3 args "echo, bye, bye", redir data "> file.txt" and a pipe "|")
-// 	t_node	*next_node; // Pointer to the next node "cat"  (the node has only a command cat, no args, redirections or pipes)
-// 	//int	node_n; //to see if there are nodes that we need to pipe
+typedef	struct  s_node_table //if next token is PIPE we create this
+{
+	// example: "echo hi > hello.txt bye bye | cat"
+	t_node	curr_node; // Current node of teh table "echo hi > hello.txt bye bye |" (the node has a command "echo", 3 args "echo, bye, bye", redir data "> file.txt" and a pipe "|")
+	t_node	*next_node; // Pointer to the next node "cat"  (the node has only a command cat, no args, redirections or pipes)
+	//int	node_n; //to see if there are nodes that we need to pipe
 
-// 	// example: "echo hi > hello.txt bye bye |"
-// 	// here curr_node->pipe == true and next_node == NULL, so bash asks input fro the use to write the next commands
-// 	// example: "echo hi > hello.txt bye bye"
-// 	//here curr_node->pipe == false and next_node == NULL it means we have just one node in the node table
-// }	t_node_table;
+	// example: "echo hi > hello.txt bye bye |"
+	// here curr_node->pipe == true and next_node == NULL, so bash asks input fro the use to write the next commands
+	// example: "echo hi > hello.txt bye bye"
+	//here curr_node->pipe == false and next_node == NULL it means we have just one node in the node table
+}	t_node_table;
 
 // IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE TABLES THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
 // THEREFORE ONLY IN THE BONUS WE CREATE A REAL ABSTRACT SYNTAX TREE.
@@ -87,13 +81,13 @@ typedef struct s_node // A node typically has this data: command, command argume
 }	t_ast; // without bonus  t_ast will only return 1 cmd_table while the rest of the data is empty */
 
 
-t_node	*parse(t_mock *mock_token); // mock version
+t_node_table	*parse(t_mock *mock_token); // mock version
 // t_node_table	*parse(t_tokens *tokens); // definitive version
 t_mock			*create_mock_tokens(char *input);
 void			free_mock_tokens(t_mock *head);
 
 //freeing functions for node allocation data
-void free_node_list(t_node *node_list);
+void free_node_table(t_node_table *node_table);
 
 //Good resources that helped getting me into this and that will allow us to expand our logic:
 //https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100
