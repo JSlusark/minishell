@@ -8,7 +8,7 @@ typedef enum e_token_type // good to have an order like below
 	ABS_PATH,           	// 2 A path starting with / (e.g., /directory/directory/  or /directory/file ) is an absolute path and refers to the exact location of the file or command file system staring from root directory
 	REL_PATH,           	// 3 A path that doesn’t start with ./ or ../ It is relative to the current working directory. (example ./directory/directory/  or ../directory/directory/  or ../directory/directory/ or ../directory/file )
 	PATH_EXP,				// 4 Not sure that we have to handle path expansion with "~" but leaving it here for now
-	OPTION,         		// 5 Command options (e.g., "-l", "-a")
+	OPTION,         		// 5 Command options (only "-n" with echo) -> probably do not need to tokenize.
 
 	REDIR_IN,       		// 6 Input redirection ("<")
 	REDIR_OUT,      		// 7 Output redirection (">")

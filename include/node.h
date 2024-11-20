@@ -6,13 +6,12 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 21:05:42 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:26:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
-
 // The scanning function (which we can also call tokenizer), should return us a linked list of tockens needed by our parsing function, just as the t_mock struct below
 typedef struct s_mock
 {
@@ -53,7 +52,8 @@ typedef struct s_node // A node typically has this data: command, command argume
 	t_cmd *cmd_token; // the shell sees the first token as a command unless a redir is found (echo)
 	t_redirection *redir;  // Input redirection, e.g., "< input.txt" (> hello.txt)
 	t_args *cmd_args; // List of arguments following the command (hi, bye, bye)
-	int pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
+	bool pipe; // true or false - pipe will be part of the node, if pipe is true we have to check if we have another node
+	//int	node_index; //??
 } t_node;
 
 typedef	struct  s_node_table //if next token is PIPE we create this
@@ -61,6 +61,7 @@ typedef	struct  s_node_table //if next token is PIPE we create this
 	// example: "echo hi > hello.txt bye bye | cat"
 	t_node	curr_node; // Current node of teh table "echo hi > hello.txt bye bye |" (the node has a command "echo", 3 args "echo, bye, bye", redir data "> file.txt" and a pipe "|")
 	t_node	*next_node; // Pointer to the next node "cat"  (the node has only a command cat, no args, redirections or pipes)
+	//int	node_n; //to see if there are nodes that we need to pipe
 
 	// example: "echo hi > hello.txt bye bye |"
 	// here curr_node->pipe == true and next_node == NULL, so bash asks input fro the use to write the next commands
@@ -101,3 +102,15 @@ t_mock *create_mock_tokens(char *input);
 // TO DO LATER, after making sure about bash token interpretation:
 // Use the logic in parsing.c to create nodes in the command table
 // print the nodes that we create from the parsin in a similar style i have now
+
+
+
+///FUNCTIONS
+
+// create table --- before loop allocate memory for the table ()
+// create node --- if token loop happens and when node flag is true
+// create redir struct
+// create command struct
+// create arg liked list sruct and collect args in the loop
+
+// free functions

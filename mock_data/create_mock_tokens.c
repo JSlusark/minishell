@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/18 19:38:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:52:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_mock *create_mock_tokens(char *input)
 		else if (strstr(word, "./") == word)
 			new_token->mock_type = REL_PATH; // RELATIVE PATH
 		else if (word[0] == '~')
-			new_token->mock_type = EXPANSION; // PATH EXPANSION <- unsure we need this
+			new_token->mock_type = PATH_EXP; // PATH EXPANSION <- unsure we need this
 		else if (word[0] == '-')
 			new_token->mock_type = OPTION; // OPTION <- i don't know if we need this
 		else
