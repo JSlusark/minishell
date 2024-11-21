@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 16:04:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:42:03 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,93 @@
 
 // }
 
+// void add_args_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
+// {
+// 	t_cmd *cmd = calloc(1, sizeof(t_cmd));
+// 	if (!cmd)
+// 	{
+// 		perror("Failed to allocate node\n");
+// 		free_node_list(node_list); // Free the existing list in case of an error
+// 		return;
+// 	}
+// 	cmd->cmd_type = token->mock_type;
+// 	cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+// 	if (!cmd->cmd_value)
+// 	{
+// 		perror("Failed to allocate cmd_value\n");
+// 		free(cmd);
+// 		free_node_list(node_list); // Free the existing list in case of an error
+// 		return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
+// 	}
+// 	curr_node->cmd_data = cmd;
+	// return(true);
+// }
+
+// void append_arg_to_cmd_args(t_args **cmd_args, t_args *new_arg)
+// {
+// 	if(!(*cmd_args))
+// 	{
+// 		*cmd_args = new_arg; // This updates a local copy of cmd_args
+// 		new_arg->prev = NULL;
+// 	}
+// 	else
+// 	{
+// 		t_args *last_arg = *cmd_args; // we do this to traverse tthrough the list without affecting it
+// 		while(last_arg->next) // we traverse the list until we reach the node that has NULL as next node
+// 			last_arg = last_arg->next;
+// 		last_arg->next = new_arg; // we assign the new node as last in the list
+// 		new_arg->prev = last_arg; // we assign the 2nd last node as prev node of teh new node
+// 	}
+// }
+
+t_args *create_arg_data(t_node *node_list, t_mock *token)
+{
+	t_args *new_arg = calloc(1, sizeof(t_args));
+	if (!new_arg)
+	{
+		perror("Failed to allocate node\n");
+		free_node_list(node_list); // Free the existing list in case of an error
+		return(NULL);
+	}
+	new_arg->arg_type = token->mock_type;
+	new_arg->arg_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	if (!new_arg->arg_value)
+	{
+		perror("Failed to allocate arg_value\n");
+		free(new_arg);
+		free_node_list(node_list); // Free the existing list in case of an error
+		return (NULL); // if this happens it should stop so it has to return something!!!!!!!!!!!!
+	}
+	return(new_arg);
+}
+
+void add_cmdargs_to_node(t_node *node_list, t_node *curr_node)
+{
+	t_args *cmd_args = calloc(1, sizeof(t_args));
+	if (!cmd_args)
+	{
+		perror("Failed to allocate cmd_args\n");
+		free_node_list(node_list); // Free the existing list in case of an error
+		return;
+	}
+
+
+
+	// cmd->cmd_type = token->mock_type;
+	// cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	// if (!cmd->cmd_value)
+	// {
+	// 	perror("Failed to allocate cmd_value\n");
+	// 	free(cmd);
+	// 	free_node_list(node_list); // Free the existing list in case of an error
+	// 	return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
+	// }
+	curr_node->cmd_args = cmd_args;
+	// return(true);
+}
+
+
+
 void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
 {
 	t_cmd *cmd = calloc(1, sizeof(t_cmd));
@@ -53,7 +140,7 @@ void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
 		perror("Failed to allocate cmd_value\n");
 		free(cmd);
 		free_node_list(node_list); // Free the existing list in case of an error
-		return;
+		return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
 	}
 	curr_node->cmd_data = cmd;
 	// return(true);
@@ -100,6 +187,8 @@ t_node *parse(t_mock *mock_token)
 
 	t_node *head = NULL; 			// First node in the list
 	t_node *new_node;
+	// t_args *new_arg;
+	// t_args *cmd_args;
 
 	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (mock_token)
@@ -191,11 +280,19 @@ t_node *parse(t_mock *mock_token)
 				{
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
-					add_cmd_to_node(head, new_node, mock_token);
+					add_cmd_to_node(head, new_node, mock_token); // had to return as error
+					// new_node->cmd_args = NULL;
 					get_command = false; // command found, if we have other tokens they are args if not redir data
 				}
 				else // triggers args storing
 				{
+					add_cmdargs_to_node(head, new_node);
+					new_node->cmd_args = create_arg_data(head, mock_token);
+					// printf("YOYO: %s\n", new_arg->arg_value);
+					// printf("YOYO    2: %s\n", new_node->cmd_args->arg_value);
+					if(!new_node->cmd_args) // is null
+						return (NULL); // no free as i did alread in the create node func
+					// append_arg_to_cmd_args(&(new_node->cmd_args), new_arg); //??
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type); // he
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);
 				}

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 15:29:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:43:47 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void free_arg_list (t_args *head)
 	while(curr)
 	{
 		// free(curr->arg_type);
-		free(curr->arg_value);
-		t_args *temp = curr->arg_next;
-		free(curr);
+		// free(curr->arg_value);
+		t_args *temp = curr->next;
+		// free(curr);
 		curr = temp;
 	}
 }

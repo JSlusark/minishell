@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 15:29:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:55:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ typedef struct s_redirection
 
 typedef struct s_args // list of tokens that follow the command token in the node and considered its arguments
 {
-	struct s_args *arg_prev;   // Pointer to the next argument in the list
+	struct s_args *prev;   // Pointer to the prev argument in the list (adding it in case it can be useful in the future)
 	int arg_type;         //anything that is not a command/builtin token or part of the redirection struct (file, redir type)
 	char *arg_value;      // Value of the token (strings.. could it be also expandables and env variables?)
-	struct s_args *arg_next;   // Pointer to the next argument in the list
+	struct s_args *next;   // Pointer to the next argument in the list
 } t_args;
 
 typedef struct s_cmd // the the first token thas is not redirection data (redirection symbol and file name) or pipe is seen by bash as the command of the node
