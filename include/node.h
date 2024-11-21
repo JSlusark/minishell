@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 19:00:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:08:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void			free_mock_tokens(t_mock *head);
 
 //freeing functions for node allocation data
 void free_node_list(t_node *node_list);
+void print_nodes(t_node *head);
 
 //Good resources that helped getting me into this and that will allow us to expand our logic:
 //https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100

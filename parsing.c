@@ -6,31 +6,19 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 13:51:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 14:16:30 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void print_node_indices(t_node *head)
-{
-    t_node *current = head; // Start with the head of the node list
-    printf("HEYYYYYY\n"); // Print the node_i value
-    // Traverse through the linked list
-    while (current != NULL)
-    {
-        printf("Node index: %d\n", current->node_i); // Print the node_i value
-        current = current->next; // Move to the next node
-    }
-}
-
-// create node --- if token loop happens and when node flag is true
+// create node  - creates a node in the loop when start_node flag is true
+// append node - appends the created node after we find a pipe, we also have to use this at end of loop (as ending with pipe will be error anyway and wont allocate a new node but free and return)
 // create redir struct
 // create command struct
 // create arg liked list sruct and collect args in the loop
 // free functions
 
-// create table --- before loop allocate memory for the table ()
 
 // t_args	init_collect_args()
 // {
@@ -90,20 +78,12 @@ t_node *parse(t_mock *mock_token)
 	t_node *head = NULL; 			// First node in the list
 	t_node *new_node;
 
-	//_______ allocate node list memory______
-	// t_node *head = calloc(1, sizeof(t_node));
-	// if (!head)
-	// 	perror("calloc failed for node_table");
-	// _________________________________
-	// assign prev to null
-
 	while (mock_token)
 	{
 		token_n++;
-		// CHECKS IF WE HAVE TO START A NEW NODE
+		// IF STARTNODE FLAG IS TRUE WE CREATE A NEW NODE
 		if (start_node == true)
 		{
-
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 			new_node = create_node(head);
 			if(!new_node) // is null
@@ -204,8 +184,6 @@ t_node *parse(t_mock *mock_token)
 		mock_token = mock_token->next_token; // Move to the next token
 	}
 	append_node(&head, new_node);// we also have to append the node when it doesn't have pipe
-	print_node_indices(head);
-	free_node_list(head); // it works
 	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?
 		//if node == 0 -- either malloc failed, or node error, or input is empty, free everything?
 		//if node == 1, means we have 1 node no pipes
