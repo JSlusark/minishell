@@ -6,11 +6,23 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 19:45:09 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:51:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void print_node_indices(t_node *head)
+{
+    t_node *current = head; // Start with the head of the node list
+    printf("HEYYYYYY\n"); // Print the node_i value
+    // Traverse through the linked list
+    while (current != NULL)
+    {
+        printf("Node index: %d\n", current->node_i); // Print the node_i value
+        current = current->next; // Move to the next node
+    }
+}
 
 // create node --- if token loop happens and when node flag is true
 // create redir struct
@@ -35,71 +47,35 @@
 
 // }
 
-// t_node	init_node_struct()
-// {
 
-// }
+void append_node(t_node **head, t_node *new_node)
+{
+	if(!(*head))
+	{
+		*head = new_node; // This updates a local copy of head
+		new_node->prev = NULL;
+	}
+	else
+	{
+		t_node *last_node = *head; // we do this to traverse tthrough the list without affecting it
+		while(last_node->next) // we traverse the list until we reach the node that has NULL as next node
+			last_node = last_node->next;
+		last_node->next = new_node; // we assign the new node as last in the list
+		new_node->prev = last_node; // we assign the 2nd last node as prev node of teh new node
+	}
+}
 
-// t_node_table	add_node_to_table()
-// {
-
-// }
-
-
-// void	append_node(t_node **node_list, int n)
-// {
-// 	t_node	*node;
-// 	t_node	*last_node;
-
-// 	if (!node_list)
-// 		return ;
-// 	node = malloc(sizeof(t_node));
-// 	if (!node)
-// 		return;
-// 	// we
-// 	node->next = NULL;
-// 	if (!(*node_list))
-// 	{
-// 		*node_list = node;
-// 		node->prev = NULL;
-// 	}
-// 	else
-// 	{
-// 		last_node = *node_list;
-// 		while (last_node->next)
-// 			last_node = last_node->next;
-// 		last_node->next = node;
-// 		node->prev = last_node;
-// 	}
-// }
-
-// void	append_node(t_node *head)
-// {
-// 	t_node *new_node = calloc(1, sizeof(t_node));
-// 	if (!new_node)
-// 	{
-// 		perror("calloc failed for node");
-// 		free_node_list(head); // Free the existing list in case of an error
-// 		return NULL;
-// 	}
-// 	// Set up the node links
-// 	if (!head)
-// 	{
-// 		head = new_node; // This is the first node
-// 		head->prev = NULL;
-// 	}
-// 	else
-// 	{
-// 		head->next = new_node; // Link the previous node to the new node
-// 		new_node->prev = head; // Link back to the previous node
-// 		new_node->prev = head; // Link back to the previous node
-// 	}
-
-// 	// Move to the new node
-// 	curr_node = new_node;
-// 	curr_node->node_i = node_n++; // Assign the node index
-
-// }
+t_node *create_node(t_node *node_list)
+{
+	t_node *new_node = calloc(1, sizeof(t_node));
+	if (!new_node)
+	{
+		perror("Failed to allocate node\n");
+		free_node_list(node_list); // Free the existing list in case of an error
+		return(NULL);
+	}
+	return(new_node);
+}
 
 
 //converting my logic to node creation
@@ -111,10 +87,13 @@ t_node *parse(t_mock *mock_token)
 	bool get_command = true;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start = true;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
 
+	t_node *head = NULL; 			// First node in the list
+	t_node *new_node;
+
 	//_______ allocate node list memory______
-	t_node *head = calloc(1, sizeof(t_node));
-	if (!head)
-		perror("calloc failed for node_table");
+	// t_node *head = calloc(1, sizeof(t_node));
+	// if (!head)
+	// 	perror("calloc failed for node_table");
 	// _________________________________
 	// assign prev to null
 
@@ -126,17 +105,10 @@ t_node *parse(t_mock *mock_token)
 		{
 
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-				// _____ allocate node memory________
-				// if(node n is 2 we append node)
-				// t_node *new_node = calloc(1, sizeof(t_node));
-				// if (!new_node)
-				// {
-				// 	perror("calloc failed for node");
-				// 	free_node_list(head); // Free the existing list in case of an error
-				// 	return NULL;
-				// }
-				// head->node_i = node_n - 1;
-				//_________________________________
+			new_node = create_node(head);
+			if(!new_node) // is null
+				return (NULL); // no free as i did alread in the create node func
+			new_node->node_i = node_n - 1;
 			start_node = false;
 		}
 		if (mock_token->mock_type == UNKNOWN) // ERROR AND FREE
@@ -166,8 +138,8 @@ t_node *parse(t_mock *mock_token)
 					// node->token_n = token_n; // collect number of tokens in node, if it can help
 					// add node to node table
 				start_node = true;  // Node created, we have to start a new node
-				// node = node->next <--- here we pass to the next node because we start over again
 				get_command = true; // As we start a new node we reset this flag to true
+				append_node(&head, new_node);// as we end the node we append it to our list
 			}
 		}
 		else //sets pipeflag to false as pipe is not first command
@@ -231,7 +203,8 @@ t_node *parse(t_mock *mock_token)
 		}
 		mock_token = mock_token->next_token; // Move to the next token
 	}
-
+	append_node(&head, new_node);// we also have to append the node when it doesn't have pipe
+	print_node_indices(head);
 	free_node_list(head); // it works
 	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?
 		//if node == 0 -- either malloc failed, or node error, or input is empty, free everything?
