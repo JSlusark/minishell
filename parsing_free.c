@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 20:00:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:29:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void free_cmd_struct (t_cmd *cmd)
 	// free(cmd->cmd_type);
 }
 
-void free_node_list(t_node *head)
+void free_node_list(t_node *head) // frees each node in the list and its data if it was assigned
 {
 	if (!head)
 		return; // Nothing to free if head is NULL
@@ -61,9 +61,9 @@ void free_node_list(t_node *head)
 	// traverse and free each node inside the list
 	while (curr) // will free until curr == NULL
 	{
-		if(curr->cmd_token)
-			free_cmd_struct (curr->cmd_token); // free elements in the cmd struct if memory was allocated to them
-		free(curr->cmd_token); // free the cmd struct container
+		if(curr->cmd_data)
+			free_cmd_struct (curr->cmd_data); // free elements in the cmd struct if memory was allocated to them
+		free(curr->cmd_data); // free the cmd struct container
 		if(curr->redir)
 			free_redir_list (curr->redir); // free elements in the redir struct if memory was allocated to them
 		free(curr->redir);  // free the redir struct container

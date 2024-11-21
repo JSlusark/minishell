@@ -6,18 +6,20 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 14:16:30 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:04:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// create node  - creates a node in the loop when start_node flag is true
-// append node - appends the created node after we find a pipe, we also have to use this at end of loop (as ending with pipe will be error anyway and wont allocate a new node but free and return)
+// ✅ create node  - creates a node in the loop when start_node flag is true
+// ✅ append node - appends the created node after we find a pipe, we also have to use this at end of loop (as ending with pipe will be error anyway and wont allocate a new node but free and return)
+
 // create redir struct
 // create command struct
 // create arg liked list sruct and collect args in the loop
-// free functions
+// free function ✅
+// print fundtion ✅ (just node index for now)
 
 
 // t_args	init_collect_args()
@@ -35,6 +37,27 @@
 
 // }
 
+void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
+{
+	t_cmd *cmd = calloc(1, sizeof(t_cmd));
+	if (!cmd)
+	{
+		perror("Failed to allocate node\n");
+		free_node_list(node_list); // Free the existing list in case of an error
+		return;
+	}
+	cmd->cmd_type = token->mock_type;
+	cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	if (!cmd->cmd_value)
+	{
+		perror("Failed to allocate cmd_value\n");
+		free(cmd);
+		free_node_list(node_list); // Free the existing list in case of an error
+		return;
+	}
+	curr_node->cmd_data = cmd;
+	// return(true);
+}
 
 void append_node(t_node **head, t_node *new_node)
 {
@@ -69,7 +92,7 @@ t_node *create_node(t_node *node_list)
 //converting my logic to node creation
 t_node *parse(t_mock *mock_token)
 {
-	int node_n = 1;					// We may need this for knowing how many nodes we have for piping? prob also for malloc?
+	int node_n = 1;					// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int token_n = 0;				// We may not need this
 	bool start_node = true;			// Flag to indicate if we have to start a node at start or after pipe
 	bool get_command = true;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
@@ -78,6 +101,7 @@ t_node *parse(t_mock *mock_token)
 	t_node *head = NULL; 			// First node in the list
 	t_node *new_node;
 
+	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (mock_token)
 	{
 		token_n++;
@@ -111,12 +135,7 @@ t_node *parse(t_mock *mock_token)
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
 				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->mock_type);
 				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
-
 				node_n++;
-				// POINT: ----> here we end the node and reactivate a flag to create a new one on top of the loop
-					// node->node_i = node_n; // give an index to the node
-					// node->token_n = token_n; // collect number of tokens in node, if it can help
-					// add node to node table
 				start_node = true;  // Node created, we have to start a new node
 				get_command = true; // As we start a new node we reset this flag to true
 				append_node(&head, new_node);// as we end the node we append it to our list
@@ -172,7 +191,8 @@ t_node *parse(t_mock *mock_token)
 				{
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
-					get_command = false; // command found, next tokens are args
+					add_cmd_to_node(head, new_node, mock_token);
+					get_command = false; // command found, if we have other tokens they are args if not redir data
 				}
 				else // triggers args storing
 				{
@@ -190,6 +210,9 @@ t_node *parse(t_mock *mock_token)
 		//if node > 1, means we have to pipe
 
 
+	printf("	Total number of nodes detected: %d\n", node_n);
+
+
 
 	// Summary of AST structure
 	// if (node_n == 1)
@@ -198,5 +221,5 @@ t_node *parse(t_mock *mock_token)
 	// } else if (node_n > 1) {
 	// 	printf("\n Our TREE is made of %d nodes connected by pipes within a single node table.\n", node_n);
 	// }
-	return NULL;
+	return (head);
 }

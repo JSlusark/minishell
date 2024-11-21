@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 14:08:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:29:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ typedef struct s_cmd // the the first token thas is not redirection data (redire
 typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe
 {
 	struct s_node *prev; // prev nodes can help
-	t_cmd *cmd_token;
+	t_cmd *cmd_data;
 	t_redirection *redir;
 	t_args *cmd_args;
-	bool pipe;
+	// bool pipe;
 	int	node_i;
-	// int	node_amout;// we cannot store this as it will change at every iteration
+	int	node_amount;// every node will store this data so we know how many pipes we have
 	struct s_node *next;
 } t_node;
 
