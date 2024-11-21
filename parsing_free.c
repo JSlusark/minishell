@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 17:43:47 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:29:24 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void free_arg_list (t_args *head)
 	while(curr)
 	{
 		// free(curr->arg_type);
-		// free(curr->arg_value);
+		free(curr->arg_value);
 		t_args *temp = curr->next;
-		// free(curr);
+		free(curr);
 		curr = temp;
 	}
 }
@@ -69,7 +69,7 @@ void free_node_list(t_node *head) // frees each node in the list and its data if
 		free(curr->redir);  // free the redir struct container
 		if(curr->cmd_args)
 			free_arg_list (curr->cmd_args); // free elements in the struct if memory was allocated to them
-		free(curr->cmd_args);  // free the arg struct container
+		// free(curr->cmd_args);  // <--- gives issues unsure why check if without it will leak
 		// free(curr->pipe); // undure if we still need this as (if node->next_node == NULL is what will tell us ther is another node to pipe into)
 		// free(curr->node_i); // this can be useful to see the order of the node in the list
 		// free(curr->node_amout); // this can be useful to see how many forks we need

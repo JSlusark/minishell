@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 17:42:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:29:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,6 @@
 // free function ✅
 // print fundtion ✅ (just node index for now)
 
-
-// t_args	init_collect_args()
-// {
-
-// }
-
-// t_cmd	init_collect_cmd()
-// {
-
-// }
 
 // t_redirection	init_redirection_struct()
 // {
@@ -59,24 +49,22 @@
 	// return(true);
 // }
 
-// void append_arg_to_cmd_args(t_args **cmd_args, t_args *new_arg)
-// {
-// 	if(!(*cmd_args))
-// 	{
-// 		*cmd_args = new_arg; // This updates a local copy of cmd_args
-// 		new_arg->prev = NULL;
-// 	}
-// 	else
-// 	{
-// 		t_args *last_arg = *cmd_args; // we do this to traverse tthrough the list without affecting it
-// 		while(last_arg->next) // we traverse the list until we reach the node that has NULL as next node
-// 			last_arg = last_arg->next;
-// 		last_arg->next = new_arg; // we assign the new node as last in the list
-// 		new_arg->prev = last_arg; // we assign the 2nd last node as prev node of teh new node
-// 	}
-// }
+void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg)
+{
+	if (!(*cmd_args)) {
+		*cmd_args = new_arg; // Update the actual pointer to the first argument
+		new_arg->prev = NULL;
+	} else {
+		t_args *last_arg = *cmd_args; // Traverse the list to find the last argument
+		while (last_arg->next) {
+			last_arg = last_arg->next;
+		}
+		last_arg->next = new_arg; // Append the new argument to the list
+		new_arg->prev = last_arg; // Set the previous pointer
+	}
+}
 
-t_args *create_arg_data(t_node *node_list, t_mock *token)
+t_args *create_newarg_data(t_node *node_list, t_mock *token)
 {
 	t_args *new_arg = calloc(1, sizeof(t_args));
 	if (!new_arg)
@@ -97,10 +85,10 @@ t_args *create_arg_data(t_node *node_list, t_mock *token)
 	return(new_arg);
 }
 
-void add_cmdargs_to_node(t_node *node_list, t_node *curr_node)
+void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg)
 {
-	t_args *cmd_args = calloc(1, sizeof(t_args));
-	if (!cmd_args)
+	// t_args *head_arg = calloc(1, sizeof(t_args));
+	if (!head_arg)
 	{
 		perror("Failed to allocate cmd_args\n");
 		free_node_list(node_list); // Free the existing list in case of an error
@@ -118,7 +106,7 @@ void add_cmdargs_to_node(t_node *node_list, t_node *curr_node)
 	// 	free_node_list(node_list); // Free the existing list in case of an error
 	// 	return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
 	// }
-	curr_node->cmd_args = cmd_args;
+	curr_node->cmd_args = head_arg;
 	// return(true);
 }
 
@@ -187,7 +175,7 @@ t_node *parse(t_mock *mock_token)
 
 	t_node *head = NULL; 			// First node in the list
 	t_node *new_node;
-	// t_args *new_arg;
+	// t_args *new_arg = NULL;
 	// t_args *cmd_args;
 
 	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
@@ -286,13 +274,10 @@ t_node *parse(t_mock *mock_token)
 				}
 				else // triggers args storing
 				{
-					add_cmdargs_to_node(head, new_node);
-					new_node->cmd_args = create_arg_data(head, mock_token);
-					// printf("YOYO: %s\n", new_arg->arg_value);
-					// printf("YOYO    2: %s\n", new_node->cmd_args->arg_value);
-					if(!new_node->cmd_args) // is null
-						return (NULL); // no free as i did alread in the create node func
-					// append_arg_to_cmd_args(&(new_node->cmd_args), new_arg); //??
+					t_args *new_arg = create_newarg_data(head, mock_token);
+					// append_newarg_to_cmdargs(new_node->cmd_args, new_arg); //??
+					// add_cmdargs_to_node(head, new_node, new_arg);
+					append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type); // he
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);
 				}
