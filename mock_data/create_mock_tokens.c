@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 15:28:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:03:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ t_mock *create_mock_tokens(char *input)
 				|| word[0] == '&'
 				|| word[0] == '`'
 				|| word[0] == '*'
+				|| word[0] == '~'
+				// || word[0] == '~'
 				)
 			new_token->mock_type = UNKNOWN; // THESE SYMBOLS IF USED OUTSIDE QUOTES SHOULD NOT BE PROCESSED
 		else if (strcmp(word, "<") == 0)
@@ -79,10 +81,8 @@ t_mock *create_mock_tokens(char *input)
 			new_token->mock_type = ENV_VAR; // $environment variable (when outside quotes)
 		else if (word[0] == '/')
 			new_token->mock_type = ABS_PATH; // ABSOLUTE PATH
-		else if (strstr(word, "./") == word)
+		else if (strstr(word, "./") == word || strstr(word, "../") == word)
 			new_token->mock_type = REL_PATH; // RELATIVE PATH
-		else if (word[0] == '~')
-			new_token->mock_type = PATH_EXP; // PATH EXPANSION <- unsure we need this
 		else if (word[0] == '-')
 			new_token->mock_type = OPTION; // OPTION <- i don't know if we need this
 		else

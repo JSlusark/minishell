@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 14:24:15 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:49:44 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,23 @@ typedef struct s_mock
 
 typedef enum e_target_type
 {
-	TARGET_FILE, // if token_type of the target is word or cmd
-	TARGET_PATH, // if token is REL, ABS path or envar ($PATH)
-	TARGET_DELIMITER // if redir_type is HEREDOC
+	TARGET_FILENAME, 		// 0 - if token_type of the target is word or cmd
+	TARGET_PATHNAME, 		// 1 - if token is REL, ABS path (which can end or not with a file)
+	TARGET_ENV_PATHNAME,	// 2 - if token is an env_variable (once we have the nodes we check if the env_var is a valid path, like $PATH/file for example)
+	TARGET_DELIMITER		// 3 - if redir_type is HEREDOC
 } t_target_type;
 
-typedef struct s_redirection
+typedef struct s_redir
 {
-	struct s_redirection *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
+	struct s_redir *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
 	int		redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
 	int		redir_i; // can be useful when we have more than 1 redirection in a node
 	char	*target;		// Target is filename (for input, output and append) or delimiter (for HEREDOC)
-	char	**target_lines;
-	t_target_type		target_type;	// can be just path or file (for >, >> and < ) or delimiter (for <<) <-- have a function that checks this and also check if env variable that has a path
-	struct s_redirection *next; // we need this as a redirection can be followed by other redirections and interact with them
+	int		target_type;	// can be delimiter for heredoc, for else it can be file name or a valid path to a file (abs, relative or env_var like $PATH)
+	int		target_token_type; // We store the target token type so we can use to understand what path is used in TARGET PATH_NAME
+	struct s_redir *next; // we need this as a redirection can be followed by other redirections and interact with them
 
-	// this input can be stored after we have the nodes and before/while executing
+	// this input can be stored after we have the nodes and before/while executing - still nedd to check if good
 	char	*exec_path; // the path where we have to execute the redir, comes from target if target_type is path or we assign it by default to home of shell
 	char	*exec_file; // the file we have to execute on (or also create in some cases), comes from target, if target type is not word we have to get the last word in path (comes after last /)
 	char	*file_input; // we can store everything together and then split in different lines after if input has \n
@@ -46,7 +47,7 @@ typedef struct s_redirection
 	int fd; // we can store fd here for future use?
 	bool close_fd; // Indicates if the fd should be closed after use.
 
-} t_redirection;
+} t_redir;
 
 typedef struct s_args // list of tokens that follow the command token in the node and considered its arguments
 {
@@ -64,11 +65,11 @@ typedef struct s_cmd // the the first token thas is not redirection data (redire
 
 //a node table is a linked list of nodes, we traverse each node as a double linked list.. why?
 // we do it so that when we have to execure we can access each node
-typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe
+typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe, a sequence of node commands is called command_list
 {
 	struct s_node *prev; // prev nodes can help
 	t_cmd *cmd_data;
-	t_redirection *redir;
+	t_redir *redir_data;
 	t_args *cmd_args;
 	bool	n_flag; // flag that tells echo not to append a new_line to the echoed args
 	int		n_flag_n; // writes how many time -n flag to see if last arg should be -
@@ -77,29 +78,15 @@ typedef struct s_node // A node typically has this data: command, command argume
 	struct s_node *next;
 } t_node;
 
-// typedef	struct  s_node_table //if next token is PIPE we create this
-// {
-// 	// example: "echo hi > hello.txt bye bye | cat"
-// 	t_node	curr_node; // Current node of teh table "echo hi > hello.txt bye bye |" (the node has a command "echo", 3 args "echo, bye, bye", redir data "> file.txt" and a pipe "|")
-// 	t_node	*next_node; // Pointer to the next node "cat"  (the node has only a command cat, no args, redirections or pipes)
-// 	//int	node_n; //to see if there are nodes that we need to pipe
-
-// 	// example: "echo hi > hello.txt bye bye |"
-// 	// here curr_node->pipe == true and next_node == NULL, so bash asks input fro the use to write the next commands
-// 	// example: "echo hi > hello.txt bye bye"
-// 	//here curr_node->pipe == false and next_node == NULL it means we have just one node in the node table
-// }	t_node_table;
-
-// IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE TABLES THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
+// IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE LISTS THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
 // THEREFORE ONLY IN THE BONUS WE CREATE A REAL ABSTRACT SYNTAX TREE.
 // WITHOUT THE BONUS, ANY OF OUR COMMANDS ARE GROUPED IN NODE COMMANDS IN A SINGLE NODE TABLE: so we do not need to return the ast struct written below.
 /* typedef	struct s_ast // wrote this just to better clarify my node structure
 {
-	t_node_table	curr_table; // the cmd table made of nodes and pipes
-	// if we do the bonus the actual tree is built by considering the
-	t_conjuction		table_conjunction_op; // the && and || operators and ; // the ; delimeter (contais the operator type and value and node to the next cmd table)
-	t_node_table	*next_table;
-}	t_ast; // without bonus  t_ast will only return 1 cmd_table while the rest of the data is empty */
+	t_node			*curr_node_list; // the cmd table made of nodes and pipes
+	t_operator		*operator_data; // the && and || operators and ; // the ; delimeter (contais the operator type and value and node to the next cmd table)
+	t_node			*next_node_list; // the cmd table made of nodes and pipes
+}	t_ast; // without bonus  t_ast will only return 1 cmd_line while the rest of the data is empty */
 
 
 t_node	*parse(t_mock *mock_token); // mock version
@@ -114,29 +101,9 @@ void print_nodes(t_node *head);
 //Good resources that helped getting me into this and that will allow us to expand our logic:
 //https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100
 //https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c
+// brainstorming and asking questions to chat_gpt
+// testing command lines in bash
+// google
 
 
 #endif
-
-
-// DOING NOW:
-// showing how bash interprets redirections ✅ (need to check better for input redir)
-// showing how bash inteprets commans and args in a node ✅
-// fix pipe handling (if node starts with pipe it is error, but if nod ends with pipe it is not an error unless pipe comes right after redir symbol)
-
-
-// TO DO LATER, after making sure about bash token interpretation:
-// Use the logic in parsing.c to create nodes in the command table
-// print the nodes that we create from the parsin in a similar style i have now
-
-
-
-///FUNCTIONS
-
-// create table --- before loop allocate memory for the table ()
-// create node --- if token loop happens and when node flag is true
-// create redir struct
-// create command struct
-// create arg liked list sruct and collect args in the loop
-
-// free functions

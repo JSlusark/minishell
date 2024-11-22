@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 16:35:19 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 16:59:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		if (strlen(input) > 0)
-			add_history(input);
+			add_history(input); // FOUND BUGS HERE
 		if(ft_strcmp(input, "exit") == 0)
 		{
 			free(input);

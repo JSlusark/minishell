@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 18:29:24 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:35:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ static void free_arg_list (t_args *head)
 	}
 }
 
-static void free_redir_list (t_redirection *head)
+static void free_redir_list (t_redir *head) // need to add other frees
 {
 	if (!head)
 		return; // unsure if needed
-	t_redirection *curr = head;
+	t_redir *curr = head;
 	// traverse and free each redirection data inside the list
 	while(curr)
 	{
 		// after need to add - if arg type is herdoc free this, if it's else free this other way
 		// free(curr->redir_type);
-		free(curr->file_name);
-		t_redirection *temp = curr->next;
+		free(curr->target);
+		t_redir *temp = curr->next;
 		free(curr);
 		curr = temp;
 	}
@@ -64,9 +64,9 @@ void free_node_list(t_node *head) // frees each node in the list and its data if
 		if(curr->cmd_data)
 			free_cmd_struct (curr->cmd_data); // free elements in the cmd struct if memory was allocated to them
 		free(curr->cmd_data); // free the cmd struct container
-		if(curr->redir)
-			free_redir_list (curr->redir); // free elements in the redir struct if memory was allocated to them
-		free(curr->redir);  // free the redir struct container
+		if(curr->redir_data)
+			free_redir_list (curr->redir_data); // free elements in the redir struct if memory was allocated to them
+		// free(curr->redir_data);  // free the redir struct container
 		if(curr->cmd_args)
 			free_arg_list (curr->cmd_args); // free elements in the struct if memory was allocated to them
 		// free(curr->cmd_args);  // <--- gives issues unsure why check if without it will leak

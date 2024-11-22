@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 14:07:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:02:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,40 @@
 // print fundtion ✅ (just node index for now)
 
 
-// t_redirection	init_redirection_struct()
+// void add_target_to_redir(t_redir *redir_data, t_mock *token)
 // {
-
+// 	redir_data->target = token->mock_value;
+// 	redir_data->target_type = token->mock_type;
 // }
 
-// void add_args_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
-// {
-// 	t_cmd *cmd = calloc(1, sizeof(t_cmd));
-// 	if (!cmd)
-// 	{
-// 		perror("Failed to allocate node\n");
-// 		free_node_list(node_list); // Free the existing list in case of an error
-// 		return;
-// 	}
-// 	cmd->cmd_type = token->mock_type;
-// 	cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
-// 	if (!cmd->cmd_value)
-// 	{
-// 		perror("Failed to allocate cmd_value\n");
-// 		free(cmd);
-// 		free_node_list(node_list); // Free the existing list in case of an error
-// 		return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
-// 	}
-// 	curr_node->cmd_data = cmd;
-	// return(true);
-// }
+void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
+{
+	t_redir *redir = calloc(1, sizeof(t_redir));
+	if (!redir)
+	{
+		perror("Failed to allocate node\n");
+		free_node_list(node_list); // Free the existing list in case of an error
+		return;
+	}
+	redir->redir_type = token->mock_type;
+	if(token->next_token != NULL)
+	{
+		redir->target = ft_strdup(token->next_token->mock_value);
+		redir->target_token_type = token->next_token->mock_type;
+		if(redir->redir_type == HEREDOC)
+			redir->target_type = TARGET_DELIMITER;
+		else
+		{
+			if(token->next_token->mock_type == ABS_PATH || token->next_token->mock_type == REL_PATH)
+				redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+			else if(token->next_token->mock_type == ENV_VAR)
+				redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+			else
+				redir->target_type = TARGET_FILENAME;
+		}
+	}
+	curr_node->redir_data = redir;
+}
 
 void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg)
 {
@@ -169,8 +177,8 @@ t_node *parse(t_mock *mock_token)
 {
 	int node_n = 1;					// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int token_n = 0;				// We may not need this
-	int redir_n = 0;
-	int redir_i = 0;
+	// int redir_n = 0;
+	// int redir_i = 0;
 	bool start_node = true;			// Flag to indicate if we have to start a node at start or after pipe
 	bool get_command = true;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start = true;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
@@ -239,6 +247,7 @@ t_node *parse(t_mock *mock_token)
 				// checks next token that will be file value of redir
 				if(mock_token->next_token != NULL)
 				{
+					add_redir_data_to_node(head, new_node, mock_token); // has to go here as its where we create the redirection
 					token_n++;
 					mock_token = mock_token->next_token; // me move to the next token to check
 					if (mock_token->mock_type == PIPE || mock_token->mock_type == REDIR_IN
@@ -252,7 +261,6 @@ t_node *parse(t_mock *mock_token)
 					else
 					{
 						// creates the redir struct and adds redir index
-						// add_redir_data_to_node();
 						if(redir_type == HEREDOC) // the next token is seen as delimiter for the heredoc array
 						{
 							//adds redir data for heredoc
@@ -264,7 +272,7 @@ t_node *parse(t_mock *mock_token)
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
 						}
 						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
-						redir_i++; // increase redir index in case we have a 2nd redirection
+						// redir_i++; // increase redir index in case we have a 2nd redirection
 					}
 				}
 			}
