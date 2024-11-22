@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:43:56 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/17 18:19:00 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:22:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ rules still work! :)
 			hello
 
 
-	- RULE_N_3: The word that follows a redirection symbol (>, <, << or >>) is always considered a file (for >, < and >>)
+	- RULE_N_3: The word that follows a redirection symbol (>, <, << or >>) is always considered a file or a path(for >, < and >>)
 	or delimiter(for heredoc "<<") of the redirection data.
 	This rule is both examples below give the same result:
 
@@ -150,6 +150,30 @@ rules still work! :)
 			----> since bash sees that the node is a command, "hello" is not see as redir data (redir + file) and will be memorized as argument of echo
 			----> file4 and file5 are empty but file6.txt will still contain the text "hello"
 
+		If the redirection data is followed by a path /dir/dir/file, it will not create a file called
+		"/dir/dir/file" but will instead create file in the path you are given it to.
+		If the path does not exist bash will give an error
+
+			EXAMPLE - invalid path
+			echo hello > dir/dir/file
+			bash: dir/dir/file: No such file or directory
+
+			EXAMPLE - valid path
+			echo hello > /Users/jjs/file
+			cat file
+			hello
+
+			EXAMPLE - If the token after > is a directory (not a file), Bash will throw an error:
+			 echo hello > /Users/jjs
+			 bash: /Users/jjs: Is a directory
+
+		ATTENTION! THIS HAPPENS ALSO WITH ENVIRONMENT VARIABLES LIKE $PATH
+
+			EXAMPLE:
+			echo hello > $HOME/file2
+			cat file2
+			hello
+
 	- RULE_N_4: Input cannot end with a redirection symbol.
 
 			EXAMPLE:
@@ -175,7 +199,8 @@ rules still work! :)
 		bash: syntax error near unexpected token `|'
 
 
-	- RULE_N_6: If input ends with a pipe, bash prompts the user to write commands on the next line, bash will then tokenize the new input and parse it as
+	- RULE_N_6: (WE DO NOT NEED TO DO THIS AND MAKE IT LOOK LIKE AN ERROR)
+	If input ends with a pipe, bash prompts the user to write commands on the next line, bash will then tokenize the new input and parse it as
 	part of the same tree (but different node as a pipe always starts a new node).
 
 		EXAMPLE:
@@ -199,5 +224,80 @@ rules still work! :)
 		>delimiter          <-spaces after delimeter
 		> delimiter yo
 		> delimiter
+
+	- RULE N_8: if we have more than 1 HEREDOC redir in our node we create a buffer for each redirection.
+	The first buffer is part of teh first heredoc buff and the second buffer is part of the 2nd heredoc buff.
+	We have to write 1t the delimiter for the 1st HEREDOC to use the delimiter of the 2nd heredoc.
+
+	EXAMPLE:
+	echo hello << del1 << del2
+	> echo hello
+	> del2             <-- this does not work as we are in 1st heredoc with del1 as delimiter
+	> del2
+	> del1             <-- heredoc 1 ends and collects previous lines in its buffer
+	> del1             <-- we are in 2nd heredoc with del2 as delimiter so this does not interrupt the heredoc process
+	> del1
+	> del2              <-- heredoc  2 ends and collects previous lines in its buffer
+	hello
+
+	bash executes from the first to the last herdoc, the buff of the last heredoc
+	overwrites the buff of the previous heredocs and is the one executed as a result
+
+	EXAMPLE (with cat):
+	cat << first << second
+	This goes to the first heredoc buffer
+	first
+	First heredoc finished, so this goes to the second heredoc buffer
+	second
+	First heredoc finished, so this goes to the second heredoc buffer
+
+	EXAMPLE (example with file1 out redirection)
+	cat << EOF1 << EOF2 > file1
+	> echo hello
+	> ciao
+	> hola
+	> EOF2
+	> we are still in EOF1 writing EOF2 does nothig and we are still in buff1
+	> EOF1
+	> now we are in EOF2
+	> what do you thinnk will it write to the file?
+	> EOF2
+	cat file1
+	now we are in EOF2
+	what do you thinnk will it write to the file?
+
+	RULE N_9: a command's OPTION is seen as such only if it comes next to the command token
+
+		We only use -n with echo as an OPTION.
+		This option suppresses appending the new line to the echoed arguments.
+
+		EXAMPLE:
+		 bash-3.2$ echo -n hello world
+		hello worldbash-3.2$
+
+		If -n is not used right after echo, -n is just an argument
+
+		EXAMPLE:
+		bash-3.2$ echo hello -n world
+		hello -n world
+
+		EXAMPLE
+		bash-3.2$ echo hello world -n
+		hello world -n
+
+		EXAMPLE
+		bash-3.2$ echo hello -n world -n
+		hello -n world -n
+
+		If we write -n multiple times after echo we have a weird behaviour which
+		will repress apprending the new line but will write - as last argument!!!
+
+		EXAMPLE:
+		bash-3.2$ echo -n -n hello world
+		hello worldbash-3.2$
+
+		EXAMPLE:
+		bash-3.2$ echo -n -n -n hello world
+		hello worldbash-3.2$
 
 */

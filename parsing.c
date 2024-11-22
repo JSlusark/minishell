@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 18:29:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:07:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,8 @@ t_node *parse(t_mock *mock_token)
 {
 	int node_n = 1;					// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int token_n = 0;				// We may not need this
+	int redir_n = 0;
+	int redir_i = 0;
 	bool start_node = true;			// Flag to indicate if we have to start a node at start or after pipe
 	bool get_command = true;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start = true;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
@@ -249,14 +251,20 @@ t_node *parse(t_mock *mock_token)
 					}
 					else
 					{
-						// creates the redir struct
+						// creates the redir struct and adds redir index
+						// add_redir_data_to_node();
 						if(redir_type == HEREDOC) // the next token is seen as delimiter for the heredoc array
 						{
+							//adds redir data for heredoc
 							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
 						}
 						else // if redir is <, > and >> the next token is seen as file
+						{
+							//adds redir data for the other redir types
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
+						}
 						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
+						redir_i++; // increase redir index in case we have a 2nd redirection
 					}
 				}
 			}
@@ -269,14 +277,16 @@ t_node *parse(t_mock *mock_token)
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
 					add_cmd_to_node(head, new_node, mock_token); // had to return as error
-					// new_node->cmd_args = NULL;
 					get_command = false; // command found, if we have other tokens they are args if not redir data
+					// ADD ECHO -N FLAG HERE, if mocktoken->next-token_type == OPTION
+					//mocktoken = mocktoken->next
+					// n_echoflag = true
+					//mocktoken = mocktoken->next
+					// pass to next tokens
 				}
 				else // triggers args storing
 				{
 					t_args *new_arg = create_newarg_data(head, mock_token);
-					// append_newarg_to_cmdargs(new_node->cmd_args, new_arg); //??
-					// add_cmdargs_to_node(head, new_node, new_arg);
 					append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
 					printf("%s - %d", mock_token->mock_value, mock_token->mock_type); // he
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/21 18:07:19 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/22 14:24:15 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,32 @@ typedef struct s_mock
 	struct s_mock *next_token; // Pointer to the next token in the linked list
 }			t_mock;
 
+typedef enum e_target_type
+{
+	TARGET_FILE, // if token_type of the target is word or cmd
+	TARGET_PATH, // if token is REL, ABS path or envar ($PATH)
+	TARGET_DELIMITER // if redir_type is HEREDOC
+} t_target_type;
+
 typedef struct s_redirection
 {
 	struct s_redirection *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
-	int	redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
-	char *file_name;          // Target file for input, output and append
-
-	// other elements thayt we might need if we consider heredoc and other redirs;
-	// char *delimiter; // we use this for HEREDOC instead than *file
-	// char **file_input; // array that stores every heredoc line as a array[i] or the cmd_token args inside array[0]
-	// int flags; // flags that we pass to open(), depends on the redir type
-	// int fd; //we can store fd here for future use?
+	int		redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
+	int		redir_i; // can be useful when we have more than 1 redirection in a node
+	char	*target;		// Target is filename (for input, output and append) or delimiter (for HEREDOC)
+	char	**target_lines;
+	t_target_type		target_type;	// can be just path or file (for >, >> and < ) or delimiter (for <<) <-- have a function that checks this and also check if env variable that has a path
 	struct s_redirection *next; // we need this as a redirection can be followed by other redirections and interact with them
+
+	// this input can be stored after we have the nodes and before/while executing
+	char	*exec_path; // the path where we have to execute the redir, comes from target if target_type is path or we assign it by default to home of shell
+	char	*exec_file; // the file we have to execute on (or also create in some cases), comes from target, if target type is not word we have to get the last word in path (comes after last /)
+	char	*file_input; // we can store everything together and then split in different lines after if input has \n
+	char	**split_input; // we can store everything together and then split in different lines after if input has \n
+	int flags; // flags that we pass to open(), depends on the redir type
+	int fd; // we can store fd here for future use?
+	bool close_fd; // Indicates if the fd should be closed after use.
+
 } t_redirection;
 
 typedef struct s_args // list of tokens that follow the command token in the node and considered its arguments
@@ -56,7 +70,8 @@ typedef struct s_node // A node typically has this data: command, command argume
 	t_cmd *cmd_data;
 	t_redirection *redir;
 	t_args *cmd_args;
-	// bool pipe;
+	bool	n_flag; // flag that tells echo not to append a new_line to the echoed args
+	int		n_flag_n; // writes how many time -n flag to see if last arg should be -
 	int	node_i;
 	int	node_amount;// every node will store this data so we know how many pipes we have
 	struct s_node *next;
