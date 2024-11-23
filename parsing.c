@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 17:02:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 // print fundtion ✅ (just node index for now)
 
 
-// void add_target_to_redir(t_redir *redir_data, t_mock *token)
+// void add_target_to_redir(t_redir *redir_data, t_token_list *token)
 // {
-// 	redir_data->target = token->mock_value;
-// 	redir_data->target_type = token->mock_type;
+// 	redir_data->target = token->value;
+// 	redir_data->target_type = token->type;
 // }
 
-void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
+void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_token_list *token)
 {
 	t_redir *redir = calloc(1, sizeof(t_redir));
 	if (!redir)
@@ -37,18 +37,18 @@ void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
 		free_node_list(node_list); // Free the existing list in case of an error
 		return;
 	}
-	redir->redir_type = token->mock_type;
-	if(token->next_token != NULL)
+	redir->redir_type = token->type;
+	if(token->next != NULL)
 	{
-		redir->target = ft_strdup(token->next_token->mock_value);
-		redir->target_token_type = token->next_token->mock_type;
+		redir->target = ft_strdup(token->next->value);
+		redir->target_token_type = token->next->type;
 		if(redir->redir_type == HEREDOC)
 			redir->target_type = TARGET_DELIMITER;
 		else
 		{
-			if(token->next_token->mock_type == ABS_PATH || token->next_token->mock_type == REL_PATH)
+			if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
 				redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-			else if(token->next_token->mock_type == ENV_VAR)
+			else if(token->next->type == ENV_VAR)
 				redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
 			else
 				redir->target_type = TARGET_FILENAME;
@@ -72,7 +72,7 @@ void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg)
 	}
 }
 
-t_args *create_newarg_data(t_node *node_list, t_mock *token)
+t_args *create_newarg_data(t_node *node_list, t_token_list *token)
 {
 	t_args *new_arg = calloc(1, sizeof(t_args));
 	if (!new_arg)
@@ -81,8 +81,8 @@ t_args *create_newarg_data(t_node *node_list, t_mock *token)
 		free_node_list(node_list); // Free the existing list in case of an error
 		return(NULL);
 	}
-	new_arg->arg_type = token->mock_type;
-	new_arg->arg_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	new_arg->arg_type = token->type;
+	new_arg->arg_value = ft_strdup(token->value); // coudl be issue when freeing the token list
 	if (!new_arg->arg_value)
 	{
 		perror("Failed to allocate arg_value\n");
@@ -105,8 +105,8 @@ void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg)
 
 
 
-	// cmd->cmd_type = token->mock_type;
-	// cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	// cmd->cmd_type = token->type;
+	// cmd->cmd_value = ft_strdup(token->value); // coudl be issue when freeing the token list
 	// if (!cmd->cmd_value)
 	// {
 	// 	perror("Failed to allocate cmd_value\n");
@@ -120,7 +120,7 @@ void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg)
 
 
 
-void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
+void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token)
 {
 	t_cmd *cmd = calloc(1, sizeof(t_cmd));
 	if (!cmd)
@@ -129,8 +129,8 @@ void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_mock *token)
 		free_node_list(node_list); // Free the existing list in case of an error
 		return;
 	}
-	cmd->cmd_type = token->mock_type;
-	cmd->cmd_value = ft_strdup(token->mock_value); // coudl be issue when freeing the token list
+	cmd->cmd_type = token->type;
+	cmd->cmd_value = ft_strdup(token->value); // coudl be issue when freeing the token list
 	if (!cmd->cmd_value)
 	{
 		perror("Failed to allocate cmd_value\n");
@@ -173,7 +173,7 @@ t_node *create_node(t_node *node_list)
 
 
 //converting my logic to node creation
-t_node *parse(t_mock *mock_token)
+t_node *parse(t_token_list *mock_token)
 {
 	int node_n = 1;					// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int token_n = 0;				// We may not need this
@@ -202,16 +202,16 @@ t_node *parse(t_mock *mock_token)
 			new_node->node_i = node_n - 1;
 			start_node = false;
 		}
-		if (mock_token->mock_type == UNKNOWN) // ERROR AND FREE
+		if (mock_token->type == UNKNOWN) // ERROR AND FREE
 		{
 			printf("Error: invalid tokens \n");
 			free_node_list(head);
 			return(NULL);
 		}
 		//CHECKS PIPES
-		if (mock_token->mock_type == PIPE)
+		if (mock_token->type == PIPE)
 		{
-			if (!mock_token->next_token || pipe_at_start || mock_token->next_token->mock_type == PIPE) // error and free
+			if (!mock_token->next || pipe_at_start || mock_token->next->type == PIPE) // error and free
 			{
 				printf("Error: cannot start/end pipe and cannot have consecutive pipes\n");
 				free_node_list(head);
@@ -219,9 +219,9 @@ t_node *parse(t_mock *mock_token)
 			}
 			else // we end the node here
 			{
-				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
-				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->mock_type);
-				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
+				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->value);
+				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->type);
+				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->value);
 				node_n++;
 				start_node = true;  // Node created, we have to start a new node
 				get_command = true; // As we start a new node we reset this flag to true
@@ -232,27 +232,27 @@ t_node *parse(t_mock *mock_token)
 		{
 			pipe_at_start = false;
 			// CHECK REDIRECTIONS & FILES
-			if (mock_token->mock_type == REDIR_IN || mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT || mock_token->mock_type == HEREDOC)
+			if (mock_token->type == REDIR_IN || mock_token->type == REDIR_OUT || mock_token->type == APPEND_OUT || mock_token->type == HEREDOC)
 			{
-				int redir_type = mock_token->mock_type;
+				int redir_type = mock_token->type;
 				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
-				printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
-				if(mock_token->next_token == NULL) // error and free
+				printf("%s - %d\n", mock_token->value, mock_token->type);
+				if(mock_token->next == NULL) // error and free
 				{
 					printf(COLOR_RED"ERROR: redirections need to be followed by a file! \n"COLOR_RESET);
 					free_node_list(head);
 					return(NULL); // we break the loop
 				}
 				// checks next token that will be file value of redir
-				if(mock_token->next_token != NULL)
+				if(mock_token->next != NULL)
 				{
 					add_redir_data_to_node(head, new_node, mock_token); // has to go here as its where we create the redirection
 					token_n++;
-					mock_token = mock_token->next_token; // me move to the next token to check
-					if (mock_token->mock_type == PIPE || mock_token->mock_type == REDIR_IN
-						|| mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT
-						|| mock_token->mock_type == HEREDOC) // error and free
+					mock_token = mock_token->next; // me move to the next token to check
+					if (mock_token->type == PIPE || mock_token->type == REDIR_IN
+						|| mock_token->type == REDIR_OUT || mock_token->type == APPEND_OUT
+						|| mock_token->type == HEREDOC) // error and free
 					{
 						printf(COLOR_RED"ERROR: redirection cannot be immediately followed by pipes or other redirections \n"COLOR_RESET);
 						// free_node_list(head);
@@ -271,7 +271,7 @@ t_node *parse(t_mock *mock_token)
 							//adds redir data for the other redir types
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
 						}
-						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
+						printf("%s - %d\n", mock_token->value, mock_token->type);
 						// redir_i++; // increase redir index in case we have a 2nd redirection
 					}
 				}
@@ -282,7 +282,7 @@ t_node *parse(t_mock *mock_token)
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
 				if (get_command) // triggers command storing if true
 				{
-					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
+					printf("%s - %d", mock_token->value, mock_token->type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
 					add_cmd_to_node(head, new_node, mock_token); // had to return as error
 					get_command = false; // command found, if we have other tokens they are args if not redir data
@@ -296,12 +296,12 @@ t_node *parse(t_mock *mock_token)
 				{
 					t_args *new_arg = create_newarg_data(head, mock_token);
 					append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
-					printf("%s - %d", mock_token->mock_value, mock_token->mock_type); // he
+					printf("%s - %d", mock_token->value, mock_token->type); // he
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);
 				}
 			}
 		}
-		mock_token = mock_token->next_token; // Move to the next token
+		mock_token = mock_token->next; // Move to the next token
 	}
 	append_node(&head, new_node);// we also have to append the node when it doesn't have pipe
 	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?

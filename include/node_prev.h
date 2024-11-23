@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node.h                                             :+:      :+:    :+:   */
+/*   node_prev.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/20 16:24:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:42:14 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
-// The scanning function (which we can also call tokenizer), should return us a linked list of tockens needed by our parsing function, just as the t_mock struct below
+// The scanning function (which we can also call tokenizer), should return us a linked list of tockens needed by our parsing function, just as the t_token_list struct below
 typedef struct s_mock
 {
-	int mock_type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
-	char *mock_value;      // Value of the token, e.g., "echo", "hello"
-	struct s_mock *next_token; // Pointer to the next token in the linked list
-}			t_mock;
+	int type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
+	char *value;      // Value of the token, e.g., "echo", "hello"
+	struct s_mock next; // Pointer to the next token in the linked list
+}			t_token_list;
 
 typedef struct s_redirection
 {
@@ -81,10 +81,10 @@ typedef	struct  s_node_table //if next token is PIPE we create this
 }	t_ast; // without bonus  t_ast will only return 1 cmd_table while the rest of the data is empty */
 
 
-t_node_table	*parse(t_mock *mock_token); // mock version
+t_node_table	*parse(t_token_list *mock_token); // mock version
 // t_node_table	*parse(t_tokens *tokens); // definitive version
-t_mock			*create_mock_tokens(char *input);
-void			free_mock_tokens(t_mock *head);
+t_token_list			*create_mock_tokens(char *input);
+void			free_mock_tokens(t_token_list *head);
 
 //freeing functions for node allocation data
 void free_node_table(t_node_table *node_table);

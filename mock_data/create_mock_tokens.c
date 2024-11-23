@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 17:03:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,30 @@
 #include <stdio.h>
 
 
-void free_mock_tokens(t_mock *head) {
-	t_mock *current = head;
-	t_mock *next;
+void free_mock_tokens(t_token_list *head) {
+	t_token_list *current = head;
+	t_token_list *next;
 
 	while (current != NULL) {
-		next = current->next_token; // Store the next token
-		free(current->mock_value); // Free the duplicated string
+		next = current->next; // Store the next token
+		free(current->value); // Free the duplicated string
 		free(current);             // Free the current node
 		current = next;            // Move to the next token
 	}
 }
 
 // Splits the input into words and assigns enum types
-t_mock *create_mock_tokens(char *input)
+t_token_list *create_mock_tokens(char *input)
 {
 	char *word;
-	t_mock *head = NULL;      // Head of the linked list
-	t_mock *current = NULL;   // Current node in the linked list
+	t_token_list *head = NULL;      // Head of the linked list
+	t_token_list *current = NULL;   // Current node in the linked list
 
 	// Tokenize input based on spaces
 	word = strtok(input, " ");
 	while (word != NULL) {
 		// Allocate memory for a new node
-		t_mock *new_token = malloc(sizeof(t_mock));
+		t_token_list *new_token = malloc(sizeof(t_token_list));
 		if (!new_token) {
 			perror("malloc failed");
 			exit(EXIT_FAILURE);
@@ -52,9 +52,9 @@ t_mock *create_mock_tokens(char *input)
 			|| strcmp(word, "echo") == 0
 			|| strcmp(word, "cd") == 0
 			|| strcmp(word, "env") == 0)
-			new_token->mock_type = BUILT_IN; // COMMANDS WE NEED TO CREATE
+			new_token->type = BUILT_IN; // COMMANDS WE NEED TO CREATE
 		else if (strcmp(word, "|") == 0)
-			new_token->mock_type = PIPE; // PIPE (when outside quotes)
+			new_token->type = PIPE; // PIPE (when outside quotes)
 		else if (strcmp(word, "&&") == 0
 				|| strcmp(word, "||") == 0
 				|| word[0] == '\\' // checks 1 backslash not 2
@@ -68,33 +68,33 @@ t_mock *create_mock_tokens(char *input)
 				|| word[0] == '~'
 				// || word[0] == '~'
 				)
-			new_token->mock_type = UNKNOWN; // THESE SYMBOLS IF USED OUTSIDE QUOTES SHOULD NOT BE PROCESSED
+			new_token->type = UNKNOWN; // THESE SYMBOLS IF USED OUTSIDE QUOTES SHOULD NOT BE PROCESSED
 		else if (strcmp(word, "<") == 0)
-			new_token->mock_type = REDIR_IN; // REDIR_IN (when outside quotes)
+			new_token->type = REDIR_IN; // REDIR_IN (when outside quotes)
 		else if (strcmp(word, ">") == 0)
-			new_token->mock_type = REDIR_OUT; // REDIR_OUT (when outside quotes)
+			new_token->type = REDIR_OUT; // REDIR_OUT (when outside quotes)
 		else if (strcmp(word, ">>") == 0)
-			new_token->mock_type = APPEND_OUT; // APPEND_OUT (when outside quotes)
+			new_token->type = APPEND_OUT; // APPEND_OUT (when outside quotes)
 		else if (strcmp(word, "<<") == 0)
-			new_token->mock_type = HEREDOC; // HEREDOC (when outside quotes)
+			new_token->type = HEREDOC; // HEREDOC (when outside quotes)
 		else if (word[0] == '$')
-			new_token->mock_type = ENV_VAR; // $environment variable (when outside quotes)
+			new_token->type = ENV_VAR; // $environment variable (when outside quotes)
 		else if (word[0] == '/')
-			new_token->mock_type = ABS_PATH; // ABSOLUTE PATH
+			new_token->type = ABS_PATH; // ABSOLUTE PATH
 		else if (strstr(word, "./") == word || strstr(word, "../") == word)
-			new_token->mock_type = REL_PATH; // RELATIVE PATH
+			new_token->type = REL_PATH; // RELATIVE PATH
 		else if (word[0] == '-')
-			new_token->mock_type = OPTION; // OPTION <- i don't know if we need this
+			new_token->type = OPTION; // OPTION <- i don't know if we need this
 		else
-			new_token->mock_type = WORD; // any thing else
+			new_token->type = WORD; // any thing else
 		// Set the value and initialize the next pointer
-		new_token->mock_value = strdup(word); // Duplicate the word for storage
-		new_token->next_token = NULL;
+		new_token->value = strdup(word); // Duplicate the word for storage
+		new_token->next = NULL;
 		// Add the new token to the linked list
 		if (!head) {
 			head = new_token;  // First token becomes the head
 		} else {
-			current->next_token = new_token; // Link the new token
+			current->next = new_token; // Link the new token
 		}
 		current = new_token;  // Move to the new end of the list
 

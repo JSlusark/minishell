@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_print.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/19 17:57:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ which will print the nodes that I created.
  */
 
 #include "minishell.h"
-t_node_table *parse(t_mock *mock_token)
+t_node_table *parse(t_token_list *mock_token)
 {
 	int node_n = 1;					// We may need this for knowing how many nodes we have for piping and forking? prob also for malloc?
 	int token_n = 0;				// We may not need this
@@ -44,23 +44,23 @@ t_node_table *parse(t_mock *mock_token)
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 			start_node = false; // we started the node so what happens next is grabbing the node data
 		}
-		if (mock_token->mock_type == UNKNOWN) // interrupts node creation as it checks invalid tokens: symbols outside of string like (&&, ;, \, /, ?, unclosed ", unclosed ', ~, and * etc..) <- can we avoid tokens
+		if (mock_token->type == UNKNOWN) // interrupts node creation as it checks invalid tokens: symbols outside of string like (&&, ;, \, /, ?, unclosed ", unclosed ', ~, and * etc..) <- can we avoid tokens
 		{
 			printf("Error: invalid tokens \n");
 			break;
 		}
-		if (mock_token->mock_type == PIPE) // checks pipe to end/start node and command or trigger error
+		if (mock_token->type == PIPE) // checks pipe to end/start node and command or trigger error
 		{
-			if (!mock_token->next_token || pipe_at_start || mock_token->next_token->mock_type == PIPE) // interrupts node creation
+			if (!mock_token->next || pipe_at_start || mock_token->next->type == PIPE) // interrupts node creation
 			{
 				printf("Error: cannot start/end pipe and cannot have consecutive pipes\n"); // Starting with pipe is error and we do not have to handle when a command ends with pipe
 				break;
 			}
 			else // we end the node, flag to start a new one and its command
 			{
-				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
-				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->mock_type);
-				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->mock_value);
+				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->value);
+				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  mock_token->type);
+				printf(COLOR_RED"		%s\n"COLOR_RESET, mock_token->value);
 				start_node = true;  // Node created, we have to start a new node
 				get_command = true; // As we start a new node we reset this flag to true
 				node_n++;			// As we start a new node we increase the node number,
@@ -70,26 +70,26 @@ t_node_table *parse(t_mock *mock_token)
 		{
 			pipe_at_start = false;
 			//if redir grab redir and file data
-			if (mock_token->mock_type == REDIR_IN || mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT || mock_token->mock_type == HEREDOC)
+			if (mock_token->type == REDIR_IN || mock_token->type == REDIR_OUT || mock_token->type == APPEND_OUT || mock_token->type == HEREDOC)
 			{
-				int redir_type = mock_token->mock_type;
+				int redir_type = mock_token->type;
 				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
-				printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
+				printf("%s - %d\n", mock_token->value, mock_token->type);
 				// Trigger error if token after redir is NULL - Redir has to be followed by something that shell will see as file
-				if(mock_token->next_token == NULL)
+				if(mock_token->next == NULL)
 				{
 					printf(COLOR_RED"ERROR: redirections need to be followed by a file! \n"COLOR_RESET);
 					break; // we break the loop
 				}
 				// If we have a token after redir, trigger error if redir symbol is followed by redir symbol or pipe, if not we grab the file
-				if(mock_token->next_token != NULL)
+				if(mock_token->next != NULL)
 				{
 					token_n++;
-					mock_token = mock_token->next_token; // me move to the ne
-					if (mock_token->mock_type == PIPE || mock_token->mock_type == REDIR_IN
-						|| mock_token->mock_type == REDIR_OUT || mock_token->mock_type == APPEND_OUT
-						|| mock_token->mock_type == HEREDOC) // if redir symbol is followed by |, >, >>, < and << this is considered an error
+					mock_token = mock_token->next; // me move to the ne
+					if (mock_token->type == PIPE || mock_token->type == REDIR_IN
+						|| mock_token->type == REDIR_OUT || mock_token->type == APPEND_OUT
+						|| mock_token->type == HEREDOC) // if redir symbol is followed by |, >, >>, < and << this is considered an error
 					{
 						printf(COLOR_RED"ERROR: redirection cannot be immediately followed by pipes or other redirections \n"COLOR_RESET);
 						break; // we break the loop as there is no point in continuing to build a node if it's an error
@@ -100,7 +100,7 @@ t_node_table *parse(t_mock *mock_token)
 							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n); // this is either
 						else // if redir is <, > and >> the next token is seen as file
 							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
-						printf("%s - %d\n", mock_token->mock_value, mock_token->mock_type);
+						printf("%s - %d\n", mock_token->value, mock_token->type);
 					}
 				}
 			}
@@ -109,18 +109,18 @@ t_node_table *parse(t_mock *mock_token)
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
 				if (get_command) // triggers command storing if true
 				{
-					printf("%s - %d", mock_token->mock_value, mock_token->mock_type);
+					printf("%s - %d", mock_token->value, mock_token->type);
 					printf(COLOR_RED" (command)\n"COLOR_RESET);
 					get_command = false; // command found, next tokens are args
 				}
 				else // triggers args storing
 				{
-					printf("%s - %d", mock_token->mock_value, mock_token->mock_type); // he
+					printf("%s - %d", mock_token->value, mock_token->type); // he
 					printf(COLOR_RED" (arg)\n"COLOR_RESET);
 				}
 			}
 		}
-		mock_token = mock_token->next_token; // Move to the next token
+		mock_token = mock_token->next; // Move to the next token
 	}
 	// Summary of AST structure
 	// if (node_n == 1)

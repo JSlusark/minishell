@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 16:59:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/23 19:37:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 			exit (0);
 		}
 		// Creates mock tokens, this will have to be substituted by the token list created from alejo
-		t_mock	*tokens = create_mock_tokens(input);
+		t_token_list	*tokens = create_mock_tokens(input);
 		//We have our node list! I do not call it AST because AST is a lists of nodes unified by &&, || and ; which is bomus work
 		t_node *node_list = parse(tokens);
 		free_mock_tokens(tokens); // we free the token list after we used them for the nodes
