@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/24 17:01:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:50:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void append_node(t_node **head, t_node *new_node)
 		while(last_node->next) // we traverse the list until we reach the node that has NULL as next node
 			last_node = last_node->next;
 		last_node->next = new_node; // we assign the new node as last in the list
+		// last_node->next->next = NULL;
 		new_node->prev = last_node; // we assign the 2nd last node as prev node of teh new node
 	}
 }

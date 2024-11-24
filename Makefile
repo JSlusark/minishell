@@ -7,6 +7,7 @@ SRC	= main.c \
 	parsing.c \
 	parsing_free.c \
 	print_nodes.c \
+	exec_test.c \
 	$(MOCK_TOKENS)
 
 

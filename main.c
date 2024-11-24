@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/23 19:37:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/24 18:34:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int main(int argc, char **argv) {
 		}
 		else
 		{
-			// execution happens here?
 			print_nodes(node_list); // i am able to print the nodes data here!
+			exec_node(node_list);
 			free_node_list(node_list);// we have to free the node_list before we free the input and get more input
 		}
 	}
