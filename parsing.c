@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/24 17:01:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,30 @@
 // print fundtion ✅ (just node index for now)
 
 
-// void add_target_to_redir(t_redir *redir_data, t_token_list *token)
-// {
-// 	redir_data->target = token->value;
-// 	redir_data->target_type = token->type;
-// }
+void append_redir_data(t_redir **head_redir, t_redir *curr_redir)
+{
+	if (!(*head_redir))
+	{
+		*head_redir = curr_redir; // Update the the redirection data as head redir
+		curr_redir->prev = NULL;
+	} else {
+		t_redir *last_redir = *head_redir; // Traverse the redir list to find the last redir
+		while (last_redir->next) {
+			last_redir = last_redir->next;
+		}
+		last_redir->next = curr_redir; // Append the new argument to the list
+		curr_redir->prev = last_redir; // Set the previous pointer
+	}
+}
 
-void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_token_list *token)
+t_redir *create_redir_data(t_node *node_list, t_token_list *token)
 {
 	t_redir *redir = calloc(1, sizeof(t_redir));
 	if (!redir)
 	{
 		perror("Failed to allocate node\n");
 		free_node_list(node_list); // Free the existing list in case of an error
-		return;
+		return NULL;
 	}
 	redir->redir_type = token->type;
 	if(token->next != NULL)
@@ -54,7 +64,8 @@ void add_redir_data_to_node(t_node *node_list, t_node *curr_node, t_token_list *
 				redir->target_type = TARGET_FILENAME;
 		}
 	}
-	curr_node->redir_data = redir;
+	return (redir);
+	// curr_node->redir_data = redir;
 }
 
 void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg)
@@ -247,7 +258,11 @@ t_node *parse(t_token_list *mock_token)
 				// checks next token that will be file value of redir
 				if(mock_token->next != NULL)
 				{
-					add_redir_data_to_node(head, new_node, mock_token); // has to go here as its where we create the redirection
+					// append_redir_data(new_node->redir_data);
+					t_redir *new_redir = create_redir_data(head, mock_token); // has to go here as its where we create the redirection
+					if(!new_redir)
+						return (NULL);
+					append_redir_data(&(new_node->redir_data), new_redir);
 					token_n++;
 					mock_token = mock_token->next; // me move to the next token to check
 					if (mock_token->type == PIPE || mock_token->type == REDIR_IN
