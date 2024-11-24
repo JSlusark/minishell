@@ -1,7 +1,7 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-SRC	= main.c char_itr.c scanner.c token.c cmd.c token_list.c
+SRC	= main.c char_itr.c scanner.c token.c cmd.c token_list.c guards.c
 
 HEADERS	= ./include/minishell.h ./include/char_itr.h ./include/guards.h ./include/parser.h ./include/scanner.h ./include/token.h ./include/token_list.h ./include/cmd.h
 

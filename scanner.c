@@ -46,7 +46,6 @@ t_token scanner_next(t_scanner *self)
 {
 	/* t_token token;
 	ft_memset(&token, 0, sizeof(t_token)); */
-
 	skip_whitespaces(&self->char_itr);
 	//self->next = scanner_peek(self);
 	if (scanner_has_next(self)) //ok this is if there is next, but what about the current? Next is the current!

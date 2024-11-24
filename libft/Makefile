@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+         #
+#    By: alejandroramirez <alejandroramirez@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 11:53:09 by jessica           #+#    #+#              #
-#    Updated: 2024/05/03 14:45:44 by jslusark         ###   ########.fr        #
+#    Updated: 2024/11/20 20:24:39 by alejandrora      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ ft_putstr_fd.c \
 ft_itoa.c \
 ft_striteri.c \
 ft_strmapi.c \
-ft_split.c
+ft_split.c \
+ft_strndup.c
 
 
 

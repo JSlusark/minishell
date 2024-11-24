@@ -11,17 +11,20 @@ t_token_list *init_token_list(t_scanner *scanner)
 	current = NULL;
 	while (scanner_has_next(scanner))
 	{
-		scanner->next = scanner_next(scanner);
-		new_token = OOM_GUARDS(malloc(sizeof(t_token_list)), __FILE__, __LINE__);
-		new_token->token_type = scanner->next.type;
-		new_token->token_value = ft_strndup(scanner->next.lexeme.start, scanner->next.lexeme.length);
-		new_token->next_token = NULL;
+		scanner->next = scanner_next(scanner); //OK it enters and exit.
+		new_token = OOM_GUARD(malloc(sizeof(t_token_list)), __FILE__, __LINE__);
+		new_token->type = scanner->next.type;
+		new_token->value = ft_strndup(scanner->next.lexeme.start, scanner->next.lexeme.length);
+		new_token->next = NULL;
 		if (!head)
-			head = new_token;  // First token becomes the head
+		{
+			head = new_token; // First token becomes the head
+			current = head;
+		}
 		else
-			current->next_token = new_token; // Link the new token
-		current = new_token;  // Move to the new end of the list
-		print_token(scanner->next);
+			current->next = new_token;
+		printf("Token Type: %d, Token Value: %s\n", new_token->type, new_token->value);
+		//print_token(scanner->next);
 	}
 	return (head); // Return the head of the linked list
 }
