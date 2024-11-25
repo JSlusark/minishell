@@ -2,9 +2,15 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 TOKENIZATION  = ./parsing/tokenization/mock_tokens.c
-NODE_CREATION = 	./parsing/node_creation/create_nodes.c \
+
+NODE_CREATION = 	./parsing/node_creation/return_nodelist.c \
+					./parsing/node_creation/alloc_nodes.c \
+					./parsing/node_creation/alloc_args.c \
+					./parsing/node_creation/alloc_cmd.c \
+					./parsing/node_creation/alloc_redir.c \
 					./parsing/node_creation/free_nodes.c \
 					./parsing/node_creation/print_nodes.c
+
 EXECUTION	= ./execution/execution.c
 
 SRC	= main.c \

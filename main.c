@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/25 12:50:42 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:32:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 			exit (0);
 		}
 		t_token_list	*tokens = create_mock_tokens(input); // <-------------- this needs to be substituted by Alejo's token list
-		t_node *node_list = parse(tokens); //
+		t_node *node_list = return_nodelist(tokens); //
 		free_mock_tokens(tokens); // we free the token list since we allocated and created our nodes
 		free(input); // we also free the input as we have processed it already as tokens and then nodes
 		if(!node_list)

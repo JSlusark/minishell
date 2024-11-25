@@ -6,13 +6,13 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/24 18:30:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:37:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
-// The scanning function (which we can also call tokenizer), should return us a linked list of tockens needed by our parsing function, just as the t_token_list struct below
+
 typedef struct s_token_list
 {
 	int type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
@@ -68,14 +68,15 @@ typedef struct s_cmd // the the first token thas is not redirection data (redire
 typedef struct s_node // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe, a sequence of node commands is called command_list
 {
 	struct s_node *prev; // prev nodes can help
-	t_cmd *cmd_data;
+	t_cmd *cmd_data; // actually we may not need a struct with cmd, just the value might be enough because of the logic wrote in the execution file
 	t_redir *redir_data;
 	t_args *cmd_args;
+	int	node_i;
+	int	nodes_total;// every node will store this data so we know how many pipes we have
+	struct s_node *next;
+	//not sure yet but we have to find a way to handle -n flag
 	bool	n_flag; // flag that tells echo not to append a new_line to the echoed args
 	int		n_flag_n; // writes how many time -n flag to see if last arg should be -
-	int	node_i;
-	int	node_amount;// every node will store this data so we know how many pipes we have
-	struct s_node *next;
 } t_node;
 
 // IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE LISTS THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
@@ -89,24 +90,52 @@ typedef struct s_node // A node typically has this data: command, command argume
 }	t_ast; // without bonus  t_ast will only return 1 cmd_line while the rest of the data is empty */
 
 
-t_node	*parse(t_token_list *mock_token); // mock version
-// t_node_table	*parse(t_tokens *tokens); // definitive version
+//Main function that will return the node list to the main
+t_node	*return_nodelist(t_token_list *token_list);
+
+/* ---- Supporting functions --- */
+
+//Functions used to allocate and append nodes to nodelist
+t_node *create_node(t_node *node_list);
+void append_node(t_node **head, t_node *new_node);
+
+//Functions used to allocate and append cmd struct to its parent node
+void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token);
+
+//Functions used to allocate and append args to arglist and then to its parent node
+t_args *create_newarg_data(t_node *node_list, t_token_list *token);
+void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg);
+void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg);
+
+//Functions used to allocate and append cmd struct to its parent node
+t_redir *create_redir_data(t_node *node_list, t_token_list *token);
+void append_redir_data(t_redir **head_redir, t_redir *curr_redir);
+
+//Functions to free node allocation and its children data
+void free_node_list(t_node *node_list);
+
+/* ------------------------------ */
+
+
+//My mock tocken_list creation functions
 t_token_list			*create_mock_tokens(char *input);
 void			free_mock_tokens(t_token_list *head);
 
-//freeing functions for node allocation data
-void free_node_list(t_node *node_list);
+// Printing and debugging functions (we comment or remove them from our code when ready to submit)
 void print_nodes(t_node *head);
 
 // exec test
 void	exec_node(t_node	*node_list);
+
+#endif
+
+
 
 //Good resources that helped getting me into this and that will allow us to expand our logic:
 //https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100
 //https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c
 // brainstorming and asking questions to chat_gpt
 // testing command lines in bash
-// google
+// google & youtube
 
 
-#endif
