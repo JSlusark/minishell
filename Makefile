@@ -1,21 +1,22 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-MOCK_TOKENS = ./mock_data/create_mock_tokens.c
+TOKENIZATION  = ./parsing/tokenization/mock_tokens.c
+NODE_CREATION = 	./parsing/node_creation/create_nodes.c \
+					./parsing/node_creation/free_nodes.c \
+					./parsing/node_creation/print_nodes.c
+EXECUTION	= ./execution/execution.c
 
 SRC	= main.c \
-	parsing.c \
-	parsing_free.c \
-	print_nodes.c \
-	exec_test.c \
-	$(MOCK_TOKENS)
+	$(TOKENIZATION) \
+	$(NODE_CREATION) \
+	$(EXECUTION)
 
+HEADERS	= ./headers/minishell.h \
+		./headers/token.h \
+		./headers/node.h
 
-HEADERS	= ./include/minishell.h \
-		./include/token.h \
-		./include/node.h
-
-OBJS	= $(SRC:.c=.o)
+OBJS = $(SRC:.c=.o)
 
 CC	= cc
 

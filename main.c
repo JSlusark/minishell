@@ -6,11 +6,11 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/24 18:34:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:46:16 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "headers/minishell.h"
 
 int main(int argc, char **argv) {
 	char *input;

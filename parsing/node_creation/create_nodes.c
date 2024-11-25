@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   create_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/24 18:50:52 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:17:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../headers/minishell.h"
+
 
 // ✅ create node  - creates a node in the loop when start_node flag is true
 // ✅ append node - appends the created node after we find a pipe, we also have to use this at end of loop (as ending with pipe will be error anyway and wont allocate a new node but free and return)

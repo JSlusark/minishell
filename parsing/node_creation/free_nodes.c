@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_free.c                                     :+:      :+:    :+:   */
+/*   free_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 15:35:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:17:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../headers/minishell.h"
+
 
 static void free_arg_list (t_args *head)
 {

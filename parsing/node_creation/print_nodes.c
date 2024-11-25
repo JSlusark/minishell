@@ -6,11 +6,11 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/22 17:06:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:18:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../headers/minishell.h"
 
 char *return_token_enum(int token_type)
 {

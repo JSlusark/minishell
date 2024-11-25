@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_print.c                                    :+:      :+:    :+:   */
+/*   print_logic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:18:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ Once i am done I will use this same logic to build our nodes and another file ca
 which will print the nodes that I created.
  */
 
-#include "minishell.h"
-t_node_table *parse(t_token_list *mock_token)
+#include "../../headers/minishell.h"
+
+t_node *parse(t_token_list *mock_token)
 {
 	int node_n = 1;					// We may need this for knowing how many nodes we have for piping and forking? prob also for malloc?
 	int token_n = 0;				// We may not need this

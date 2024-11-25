@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_mock_tokens.c                               :+:      :+:    :+:   */
+/*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/23 19:43:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:35:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+/*
+When merging and adding your tokeinzation files here, do not delete this file yet, just remove it from
+the compilation process. There may be a chance for this file to be still helpful while we grow and
+improve the lexical analysis and tokenization part of the project
+*/
 
+#include "../../headers/minishell.h"
 
 void free_mock_tokens(t_token_list *head) {
 	t_token_list *current = head;
 	t_token_list *next;
 
-	while (current != NULL) {
+	while (current != NULL)
+	{
 		next = current->next; // Store the next token
 		free(current->value); // Free the duplicated string
 		free(current);             // Free the current node
@@ -66,7 +69,6 @@ t_token_list *create_mock_tokens(char *input)
 				|| word[0] == '`'
 				|| word[0] == '*'
 				|| word[0] == '~'
-				// || word[0] == '~'
 				)
 			new_token->type = UNKNOWN; // THESE SYMBOLS IF USED OUTSIDE QUOTES SHOULD NOT BE PROCESSED
 		else if (strcmp(word, "<") == 0)

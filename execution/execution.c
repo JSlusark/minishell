@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_test.c                                        :+:      :+:    :+:   */
+/*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/24 19:14:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/25 12:12:08 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../headers/minishell.h"
 
 /*
 	BUILT-INS
@@ -36,18 +36,18 @@
 
 void exec_command(t_node	*node)
 {
-	if(strcmp(node->cmd_data->cmd_value, "echo") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "cd") == 0)
+	if(strcmp(node->cmd_data->cmd_value, "cd") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "pwd") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "export") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "unset") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
+	else if(strcmp(node->cmd_data->cmd_value, "echo") == 0)
+		printf(COLOR_GREEN"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd_data->cmd_value, "exit") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < EXIT > BUILT-IN...\n\n"COLOR_RESET);
+	else if(strcmp(node->cmd_data->cmd_value, "export") == 0)
+		printf(COLOR_GREEN"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
+	else if(strcmp(node->cmd_data->cmd_value, "pwd") == 0)
+		printf(COLOR_GREEN"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
+	else if(strcmp(node->cmd_data->cmd_value, "unset") == 0)
+		printf(COLOR_GREEN"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
 	else if(node->cmd_data->cmd_type == ENV_VAR) // there are cases like "$PATH echo hello" which made me consider this but there might be other ways.. will think about it in the futue
 		printf(COLOR_GREEN"\nFound env_var as node command, still need to figure out how thinsg work here! Try <$PATH echo hello> on bash !\n"COLOR_RESET);
 	else
