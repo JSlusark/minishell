@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 13:17:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:32:16 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int main(int argc, char **argv) {
 				// planning that every error (not only allocation error but also parsing error) makes the parsing list "NULL"
 				// so that we just need to free once in here and not on every parsing considion with meet
 				// could also return an error, but need to check
-				printf("Error increating node! (I could possibly return the error here too..?)\n");
-				// free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
+				// printf("Error increating node! (I could possibly return the error here too..?)\n"); // prob will print in the fuction, i will just free here
+				free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
 			}
 			else
 			{
