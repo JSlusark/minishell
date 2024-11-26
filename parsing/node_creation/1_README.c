@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:37:17 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/25 14:38:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:22:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,15 @@ Each node will be the parent of the following data:
 - S_NODE *NEXT
 		Pointer to the next node.
 
-- CMD_VALUE (i created a struct first and will fix it to this later)
-		Name of the command. When reading the input, bash sees the first token of type "WORD" as command of the node.
-		This is why when you write: "hello echo in bash" it will give you error.
+- CMD_STRUCT
+	Holds the type and value of the token that bash detects as command of the node.
+	Bash detects as a command of the node any token that is not redirection data or pipe.
+	I am unsure if we need a struct or just the token value is enough (based on what I was thinking about executing the commands).
+	My thoughts come from writing this in bash:
+		- "hello echo" it will give you error.
+		- '$PATH', it will give it as error.
+		- '$UNKNOWN' will not write anything and not give an error... unsure why
+	Probably let's do other tests to see if we need to decide to change this.
 
 - REDIRECTION STRUCT (t_redir *redir_data)
 	The struct is a double linked list.
