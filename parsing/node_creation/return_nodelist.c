@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 15:59:16 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:17:46 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	redir_error(t_token_list *token)
 
 
 
-// bool	end_node(t_token_list *token, bool start_node, bool found_cmd, )
+// bool	end_node(t_token_list *token, bool node_starts, bool found_cmd, )
 // {
 // 	if(token->type == PIPE)
 // 	{
@@ -78,28 +78,29 @@ bool	redir_error(t_token_list *token)
 // 		printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
 // 		printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
 // 		node_n++;
-// 		start_node = true;  // Node created, we have to start a new node
+// 		node_starts = true;  // Node created, we have to start a new node
 // 		found_cmd = true; // As we start a new node we reset this flag to true
 // 		append_node(&head, new_node);// as we end the node we append it to our list
 // 	}
 
 // }
 
+// need 3 more funcs of 20/25 lines each
 t_node *return_nodelist(t_token_list *token)
 {
 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int	token_n;					// We may not need this
-	// int	redir_i;					// redir index
-	bool start_node;		// Flag to indicate if we have to start a node at start or after pipe
+	int	redir_i;					// redir index
+	bool node_starts;		// Flag to indicate if we have to start a node at start or after pipe
 	bool found_cmd;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
 	t_node *head; 			// First node in the list
 	t_node *new_node;
 
-	// redir_i = 0;
+	redir_i = 0;
 	node_n = 1;
 	token_n = 0;
-	start_node = true;
+	node_starts = true;
 	found_cmd = false;
 	pipe_at_start = true;
 	head = NULL;
@@ -108,17 +109,15 @@ t_node *return_nodelist(t_token_list *token)
 	while (token)
 	{
 		token_n++;
-		// START NODE FUNCTION - returns
-		if (start_node == true)
+		if (node_starts == true)
 		{
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-			new_node = create_node(head);
+			new_node = calloc(1, sizeof(t_node));
 			if(!new_node) // is null
 				return (NULL); // no free as i did alread in the create node func
 			new_node->node_i = node_n - 1;
-			start_node = false;
+			node_starts = false;
 		}
-
 		if(unknown_token(token))
 			return(NULL);
 		if(pipe_error(token, pipe_at_start))
@@ -129,7 +128,8 @@ t_node *return_nodelist(t_token_list *token)
 				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
 				printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
 				node_n++;
-				start_node = true;  // Node created, we have to start a new node
+				redir_i = 0;
+				node_starts = true;  // Node created, we have to start a new node
 				found_cmd = false; // As we start a new node we reset this flag to true
 				append_node(&head, new_node);// as we end the node we append it to our list
 		}
@@ -147,7 +147,9 @@ t_node *return_nodelist(t_token_list *token)
 				t_redir *new_redir = create_redir_data(head, token); // has to go here as its where we create the redirection
 				if(!new_redir)
 					return (NULL);
+				new_redir->redir_i = redir_i;
 				append_redir_data(&(new_node->redir_data), new_redir);
+				redir_i++;
 				if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
 					printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
 				else // if redir is <, > and >> the next token is seen as file
@@ -179,13 +181,6 @@ t_node *return_nodelist(t_token_list *token)
 		token = token->next; // Move to the next token
 	}
 	append_node(&head, new_node);// we also have to append the node when it doesn't have pipe
-	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?
-		//if node == 0 -- either malloc failed, or node error, or input is empty, free everything?
-		//if node == 1, means we have 1 node no pipes
-		//if node > 1, means we have to pipe
-
-
 	printf("	Total number of nodes detected: %d\n", node_n);
-
 	return (head);
 }

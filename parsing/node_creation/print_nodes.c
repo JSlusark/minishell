@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 13:04:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:15:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void print_redir_data(t_redir *head)
 {
 	if (!head)
 	{
-		printf(COLOR_RED"		- t_redir redir_data:\n"COLOR_RESET);
+		printf(COLOR_RED"		- t_redir redir_data N %d:\n"COLOR_RESET, head->redir_i);
 		printf("			  - No redirection data found from input\n");
 		return;
 	}

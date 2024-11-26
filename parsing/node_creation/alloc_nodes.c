@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 15:59:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:07:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ void append_node(t_node **head, t_node *new_node)
 	}
 }
 
-t_node *create_node(t_node *node_list)
-{
-	t_node *new_node = calloc(1, sizeof(t_node));
-	if (!new_node)
-	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return(NULL);
-	}
-	return(new_node);
-}
+// t_node *create_node()
+// {
+// 	// t_node *new_node = calloc(1, sizeof(t_node));
+// 	// if (!new_node) // i do  not free the node as i do it in the main
+// 	// 	return(NULL);
+// 	// return(new_node);
+// }

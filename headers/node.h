@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 15:59:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:12:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_node	*return_nodelist(t_token_list *token_list);
 /* ---- Supporting functions --- */
 
 //Functions used to allocate and append nodes to nodelist
-t_node *create_node(t_node *node_list);
+// t_node *create_node();
 void append_node(t_node **head, t_node *new_node);
 
 //Functions used to allocate and append cmd struct to its parent node
