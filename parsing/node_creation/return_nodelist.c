@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 17:46:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:13:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ bool	redir_error(t_token_list *token)
 
 bool add_redir(t_token_list *token, int redir_i, t_node	*new_node)
 {
+	if(redir_error(token))
+		return(false);
 	t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
 	if(!new_redir)
 		return (false);
@@ -68,6 +70,13 @@ bool add_redir(t_token_list *token, int redir_i, t_node	*new_node)
 	append_redir_data(&(new_node->redir_data), new_redir);
 	redir_i++;
 	return(true);
+}
+void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node)
+{
+	// redir_i = 0;
+	*node_starts = true;  // Node created, we have to start a new node
+	*found_cmd = false; // As we start a new node we reset this flag to true
+	append_node(head, new_node);// as we end the node we append it to our list
 }
 
 void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_node *head)
@@ -135,22 +144,18 @@ t_node *return_nodelist(t_token_list *token)
 				printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
 				node_n++;
 				redir_i = 0;
-				node_starts = true;  // Node created, we have to start a new node
-				found_cmd = false; // As we start a new node we reset this flag to true
-				append_node(&head, new_node);// as we end the node we append it to our list
+				end_node(&node_starts, &found_cmd, &head, new_node);
 		}
 		else // if we don't hit PIPE or UNKNOWN, se set pipe at sratrt false to process other tokens (redir, cmd and args)
 		{
 			pipe_at_start = false;
 			if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
 			{
+				if(!add_redir(token, redir_i, new_node))
+					return(NULL);
 				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
 				printf("%s - %d\n", token->value, token->type);
-				if(redir_error(token))
-					return(NULL);
-				if(!add_redir(token, redir_i, new_node))
-					return(NULL);
 				token = token->next; // me move to the next token to check
 				token_n++;
 				if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
