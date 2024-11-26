@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:07:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:27:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void append_node(t_node **head, t_node *new_node)
 {
 	if(!(*head))
 	{
-		*head = new_node; // This updates a local copy of head
 		new_node->prev = NULL;
+		*head = new_node; // This updates a local copy of head
 	}
 	else
 	{

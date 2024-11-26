@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:15:55 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:42:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,15 @@ void print_redir_data(t_redir *head)
 {
 	if (!head)
 	{
-		printf(COLOR_RED"		- t_redir redir_data N %d:\n"COLOR_RESET, head->redir_i);
-		printf("			  - No redirection data found from input\n");
+		printf(COLOR_RED"		- t_redir redir_data:\n"COLOR_RESET);
+		printf("		(NULL)\n");
 		return;
 	}
-	// printf("HEYYYY\n");
 	t_redir *current = head;
-	int index = 1; // Index to track the argument position in the list
 	printf(COLOR_RED"		- t_redir redir_data:\n"COLOR_RESET);
 	while (current)
 	{
-		printf(COLOR_BLUE"			REDIR N_%d\n"COLOR_RESET, index);
+		printf(COLOR_BLUE"				- REDIR N %d:\n"COLOR_RESET, head->redir_i + 1);
 		printf("			  - int redir_type: %s\n", return_token_enum(current->redir_type));
 
 		printf("			  - char *target: %s (%s)\n", current->target, return_token_enum(current->target_token_type));
@@ -85,7 +83,6 @@ void print_redir_data(t_redir *head)
 		// else
 		// 	printf("			  - char *value: (NULL)\n");
 		current = current->next; // Move to the next argument in the list
-		index++;
 	}
 }
 
