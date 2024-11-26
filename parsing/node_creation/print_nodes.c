@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/25 12:18:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:04:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void print_args(t_args *head)
 	if (!head)
 	{
 		printf(COLOR_RED"		- t_args cmd_args:\n"COLOR_RESET);
-		printf("			  - No args found from input\n");
+		printf("		(NULL)\n");
 		return;
 	}
 	// printf("HEYYYY\n");

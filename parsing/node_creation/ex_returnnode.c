@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 13:07:37 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 12:33:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ t_node *return_nodelist(t_token_list *token_list)
 	start_node = true;
 	get_command = true;
 	pipe_at_start = true;
-	head = NULL;
 
 	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
- // char *error -
 	while (token_list)
 	{
 		token_n++;
-		// START NODE FUNCTION - returns
+		// START NODE FUNCTION
 		if (start_node == true)
 		{
 			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
