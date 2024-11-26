@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 13:32:16 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:50:30 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int main(int argc, char **argv) {
 		{
 			free(input);
 			free_mock_tokens(tokens);
+		}
+		if(strcmp(input, "exit") == 0)
+		{
+			free(input);
+			free_mock_tokens(tokens);
+			clear_history();
+			exit(0);
 		}
 		else
 		{
