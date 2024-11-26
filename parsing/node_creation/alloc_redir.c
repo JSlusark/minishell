@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:13:47 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:52:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void append_redir_data(t_redir **head_redir, t_redir *curr_redir)
 	}
 }
 
-t_redir *create_redir_data(t_node *node_list, t_token_list *token)
+t_redir *create_redir_data(t_token_list *token)
 {
 	t_redir *redir = calloc(1, sizeof(t_redir));
 	if (!redir)
 	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
+		// perror("Failed to allocate node\n");
+		// free_node_list(node_list); // Free the existing list in case of an error
 		return NULL;
 	}
 	redir->redir_type = token->type;

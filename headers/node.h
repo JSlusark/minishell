@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:12:52 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 16:52:44 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg);
 void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg);
 
 //Functions used to allocate and append cmd struct to its parent node
-t_redir *create_redir_data(t_node *node_list, t_token_list *token);
+t_redir *create_redir_data(t_token_list *token);
 void append_redir_data(t_redir **head_redir, t_redir *curr_redir);
 
 //Functions to free node allocation and its children data
