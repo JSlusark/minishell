@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 18:13:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:04:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,32 @@ bool	redir_error(t_token_list *token)
 
 bool add_redir(t_token_list *token, int redir_i, t_node	*new_node)
 {
-	if(redir_error(token))
-		return(false);
-	t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
-	if(!new_redir)
-		return (false);
-	new_redir->redir_i = redir_i;
-	append_redir_data(&(new_node->redir_data), new_redir);
-	redir_i++;
-	return(true);
+	// if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
+	// {
+		if(redir_error(token))
+			return(false);
+		t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
+		if(!new_redir)
+			return (false);
+		new_redir->redir_i = redir_i;
+		append_redir_data(&(new_node->redir_data), new_redir);
+		redir_i++;
+		// token = token->next; // me move to the next token to check
+		// token_n++;
+		// token = token->next; // me move to the next token to check
+		// printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
+		// printf(COLOR_BLUE"			TOKEN - Redirection:"COLOR_RESET);
+		// printf("%s - %d\n", token->value, token->type);
+		// token = token->next; // me move to the next token to check
+		// // token_n++;
+		// if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
+		// 	printf(COLOR_BLUE"			TOKEN - delimiter:"COLOR_RESET);
+		// else // if redir is <, > and >> the next token is seen as file
+		// 	printf(COLOR_BLUE"			TOKEN - file:"COLOR_RESET);
+		// printf("%s\n", token->value);
+		return(true);
+	// }
+	// return(true);
 }
 void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node)
 {
@@ -98,6 +115,20 @@ void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_
 	}
 }
 
+t_node *node_init(t_node *head, int node_n, bool *node_starts)
+{
+	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
+    t_node *new_node = calloc(1, sizeof(t_node));
+    if (!new_node)
+    {
+        perror("Failed to allocate memory for a new node");
+        free_node_list(head); // Free the existing list
+        return NULL;
+    }
+    new_node->node_i = node_n - 1;
+    *node_starts = false; // Node has started
+    return new_node;
+}
 
 
 
@@ -128,14 +159,11 @@ t_node *return_nodelist(t_token_list *token)
 		token_n++;
 		if(unknown_token(token) || pipe_error(token, pipe_at_start))
 			return(NULL);
-		if (node_starts == true)
+		if (node_starts)
 		{
-			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-			new_node = calloc(1, sizeof(t_node));
-			if(!new_node) // is null
-				return (NULL); // no free as i did alread in the create node func
-			new_node->node_i = node_n - 1;
-			node_starts = false;
+			new_node = node_init(head, node_n, &node_starts);
+            if (!new_node)
+                return NULL;
 		}
 		if (token->type == PIPE) // if we don't have pipe errors it means our node ends and we ahve to start anothee one
 		{
@@ -149,20 +177,22 @@ t_node *return_nodelist(t_token_list *token)
 		else // if we don't hit PIPE or UNKNOWN, se set pipe at sratrt false to process other tokens (redir, cmd and args)
 		{
 			pipe_at_start = false;
+			// if(!add_redir(token, redir_i, new_node))
+			// 	return(NULL);
 			if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
 			{
 				if(!add_redir(token, redir_i, new_node))
 					return(NULL);
-				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
-				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
-				printf("%s - %d\n", token->value, token->type);
 				token = token->next; // me move to the next token to check
-				token_n++;
-				if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-					printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
-				else // if redir is <, > and >> the next token is seen as file
-					printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
-				printf("%s\n", token->value);
+				// printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
+				// printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
+				// printf("%s - %d\n", token->value, token->type);
+				// token_n++;
+				// if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
+				// 	printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
+				// else // if redir is <, > and >> the next token is seen as file
+				// 	printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
+				// printf("%s\n", token->value);
 			}
 			else // CHECKS THE REST (cmd and args)
 			{

@@ -6,329 +6,188 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 13:24:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/26 18:40:21 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-
-/*
-	Will need to clean this up after i cleanup print_nodes
-*/
-
-
-void append_redir_data(t_redir **head_redir, t_redir *curr_redir)
+bool	unknown_token(t_token_list *token)
 {
-	if (!(*head_redir))
-	{
-		*head_redir = curr_redir; // Update the the redirection data as head redir
-		curr_redir->prev = NULL;
-	} else {
-		t_redir *last_redir = *head_redir; // Traverse the redir list to find the last redir
-		while (last_redir->next) {
-			last_redir = last_redir->next;
-		}
-		last_redir->next = curr_redir; // Append the new argument to the list
-		curr_redir->prev = last_redir; // Set the previous pointer
-	}
-}
-
-t_redir *create_redir_data(t_node *node_list, t_token_list *token)
-{
-	t_redir *redir = calloc(1, sizeof(t_redir));
-	if (!redir)
-	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return NULL;
-	}
-	redir->redir_type = token->type;
-	if(token->next != NULL)
-	{
-		redir->target = ft_strdup(token->next->value);
-		redir->target_token_type = token->next->type;
-		if(redir->redir_type == HEREDOC)
-			redir->target_type = TARGET_DELIMITER;
-		else
+		if (token->type == UNKNOWN) // ERROR AND FREE
 		{
-			if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
-				redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-			else if(token->next->type == ENV_VAR)
-				redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-			else
-				redir->target_type = TARGET_FILENAME;
+			printf("Minishell: found invalid token %s\n", token->value);
+			return(true);
+		}
+		return(false);
+}
+
+bool	pipe_error(t_token_list *token, bool pipe_at_start)
+{
+	if (token->type == PIPE) // ERROR AND FREE
+	{
+		if (!token->next) // Check if the next token is NULL
+		{
+			printf("Minishell: found `%s' at end of syntax\n", token->value);
+			return(true);
+		}
+		else if (pipe_at_start || token->next->type == PIPE) // Ensure token->next is not NULL
+		{
+			printf("Minishell: syntax error near unexpected token `%s'\n", token->value);
+			return(true);
 		}
 	}
-	return (redir);
-	// curr_node->redir_data = redir;
+	return(false);
 }
-
-void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg)
+bool	redir_error(t_token_list *token)
 {
-	if (!(*cmd_args)) {
-		*cmd_args = new_arg; // Update the actual pointer to the first argument
-		new_arg->prev = NULL;
-	} else {
-		t_args *last_arg = *cmd_args; // Traverse the list to find the last argument
-		while (last_arg->next) {
-			last_arg = last_arg->next;
+	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
+	{
+		if(token->next == NULL) // error and free
+		{
+			printf("Minishell: syntax error near unexpected token `newline'\n");
+			return(true); // we break the loop
 		}
-		last_arg->next = new_arg; // Append the new argument to the list
-		new_arg->prev = last_arg; // Set the previous pointer
+		else if (token->next->type == PIPE || token->next->type == REDIR_IN
+			|| token->next->type == REDIR_OUT || token->next->type == APPEND_OUT
+			|| token->next->type == HEREDOC || token->next->type == UNKNOWN)
+		{
+			printf("Minishell: syntax error near unexpected token `%s'\n", token->next->value);
+			return(true); // we break the loop as there is no point in continuing to build a node if it's an error
+		}
 	}
+	return(false);
 }
 
-t_args *create_newarg_data(t_node *node_list, t_token_list *token)
+bool add_redir(t_token_list *token, int redir_i, t_node	*new_node)
 {
-	t_args *new_arg = calloc(1, sizeof(t_args));
-	if (!new_arg)
+	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
 	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return(NULL);
+		if(redir_error(token))
+			return(false);
+		t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
+		if(!new_redir)
+			return (false);
+		new_redir->redir_i = redir_i;
+		append_redir_data(&(new_node->redir_data), new_redir);
+		redir_i++;
+		return(true);
 	}
-	new_arg->arg_type = token->type;
-	new_arg->arg_value = ft_strdup(token->value); // coudl be issue when freeing the token list
-	if (!new_arg->arg_value)
-	{
-		perror("Failed to allocate arg_value\n");
-		free(new_arg);
-		free_node_list(node_list); // Free the existing list in case of an error
-		return (NULL); // if this happens it should stop so it has to return something!!!!!!!!!!!!
-	}
-	return(new_arg);
+	return(true);
 }
-
-void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg)
+void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node)
 {
-	// t_args *head_arg = calloc(1, sizeof(t_args));
-	if (!head_arg)
-	{
-		perror("Failed to allocate cmd_args\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return;
-	}
-
-
-
-	// cmd->cmd_type = token->type;
-	// cmd->cmd_value = ft_strdup(token->value); // coudl be issue when freeing the token list
-	// if (!cmd->cmd_value)
-	// {
-	// 	perror("Failed to allocate cmd_value\n");
-	// 	free(cmd);
-	// 	free_node_list(node_list); // Free the existing list in case of an error
-	// 	return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
-	// }
-	curr_node->cmd_args = head_arg;
-	// return(true);
+	// redir_i = 0;
+	*node_starts = true;  // Node created, we have to start a new node
+	*found_cmd = false; // As we start a new node we reset this flag to true
+	append_node(head, new_node);// as we end the node we append it to our list
 }
 
-
-
-void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token)
+void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_node *head)
 {
-	t_cmd *cmd = calloc(1, sizeof(t_cmd));
-	if (!cmd)
+	if (!(*found_cmd)) // triggers command storing if true
 	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return;
+		printf("%s - %d", token->value, token->type);
+		printf(COLOR_RED" (command)\n"COLOR_RESET);
+		add_cmd_to_node(head, new_node, token); // had to return as error
+		*found_cmd = true; // command found, if we have other tokens they are args if not redir data
+		// ADD ECHO -N FLAG HERE, if mocktoken->next-token_type == OPTION
 	}
-	cmd->cmd_type = token->type;
-	cmd->cmd_value = ft_strdup(token->value); // coudl be issue when freeing the token list
-	if (!cmd->cmd_value)
+	else // triggers args storing
 	{
-		perror("Failed to allocate cmd_value\n");
-		free(cmd);
-		free_node_list(node_list); // Free the existing list in case of an error
-		return; // if this happens it should stop so it has to return something!!!!!!!!!!!!
+		t_args *new_arg = create_newarg_data(head, token);
+		append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
+		printf("%s - %d", token->value, token->type); // he
+		printf(COLOR_RED" (arg)\n"COLOR_RESET);
 	}
-	curr_node->cmd_data = cmd;
-	// return(true);
 }
 
-void append_node(t_node **head, t_node *new_node)
+t_node *node_init(t_node *head, int node_n, bool *node_starts)
 {
-	if(!(*head))
-	{
-		*head = new_node; // This updates a local copy of head
-		new_node->prev = NULL;
-	}
-	else
-	{
-		t_node *last_node = *head; // we do this to traverse tthrough the list without affecting it
-		while(last_node->next) // we traverse the list until we reach the node that has NULL as next node
-			last_node = last_node->next;
-		last_node->next = new_node; // we assign the new node as last in the list
-		// last_node->next->next = NULL;
-		new_node->prev = last_node; // we assign the 2nd last node as prev node of teh new node
-	}
-}
-
-t_node *create_node(t_node *node_list)
-{
-	t_node *new_node = calloc(1, sizeof(t_node));
-	if (!new_node)
-	{
-		perror("Failed to allocate node\n");
-		free_node_list(node_list); // Free the existing list in case of an error
-		return(NULL);
-	}
-	return(new_node);
+	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
+    t_node *new_node = calloc(1, sizeof(t_node));
+    if (!new_node)
+    {
+        perror("Failed to allocate memory for a new node");
+        free_node_list(head); // Free the existing list
+        return NULL;
+    }
+    new_node->node_i = node_n - 1;
+    *node_starts = false; // Node has started
+    return new_node;
 }
 
 
-//converting my logic to node creation
-t_node *parse(t_token_list *token_list)
+
+// need 3 more funcs of 20/25 lines each
+t_node *return_nodelist(t_token_list *token)
 {
 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int	token_n;					// We may not need this
-	// int	redir_i;					// redir index
-	bool start_node;		// Flag to indicate if we have to start a node at start or after pipe
-	bool get_command;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
+	int	redir_i;					// redir index
+	bool node_starts;		// Flag to indicate if we have to start a node at start or after pipe
+	bool found_cmd;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
 	t_node *head; 			// First node in the list
 	t_node *new_node;
 
-	// redir_i = 0;
+
+	redir_i = 0;
 	node_n = 1;
 	token_n = 0;
-	start_node = true;
-	get_command = true;
+	node_starts = true;
+	found_cmd = false;
 	pipe_at_start = true;
 	head = NULL;
 
 	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
- // char *error -
-	while (token_list)
+	while (token)
 	{
 		token_n++;
-		// START NODE FUNCTION - returns
-		if (start_node == true)
-		{
-			printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-			new_node = create_node(head);
-			if(!new_node) // is null
-				return (NULL); // no free as i did alread in the create node func
-			new_node->node_i = node_n - 1;
-			start_node = false;
-		}
-
-		if (token_list->type == UNKNOWN) // ERROR AND FREE
-		{
-			printf("Error: invalid tokens \n");
-			free_node_list(head);
+		if(unknown_token(token) || pipe_error(token, pipe_at_start))
 			return(NULL);
-		}
-		//CHECKS PIPES
-		if (token_list->type == PIPE)
+		if (node_starts)
 		{
-			if (!token_list->next || pipe_at_start || token_list->next->type == PIPE) // error and free
-			{
-				printf("Error: cannot start/end pipe and cannot have consecutive pipes\n");
-				free_node_list(head);
-				return(NULL);
-			}
-			else // we end the node here
-			{
-				printf(COLOR_RED"		%s\n"COLOR_RESET, token_list->value);
-				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token_list->type);
-				printf(COLOR_RED"		%s\n"COLOR_RESET, token_list->value);
-				node_n++;
-				start_node = true;  // Node created, we have to start a new node
-				get_command = true; // As we start a new node we reset this flag to true
-				append_node(&head, new_node);// as we end the node we append it to our list
-			}
+			new_node = node_init(head, node_n, &node_starts);
+            if (!new_node)
+                return NULL;
 		}
-		else //sets pipeflag to false as pipe is not first command
+		if (token->type == PIPE) // if we don't have pipe errors it means our node ends and we ahve to start anothee one
+		{
+				printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
+				printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
+				printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
+				node_n++;
+				redir_i = 0;
+				end_node(&node_starts, &found_cmd, &head, new_node);
+		}
+		else // if we don't hit PIPE or UNKNOWN, se set pipe at sratrt false to process other tokens (redir, cmd and args)
 		{
 			pipe_at_start = false;
-			// CHECK REDIRECTIONS & FILES
-			if (token_list->type == REDIR_IN || token_list->type == REDIR_OUT || token_list->type == APPEND_OUT || token_list->type == HEREDOC)
+			if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
 			{
-				int redir_type = token_list->type;
+				if(!add_redir(token, redir_i, new_node))
+				return(NULL);
 				printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 				printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
-				printf("%s - %d\n", token_list->value, token_list->type);
-				if(token_list->next == NULL) // error and free
-				{
-					printf(COLOR_RED"ERROR: redirections need to be followed by a file! \n"COLOR_RESET);
-					free_node_list(head);
-					return(NULL); // we break the loop
-				}
-				// checks next token that will be file value of redir
-				if(token_list->next != NULL)
-				{
-					// append_redir_data(new_node->redir_data);
-					t_redir *new_redir = create_redir_data(head, token_list); // has to go here as its where we create the redirection
-					if(!new_redir)
-						return (NULL);
-					append_redir_data(&(new_node->redir_data), new_redir);
-					token_n++;
-					token_list = token_list->next; // me move to the next token to check
-					if (token_list->type == PIPE || token_list->type == REDIR_IN
-						|| token_list->type == REDIR_OUT || token_list->type == APPEND_OUT
-						|| token_list->type == HEREDOC) // error and free
-					{
-						printf(COLOR_RED"ERROR: redirection cannot be immediately followed by pipes or other redirections \n"COLOR_RESET);
-						// free_node_list(head);
-						return(NULL); // we break the loop as there is no point in continuing to build a node if it's an error
-					}
-					else
-					{
-						// creates the redir struct and adds redir index
-						if(redir_type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-						{
-							//adds redir data for heredoc
-							printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
-						}
-						else // if redir is <, > and >> the next token is seen as file
-						{
-							//adds redir data for the other redir types
-							printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
-						}
-						printf("%s - %d\n", token_list->value, token_list->type);
-						// redir_i++; // increase redir index in case we have a 2nd redirection
-					}
-				}
+				printf("%s - %d\n", token->value, token->type);
+				token = token->next; // me move to the next token to check
+				token_n++;
+				if(token->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
+					printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
+				else // if redir is <, > and >> the next token is seen as file
+					printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
+				printf("%s\n", token->value);
 			}
 			else // CHECKS THE REST (cmd and args)
 			{
-				//------------> initiate command struct and args struct to see if command and args are filled of null
 				printf(COLOR_BLUE"		TOKEN %d:"COLOR_RESET, token_n);
-				if (get_command) // triggers command storing if true
-				{
-					printf("%s - %d", token_list->value, token_list->type);
-					printf(COLOR_RED" (command)\n"COLOR_RESET);
-					add_cmd_to_node(head, new_node, token_list); // had to return as error
-					get_command = false; // command found, if we have other tokens they are args if not redir data
-					// ADD ECHO -N FLAG HERE, if mocktoken->next-token_type == OPTION
-					//mocktoken = mocktoken->next
-					// n_echoflag = true
-					//mocktoken = mocktoken->next
-					// pass to next tokens
-				}
-				else // triggers args storing
-				{
-					t_args *new_arg = create_newarg_data(head, token_list);
-					append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
-					printf("%s - %d", token_list->value, token_list->type); // he
-					printf(COLOR_RED" (arg)\n"COLOR_RESET);
-				}
+				add_cmd_and_args(&found_cmd, token, new_node, head);
 			}
 		}
-		token_list = token_list->next; // Move to the next token
+		token = token->next; // Move to the next token
 	}
 	append_node(&head, new_node);// we also have to append the node when it doesn't have pipe
-	// POINT: ------> collect node in node table, node n will help in understanding how much memory to allocate?
-		//if node == 0 -- either malloc failed, or node error, or input is empty, free everything?
-		//if node == 1, means we have 1 node no pipes
-		//if node > 1, means we have to pipe
-
-
 	printf("	Total number of nodes detected: %d\n", node_n);
-
 	return (head);
 }
