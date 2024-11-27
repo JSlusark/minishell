@@ -1,11 +1,41 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-SRC	= main.c char_itr.c scanner.c token.c cmd.c token_list.c guards.c
+TOKENIZATION  = ./parsing/tokenization/mock_tokens.c \
+				./parsing/tokenization/char_itr.c \
+				./parsing/tokenization/scanner.c \
+				./parsing/tokenization/token.c \
+				./parsing/tokenization/cmd.c \
+				./parsing/tokenization/token_list.c \
+				./parsing/tokenization/guards.c
 
-HEADERS	= ./include/minishell.h ./include/char_itr.h ./include/guards.h ./include/parser.h ./include/scanner.h ./include/token.h ./include/token_list.h ./include/cmd.h
+NODE_CREATION = 	./parsing/node_creation/return_nodelist.c \
+					./parsing/node_creation/alloc_nodes.c \
+					./parsing/node_creation/alloc_args.c \
+					./parsing/node_creation/alloc_cmd.c \
+					./parsing/node_creation/alloc_redir.c \
+					./parsing/node_creation/free_nodes.c \
+					./parsing/node_creation/print_nodes.c
 
-OBJS	= $(SRC:.c=.o)
+EXECUTION	= ./execution/execution.c
+
+SRC	= main.c \
+	$(TOKENIZATION) \
+	$(NODE_CREATION) \
+	$(EXECUTION)
+
+HEADERS	= ./headers/minishell.h \
+		./headers/char_itr.h \
+		./headers/guards.h \
+		./headers/parser.h \
+		./headers/scanner.h \
+		./headers/token.h \
+		./headers/token_list.h \
+		./headers/cmd.h \
+		./headers/node.h \
+
+
+OBJS = $(SRC:.c=.o)
 
 CC	= cc
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alejandroramirez <alejandroramirez@stud    +#+  +:+       +#+         #
+#    By: alramire <alramire@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 11:53:09 by jessica           #+#    #+#              #
-#    Updated: 2024/11/20 20:24:39 by alejandrora      ###   ########.fr        #
+#    Updated: 2024/11/27 13:13:32 by alramire         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,8 @@ ft_itoa.c \
 ft_striteri.c \
 ft_strmapi.c \
 ft_split.c \
-ft_strndup.c
+ft_strndup.c \
+ft_strcmp.c
 
 
 

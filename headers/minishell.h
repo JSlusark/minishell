@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/27 12:23:40 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:06:08 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,10 @@
 #include	"redirections.h" // this already should include all the redirections headers inside
 
 //Tokenizer headers
-#include "../headers/token.h"
-#include "../headers/char_itr.h"
-#include "../headers/guards.h"
-#include "../headers/scanner.h"
-#include "../headers/cmd.h"
-#include "../headers/token_list.h"
+#include "char_itr.h"
+#include "guards.h"
+#include "scanner.h"
+#include "cmd.h"
+#include "token_list.h"
 
 #endif
-
-
-

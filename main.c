@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/27 12:37:51 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:55:46 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 			free(input);
 			free_mock_tokens(tokens);
 		}
-		if (!input || ft_strncmp(input, "exit", 4) == 0)
+		if (!input || ft_strcmp(input, "exit") == 0)
 		{
 			free(input);
 			free_mock_tokens(tokens);
@@ -67,8 +67,10 @@ int	main(int argc, char **argv)
 /*
 		if (ft_strlen(input) > 0)
 		{
-			add_history(input);
-			printf("You entered: %s\n", input); // Placeholder for command processing
+			free(input);
+			free_mock_tokens(tokens);
+			clear_history();
+			exit(0);
 		}
 		// The itr struct is initialized with the input and the length of it.
 		itr = char_itr_value(input, ft_strlen(input));
