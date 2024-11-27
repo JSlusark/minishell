@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   return_nodelist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 19:45:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:57:36 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+// change calloc to FT_CALLOC
+// check if forbidden functions are here
 
 bool	unknown_token(t_token_list *token)
 {
@@ -61,29 +63,32 @@ bool	redir_error(t_token_list *token)
 
 bool add_redir(t_token_list *token, t_node	*new_node, int redir_i)
 {
-
-		if(redir_error(token))
-			return(false);
-		t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
-		if(!new_redir)
-			return (false);
-		new_redir->redir_i = redir_i;
-		append_redir_data(&(new_node->redir_data), new_redir);
-		redir_i++;
-		return(true);
+	if(redir_error(token))
+		return(false);
+	t_redir *new_redir = create_redir_data(token); // has to go here as its where we create the redirection
+	if(!new_redir)
+		return (false);
+	new_redir->redir_i = redir_i;
+	append_redir_data(&(new_node->redir_data), new_redir);
+	redir_i++;
+	return(true);
 }
-void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node)
+void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node, t_token_list *token, int token_n) // a
 {
 	// redir_i = 0;
+	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
+	printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
+	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
 	*node_starts = true;  // Node created, we have to start a new node
 	*found_cmd = false; // As we start a new node we reset this flag to true
 	append_node(head, new_node);// as we end the node we append it to our list
 }
 
-void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_node *head)
+void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_node *head, int token_n)
 {
 	if (!(*found_cmd)) // triggers command storing if true
 	{
+		printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
 		printf("%s - %d", token->value, token->type);
 		printf(COLOR_RED" (command)\n"COLOR_RESET);
 		add_cmd_to_node(head, new_node, token); // had to return as error
@@ -94,38 +99,40 @@ void add_cmd_and_args(bool *found_cmd, t_token_list *token, t_node *new_node, t_
 	{
 		t_args *new_arg = create_newarg_data(head, token);
 		append_newarg_to_cmdargs(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
+		printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
 		printf("%s - %d", token->value, token->type); // he
 		printf(COLOR_RED" (arg)\n"COLOR_RESET);
 	}
 }
 
-t_node *node_init(t_node *head, int node_n, bool *node_starts)
+t_node *node_init(int node_n, bool *node_starts) // nothing else needed
 {
 	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 	t_node *new_node = calloc(1, sizeof(t_node));
-	if (!new_node)
+	if (!new_node) //not freeing things here as i will do in the main if error
 	{
-		perror("Failed to allocate memory for a new node");
-		free_node_list(head); // Free the existing list
+		printf("Minishell: Failed to allocate node number %d\n", node_n);
 		return NULL;
 	}
+	//{
+	// 	perror("Failed to allocate memory for a new node");
+	// 	free_node_list(head); // Free the existing list
+	// }
 	new_node->node_i = node_n - 1;
 	*node_starts = false; // Node has started
 	return new_node;
 }
 
-bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int redir_i, t_token_list **token, t_node **head, t_node **new_node)
+bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int redir_i, t_token_list **token, t_node **head, t_node **new_node, int token_n)
 {
 	if (*node_starts)
 	{
-		*new_node = node_init(*head, node_n, node_starts); // Initialize the new node
-		if (!*new_node)
+		*new_node = node_init(node_n, node_starts); // Initialize the new node
+		if (!*new_node) // already printing error inside node_init
 			return(false);
 	}
 	if ((*token)->type == PIPE) // Node ends at pipe
-	{
-		end_node(node_starts, found_cmd, head, *new_node);
-	}
+		end_node(node_starts, found_cmd, head, *new_node, *token, token_n);
 	else // Process redirection, command, or arguments
 	{
 		*pipe_at_start = false;
@@ -134,11 +141,17 @@ bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node
 			if (!add_redir(*token, *new_node, redir_i))
 				return(false);
 			*token = (*token)->next; // Advance token for the redirection target
+			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
+			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
+			printf("%s - %d\n", (*token)->value, (*token)->type);
+			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
+				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
+			else // if redir is <, > and >> the next token is seen as file
+				printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
+			printf("%s\n", (*token)->value);
 		}
 		else // Handle commands and arguments
-		{
-			add_cmd_and_args(found_cmd, *token, *new_node, *head);
-		}
+			add_cmd_and_args(found_cmd, *token, *new_node, *head, token_n);
 	}
 	*token = (*token)->next; // Move to the next token
 	return(true);
@@ -151,6 +164,7 @@ t_node *return_nodelist(t_token_list *token)
 {
 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int	redir_i;					// redir index
+	int token_n;
 	bool node_starts;		// Flag to indicate if we have to start a node at start or after pipe
 	bool found_cmd;		// Flag to make the first token a command of the node (unless redir data or pipe found) - this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipe_at_start;  	// Flag to see if we start with a pipe, we set this to false the first token is not pipe.
@@ -160,7 +174,7 @@ t_node *return_nodelist(t_token_list *token)
 
 	redir_i = 0;
 	node_n = 1;
-	// token_n = 0;
+	token_n = 1;
 	node_starts = true;
 	found_cmd = false;
 	pipe_at_start = true;
@@ -171,8 +185,9 @@ t_node *return_nodelist(t_token_list *token)
 		{
 			if (unknown_token(token) || pipe_error(token, pipe_at_start))
 				return NULL;
-			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, redir_i, &token, &head, &new_node))
+			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, redir_i, &token, &head, &new_node, token_n))
 				return(NULL);
+			token_n++;
 		}
 		if (new_node) // Append the last node if no pipe ends it
 			append_node(&head, new_node);

@@ -46,6 +46,6 @@ t_token pipe_token (t_scanner *self);
 t_token redir_out_token (t_scanner *self);
 t_token redir_in_token (t_scanner *self);
 t_token word_token (t_scanner *self);
-t_token unknown_token (t_scanner *self);
+t_token tmp_unknown_token (t_scanner *self);
 
 #endif

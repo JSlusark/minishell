@@ -4,6 +4,7 @@
 #include "char_itr.h"
 #include "token.h"
 #include "guards.h"
+#include "scanner.h"
 
 typedef struct s_token_list
 {

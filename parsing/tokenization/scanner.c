@@ -81,6 +81,6 @@ t_token scanner_peek(t_scanner *self)
 		else if (ft_isalnum(c))
 			return (word_token(self));
 		else
-			return (unknown_token(self));
+			return (tmp_unknown_token(self));
 	}
 }

@@ -68,7 +68,7 @@ t_token word_token (t_scanner *self)
 	return (self->next);
 }
 
-t_token unknown_token (t_scanner *self)
+t_token tmp_unknown_token (t_scanner *self)
 {
 	self->next.type = UNKNOWN;
 	self->next.lexeme.length = 1;

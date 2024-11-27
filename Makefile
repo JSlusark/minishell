@@ -27,12 +27,12 @@ SRC	= main.c \
 HEADERS	= ./headers/minishell.h \
 		./headers/char_itr.h \
 		./headers/guards.h \
-		./headers/parser.h \
 		./headers/scanner.h \
 		./headers/token.h \
 		./headers/token_list.h \
 		./headers/cmd.h \
 		./headers/node.h \
+#./headers/parser.h \
 
 
 OBJS = $(SRC:.c=.o)

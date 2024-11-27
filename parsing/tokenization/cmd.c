@@ -24,7 +24,7 @@ void check_cmd(t_scanner *self)
 	{
 		//printf("+++son iguales+++\n");
 		//printf("self->next.lexeme.length: %zu\n", self->next.lexeme.length);
-		self->next.type = COMMAND;
+		self->next.type = BUILT_IN;
 	}
 	else
 	{
