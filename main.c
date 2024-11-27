@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 19:50:30 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:54:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,9 @@ int main(int argc, char **argv) {
 			free(input); // we also free the input as we have processed it already as tokens and then nodes
 			if(!node_list)
 			{
-				// planning that every error (not only allocation error but also parsing error) makes the parsing list "NULL"
-				// so that we just need to free once in here and not on every parsing considion with meet
-				// could also return an error, but need to check
-				// printf("Error increating node! (I could possibly return the error here too..?)\n"); // prob will print in the fuction, i will just free here
 				free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
+				// after this fails if we write "echo $?" it should print 2
+				// so after we free node list we could set $? to 2, not sure how yet or if we can find a better way
 			}
 			else
 			{

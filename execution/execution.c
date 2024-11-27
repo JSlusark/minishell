@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/25 12:12:08 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:54:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@
 	and we have to grab them from /usr/bin/ path in our linux pc
 
 	THE CODE BELOW IS A ROUGH IDEA ON HOW WE CAN GET STARTED WITH EXECUTION.
+
+Exit Codes and meaning (we should remember to assign them after parsing and executing)
+	0 	- Success: Command executed successfully.
+	1 	- General error: Command failed for a generic reason.
+	2 	- Incorrect usage: Invalid arguments or syntax in the command (Jess can add this in main.c - if(!node_list) after the node is freed)
+	126	- Cannot execute: File exists but is not executable.
+	127	- Command not found: Command is missing in the system's PATH.
+	130	- Script interrupted (SIGINT): Process terminated via Ctrl+C.
+
  */
 
 void exec_command(t_node	*node)
