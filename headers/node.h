@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:52:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:42:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ t_node	*return_nodelist(t_token_list *token_list);
 /* ---- Supporting functions --- */
 
 //Functions used to allocate and append nodes to nodelist
-// t_node *create_node();
-void append_node(t_node **head, t_node *new_node);
+
+// node init, returns new node,if failes it is null
+// end node - ends the current node, appends it to the list, start_node flag and cmd_flag
+void append_node(t_node **head, t_node *new_node); // apends current node to list as head or last
 
 //Functions used to allocate and append cmd struct to its parent node
 void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token);

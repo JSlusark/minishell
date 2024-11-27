@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:52:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:41:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,63 @@ void append_redir_data(t_redir **head_redir, t_redir *curr_redir)
 	}
 }
 
+bool	add_redir_target(t_token_list *token, t_redir *redir)
+{
+	redir->target = ft_strdup(token->next->value);
+	if(!redir->target) // if dup fails.. do we even have to use dup??
+	{
+		printf("Minishell: Failed to add target to redir data\n");
+		redir = NULL;// unsure
+		return(false);
+	}
+	redir->target_token_type = token->next->type;
+	if(redir->redir_type == HEREDOC)
+		redir->target_type = TARGET_DELIMITER;
+	else
+	{
+		if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
+			redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+		else if(token->next->type == ENV_VAR)
+			redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+		else
+			redir->target_type = TARGET_FILENAME;
+	}
+	return(true);
+}
+
 t_redir *create_redir_data(t_token_list *token)
 {
 	t_redir *redir = calloc(1, sizeof(t_redir));
-	if (!redir)
+	if (!redir) // i do not free as i do it on the main
 	{
-		// perror("Failed to allocate node\n");
-		// free_node_list(node_list); // Free the existing list in case of an error
+		printf("Minishell: Failed to allocate redirection struct\n");
 		return NULL;
 	}
 	redir->redir_type = token->type;
-	if(token->next != NULL)
+	if(token->next != NULL && !add_redir_target(token, redir))
 	{
-		redir->target = ft_strdup(token->next->value);
-		redir->target_token_type = token->next->type;
-		if(redir->redir_type == HEREDOC)
-			redir->target_type = TARGET_DELIMITER;
-		else
-		{
-			if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
-				redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-			else if(token->next->type == ENV_VAR)
-				redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-			else
-				redir->target_type = TARGET_FILENAME;
-		}
+		// if(!add_redir_target(token, redir))
+		return(NULL);
+		// add_redir_target(token, redir);
+		// add_redir data
+		// redir->target = ft_strdup(token->next->value);
+		// if(!redir->target) // if dup fails.. do we even have to use dup??
+		// {
+		// 	printf("Minishell: Failed to add target to redir data\n");
+		// 	return(NULL);
+		// }
+		// redir->target_token_type = token->next->type;
+		// if(redir->redir_type == HEREDOC)
+		// 	redir->target_type = TARGET_DELIMITER;
+		// else
+		// {
+		// 	if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
+		// 		redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+		// 	else if(token->next->type == ENV_VAR)
+		// 		redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
+		// 	else
+		// 		redir->target_type = TARGET_FILENAME;
+		// }
 	}
 	return (redir);
-	// curr_node->redir_data = redir;
 }
