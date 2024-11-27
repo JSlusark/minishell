@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   node.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:52:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:03:27 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
 
-typedef struct s_token_list
+/* typedef struct s_token_list
 {
 	int type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
 	char *value;      // Value of the token, e.g., "echo", "hello"
 	struct s_token_list *next; // Pointer to the next token in the linked list
-}			t_token_list;
+}			t_token_list; */
 
 typedef enum e_target_type
 {
