@@ -6,12 +6,14 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/27 13:03:27 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:24:45 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
+
+#include "token_list.h"
 
 /* typedef struct s_token_list
 {
