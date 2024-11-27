@@ -1,5 +1,5 @@
 
-#include "include/minishell.h" // to Include libft, right?
+#include "../../headers/minishell.h"
 
 // value lifetime dependes of the start reference
 t_char_itr char_itr_value(const char *star, size_t length)

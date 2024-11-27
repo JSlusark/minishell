@@ -1,4 +1,4 @@
-#include "./include/minishell.h"
+#include "../../headers/minishell.h"
 
 
 t_token_list *init_token_list(t_scanner *scanner)

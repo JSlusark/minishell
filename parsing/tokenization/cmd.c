@@ -1,4 +1,4 @@
-#include "./include/minishell.h"
+#include "../../headers/minishell.h"
 
 int compare_token(const t_token *token, const char *str)
 {

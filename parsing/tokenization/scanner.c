@@ -1,5 +1,5 @@
 
-#include "./include/minishell.h"
+#include "../../headers/minishell.h"
 
 
 /*
