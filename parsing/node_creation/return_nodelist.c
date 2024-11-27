@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   return_nodelist.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 19:45:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:16:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+// change to new branch
 
 bool	unknown_token(t_token_list *token)
 {
