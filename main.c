@@ -6,37 +6,55 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/10/31 18:50:04 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/27 11:54:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "headers/minishell.h"
 
-int	main(int argc, char **argv)
-{
-	char	*input;
-	printf("ARGC: %d, ARGV:%s\n", argc, argv[0]); // added this just to avoid compilation error
+int main(int argc, char **argv) {
+	char *input;
+	t_token_list *tokens;
+	t_node		*node_list;
+
+	printf("ARGC: %d, ARGV: %s\n", argc, argv[0]); // added this to avoid compilation blocks as we don't use this yet
 	while (1)
 	{
-		input = readline("Minishell> "); // suppression file (.supp) is needed to suppress readline leaks
-
-		if (!input || ft_strncmp(input, "exit", 4) == 0)
+		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
+		tokens = create_mock_tokens(input); // <-------------- this needs to be substituted by Alejo's token list
+		if(!tokens)
 		{
 			free(input);
-			printf("Exiting Minishell...\n");
-			exit (0); // Terminate the program immediately
+			free_mock_tokens(tokens);
 		}
-		if (ft_strlen(input) > 0)
+		if(strcmp(input, "exit") == 0)
 		{
-			add_history(input);
-			printf("You entered: %s\n", input); // Placeholder for command processing
+			free(input);
+			free_mock_tokens(tokens);
+			clear_history();
+			exit(0);
 		}
-		if (ft_strncmp(input, "echo ", 5) == 0)
+		else
 		{
-			printf("%s\n", input + 5);
+			add_history(input); // NOTE FOR LATER - FOUND BUGS WHEN NAVIGATING THROUGH HISTORY
+			node_list = return_nodelist(tokens); //
+			free_mock_tokens(tokens); // we free the token list since we allocated and created our nodes
+			free(input); // we also free the input as we have processed it already as tokens and then nodes
+			if(!node_list)
+			{
+				free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
+				// after this fails if we write "echo $?" it should print 2
+				// so after we free node list we could set $? to 2, not sure how yet or if we can find a better way
+			}
+			else
+			{
+				// print node logic will be added here just to help us with error handling, we can comment it our or remove it once we submit the project
+				print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
+				exec_node(node_list); // I already set a simple ground for initiating execution from our nodes
+				free_node_list(node_list);// we have to free the node_list when finished executing it and ready to prompt a new input
+			}
 		}
-		free(input);
 	}
-	rl_clear_history(); // shouldn't this run in the while loop? (outside if statements)
-	return (0);
+	clear_history();
+	return 0;
 }
