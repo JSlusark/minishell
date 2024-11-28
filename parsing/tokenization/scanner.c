@@ -61,14 +61,19 @@ t_token scanner_peek(t_scanner *self)
 		if (c == EOF || c == '\n' || c == '\0')
 			return (end_token(self));
 		else if (c == '|')
-		{
-			//printf("I see a pipe\n");
 			return (pipe_token(self));
-		}
 		else if (c == '>')
 			return (redir_out_token(self));
 		else if (c == '<')
 			return (redir_in_token(self));
+		else if (c == '$')
+			return (env_var_token(self));
+		else if (c == '/')
+			return (abs_path_token(self));
+		else if (c == '.' && *(self->char_itr.cursor + 1) == '/')
+			return (rel_path_token(self));
+		else if (c == '-')
+			return (option_token(self));
 		else if (ft_isalnum(c))
 			return (word_token(self));
 		else

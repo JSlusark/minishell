@@ -76,3 +76,4 @@ t_token tmp_unknown_token (t_scanner *self)
 	self->char_itr.cursor++;
 	return (self->next);
 }
+
