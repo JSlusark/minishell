@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/27 11:54:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:13:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,10 @@ void	exec_node(t_node	*node_list)
 		printf("	- Let's focus on built-ns with single nodes first so that then we can use that same logic when we fork the execution of each node with pipes perhaps?\n");
 	}
 	else
-		exec_command(node_list);
+	{
+		if(node_list->cmd_data)
+			exec_command(node_list);
+		else
+			printf("Minishell: node does not have a command\n");
+	}
 }

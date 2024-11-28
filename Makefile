@@ -28,7 +28,7 @@ CC	= cc
 
 RM	= rm -f
 
-CFLAGS	= -Wall -Wextra -Werror -I./include -I./libft
+CFLAGS	= -Wall -Wextra -Werror -I./include -I./libft -g
 PFLAGS = -lreadline
 
 all:	$(LIBFT) $(NAME)
