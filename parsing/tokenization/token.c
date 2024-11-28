@@ -94,7 +94,8 @@ t_token abs_path_token(t_scanner *self)
 	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
 	{
 		self->next.lexeme.length++;
-		self->char_itr.cursor++;
+		if(char_itr_has_next((const t_char_itr)self->char_itr) == 1)
+			self->char_itr.cursor++;
 	}
 	return (self->next);
 }
@@ -106,7 +107,8 @@ t_token rel_path_token(t_scanner *self)
 	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
 	{
 		self->next.lexeme.length++;
-		self->char_itr.cursor++;
+		if(char_itr_has_next((const t_char_itr)self->char_itr) == 1)
+			self->char_itr.cursor++;
 	}
 	return (self->next);
 }
@@ -114,11 +116,8 @@ t_token rel_path_token(t_scanner *self)
 t_token option_token(t_scanner *self)
 {
 	self->next.type = OPTION;
-	self->next.lexeme.start = self->char_itr.cursor;
-	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
-	{
-		self->next.lexeme.length++;
-		self->char_itr.cursor++;
-	}
+	self->next.lexeme.start = ++self->char_itr.cursor;
+	self->next.lexeme.length = 1;
+	self->char_itr.cursor++;
 	return (self->next);
 }
