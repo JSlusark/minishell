@@ -17,12 +17,10 @@ t_token_list *init_token_list(t_scanner *scanner)
 		new_token->value = ft_strndup(scanner->next.lexeme.start, scanner->next.lexeme.length);
 		new_token->next = NULL;
 		if (!head)
-		{
 			head = new_token; // First token becomes the head
-			current = head;
-		}
 		else
 			current->next = new_token;
+		current = new_token;
 		printf("Token Type: %d, Token Value: %s\n", new_token->type, new_token->value);
 		//print_token(scanner->next);
 	}
