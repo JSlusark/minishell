@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 14:16:52 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:22:16 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ t_node *node_init(int node_n, bool *node_starts) // nothing else needed
 	return new_node;
 }
 
-bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int redir_i, t_token_list **token, t_node **head, t_node **new_node, int token_n)
+bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n)
 {
 	if (*node_starts)
 	{
@@ -132,7 +132,7 @@ bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node
 			return(false);
 	}
 	if ((*token)->type == PIPE) // Node ends at pipe
-		end_node(node_starts, found_cmd, head, *new_node, *token, token_n);
+		end_node(node_starts, found_cmd, head, *new_node, *token, *token_n);
 	else // Process redirection, command, or arguments
 	{
 		*pipe_at_start = false;
@@ -141,19 +141,22 @@ bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node
 			if (!add_redir(*token, *new_node, redir_i))
 				return(false);
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
-			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
+			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, (*token_n));
 			printf("%s - %d\n", (*token)->value, (*token)->type);
 			*token = (*token)->next; // Advance token for the redirection target
+			(*token_n)++; // used just for print
 			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
+				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, (*token_n));
 			else // if redir is <, > and >> the next token is seen as file
-				printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, token_n);
+				printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, (*token_n));
 			printf("%s\n", (*token)->value);
+			// token_n++;
 		}
 		else // Handle commands and arguments
-			add_cmd_and_args(found_cmd, *token, *new_node, *head, token_n);
+			add_cmd_and_args(found_cmd, *token, *new_node, *head, (*token_n));
 	}
 	*token = (*token)->next; // Move to the next token
+	// (*token_n)++; // just for print
 	return(true);
 }
 
@@ -185,7 +188,7 @@ t_node *return_nodelist(t_token_list *token)
 		{
 			if (unknown_token(token) || pipe_error(token, pipe_at_start))
 				return NULL;
-			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, redir_i, &token, &head, &new_node, token_n))
+			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, redir_i, &token, &head, &new_node, &token_n))
 				return(NULL);
 			token_n++;
 		}
