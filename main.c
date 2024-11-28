@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/27 17:00:48 by alramire         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:10:26 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	main(int argc, char **argv)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		itr = char_itr_value(input, ft_strlen(input));
+		if(check_start_uknown(itr.cursor)== 1) //Free and exit are missing...
+			printf("Minishell: unknown command '%c' \n", itr.cursor[0]); //Here we check if the first character of the input is invalid.
 		scanner = scanner_value(itr);
 		tokens = init_token_list(&scanner);
 		if(!tokens)

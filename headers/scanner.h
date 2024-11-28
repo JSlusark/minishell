@@ -48,4 +48,6 @@ t_token redir_in_token (t_scanner *self);
 t_token word_token (t_scanner *self);
 t_token tmp_unknown_token (t_scanner *self);
 
+ int check_start_uknown(const char *input);
+
 #endif

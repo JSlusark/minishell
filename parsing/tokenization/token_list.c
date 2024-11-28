@@ -11,7 +11,7 @@ t_token_list *init_token_list(t_scanner *scanner)
 	current = NULL;
 	while (scanner_has_next(scanner))
 	{
-		scanner->next = scanner_next(scanner); //OK it enters and exit.
+		scanner->next = scanner_next(scanner);
 		new_token = OOM_GUARD(malloc(sizeof(t_token_list)), __FILE__, __LINE__);
 		new_token->type = scanner->next.type;
 		new_token->value = ft_strndup(scanner->next.lexeme.start, scanner->next.lexeme.length);

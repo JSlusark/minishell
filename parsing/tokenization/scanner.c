@@ -2,10 +2,6 @@
 #include "../../headers/minishell.h"
 
 
-/*
-We need to initialize the first scanner structure with its
-iterator located at the first token and the first token.
-*/
 t_scanner scanner_value(t_char_itr char_itr)
 {
 	t_scanner scanner;
@@ -13,10 +9,7 @@ t_scanner scanner_value(t_char_itr char_itr)
 
 	ft_memset(&token, 0, sizeof(t_token));
 	scanner.char_itr = char_itr;
-	scanner.next = token; //Here I am assigning the token initialized with memset.
-	//token = scanner_next(&scanner); //Then I use scanner_next to produce the token.
-	//scanner.next = token; //Here I make sure that the token is saved in the scanner struct.
-	//print_token(scanner.next);
+	scanner.next = token;
 	return(scanner);
 }
 
@@ -44,8 +37,6 @@ int scanner_has_next(const t_scanner *self)
 
 t_token scanner_next(t_scanner *self)
 {
-	/* t_token token;
-	ft_memset(&token, 0, sizeof(t_token)); */
 	skip_whitespaces(&self->char_itr);
 	//self->next = scanner_peek(self);
 	if (scanner_has_next(self)) //ok this is if there is next, but what about the current? Next is the current!
@@ -84,3 +75,14 @@ t_token scanner_peek(t_scanner *self)
 			return (tmp_unknown_token(self));
 	}
 }
+ int check_start_uknown(const char *input)
+ {
+	if (ft_strchr(SYMBOLS, input[0]))
+	{
+		printf("Input character: %c\n", input[0]);
+		printf("ft_strchr result: %s\n", ft_strchr(SYMBOLS, input[0]));
+		return(1);
+	}
+	else
+		return(0);
+ }
