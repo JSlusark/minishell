@@ -77,3 +77,50 @@ t_token tmp_unknown_token (t_scanner *self)
 	return (self->next);
 }
 
+t_token env_var_token(t_scanner *self)
+{
+	self->next.type = ENV_VAR;
+	self->next.lexeme.start = ++self->char_itr.cursor;
+	while (self->char_itr.cursor && (ft_isalnum(*self->char_itr.cursor) || *self->char_itr.cursor == '_'))
+	{
+		self->next.lexeme.length++;
+		self->char_itr.cursor++;
+	}
+	return (self->next);
+}
+
+t_token abs_path_token(t_scanner *self)
+{
+	self->next.type = ABS_PATH;
+	self->next.lexeme.start = self->char_itr.cursor;
+	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
+	{
+		self->next.lexeme.length++;
+		self->char_itr.cursor++;
+	}
+	return (self->next);
+}
+
+t_token rel_path_token(t_scanner *self)
+{
+	self->next.type = REL_PATH;
+	self->next.lexeme.start = self->char_itr.cursor;
+	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
+	{
+		self->next.lexeme.length++;
+		self->char_itr.cursor++;
+	}
+	return (self->next);
+}
+
+t_token option_token(t_scanner *self)
+{
+	self->next.type = OPTION;
+	self->next.lexeme.start = self->char_itr.cursor;
+	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
+	{
+		self->next.lexeme.length++;
+		self->char_itr.cursor++;
+	}
+	return (self->next);
+}
