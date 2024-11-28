@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 16:49:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:39:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ void print_redir_data(t_redir *head)
 	if (!head)
 	{
 		printf(COLOR_RED"		- t_redir redir_data:\n"COLOR_RESET);
-		printf("		(NULL)\n");
+		printf("			- (NULL)\n");
 		return;
 	}
 	t_redir *current = head;
 	printf(COLOR_RED"		- t_redir redir_data:\n"COLOR_RESET);
 	while (current)
 	{
-		printf(COLOR_BLUE"				- REDIR N %d:\n"COLOR_RESET, current->redir_i + 1);
+		printf(COLOR_BLUE"			- REDIR N %d:\n"COLOR_RESET, current->redir_i + 1);
 		printf("			  - int redir_type: %s\n", return_token_enum(current->redir_type));
 
 		printf("			  - char *target: %s (%s)\n", current->target, return_token_enum(current->target_token_type));
@@ -91,7 +91,7 @@ void print_args(t_args *head)
 	if (!head)
 	{
 		printf(COLOR_RED"		- t_args cmd_args:\n"COLOR_RESET);
-		printf("		(NULL)\n");
+		printf("			- (NULL)\n");
 		return;
 	}
 	// printf("HEYYYY\n");
@@ -100,7 +100,7 @@ void print_args(t_args *head)
 	printf(COLOR_RED"		- t_args cmd_args:\n"COLOR_RESET);
 	while (current)
 	{
-		printf(COLOR_BLUE"			ARG N_%d\n"COLOR_RESET, index);
+		printf(COLOR_BLUE"			- ARG N_%d\n"COLOR_RESET, index);
 		printf("			  - int type: %s\n", return_token_enum(current->arg_type));
 		if (current->arg_value)
 			printf("			  - char *value: %s\n", current->arg_value);
@@ -121,7 +121,8 @@ void print_nodes(t_node *head)
 	{
 		n++;
 		printf(COLOR_RED"	- NODE %d\n"COLOR_RESET, n); // Print the node_i value
-		printf("		- int node_i: %d\n", curr->node_i); // Print the node_i value
+		printf(COLOR_RED"		- int node_i:"COLOR_RESET); // Print the node_i value
+		printf(" %d\n", curr->node_i); // Print the node_i value
 		printf(COLOR_RED"		- t_cmd command_data:\n"COLOR_RESET); // Print the node_i value
 		if (curr->cmd_data)
 		{
@@ -129,7 +130,7 @@ void print_nodes(t_node *head)
 			printf("			- int cmd_type: %s\n", return_token_enum(curr->cmd_data->cmd_type)); // Print the node_i value
 		}
 		if (!curr->cmd_data)
-			printf("		(NULL)\n"); // Print the node_i value
+			printf("			- (NULL)\n"); // Print the node_i value
 		print_args(curr->cmd_args);
 		print_redir_data(curr->redir_data);
 		curr = curr->next; // Move to the next node

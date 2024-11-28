@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 16:22:16 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:46:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool add_redir(t_token_list *token, t_node	*new_node, int redir_i)
 		return (false);
 	new_redir->redir_i = redir_i;
 	append_redir_data(&(new_node->redir_data), new_redir);
-	redir_i++;
+	// redir_i++;
 	return(true);
 }
 void	end_node(bool *node_starts, bool *found_cmd, t_node **head, t_node *new_node, t_token_list *token, int token_n) // a
@@ -123,7 +123,7 @@ t_node *node_init(int node_n, bool *node_starts) // nothing else needed
 	return new_node;
 }
 
-bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n)
+bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node_n, int *redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n)
 {
 	if (*node_starts)
 	{
@@ -132,14 +132,18 @@ bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node
 			return(false);
 	}
 	if ((*token)->type == PIPE) // Node ends at pipe
+	{
 		end_node(node_starts, found_cmd, head, *new_node, *token, *token_n);
+		(*redir_i) = 0;
+	}
 	else // Process redirection, command, or arguments
 	{
 		*pipe_at_start = false;
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
 		{
-			if (!add_redir(*token, *new_node, redir_i))
+			if (!add_redir(*token, *new_node, *redir_i))
 				return(false);
+			(*redir_i)++; // Increment the redir index
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, (*token_n));
 			printf("%s - %d\n", (*token)->value, (*token)->type);
@@ -188,8 +192,10 @@ t_node *return_nodelist(t_token_list *token)
 		{
 			if (unknown_token(token) || pipe_error(token, pipe_at_start))
 				return NULL;
-			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, redir_i, &token, &head, &new_node, &token_n))
+			if(!grab_node(&pipe_at_start, &found_cmd, &node_starts, node_n, &redir_i, &token, &head, &new_node, &token_n))
 				return(NULL);
+			if(node_starts == true)
+				node_n++;
 			token_n++;
 		}
 		if (new_node) // Append the last node if no pipe ends it
