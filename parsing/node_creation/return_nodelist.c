@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/27 16:44:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/28 14:16:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ bool grab_node(bool *pipe_at_start, bool *found_cmd, bool *node_starts, int node
 		{
 			if (!add_redir(*token, *new_node, redir_i))
 				return(false);
-			*token = (*token)->next; // Advance token for the redirection target
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, token_n);
 			printf("%s - %d\n", (*token)->value, (*token)->type);
+			*token = (*token)->next; // Advance token for the redirection target
 			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
 				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, token_n);
 			else // if redir is <, > and >> the next token is seen as file
