@@ -14,7 +14,6 @@ t_token new_token (t_token_type type, char *start, size_t length)
 
 void print_token(const t_token token)
 {
-	//print all token data
 	printf("[Token Type]: %d\n", token.type);
 	printf("[Token Lexeme]: %.*s\n", (int)token.lexeme.length, token.lexeme.start);
 }
@@ -61,7 +60,6 @@ t_token word_token (t_scanner *self)
 	while(self->char_itr.cursor && ft_isalnum(*self->char_itr.cursor))
 	{
 		self->next.lexeme.length++;
-		//printf("self->next.lexeme.length: %zu\n", self->next.lexeme.length);
 		self->char_itr.cursor++;
 	}
 	check_cmd(self);
