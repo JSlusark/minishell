@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 16:39:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:55:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,16 @@ void print_nodes(t_node *head)
 		}
 		if (!curr->cmd_data)
 			printf("			- (NULL)\n"); // Print the node_i value
+		if (curr->option_n)
+		{
+			printf(COLOR_RED"		Option -n:"COLOR_RESET); // Print the node_i value
+			printf(" true\n"); // Print the node_i value
+		}
+		if (!curr->option_n)
+		{
+			printf(COLOR_RED"		Option -n:"COLOR_RESET); // Print the node_i value
+			printf(" false\n"); // Print the node_i value
+		}
 		print_args(curr->cmd_args);
 		print_redir_data(curr->redir_data);
 		curr = curr->next; // Move to the next node

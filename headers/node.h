@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 14:36:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:04:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ typedef struct s_node // A node typically has this data: command, command argume
 	int	nodes_total;// every node will store this data so we know how many pipes we have
 	struct s_node *next;
 	//not sure yet but we have to find a way to handle -n flag
-	bool	n_flag; // flag that tells echo not to append a new_line to the echoed args
-	int		n_flag_n; // writes how many time -n flag to see if last arg should be -
+	bool		option_n; // checks if we have a flag
 } t_node;
 
 // IMPORTANT: AN ABSTRACT SYNTAX TREE IS A SEQUENCE OF NODE LISTS THAT ARE LINKED THROUGH EACHOTHER WITH AN OPERATOR(&& or ||) or a DELIMITER (;)
@@ -90,44 +89,42 @@ typedef struct s_node // A node typically has this data: command, command argume
 }	t_ast; // without bonus  t_ast will only return 1 cmd_line while the rest of the data is empty */
 
 
-/* ---- Main function --- */
-// Returns a a list of nodes that we will traverse to handle execution
-// If error occurs inside the function, we print the error and return NULL to the main and free.
-t_node	*return_nodelist(t_token_list *token_list);
-/* ------------------------------ */
+/* ---- Function that parse the tokens into a linked list of nodes --- */
 
-
-/* ---- Supporting functions --- */
-
-// PARSING ERRORS - error_handling.c stops node creation and prints error
-bool	unknown_token(t_token_list *token);
-bool	pipe_error(t_token_list *token, bool check_pipestart);
-bool	redir_error(t_token_list *token);
+t_node	*return_nodelist(t_token_list *token_list); // Main function, returns the node list or NULL if we have parsing error
+bool parse_token(bool *check_pipestart, bool *find_cmd, bool *start_node, int *redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n); // iterates through each token to replicate how bash distrobute their role in the node
 
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
-t_node	*init_new_node(int node_n, bool *start_node); // nothing else needed;
-void	append_node(t_node **head, t_node *new_node); // apends current node to list as head or last
-void	end_new_node(bool *start_node, t_node **head, t_node *new_node, t_token_list *token, int token_n);
+t_node	*init_new_node(int node_n, bool *start_node); // allovates a new node at the start of parsing or after we encounter a pipe
+void	append_node(t_node **head, t_node *new_node); // apends current node to list as head or last node of the list
+void	end_new_node(bool *start_node, t_node **head, t_node *new_node, t_token_list *token, int token_n); // ends new node when we encounter a pipe and alerts us that we have to start a new node
+
+
+// PARSE NODE ERRORS - error_handling.c stops node creation and prints error to the terminal
+bool	unknown_token(t_token_list *token); // gives errors with unknown tokens
+bool	pipe_error(t_token_list *token, bool check_pipestart); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
+bool	redir_error(t_token_list *token); // gives an error to when redir symbol is followed by |, another redir symbol and \n
+
 
 // REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
-bool	add_redir(t_token_list **token, t_node	*new_node, int *redir_i); // creates redir data and appends to redir list
-t_redir	*create_redir_data(t_token_list **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
-bool	add_redir_target(t_token_list *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
-void	append_redir_data(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
+bool	parse_redir(t_token_list **token, t_node	*new_node, int *redir_i); // creates redir data and appends to redir list
+t_redir	*init_new_redir(t_token_list **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
+bool	add_target(t_token_list *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
+void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
 // COMMAND DATA - creates a command stuct that stores the token value and token type to help us process the node of the command
-
+bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int token_n);
 
 // ARG LIST CREATION
 
 
 //Functions used to allocate and append cmd struct to its parent node
-void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token);
+bool add_cmd_to_node(t_node *curr_node, t_token_list *token);
 
 //Functions used to allocate and append args to arglist and then to its parent node
-t_args *create_newarg_data(t_node *node_list, t_token_list *token);
-void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg);
-void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg);
+t_args *init_new_arg(t_token_list *token);
+void append_new_arg(t_args **cmd_args, t_args *new_arg);
+// void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg);
 
 //Functions to free node allocation and its children data
 void free_node_list(t_node *node_list);
