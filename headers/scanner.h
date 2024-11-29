@@ -51,6 +51,8 @@ t_token env_var_token(t_scanner *self);
 t_token abs_path_token(t_scanner *self);
 t_token rel_path_token(t_scanner *self);
 t_token option_token(t_scanner *self);
+t_token append_out_token(t_scanner *self);
+t_token heredoc_token(t_scanner *self);
 int check_start_uknown(const char *input);
 
 #endif

@@ -37,19 +37,29 @@ t_token pipe_token (t_scanner *self)
 
 t_token redir_out_token (t_scanner *self)
 {
-	self->next.type = REDIR_OUT;
-	self->next.lexeme.length = 1;
-	self->next.lexeme.start = self->char_itr.cursor;
-	self->char_itr.cursor++;
+	if (*(self->char_itr.cursor + 1) == '>')
+		self->next = append_out_token(self);
+	else
+	{
+		self->next.type = REDIR_OUT;
+		self->next.lexeme.length = 1;
+		self->next.lexeme.start = self->char_itr.cursor;
+		self->char_itr.cursor++;
+	}
 	return (self->next);
 }
 
 t_token redir_in_token (t_scanner *self)
 {
-	self->next.type = REDIR_IN;
-	self->next.lexeme.length = 1;
-	self->next.lexeme.start = self->char_itr.cursor;
-	self->char_itr.cursor++;
+	if (*(self->char_itr.cursor + 1) == '<')
+		self->next = heredoc_token(self);
+	else
+	{
+		self->next.type = REDIR_IN;
+		self->next.lexeme.length = 1;
+		self->next.lexeme.start = self->char_itr.cursor;
+		self->char_itr.cursor++;
+	}
 	return (self->next);
 }
 
@@ -123,5 +133,23 @@ t_token option_token(t_scanner *self)
 	self->next.lexeme.start = ++self->char_itr.cursor;
 	self->next.lexeme.length = 1;
 	self->char_itr.cursor++;
+	return (self->next);
+}
+
+t_token append_out_token(t_scanner *self)
+{
+	self->next.type = APPEND_OUT;
+	self->next.lexeme.length = 2;
+	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor += 2;
+	return (self->next);
+}
+
+t_token heredoc_token(t_scanner *self)
+{
+	self->next.type = HEREDOC;
+	self->next.lexeme.length = 2;
+	self->next.lexeme.start = self->char_itr.cursor;
+	self->char_itr.cursor += 2;
 	return (self->next);
 }
