@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 12:23:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:48:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	redir_error(t_token_list *token)
 	return(false);
 }
 
-bool add_redir(t_token_list *token, t_node	*new_node, int redir_i)
+bool add_redir(t_token_list *token, t_node	*new_node, int *redir_i)
 {
 	t_redir *new_redir;
 	if(redir_error(token))
@@ -69,15 +69,15 @@ bool add_redir(t_token_list *token, t_node	*new_node, int redir_i)
 	new_redir = create_redir_data(token); // has to go here as its where we create the redirection
 	if(!new_redir)
 		return (false);
-	new_redir->redir_i = redir_i;
+	new_redir->redir_i = *redir_i;
 	append_redir_data(&(new_node->redir_data), new_redir);
-	// redir_i++;
+	(*redir_i)++; // Increment the redir index
 	return(true);
 }
 
 void add_cmd_and_args(bool *find_cmd, t_token_list *token, t_node *new_node, t_node *head, int token_n)
 {
-	if (!(*find_cmd)) // triggers command storing if true
+	if (*find_cmd) // triggers command storing if true
 	{
 		printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
 		printf("%s - %d", token->value, token->type);
@@ -115,9 +115,9 @@ bool get_node_elements(bool *check_pipestart, bool *find_cmd, bool *start_node, 
 		*check_pipestart = false; // this flag is set to false when the first token is not a pipe
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
 		{
-			if (!add_redir(*token, *new_node, *redir_i))
+			if (!add_redir(*token, *new_node, redir_i))
 				return(false);
-			(*redir_i)++; // Increment the redir index
+			// (*redir_i)++; // Increment the redir index
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, (*token_n));
 			printf("%s - %d\n", (*token)->value, (*token)->type);
