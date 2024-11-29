@@ -94,8 +94,10 @@ t_token abs_path_token(t_scanner *self)
 	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
 	{
 		self->next.lexeme.length++;
-		if(char_itr_has_next((const t_char_itr)self->char_itr) == 1)
+		if(char_itr_has_next(&self->char_itr) == 1)
 			self->char_itr.cursor++;
+		else
+			break;
 	}
 	return (self->next);
 }
@@ -107,8 +109,10 @@ t_token rel_path_token(t_scanner *self)
 	while (self->char_itr.cursor && *self->char_itr.cursor != ' ' && *self->char_itr.cursor != '\t' && *self->char_itr.cursor != '\n')
 	{
 		self->next.lexeme.length++;
-		if(char_itr_has_next((const t_char_itr)self->char_itr) == 1)
+		if(char_itr_has_next(&self->char_itr) == 1)
 			self->char_itr.cursor++;
+		else
+			break;
 	}
 	return (self->next);
 }
