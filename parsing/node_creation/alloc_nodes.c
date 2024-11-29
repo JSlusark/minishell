@@ -6,11 +6,20 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 12:00:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:08:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
+
+void	end_new_node(bool *start_node, t_node **head, t_node *new_node, t_token_list *token, int token_n)
+{
+	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
+	printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
+	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
+	append_node(head, new_node);// as we end the node we have to append it to our node list
+	*start_node = true;  // As we ended and appended a new node we have to flag that we are ready to start a new one
+}
 
 void append_node(t_node **head, t_node *new_node)
 {
@@ -27,4 +36,17 @@ void append_node(t_node **head, t_node *new_node)
 		last_node->next = new_node; // we assign the new node as last in the list
 		new_node->prev = last_node; // we assign the 2nd last node as prev node of teh new node
 	}
+}
+t_node *init_new_node(int node_n, bool *start_node) // nothing else needed
+{
+	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
+	t_node *new_node = calloc(1, sizeof(t_node));
+	if (!new_node) //not freeing things here as i will do in the main if error
+	{
+		printf("Minishell: Failed to allocate node number %d\n", node_n);
+		return NULL;
+	}
+	new_node->node_i = node_n - 1;
+	*start_node = false; // Node has started
+	return new_node;
 }

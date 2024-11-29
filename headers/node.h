@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 12:00:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:36:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,36 @@ typedef struct s_node // A node typically has this data: command, command argume
 }	t_ast; // without bonus  t_ast will only return 1 cmd_line while the rest of the data is empty */
 
 
-//Main function that will return the node list to the main
+/* ---- Main function --- */
+// Returns a a list of nodes that we will traverse to handle execution
+// If error occurs inside the function, we print the error and return NULL to the main and free.
 t_node	*return_nodelist(t_token_list *token_list);
+/* ------------------------------ */
+
 
 /* ---- Supporting functions --- */
 
-//Functions used to allocate and append nodes to nodelist
+// PARSING ERRORS - error_handling.c stops node creation and prints error
+bool	unknown_token(t_token_list *token);
+bool	pipe_error(t_token_list *token, bool check_pipestart);
+bool	redir_error(t_token_list *token);
 
-// node init, returns new node,if failes it is null
-// end node - ends the current node, appends it to the list, start_node flag and cmd_flag
-void append_node(t_node **head, t_node *new_node); // apends current node to list as head or last
+// NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
+t_node	*init_new_node(int node_n, bool *start_node); // nothing else needed;
+void	append_node(t_node **head, t_node *new_node); // apends current node to list as head or last
+void	end_new_node(bool *start_node, t_node **head, t_node *new_node, t_token_list *token, int token_n);
+
+// REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
+bool	add_redir(t_token_list **token, t_node	*new_node, int *redir_i); // creates redir data and appends to redir list
+t_redir	*create_redir_data(t_token_list **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
+bool	add_redir_target(t_token_list *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
+void	append_redir_data(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
+
+// COMMAND DATA - creates a command stuct that stores the token value and token type to help us process the node of the command
+
+
+// ARG LIST CREATION
+
 
 //Functions used to allocate and append cmd struct to its parent node
 void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token);
@@ -108,10 +128,6 @@ void add_cmd_to_node(t_node *node_list, t_node *curr_node, t_token_list *token);
 t_args *create_newarg_data(t_node *node_list, t_token_list *token);
 void append_newarg_to_cmdargs(t_args **cmd_args, t_args *new_arg);
 void add_cmdargs_to_node(t_node *node_list, t_node *curr_node, t_args *head_arg);
-
-//Functions used to allocate and append cmd struct to its parent node
-t_redir *create_redir_data(t_token_list *token);
-void append_redir_data(t_redir **head_redir, t_redir *curr_redir);
 
 //Functions to free node allocation and its children data
 void free_node_list(t_node *node_list);

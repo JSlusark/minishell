@@ -6,74 +6,11 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 12:48:09 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:08:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
-// change calloc to FT_CALLOC
-// check if forbidden functions are here
-
-bool	unknown_token(t_token_list *token)
-{
-		if (token->type == UNKNOWN) // ERROR AND FREE
-		{
-			printf("Minishell: found invalid token %s\n", token->value);
-			return(true);
-		}
-		return(false);
-}
-
-bool	pipe_error(t_token_list *token, bool check_pipestart)
-{
-	if (token->type == PIPE) // ERROR AND FREE
-	{
-		if (!token->next) // Check if the next token is NULL
-		{
-			printf("Minishell: found `%s' at end of syntax\n", token->value);
-			return(true);
-		}
-		else if (check_pipestart || token->next->type == PIPE) // Ensure token->next is not NULL
-		{
-			printf("Minishell: syntax error near unexpected token `%s'\n", token->value);
-			return(true);
-		}
-	}
-	return(false);
-}
-bool	redir_error(t_token_list *token)
-{
-	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
-	{
-		if(token->next == NULL) // error and free
-		{
-			printf("Minishell: syntax error near unexpected token `newline'\n");
-			return(true); // we break the loop
-		}
-		else if (token->next->type == PIPE || token->next->type == REDIR_IN
-			|| token->next->type == REDIR_OUT || token->next->type == APPEND_OUT
-			|| token->next->type == HEREDOC || token->next->type == UNKNOWN)
-		{
-			printf("Minishell: syntax error near unexpected token `%s'\n", token->next->value);
-			return(true); // we break the loop as there is no point in continuing to build a node if it's an error
-		}
-	}
-	return(false);
-}
-
-bool add_redir(t_token_list *token, t_node	*new_node, int *redir_i)
-{
-	t_redir *new_redir;
-	if(redir_error(token))
-		return(false);
-	new_redir = create_redir_data(token); // has to go here as its where we create the redirection
-	if(!new_redir)
-		return (false);
-	new_redir->redir_i = *redir_i;
-	append_redir_data(&(new_node->redir_data), new_redir);
-	(*redir_i)++; // Increment the redir index
-	return(true);
-}
 
 void add_cmd_and_args(bool *find_cmd, t_token_list *token, t_node *new_node, t_node *head, int token_n)
 {
@@ -96,14 +33,6 @@ void add_cmd_and_args(bool *find_cmd, t_token_list *token, t_node *new_node, t_n
 	}
 }
 
-void	end_new_node(bool *start_node, t_node **head, t_node *new_node, t_token_list *token, int token_n)
-{
-	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
-	printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
-	printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
-	append_node(head, new_node);// as we end the node we have to append it to our node list
-	*start_node = true;  // As we ended and appended a new node we have to flag that we are ready to start a new one
-}
 
 bool get_node_elements(bool *check_pipestart, bool *find_cmd, bool *start_node, int *redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n)
 {
@@ -115,44 +44,25 @@ bool get_node_elements(bool *check_pipestart, bool *find_cmd, bool *start_node, 
 		*check_pipestart = false; // this flag is set to false when the first token is not a pipe
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
 		{
-			if (!add_redir(*token, *new_node, redir_i))
+			if (!add_redir(token, *new_node, redir_i)) // adds redirection and target (and advances 2 tokens from the list)
 				return(false);
-			// (*redir_i)++; // Increment the redir index
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, (*token_n));
 			printf("%s - %d\n", (*token)->value, (*token)->type);
-			*token = (*token)->next; // Advance token for the redirection target
 			(*token_n)++; // used just for print
 			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
 				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, (*token_n));
 			else // if redir is <, > and >> the next token is seen as file
 				printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, (*token_n));
 			printf("%s\n", (*token)->value);
-			// token_n++;
 		}
 		else // Handle commands and arguments
 			add_cmd_and_args(find_cmd, *token, *new_node, *head, (*token_n));
 	}
-	*token = (*token)->next; // Move to the next token
-	// (*token_n)++; // just for print
+	*token = (*token)->next; // Move to the next token (usually hits cmd, arg or redir symbol)
 	return(true);
 }
 
-t_node *init_new_node(int node_n, bool *start_node) // nothing else needed
-{
-	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
-	t_node *new_node = calloc(1, sizeof(t_node));
-	if (!new_node) //not freeing things here as i will do in the main if error
-	{
-		printf("Minishell: Failed to allocate node number %d\n", node_n);
-		return NULL;
-	}
-	new_node->node_i = node_n - 1;
-	*start_node = false; // Node has started
-	return new_node;
-}
-
-// need 3 more funcs of 20/25 lines each
 t_node *return_nodelist(t_token_list *token)
 {
 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes

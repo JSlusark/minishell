@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 12:41:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/11/29 14:21:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	add_redir_target(t_token_list *token, t_redir *redir)
 	return(true);
 }
 
-t_redir *create_redir_data(t_token_list *token)
+t_redir *create_redir_data(t_token_list **token)
 {
 	t_redir *redir = calloc(1, sizeof(t_redir));
 	if (!redir) // i do not free as i do it on the main
@@ -62,8 +62,23 @@ t_redir *create_redir_data(t_token_list *token)
 		printf("Minishell: Failed to allocate redirection struct\n");
 		return NULL;
 	}
-	redir->redir_type = token->type;
-	if(token->next != NULL && !add_redir_target(token, redir)) // if token after redir exists but it fails to be allocated
+	redir->redir_type = (*token)->type;
+	if((*token)->next != NULL && !add_redir_target(*token, redir)) // if token after redir exists but it fails to be allocated
 		return(NULL); // return null
+	*token = (*token)->next; // Advance token for the redirection target
 	return (redir);
+}
+
+bool add_redir(t_token_list **token, t_node	*new_node, int *redir_i)
+{
+	t_redir *new_redir;
+	if(redir_error(*token))
+		return(false);
+	new_redir = create_redir_data(token); // has to go here as its where we create the redirection
+	if(!new_redir)
+		return (false);
+	new_redir->redir_i = *redir_i;
+	append_redir_data(&(new_node->redir_data), new_redir);
+	(*redir_i)++; // Increment the redir index
+	return(true);
 }
