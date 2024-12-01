@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 15:55:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:23:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 {
 	char *input;
 	t_token_list *tokens;
-	t_node		*node_list;
+	t_node_list		*node_list;
 	(void)argc; // this silences compilation warnings when we do not use argc
 	(void)argv; // this silences compilation warnings when we do not use argv
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 			}
 			else // if tokenizing succeeds proceed with creating node list
 			{
-				node_list = return_nodelist(tokens);
+				node_list = return_nodes(tokens);
 				free_mock_tokens(tokens); // we free the token list since we allocated and created our nodes
 				free(input); // we also free the input as we have processed it already as tokens and then nodes
 				if(!node_list) // error handling
@@ -53,7 +53,6 @@ int main(int argc, char **argv)
 				}
 				else // success and execute
 				{
-					// print node logic will be added here just to help us with error handling, we can comment it our or remove it once we submit the project
 					print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
 					exec_node(node_list); // I already set a simple ground for initiating execution from our nodes
 					free_node_list(node_list);// we have to free the node_list when finished executing it and ready to prompt a new input

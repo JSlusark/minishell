@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   alloc_cmd.c                                        :+:      :+:    :+:   */
+/*   alloc_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:09:08 by jslusark         ###   ########.fr       */
+/*   Created: 2024/12/01 17:02:05 by jslusark          #+#    #+#             */
+/*   Updated: 2024/12/01 17:04:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-bool alloc_cmd(t_node_list *curr_node, t_token_list *token)
+void	check_option(t_token_list **token, t_node_list *new_node)
 {
-	t_cmd *cmd;
-
-	cmd = calloc(1, sizeof(t_cmd));
-	if (!cmd)
+	while ((*token)->type == OPTION)// while loop may cover edgecases when we have more than one consec -n
 	{
-		printf("Failed to allocate cmd in node\n");
-		return (false);
+		new_node->option_n = true; // Set the node's option flag
+		if ((*token)->next && (*token)->next->type == OPTION)
+			*token = (*token)->next;  // Move to the option toke
+		else
+			break;
 	}
-	cmd->cmd_type = token->type;
-	cmd->cmd_value = ft_strdup(token->value);
-	if (!cmd->cmd_value)
-	{
-		printf("Failed to allocate token->value to node cmd\n");
-		return(false);
-	}
-	curr_node->cmd_data = cmd;
-	return(true);
 }

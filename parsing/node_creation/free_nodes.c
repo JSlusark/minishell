@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/25 12:17:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:46:33 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ static void free_cmd_struct (t_cmd *cmd)
 	// free(cmd->cmd_type);
 }
 
-void free_node_list(t_node *head) // frees each node in the list and its data if it was assigned
+void free_node_list(t_node_list *head) // frees each node in the list and its data if it was assigned
 {
 	if (!head)
 		return; // Nothing to free if head is NULL
-	t_node *curr = head;
+	t_node_list *curr = head;
 	// traverse and free each node inside the list
 	while (curr) // will free until curr == NULL
 	{
@@ -71,10 +71,10 @@ void free_node_list(t_node *head) // frees each node in the list and its data if
 		if(curr->cmd_args)
 			free_arg_list (curr->cmd_args); // free elements in the struct if memory was allocated to them
 		// free(curr->cmd_args);  // <--- gives issues unsure why check if without it will leak
-		// free(curr->pipe); // undure if we still need this as (if node->next_node == NULL is what will tell us ther is another node to pipe into)
+		// free(curr->pipe); // undure if we still need this as (if node->next_node_list == NULL is what will tell us ther is another node to pipe into)
 		// free(curr->node_i); // this can be useful to see the order of the node in the list
 		// free(curr->node_amout); // this can be useful to see how many forks we need
-		t_node *temp = curr->next; //stores the next node of curr to then continue the loop
+		t_node_list *temp = curr->next; //stores the next node of curr to then continue the loop
 		free(curr);
 		curr = temp;
 	}

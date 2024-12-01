@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 14:13:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:41:44 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Exit Codes and meaning (we should remember to assign them after parsing and exec
 
  */
 
-void exec_command(t_node	*node)
+void exec_command(t_node_list	*node)
 {
 	if(strcmp(node->cmd_data->cmd_value, "cd") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
@@ -63,7 +63,7 @@ void exec_command(t_node	*node)
 		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd_data->cmd_value);
 }
 
-int count_nodes(t_node	*node_list)
+int count_nodes(t_node_list	*node_list)
 {
 	int n = 0;
 		while (node_list) // Iterate through the n list
@@ -73,7 +73,7 @@ int count_nodes(t_node	*node_list)
 	}
 	return(n);
 }
-void	exec_node(t_node	*node_list)
+void	exec_node(t_node_list	*node_list)
 {
 	int node_amount = count_nodes(node_list);
 	if (node_amount > 1)

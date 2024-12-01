@@ -6,26 +6,14 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 16:13:30 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:01:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 // add check for cli input limit
 
-void	check_option(t_token_list **token, t_node *new_node)
-{
-	while ((*token)->type == OPTION)// while loop may cover edgecases when we have more than one consec -n
-	{
-		new_node->option_n = true; // Set the node's option flag
-		if ((*token)->next && (*token)->next->type == OPTION)
-			*token = (*token)->next;  // Move to the option toke
-		else
-			break;
-	}
-}
-
-bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int token_n)
+bool parse_rest(bool *find_cmd, t_token_list **token, t_node_list *new_node, int token_n)
 {
 	t_args *new_arg;
 
@@ -34,7 +22,7 @@ bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int toke
 		printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
 		printf("%s - %d", (*token)->value, (*token)->type);
 		printf(COLOR_RED" (command)\n"COLOR_RESET);
-		if(!add_cmd_to_node(new_node, *token))// had to return as error
+		if(!alloc_cmd(new_node, *token))// had to return as error
 			return(false);
 		*find_cmd = false; // command found, if we have other tokens they are args if not redir data
 	}
@@ -56,12 +44,10 @@ bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int toke
 	return(true);
 }
 
-
-
-bool parse_token(t_flags *p, t_token_list **token, t_node **head, t_node **new_node)
+bool parse_token(t_flags *p, t_token_list **token, t_node_list **head, t_node_list **new_node)
 {
 	if ((*token)->type == PIPE) // As we handled pipe error handling and are grabbing our node elements, if we catch a pipe here it means that the node ends
-		end_new_node(&(p->start_node), head, *new_node, *token, p->token_n); // we end the new node, append to the node list and set stat_node flag to true
+		end_new_node(&(p->start_node), head, *new_node, *token, p->token_n); // we end the new node, append to the node list and set stat_node_list flag to true
 	else // Process redirection, command, or arguments of the new node
 	{
 		p->pipestart = false; // this flag is set to false when the first token is not a pipe
@@ -102,11 +88,11 @@ t_flags assign_data()
 }
 
 
-t_node *return_nodelist(t_token_list *token)
+t_node_list *return_nodes(t_token_list *token)
 {
-	t_flags	p;
-	t_node *head; 			// First node in the list
-	t_node *new_node;
+	t_flags	p;				// i created this to avoud putting more than 4 args in the parse tokens
+	t_node_list *head; 			// First node in the list
+	t_node_list *new_node;
 
 	p = assign_data();
 	head = NULL;
