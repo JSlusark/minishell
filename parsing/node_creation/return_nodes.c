@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   return_nodelist.c                                  :+:      :+:    :+:   */
+/*   return_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:01:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:51:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@ bool parse_rest(bool *find_cmd, t_token_list **token, t_node_list *new_node, int
 
 	if (*find_cmd) // triggers command storing if true and checks if next token is -n
 	{
-		printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
-		printf("%s - %d", (*token)->value, (*token)->type);
-		printf(COLOR_RED" (command)\n"COLOR_RESET);
+		printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
+		printf("%s ", (*token)->value);
+		printf(COLOR_YELLOW" <--becomes the cmd of the node\n"COLOR_RESET);
 		if(!alloc_cmd(new_node, *token))// had to return as error
 			return(false);
 		*find_cmd = false; // command found, if we have other tokens they are args if not redir data
 	}
 	else // triggers args storing
 	{
-		if(!new_node->cmd_args &&(*token)->type == OPTION) // need to put condition of cmd args is null to avoid taking -n that follow args
+		if(!new_node->args &&(*token)->type == OPTION) // need to put condition of cmd args is null to avoid taking -n that follow args
 			check_option(token, new_node);
 		else
 		{
 			new_arg = init_new_arg(*token);
 			if(!new_arg)
 				return(false);
-			append_new_arg(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
-			printf(COLOR_BLUE"		TOKEN %d - "COLOR_RESET, token_n);
-			printf("%s - %d", (*token)->value, (*token)->type); // he
-			printf(COLOR_RED" (arg)\n"COLOR_RESET);
+			append_new_arg(&(new_node->args), new_arg); // Pass args as a double pointer
+			printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
+			printf(" %s", (*token)->value); // he
+			printf(COLOR_YELLOW" <--becomes an arg of the node\n"COLOR_RESET);
 		}
 	}
 	return(true);
@@ -54,16 +54,18 @@ bool parse_token(t_flags *p, t_token_list **token, t_node_list **head, t_node_li
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
 		{
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
-			printf(COLOR_BLUE"			TOKEN %d - Redirection:"COLOR_RESET, p->token_n);
-			printf("%s - %d\n", (*token)->value, (*token)->type);
+			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
+			printf(" %s", (*token)->value);
+			printf(COLOR_YELLOW" <--becomes redirection\n"COLOR_RESET);
 			if (!parse_redir(token, *new_node, &(p->redir_i))) // adds redirection and target (and advances 2 tokens from the list)
 				return(false);
 			p->token_n++; // used just for print
+			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
+			printf(" %s", (*token)->value);
 			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-				printf(COLOR_BLUE"			TOKEN %d - delimiter:"COLOR_RESET, p->token_n);
+				printf(COLOR_YELLOW" <--becomes redirection's delimiter\n"COLOR_RESET);
 			else // if redir is <, > and >> the next token is seen as file
-				printf(COLOR_BLUE"			TOKEN %d - file:"COLOR_RESET, p->token_n);
-			printf("%s\n", (*token)->value);
+				printf(COLOR_YELLOW" <--becomes redirection's file\n"COLOR_RESET);
 		}
 		else // Parses commands and arguments
 			if(!parse_rest(&(p->find_cmd), token, *new_node, p->token_n))

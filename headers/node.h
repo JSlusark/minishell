@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:20:59 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:35:37 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_target_type
 typedef struct s_redir
 {
 	struct s_redir *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
-	int		redir_type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
+	int		type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
 	int		redir_i; // can be useful when we have more than 1 redirection in a node
 	char	*target;		// Target is filename (for input, output and append) or delimiter (for HEREDOC)
 	int		target_type;	// can be delimiter for heredoc, for else it can be file name or a valid path to a file (abs, relative or env_var like $PATH)
@@ -63,14 +63,14 @@ typedef struct s_args // list of tokens that follow the command token in the nod
 {
 	struct s_args *prev;   // Pointer to the prev argument in the list (adding it in case it can be useful in the future)
 	int type;         //anything that is not a command/builtin token or part of the redirection struct (file, redir type)
-	char *arg_value;      // Value of the token (strings.. could it be also expandables and env variables?)
+	char *value;      // Value of the token (strings.. could it be also expandables and env variables?)
 	struct s_args *next;   // Pointer to the next argument in the list
 } t_args;
 
 typedef struct s_cmd // the the first token thas is not redirection data (redirection symbol and file name) or pipe is seen by bash as the command of the node
 {
-	int		cmd_type;         // type of the token given us from the tokenizer, this will help us with execution and error handling (if the command is not an actual command)
-	char	*cmd_value;       // what is the value of the commmand (echo, cd, exit, string_value etc)
+	int		type;         // type of the token given us from the tokenizer, this will help us with execution and error handling (if the command is not an actual command)
+	char	*value;       // what is the value of the commmand (echo, cd, exit, string_value etc)
 } t_cmd;
 
 //a node table is a linked list of nodes, we traverse each node as a double linked list.. why?
@@ -78,14 +78,14 @@ typedef struct s_cmd // the the first token thas is not redirection data (redire
 typedef struct s_node_list // A node typically has this data: command, command arguments, redirection data (redir symbol and file name) and pipe, a sequence of node commands is called command_list
 {
 	struct s_node_list *prev; // prev nodes can help
-	t_cmd *cmd_data; // actually we may not need a struct with cmd, just the value might be enough because of the logic wrote in the execution file
-	t_redir *redir_data;
-	t_args *cmd_args;
+	t_cmd *cmd; // actually we may not need a struct with cmd, just the value might be enough because of the logic wrote in the execution file
+	t_redir *redir;
+	t_args *args;
 	int	node_i;
-	int	nodes_total;// every node will store this data so we know how many pipes we have
 	struct s_node_list *next;
 	//not sure yet but we have to find a way to handle -n flag
 	bool		option_n; // checks if we have a flag
+	int	nodes_total;// every node will store this data so we know how many pipes we have
 } t_node_list;
 
 // This would be needed if we decide to do the bonus
@@ -130,7 +130,7 @@ bool alloc_cmd(t_node_list *curr_node, t_token_list *token);
 void	check_option(t_token_list **token, t_node_list *new_node);
 //Assigns token as arg of the node and appends to the arg list
 t_args *init_new_arg(t_token_list *token);
-void append_new_arg(t_args **cmd_args, t_args *new_arg);
+void append_new_arg(t_args **args, t_args *new_arg);
 
 //Frees the node list at evert error and at end of the execution
 void free_node_list(t_node_list *node_list);

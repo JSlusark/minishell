@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:09:08 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:31:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ bool alloc_cmd(t_node_list *curr_node, t_token_list *token)
 		printf("Failed to allocate cmd in node\n");
 		return (false);
 	}
-	cmd->cmd_type = token->type;
-	cmd->cmd_value = ft_strdup(token->value);
-	if (!cmd->cmd_value)
+	cmd->type = token->type;
+	cmd->value = ft_strdup(token->value);
+	if (!cmd->value)
 	{
 		printf("Failed to allocate token->value to node cmd\n");
 		return(false);
 	}
-	curr_node->cmd_data = cmd;
+	curr_node->cmd = cmd;
 	return(true);
 }

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 16:41:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:31:43 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,22 +45,22 @@ Exit Codes and meaning (we should remember to assign them after parsing and exec
 
 void exec_command(t_node_list	*node)
 {
-	if(strcmp(node->cmd_data->cmd_value, "cd") == 0)
+	if(strcmp(node->cmd->value, "cd") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "echo") == 0)
+	else if(strcmp(node->cmd->value, "echo") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "exit") == 0)
+	else if(strcmp(node->cmd->value, "exit") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < EXIT > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "export") == 0)
+	else if(strcmp(node->cmd->value, "export") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "pwd") == 0)
+	else if(strcmp(node->cmd->value, "pwd") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
-	else if(strcmp(node->cmd_data->cmd_value, "unset") == 0)
+	else if(strcmp(node->cmd->value, "unset") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
-	else if(node->cmd_data->cmd_type == ENV_VAR) // there are cases like "$PATH echo hello" which made me consider this but there might be other ways.. will think about it in the futue
+	else if(node->cmd->type == ENV_VAR) // there are cases like "$PATH echo hello" which made me consider this but there might be other ways.. will think about it in the futue
 		printf(COLOR_GREEN"\nFound env_var as node command, still need to figure out how thinsg work here! Try <$PATH echo hello> on bash !\n"COLOR_RESET);
 	else
-		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd_data->cmd_value);
+		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->value);
 }
 
 int count_nodes(t_node_list	*node_list)
@@ -83,7 +83,7 @@ void	exec_node(t_node_list	*node_list)
 	}
 	else
 	{
-		if(node_list->cmd_data)
+		if(node_list->cmd)
 			exec_command(node_list);
 		else
 			printf("Minishell: node does not have a command\n");

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 16:46:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:35:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	add_target(t_token_list *token, t_redir *redir)
 		return(false);
 	}
 	redir->target_token_type = token->next->type;
-	if(redir->redir_type == HEREDOC)
+	if(redir->type == HEREDOC)
 		redir->target_type = TARGET_DELIMITER;
 	else
 	{
@@ -64,7 +64,7 @@ t_redir *init_new_redir(t_token_list **token)
 		printf("Minishell: Failed to allocate redirection struct\n");
 		return NULL;
 	}
-	redir->redir_type = (*token)->type;
+	redir->type = (*token)->type;
 	if((*token)->next != NULL && !add_target(*token, redir)) // if token after redir exists but it fails to be allocated
 		return(NULL); // return null
 	*token = (*token)->next; // Advance token for the redirection target
@@ -81,7 +81,7 @@ bool parse_redir(t_token_list **token, t_node_list	*new_node, int *redir_i)
 	if(!new_redir)
 		return (false);
 	new_redir->redir_i = *redir_i;
-	append_new_redir(&(new_node->redir_data), new_redir);
+	append_new_redir(&(new_node->redir), new_redir);
 	(*redir_i)++; // Increment the redir index
 	return(true);
 }

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:37:17 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/26 12:22:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 17:35:08 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ Each node will be the parent of the following data:
 		- '$UNKNOWN' will not write anything and not give an error... unsure why
 	Probably let's do other tests to see if we need to decide to change this.
 
-- REDIRECTION STRUCT (t_redir *redir_data)
+- REDIRECTION STRUCT (t_redir *redir)
 	The struct is a double linked list.
 	A linked list because a node can have more than 1 redirection as children,
 	so we need to have access to the next redirs if we have more than one.
 	It's a double linked list because I think there might be cases where this could be useful but not sure yet.
 	The redir struct contains this data:
-		- redir_type: which is the type of redirection
+		- type: which is the type of redirection
 		- redir_i: index of the redirection (this might be useful in our execution to understand if we are executing in the right order when having more than 1 redirs)
 		- target: which is the name of the target where the redirection executes(a file, path to a file or delimiter).
 		- target type: which is the type of the target. Input, output and append redir are always followed by files or path to files, heredoc are ONLY followed by a delimiter.
@@ -58,14 +58,14 @@ Each node will be the parent of the following data:
 		- int fd: file descriptor for error handling when we open the file and process its input
 		- bool close_fd: Indicates if the fd should be closed after use. Undure if we actually need this for error handling
 
-- ARGUMENT STRUCT (t_args *cmd_args)
+- ARGUMENT STRUCT (t_args *args)
 	The struct is a double linked list.
 	A linked list because a node can have more than 1 argument that need to be executed by its command,
 	so we need to have access to the next arguments if we have more than one.
 	It's a double linked list because I think there might be cases where this could be useful but not sure yet.
 	The args struct contains this data:
 		- arg_type:
-		- arg_value
+		- value
 		- s_args *next: pointer to the next arg (if we have just one arg, next is NULL)
 		- s_args *prev: pointer to the prev arg (for the first/head arg struct, prev is NULL)
 
