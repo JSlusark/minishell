@@ -6,12 +6,22 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/29 17:04:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:49:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef NODE_H
 # define NODE_H
+
+typedef struct s_flags
+{
+	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
+	int	redir_i;					// redir index
+	int token_n;
+	bool start_node;		// Flags minishell to start a new node, it is set to false after we init the new node and set to true when we end the new node.
+	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
+	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
+}		t_flags;
 
 typedef struct s_token_list
 {
@@ -92,7 +102,7 @@ typedef struct s_node // A node typically has this data: command, command argume
 /* ---- Function that parse the tokens into a linked list of nodes --- */
 
 t_node	*return_nodelist(t_token_list *token_list); // Main function, returns the node list or NULL if we have parsing error
-bool parse_token(bool *check_pipestart, bool *find_cmd, bool *start_node, int *redir_i, t_token_list **token, t_node **head, t_node **new_node, int *token_n); // iterates through each token to replicate how bash distrobute their role in the node
+bool parse_token(t_flags *p, t_token_list **token, t_node **head, t_node **new_node); // iterates through each token to replicate how bash distrobute their role in the node
 
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
 t_node	*init_new_node(int node_n, bool *start_node); // allovates a new node at the start of parsing or after we encounter a pipe
