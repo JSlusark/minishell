@@ -6,12 +6,24 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 15:02:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/01 16:13:30 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 // add check for cli input limit
+
+void	check_option(t_token_list **token, t_node *new_node)
+{
+	while ((*token)->type == OPTION)// while loop may cover edgecases when we have more than one consec -n
+	{
+		new_node->option_n = true; // Set the node's option flag
+		if ((*token)->next && (*token)->next->type == OPTION)
+			*token = (*token)->next;  // Move to the option toke
+		else
+			break;
+	}
+}
 
 bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int token_n)
 {
@@ -28,21 +40,8 @@ bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int toke
 	}
 	else // triggers args storing
 	{
-		if(new_node->option_n == false && !new_node->cmd_args &&(*token)->type == OPTION) // need to put condition of cmd args is null to avoid taking -n that follow args
-		{
-			while ((*token)->type == OPTION)// while loop may cover edgecases when we have more than one consec -n
-			{
-				new_node->option_n = true; // Set the node's option flag
-				if ((*token)->next && (*token)->next->type == OPTION)
-					*token = (*token)->next;  // Move to the option toke
-				else
-					break;
-			}
-			// new_arg = init_new_arg(*token); // <-- have to cancel this but leaving it here in case i find something out
-			// if(!new_arg)
-			// 	return(false);
-			// append_new_arg(&(new_node->cmd_args), new_arg); // Pass cmd_args as a double pointer
-		}
+		if(!new_node->cmd_args &&(*token)->type == OPTION) // need to put condition of cmd args is null to avoid taking -n that follow args
+			check_option(token, new_node);
 		else
 		{
 			new_arg = init_new_arg(*token);
@@ -56,6 +55,8 @@ bool parse_rest(bool *find_cmd, t_token_list **token, t_node *new_node, int toke
 	}
 	return(true);
 }
+
+
 
 bool parse_token(t_flags *p, t_token_list **token, t_node **head, t_node **new_node)
 {
