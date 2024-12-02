@@ -21,7 +21,7 @@ t_token_list *init_token_list(t_scanner *scanner)
 		else
 			current->next = new_token;
 		current = new_token;
-		printf("Token Type: %d, Token Value: %s\n", new_token->type, new_token->value);
+		//printf("Token Type: %d, Token Value: %s\n", new_token->type, new_token->value);
 		//print_token(scanner->next);
 	}
 	return (head); // Return the head of the linked list

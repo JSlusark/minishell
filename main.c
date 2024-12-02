@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/28 13:19:42 by alramire         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:19:35 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,39 @@
 int	main(int argc, char **argv)
 {
 	char			*input;
-	t_char_itr		itr;
-	t_scanner		scanner;
 	t_token_list	*tokens;
 	t_node			*node_list;
+	t_char_itr		itr;
+	t_scanner		scanner;
+	(void)argc; // this silences compilation warnings when we do not use argc
+	(void)argv; // this silences compilation warnings when we do not use argv
 
-	printf("ARGC: %d, ARGV:%s\n", argc, argv[0]); // added this just to avoid compilation error
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-		itr = char_itr_value(input, ft_strlen(input));
-		if(check_start_uknown(itr.cursor)== 1) //Free and exit are missing...
-			printf("Minishell: unknown command '%c' \n", itr.cursor[0]); //Here we check if the first character of the input is invalid.
-		scanner = scanner_value(itr);
-		tokens = init_token_list(&scanner);
+		if (ft_strlen(input) > 0)
+		{
+			add_history(input);
+			itr = char_itr_value(input, ft_strlen(input));
+			//if(check_start_uknown(itr.cursor)== 1)
+			//printf("Minishell: unknown command '%c' \n", itr.cursor[0]);
+			scanner = scanner_value(itr);
+			tokens = init_token_list(&scanner);
+		}
 		if(!tokens)
 		{
 			free(input);
 			free_mock_tokens(tokens);
 		}
-		if (!input || ft_strcmp(input, "exit") == 0)
+		if(ft_strcmp(input, "exit") == 0) //<---- we will have to remove this as we handle exit in the execution bit
 		{
 			free(input);
 			free_mock_tokens(tokens);
 			clear_history();
-			exit (0);
+			exit(0);
 		}
 		else
 		{
-			if (ft_strlen(input) > 0)
-				add_history(input); // NOTE FOR LATER - FOUND BUGS WHEN NAVIGATING THROUGH HISTORY
 			node_list = return_nodelist(tokens); //
 			free_mock_tokens(tokens); // we free the token list since we allocated and created our nodes
 			free(input); // we also free the input as we have processed it already as tokens and then nodes
