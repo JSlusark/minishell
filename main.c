@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/03 18:13:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:38:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/minishell.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	char *input;
-	t_token_list *tokens;
+	char			*input;
+	t_token_list	*tokens;
 	t_node_list		*node_list;
+	t_char_itr		itr;
+	t_scanner		scanner;
 	(void)argc; // this silences compilation warnings when we do not use argc
 	(void)argv; // this silences compilation warnings when we do not use argv
 
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-		if (strlen(input) > 0) // <------------------------------- if the len of the input is more than 0 we have to tokenize, if it's not, we reprompt the user
+		if (ft_strlen(input) > 0) // <------------------------------- if the len of the input is more than 0 we have to tokenize, if it's not, we reprompt the user
 		{
-			/* ALL OUR LOGIC FOR TOKENIZING AND PARSING SHOULD GO DOWN HERE: */
-			add_history(input); // <---- THIS WORKS CORRECTLY HERE
-			tokens = create_mock_tokens(input); // <-------------- this needs to be substituted by Alejo's token list
-			if(!tokens) // if tokenizing fails, free the input and tokenlist
+			add_history(input); // <-------------- this needs to be substituted by Alejo's token list
+			itr = char_itr_value(input, ft_strlen(input));
+			//if(check_start_uknown(itr.cursor)== 1)
+			//printf("Minishell: unknown command '%c' \n", itr.cursor[0]);
+			scanner = scanner_value(itr);
+			tokens = init_token_list(&scanner);
+			if(!tokens)
 			{
 				free(input);
 				free_mock_tokens(tokens);
@@ -41,8 +46,8 @@ int main(int argc, char **argv)
 				if(!node_list) // error handling
 				{
 					free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
-					// after this fails if we write "echo $?" it should print 2
-					// so after we free node list we could set $? to 2, not sure how yet or if we can find a better way
+						// after this fails if we write "echo $?" it should print 2
+						// so after we free node list we could set $? to 2, not sure how yet or if we can find a better way
 				}
 				else // success and execute
 				{

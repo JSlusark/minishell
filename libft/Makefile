@@ -6,7 +6,7 @@
 #    By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/25 11:53:09 by jessica           #+#    #+#              #
-#    Updated: 2024/11/18 15:28:41 by jslusark         ###   ########.fr        #
+#    Updated: 2024/12/03 21:28:45 by jslusark         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ ft_itoa.c \
 ft_striteri.c \
 ft_strmapi.c \
 ft_split.c \
+ft_strndup.c \
 ft_strcmp.c
 
 

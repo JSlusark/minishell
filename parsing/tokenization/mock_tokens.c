@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/03 18:03:58 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:10:46 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void free_mock_tokens(t_token_list *head) {
 
 	while (current != NULL)
 	{
-		// printf("token freed: %s", current->value);
 		next = current->next; // Store the next token
 		free(current->value); // Free the duplicated string
 		free(current);             // Free the current node

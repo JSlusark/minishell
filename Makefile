@@ -1,7 +1,13 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-TOKENIZATION  = ./parsing/tokenization/mock_tokens.c
+TOKENIZATION  = ./parsing/tokenization/mock_tokens.c \
+				./parsing/tokenization/char_itr.c \
+				./parsing/tokenization/scanner.c \
+				./parsing/tokenization/token.c \
+				./parsing/tokenization/cmd.c \
+				./parsing/tokenization/token_list.c \
+				./parsing/tokenization/guards.c
 
 NODE_CREATION = 	./parsing/node_creation/return_nodes.c \
 					./parsing/node_creation/error_handling.c \
@@ -21,8 +27,13 @@ SRC	= main.c \
 	$(EXECUTION)
 
 HEADERS	= ./headers/minishell.h \
+		./headers/char_itr.h \
+		./headers/guards.h \
+		./headers/scanner.h \
 		./headers/token.h \
-		./headers/node.h
+		./headers/token_list.h \
+		./headers/cmd.h \
+		./headers/node.h \
 
 OBJS = $(SRC:.c=.o)
 

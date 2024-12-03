@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/25 12:34:33 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:22:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,15 @@
 #define COLOR_BLUE "\x1b[34m"
 #define COLOR_RESET  "\x1b[0m"
 
+// Tokenizer headers // <---- do you think we can regroup all in one header file? It will simplify things once our project grows
+#include "char_itr.h"
+#include "guards.h"
+#include "scanner.h"
+#include "cmd.h"
+#include "token_list.h"
+#include "token.h"
+
 // Parsing headers
-#include	"token.h" // token structs and functions
 #include	"node.h" // node structs and node handling functions
 
 //Execution headers
@@ -43,6 +50,5 @@
 #include	"redirections.h" // this already should include all the redirections headers inside
 
 
+
 #endif
-
-

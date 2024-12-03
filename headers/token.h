@@ -20,7 +20,7 @@ typedef enum e_token_type // good to have an order like below
 
 	WORD,         			// 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
 	UNKNOWN,         		// 13 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*", "~" etc.. --- what about tilde?
-
+	END,					// 14 END token <---- what is it for?
 
 
 	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
@@ -44,10 +44,13 @@ typedef struct s_slice
 typedef struct s_token
 {
 	t_token_type type;
-	//char lexeme; //this needs to be an slice. To hold more than a char.
 	t_slice lexeme;
 } t_token;
 
+t_token new_token (t_token_type type, char *start, size_t length);
+
+void print_token(const t_token token);
+
+int compare_token(const t_token *token, const char *str);
+
 #endif
-
-

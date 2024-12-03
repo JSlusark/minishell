@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:35:37 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:18:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ typedef struct s_flags
 	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
 }		t_flags;
-
-typedef struct s_token_list
-{
-	int type;         // Type of the token, e.g., COMMAND, STRING_LITERAL, etc.
-	char *value;      // Value of the token, e.g., "echo", "hello"
-	struct s_token_list *next; // Pointer to the next token in the linked list
-}			t_token_list;
 
 typedef enum e_target_type
 {
