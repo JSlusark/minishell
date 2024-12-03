@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:23:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:13:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@ int main(int argc, char **argv)
 			{
 				free(input);
 				free_mock_tokens(tokens);
-			}
-			if(ft_strcmp(input, "exit") == 0) //<---- we will have to remove this as we handle exit in the execution bit
-			{
-				free(input);
-				free_mock_tokens(tokens);
-				clear_history();
-				exit(0);
 			}
 			else // if tokenizing succeeds proceed with creating node list
 			{

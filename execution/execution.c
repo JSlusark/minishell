@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:31:43 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:13:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,13 @@ void exec_command(t_node_list	*node)
 	else if(strcmp(node->cmd->value, "echo") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->value, "exit") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < EXIT > BUILT-IN...\n\n"COLOR_RESET);
+	{
+		printf(COLOR_GREEN"\nMinishell> "COLOR_RESET); // does not create leaks for now
+		printf("Exiting minishell...\n");
+		free_node_list(node);
+		clear_history();
+		exit(0);
+	}
 	else if(strcmp(node->cmd->value, "export") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->value, "pwd") == 0)
