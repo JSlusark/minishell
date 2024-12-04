@@ -130,8 +130,8 @@ t_token rel_path_token(t_scanner *self)
 t_token option_token(t_scanner *self)
 {
 	self->next.type = OPTION;
-	self->next.lexeme.start = ++self->char_itr.cursor;
-	self->next.lexeme.length = 1;
+	self->next.lexeme.start = self->char_itr.cursor++;
+	self->next.lexeme.length = 2;
 	self->char_itr.cursor++;
 	return (self->next);
 }
