@@ -88,7 +88,8 @@ t_token tmp_unknown_token (t_scanner *self)
 t_token env_var_token(t_scanner *self)
 {
 	self->next.type = ENV_VAR;
-	self->next.lexeme.start = ++self->char_itr.cursor;
+	self->next.lexeme.start = self->char_itr.cursor++;
+	self->next.lexeme.length++;
 	while (self->char_itr.cursor && (ft_isalnum(*self->char_itr.cursor) || *self->char_itr.cursor == '_'))
 	{
 		self->next.lexeme.length++;
