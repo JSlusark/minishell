@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/04 07:48:03 by alramire         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:48:38 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@
 int	main(int argc, char **argv, char **env)
 {
 	char			*input;
-	char			**env_copy;
-	int				count;
+	//char			**env_copy;
+	//int				count;
 	t_token_list	*tokens;
 	t_node			*node_list;
 	t_char_itr		itr;
 	t_scanner		scanner;
 	(void)argc; // this silences compilation warnings when we do not use argc
 	(void)argv; // this silences compilation warnings when we do not use argv
+	(void)env;
 
-	while
+
 
 	while (1)
 	{
