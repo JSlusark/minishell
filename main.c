@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/03 21:58:58 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/04 15:55:33 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 			//if(check_start_uknown(itr.cursor)== 1)
 			//printf("Minishell: unknown command '%c' \n", itr.cursor[0]);
 			scanner = scanner_value(itr);
-			tokens = init_token_list(&scanner);
+			tokens = create_mock_tokens(input);
 			if(!tokens)
 			{
 				free(input);
@@ -45,9 +45,8 @@ int	main(int argc, char **argv)
 				free(input);
 				if(!node_list) // if parsing has error it returns null and frees everything
 				{
-					free_node_list(node_list); // for now this is seen as double free because I al already freeing in every scenario i find in my parsing function
-					// after this fails if we write "echo $?" it should print 2
-					// so after we free node list we could set $? to 2, not sure how yet or if we can find a better way
+					// do not need to free the nodelist as it's null and we do ilaready  in the return_nodes function
+					// I think we should use this to create the error code 0 for situation like for situations like echo $?
 				}
 				else // if parser is successful we execute and free the node list after we executed
 				{
