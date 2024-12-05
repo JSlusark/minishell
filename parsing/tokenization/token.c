@@ -66,11 +66,14 @@ t_token redir_in_token (t_scanner *self)
 t_token word_token (t_scanner *self)
 {
 	self->next.lexeme.start = self->char_itr.cursor;
-
-	while(self->char_itr.cursor && ft_isalnum(*self->char_itr.cursor))
+	//while(self->char_itr.cursor && (ft_isalnum(*self->char_itr.cursor)))
+	while(self->char_itr.cursor && (ft_isalnum(*self->char_itr.cursor) || ft_strchr(NOBRKSYMS, *self->char_itr.cursor)))
 	{
 		self->next.lexeme.length++;
-		self->char_itr.cursor++;
+		if(char_itr_has_next(&self->char_itr))
+			self->char_itr.cursor++;
+		else
+			break;
 	}
 	check_cmd(self);
 	return (self->next);

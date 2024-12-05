@@ -6,7 +6,7 @@
 /*   By: alramire <alramire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:33:18 by alramire          #+#    #+#             */
-/*   Updated: 2024/11/29 12:13:12 by alramire         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:39:45 by alramire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #define WHITESPACES " \t\r\n\a\""
 #define SYMBOLS "\\;()#&`*~|"
+#define NOBRKSYMS "_.?:-+="
 
 typedef struct s_chart_itr
 {
