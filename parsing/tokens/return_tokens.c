@@ -6,36 +6,38 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 16:14:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:53:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	quote_closed(int i, char *input)
+void	collect_str(int *i, char *input, char quote)
 {
-	int j = i++;
-	while(input[j] && input[j] != '"')
-		j++;
-	if(input[j] == '"')
-		printf("closure found\n");
-	else
-		printf("closure not found\n");
-}
-
-void free_mock_tokens(t_token_list *head)
-{
-	t_token_list *current = head;
-	t_token_list *next;
-
-	while (current != NULL)
+	(*i)++;
+	// printf("i %d char %c\n", *i, input[*i]);
+	while(input[*i] && input[*i] != quote) // echo "hello""" does not print error
 	{
-		next = current->next; // Store the next token
-		free(current->value); // Free the duplicated string
-		free(current);             // Free the current node
-		current = next;            // Move to the next token
+		write(1, &input[*i],1);
+		(*i)++;
 	}
+	if(input[*i] == quote)
+		(*i)++;
+	write(1, "\n",1);
 }
+
+bool	quote_closed(int i, char *input, char quote)
+{
+	int j = i;
+	j++;
+	// printf("j %d char %c\n", i, input[j]);
+	while(input[j] && input[j] != quote)
+		j++;
+	if(input[j] == quote)
+		return(true);
+	return(false);
+}
+
 t_token_list *return_tokens(char *input)
 {
 	// t_token_list *head = NULL;      // Head of the linked list
@@ -50,30 +52,16 @@ t_token_list *return_tokens(char *input)
 		// t_token_list *new_token = malloc(sizeof(t_token_list));
 		write(1, &input[i], 1);
 		write(1, "\n", 1);
-		if(input[i] == '"')
+		if(input[i] == '"' || input[i] == '\'')
 		{
-			quote_closed(i, input);
-			// if(quote_closed(input[i]))
-			// {
-
-			// 	// new_token->value = collect_str();
-			// 	// new_token->type = D_STRING;
-			// }
-			// else
-			// {
-			// 	printf("Minishell: Error with d_str");
-			// 	return (NULL);
-			// }
+			if(!quote_closed(i, input, input[i]))
+			{
+				printf("closure not found\n");
+				return(NULL);
+			}
+			collect_str(&i, input, input[i]);
+			// printf("we have a %c string\n", input[i]);
 		}
-		// else if(input[i] == "'")
-		// {
-		// 	if(is_s_str(input[i]))
-		// 	{
-		// 		new_token->value = collect_str();
-		// 		new_token->type = S_STRING;
-		// 		printf("Minishell: Error with s_str");
-		// 	}
-		// }
 		i++;
 	}
 	return(NULL); // <- return error as this
