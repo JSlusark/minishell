@@ -15,8 +15,8 @@ typedef enum e_token_type // good to have an order like below
 	HEREDOC,        		// 8 Here-document redirection ("<<")
 
 	PIPE,           		// 9 Pipe operator ("|")
-	STRING_D_QUOTES,        // 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
-	STRING_S_QUOTES,        // 11 String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
+	D_STRING,        // 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
+	S_STRING,        // 11 String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
 
 	WORD,         			// 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
 	UNKNOWN,         		// 13 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*", "~" etc.. --- what about tilde?
@@ -24,9 +24,9 @@ typedef enum e_token_type // good to have an order like below
 
 
 	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
+	// D_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
+	// S_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
 	//EXTERNAL_COMMAND      // commands like grp or ls that we do not have to create, we can access these as binaries in /bin or /usr/bin, we do not need to create tokens for these, after we create our tokens and nodes we will then see if word is a external command
-	// D_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
-	// S_QUOTE,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
 	// DELIMITER,      		// we don't hav  to handle ; as a delimiter as it is required by the bonus, the symbol ; be seen as error if not inside a string
 	// OPERATOR,       		// we don't hav  to handle logical operators for `&&` and `||` as they are required by the bonus, these symbols will be seen as an error if not inside a string
 	// FILENAME,       		// i don't think we need this as we will check if something is a file based on the commands we find in our nodes
@@ -41,5 +41,7 @@ typedef struct s_token_list
 	t_token_type type;
 	struct s_token_list *next;
 } t_token_list;
+
+t_token_list *return_tokens(char *input);
 
 #endif

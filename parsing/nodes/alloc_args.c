@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:41 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:32:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../minishell.h"
 
 void append_new_arg(t_args **args, t_args *new_arg)
 {

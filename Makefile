@@ -1,29 +1,26 @@
 NAME = minishell
 LIBFT = libft/libft.a
 
-TOKENIZATION  = ./parsing/tokenization/mock_tokens.c \
+TOKENIZATION  = ./parsing/tokens/return_tokens.c \
+# ./parsing/tokens/mock_tokens.c \
 
-
-NODE_CREATION = 	./parsing/node_creation/return_nodes.c \
-					./parsing/node_creation/error_handling.c \
-					./parsing/node_creation/alloc_nodes.c \
-					./parsing/node_creation/alloc_redir.c \
-					./parsing/node_creation/alloc_cmd.c \
-					./parsing/node_creation/alloc_option.c \
-					./parsing/node_creation/alloc_args.c \
-					./parsing/node_creation/free_nodes.c \
-					./parsing/node_creation/print_nodes.c
+NODE_CREATION = 	./parsing/nodes/return_nodes.c \
+					./parsing/nodes/error_handling.c \
+					./parsing/nodes/alloc_nodes.c \
+					./parsing/nodes/alloc_redir.c \
+					./parsing/nodes/alloc_cmd.c \
+					./parsing/nodes/alloc_option.c \
+					./parsing/nodes/alloc_args.c \
+					./parsing/nodes/free_nodes.c \
+					./parsing/nodes/print_nodes.c
 
 EXECUTION	= ./execution/execution.c
 
-SRC	= main.c \
-	$(TOKENIZATION) \
+SRC	= $(TOKENIZATION) \
 	$(NODE_CREATION) \
 	$(EXECUTION)
 
-HEADERS	= ./headers/minishell.h \
-		./headers/token.h \
-		./headers/node.h
+HEADERS	= ./minishell.h \
 
 OBJS = $(SRC:.c=.o)
 
@@ -40,7 +37,7 @@ $(LIBFT):
 		@make -C libft
 
 $(NAME):	$(OBJS) $(HEADERS) $(LIBFT)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(PFLAGS)
+		$(CC) $(CFLAGS) main.c -o $(NAME) $(OBJS) $(LIBFT) $(PFLAGS)
 
 .c.o:
 		$(CC) $(CFLAGS) -c $< -o $@

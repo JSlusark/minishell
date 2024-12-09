@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 13:42:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:03:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void			free_mock_tokens(t_token_list *head);
 void print_nodes(t_node_list *head);
 
 // exec test
-void	exec_node(t_node_list	*node_list);
+void	exec_nodes(t_node_list	*node_list);
 
 #endif
 

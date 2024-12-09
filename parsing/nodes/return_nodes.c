@@ -6,11 +6,11 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/04 15:55:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../minishell.h"
 // add check for cli input limit
 
 bool parse_rest(bool *find_cmd, t_token_list **token, t_node_list *new_node, int token_n)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:10:37 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../minishell.h"
 
 void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_token_list *token, int token_n)
 {

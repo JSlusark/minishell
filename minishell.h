@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/12/09 13:44:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:17:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include	<readline/readline.h>
 #include	<readline/history.h>
 #include	"../libft/libft.h"
-#include	"stdbool.h" // ADDED THIS TO HANDLE TRUE / FALSE SITUATIONS - instead than using 0 or 1 (we can use it, yeah?)
+#include	"stdbool.h"
 
 // CALL VALGRIND SUPPRESSION:
 // valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
@@ -33,14 +33,11 @@
 #define COLOR_RESET  "\x1b[0m"
 
 // Parsing headers
-#include	"token.h"
-#include	"node.h" // node structs and node handling functions
+#include	"./parsing/tokens/tokens.h"
+#include	"./parsing/nodes/nodes.h" // node structs and node handling functions
 
 
 //Execution headers
-#include	"built_in.h" // this already should include all the builtins headers inside
-#include	"pipes.h" // this already should include all the pipes headers inside
-#include	"redirections.h" // this already should include all the redirections headers inside
 
 
 

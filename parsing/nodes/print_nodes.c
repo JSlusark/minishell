@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/01 17:35:33 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:14:03 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../minishell.h"
 
 char *return_token_enum(int token_type)
 {
@@ -34,9 +34,9 @@ char *return_token_enum(int token_type)
 		return "HEREDOC (<<)"; // Here-document redirection ("<<")
 	else if (token_type == PIPE)
 		return "PIPE"; // Pipe operator ("|")
-	else if (token_type == STRING_D_QUOTES)
+	else if (token_type == D_STRING)
 		return "STRING_D_QUOTES"; // Strings inside double quotes
-	else if (token_type == STRING_S_QUOTES)
+	else if (token_type == S_STRING)
 		return "STRING_S_QUOTES"; // Strings inside single quotes
 	else if (token_type == WORD)
 		return "WORD"; // Any letter or number that is not quoted

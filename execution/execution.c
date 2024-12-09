@@ -6,11 +6,11 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/03 18:13:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:11:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../minishell.h"
 
 /*
 	BUILT-INS
@@ -79,7 +79,7 @@ int count_nodes(t_node_list	*node_list)
 	}
 	return(n);
 }
-void	exec_node(t_node_list	*node_list)
+void	exec_nodes(t_node_list	*node_list)
 {
 	int node_amount = count_nodes(node_list);
 	if (node_amount > 1)

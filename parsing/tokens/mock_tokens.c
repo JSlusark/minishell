@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/03 21:10:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ the compilation process. There may be a chance for this file to be still helpful
 improve the lexical analysis and tokenization part of the project
 */
 
-#include "../../headers/minishell.h"
+#include "../../minishell.h"
 
 void free_mock_tokens(t_token_list *head) {
 	t_token_list *current = head;
