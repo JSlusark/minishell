@@ -65,6 +65,14 @@ echo "|" echo
 echo""
 
 
+FILE AND PATHS
+typically checked after execution? depends on the command preceding it
+
+cat "./file" -> writes what is inside
+cat ./file    -> writes what is inside
+cat "./unexisting_file" -> error
+
+
 STRINGS IN STRINGS
 echo ""hello""   - should print hello
 echo "'hello'"   - should print 'hello'

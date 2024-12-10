@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 13:49:55 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:33:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ bool	quote_closed(int i, char *input, char quote)
 t_token_list *return_tokens(char *input)
 {
 	int i = 0;
+	// file abs and rel path we check after during exec
+	// env var - we check during exec if in a double_s
+	// env var - shall we do the same if out of the string? can be seen as an arg first?
+	// invalid tokens.. unsure if needed to to give it a type be fair?
+	// char *invalid = ";#&,`*~";  // seen outside string also && $(..)
 	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
@@ -51,28 +56,33 @@ t_token_list *return_tokens(char *input)
 				// CHECK QUOTEDARG
 				if (!quote_closed(i, input, input[i]))
 				{
-					printf("\nMinishell: %c at index %d had no closure\n", input[i], i);
+					printf("Minishell: %c at input[%d] had no closure\n", input[i], i);
 					return (NULL);
 				}
 				collect_str(&i, input, input[i]);
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
-					printf(COLOR_YELLOW"  <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
+					printf(COLOR_YELLOW" <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 			else
 			{
 				printf("%c", input[i]);
 				i++;
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
-					printf(COLOR_YELLOW"  <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
+					printf(COLOR_YELLOW" <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 		}
+		// if(ft_strchr(invalid, input[i])) // <- says invalid
+		// {
+		// 	printf("\nMinishell: invalid token %c at input[%d]\n", input[i], i);
+		// 	return(NULL);
+		// }
 		if(input[i] == '|')
 		{
 			int k = i + 1;
 			if(input[k] != '\0' && input[k] == '|')
 			{
 				printf("||");
-				printf(COLOR_YELLOW" <---- OPERATOR\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- OPERATOR\n"COLOR_RESET);
 				printf("Minishell: error || operator are just for bonus\n");
 				return(NULL);
 				i++;
@@ -80,7 +90,7 @@ t_token_list *return_tokens(char *input)
 			else
 			{
 				printf("%c", input[i]);
-				printf(COLOR_YELLOW" <---- PIPE\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- PIPE\n"COLOR_RESET);
 			}
 		}
 		if(input[i] == '>') // use a while to understand if >> ?
@@ -89,13 +99,13 @@ t_token_list *return_tokens(char *input)
 			if(input[j] != '\0' && input[j] == '>')
 			{
 				printf(">>");
-				printf(COLOR_YELLOW" <---- APPEND_REDIR\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- APPEND_REDIR\n"COLOR_RESET);
 				i++;
 			}
 			else
 			{
 				printf("%c", input[i]);
-				printf(COLOR_YELLOW" <---- IN_REDIR\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- IN_REDIR\n"COLOR_RESET);
 			}
 		}
 		if(input[i] == '<') // use a while to understand if >> ?
@@ -104,13 +114,13 @@ t_token_list *return_tokens(char *input)
 			if(input[y] != '\0' && input[y] == '<')
 			{
 				printf("<<");
-				printf(COLOR_YELLOW" <---- HEREDOC_REDIR\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- HEREDOC_REDIR\n"COLOR_RESET);
 				i++;
 			}
 			else
 			{
 				printf("\n%c", input[i]);
-				printf(COLOR_YELLOW" <---- OUT_REDIR\n"COLOR_RESET);
+				printf(COLOR_YELLOW"<---- OUT_REDIR\n"COLOR_RESET);
 			}
 		}
 		if(input[i] != '\0')
@@ -119,6 +129,6 @@ t_token_list *return_tokens(char *input)
 			i++;
 		}
 	}
-	printf("\n");
+	// printf("\n");
 	return(NULL); // <- return error as this
 }

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:49:18 by jslusark          #+#    #+#             */
-/*   Updated: 2024/05/07 14:06:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:34:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	*ft_strchr(const char *s, int c)
 			return (NULL);
 		s++;
 	}
+	// write(1,&s,1);
 	return ((char *)s);
 }
 /* #include<stdio.h>
