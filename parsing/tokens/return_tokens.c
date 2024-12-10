@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 11:48:47 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:46:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,23 @@ void	collect_str(int *i, char *input, char quote)
 	if(input[*i] != '\0')
 		(*i)++;
 	// printf("i %d char %c\n", *i, input[*i]);
+	// printf("string surrounded by %c: ", quote);
 	while(input[*i] != '\0' && input[*i] != quote) // echo "hello""" does not print error
 	{
-		write(1, &input[*i],1);
+		printf("%c", input[*i]);
+		// write(1, &input[*i],1);
 		(*i)++;
 	}
 	if(input[*i] == quote && input[*i] != '\0')
 		(*i)++;
-	write(1, "\n",1);
+	// printf("\n");
 }
 
 bool	quote_closed(int i, char *input, char quote)
 {
 	int j = i;
 	j++;
-	printf("j %d char %c\n", i, input[j]);
+	// printf("j %d char %c\n", i, input[j]);
 	while(input[j] && input[j] != quote && input[i] != '\0')
 		j++;
 	if(input[j] == quote)
@@ -41,42 +43,24 @@ bool	quote_closed(int i, char *input, char quote)
 
 t_token_list *return_tokens(char *input)
 {
-	// t_token_list *head = NULL;      // Head of the linked list
-	// t_token_list *current = NULL;   // Current node in the linked list
-	int i;
-	char *bounds; // used when we have stuff like echo|echo
-	char *quotes; // used when we have stuff like echo|echo
+	int i = 0;
+	char *bounds = "|>< "; // Chara
+	char *quotes = "\"'";  // Quote characters
 
-	bounds = "|>< "; // not sure what to do with ec"h"o or echo"hello" , spaces could help me?
-	quotes = "\"'";
-	i = 0;
-	while(input[i] != '\0')
+	while (input[i] != '\0')
 	{
-		if(ft_strchr(quotes, input[i]))
-		{
-			while(input[i] != '\0')
-			{
-				if(!quote_closed(i, input, input[i]))
-				{
-					printf("closure not found\n");
-					return(NULL);
-				}
-					collect_str(&i, input, input[i]);
-					// printf("we have a %c string\n", input[i]);
-			}
-				printf("last c after strcoll %c\n", input[i]);
-				// if(ft_strchr(quotes, input[i]) && input[i] != '\0')
-				// 	i++;
-				// else
-				// {
-				// 	printf("%c", input[i]);
-					i++;
-				// }
-		}
 		while(!ft_strchr(bounds, input[i]) && input[i] != '\0')
 		{
 			if(ft_strchr(quotes, input[i]) && input[i] != '\0')
-				i++;
+			{
+				// CHECK QUOTEDARG
+				if (!quote_closed(i, input, input[i]))
+				{
+					printf("Minishhell: %c at index %d had no closure\n", input[i], i);
+					return (NULL);
+				}
+				collect_str(&i, input, input[i]);
+			}
 			else
 			{
 				printf("%c", input[i]);
@@ -116,15 +100,3 @@ t_token_list *return_tokens(char *input)
 	printf("\n");
 	return(NULL); // <- return error as this
 }
-
-
-
-
-/*
-
-
-
-
-
-
-*/
