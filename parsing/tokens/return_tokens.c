@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 16:53:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 10:20:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,42 @@ t_token_list *return_tokens(char *input)
 	// t_token_list *head = NULL;      // Head of the linked list
 	// t_token_list *current = NULL;   // Current node in the linked list
 	int i;
-	// char *bounds; // used when we have stuff like echo|echo
+	char *bounds; // used when we have stuff like echo|echo
+	char *quotes; // used when we have stuff like echo|echo
 
-	// bounds = "|>" // not sure what to do with ec"h"o or echo"hello" , spaces could help me?
+	bounds = "|>< "; // not sure what to do with ec"h"o or echo"hello" , spaces could help me?
+	quotes = "\"'";
 	i = 0;
 	while(input[i])
 	{
 		// t_token_list *new_token = malloc(sizeof(t_token_list));
-		write(1, &input[i], 1);
-		write(1, "\n", 1);
-		if(input[i] == '"' || input[i] == '\'')
+		// if(input[i] == '"' || input[i] == '\'')
+		// {
+		// 	if(!quote_closed(i, input, input[i]))
+		// 	{
+		// 		printf("closure not found\n");
+		// 		return(NULL);
+		// 	}
+		// 	collect_str(&i, input, input[i]);
+		// 	// printf("we have a %c string\n", input[i]);
+		// }
+		// else
+		// {
+			// write(1, &input[i], 1);
+			// write(1, "\n", 1);
+		// }
+		while(!ft_strchr(bounds, input[i]) && input[i] != '\0' && input[i])
 		{
-			if(!quote_closed(i, input, input[i]))
+			if(ft_strchr(quotes, input[i]))
+				i++;
+			else
 			{
-				printf("closure not found\n");
-				return(NULL);
+				printf("%c", input[i]);
+				i++;
 			}
-			collect_str(&i, input, input[i]);
-			// printf("we have a %c string\n", input[i]);
 		}
+
+		printf("\n%c\n", input[i]);
 		i++;
 	}
 	return(NULL); // <- return error as this
