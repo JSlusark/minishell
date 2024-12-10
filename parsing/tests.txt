@@ -1,0 +1,65 @@
+				echo hello > file
+				cat file
+				hello
+
+				> file echo hello
+				cat file
+				hello
+
+				echo > echo hello
+				cat echo
+				hello
+
+				> file hello echo
+				hello: command not found
+
+				> echo hello
+				hello: command not found
+
+				echo hello > file1 | echo ciao > file2
+				cat file1
+				hello
+				cat file2
+				ciao
+
+				echo hello > file |
+				>cat
+				hello
+
+
+TOKENIZING TESTS
+
+echo hello
+
+"e""c"ho hello
+	Result:
+	echo	(cmd)
+	hello	(arg)
+
+"echo"hello
+	Result:
+	echohello  (arg or cmd)
+
+"echo" "hello"
+	Result:
+	echo	(cmd)
+	hello	(arg)
+
+"echo"">"file
+	Result:
+	echo>hello (arg or cmd)
+
+"echo|"echo
+	Result:
+	echo|echo (arg or cmd)
+
+echo "|" echo
+	Result:
+	echo	(cmd)
+	|		(arg not pipe)
+	echo	(arg as there was no pipe)
+
+	Prints:
+	| echo
+
+echo""

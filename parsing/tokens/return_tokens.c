@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 12:46:39 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:44:46 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,19 @@ void	collect_str(int *i, char *input, char quote)
 {
 	if(input[*i] != '\0')
 		(*i)++;
-	// printf("i %d char %c\n", *i, input[*i]);
-	// printf("string surrounded by %c: ", quote);
 	while(input[*i] != '\0' && input[*i] != quote) // echo "hello""" does not print error
 	{
 		printf("%c", input[*i]);
-		// write(1, &input[*i],1);
 		(*i)++;
 	}
 	if(input[*i] == quote && input[*i] != '\0')
 		(*i)++;
-	// printf("\n");
 }
 
 bool	quote_closed(int i, char *input, char quote)
 {
 	int j = i;
 	j++;
-	// printf("j %d char %c\n", i, input[j]);
 	while(input[j] && input[j] != quote && input[i] != '\0')
 		j++;
 	if(input[j] == quote)
@@ -44,8 +39,8 @@ bool	quote_closed(int i, char *input, char quote)
 t_token_list *return_tokens(char *input)
 {
 	int i = 0;
-	char *bounds = "|>< "; // Chara
-	char *quotes = "\"'";  // Quote characters
+	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
 	while (input[i] != '\0')
 	{
@@ -56,44 +51,59 @@ t_token_list *return_tokens(char *input)
 				// CHECK QUOTEDARG
 				if (!quote_closed(i, input, input[i]))
 				{
-					printf("Minishhell: %c at index %d had no closure\n", input[i], i);
+					printf("\nMinishell: %c at index %d had no closure\n", input[i], i);
 					return (NULL);
 				}
 				collect_str(&i, input, input[i]);
+				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
+					printf(COLOR_YELLOW"  <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 			else
 			{
 				printf("%c", input[i]);
 				i++;
+				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
+					printf(COLOR_YELLOW"  <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 		}
 		if(input[i] == '|')
-			printf("\npipe: %c\n", input[i]);
+		{
+			printf("%c", input[i]);
+			printf(COLOR_YELLOW" <---- PIPE\n"COLOR_RESET);
+		}
 		if(input[i] == '>') // use a while to understand if >> ?
 		{
 			int j = i + 1;
 			if(input[j] != '\0' && input[j] == '>')
 			{
-				printf("\nappend: >>\n");
+				printf(">>");
+				printf(COLOR_YELLOW" <---- APPEND_REDIR\n"COLOR_RESET);
 				i++;
 			}
 			else
-				printf("\nin: %c\n", input[i]);
+			{
+				printf("%c", input[i]);
+				printf(COLOR_YELLOW" <---- IN_REDIR\n"COLOR_RESET);
+			}
 		}
 		if(input[i] == '<') // use a while to understand if >> ?
 		{
 			int y = i + 1;
 			if(input[y] != '\0' && input[y] == '<')
 			{
-				printf("\nheredoc: <<\n");
+				printf("<<");
+				printf(COLOR_YELLOW" <---- HEREDOC_REDIR\n"COLOR_RESET);
 				i++;
 			}
 			else
-				printf("\nout: %c\n", input[i]);
+			{
+				printf("\n%c", input[i]);
+				printf(COLOR_YELLOW" <---- OUT_REDIR\n"COLOR_RESET);
+			}
 		}
 		if(input[i] != '\0')
 		{
-			printf("\n");
+			// printf("\n");
 			i++;
 		}
 	}
