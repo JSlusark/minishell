@@ -63,3 +63,9 @@ echo "|" echo
 	| echo
 
 echo""
+
+
+STRINGS IN STRINGS
+echo ""hello""   - should print hello
+echo "'hello'"   - should print 'hello'
+echo ""'hello""  - should be error as we do not handle it

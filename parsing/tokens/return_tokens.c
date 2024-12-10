@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 13:44:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:49:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,20 @@ t_token_list *return_tokens(char *input)
 		}
 		if(input[i] == '|')
 		{
-			printf("%c", input[i]);
-			printf(COLOR_YELLOW" <---- PIPE\n"COLOR_RESET);
+			int k = i + 1;
+			if(input[k] != '\0' && input[k] == '|')
+			{
+				printf("||");
+				printf(COLOR_YELLOW" <---- OPERATOR\n"COLOR_RESET);
+				printf("Minishell: error || operator are just for bonus\n");
+				return(NULL);
+				i++;
+			}
+			else
+			{
+				printf("%c", input[i]);
+				printf(COLOR_YELLOW" <---- PIPE\n"COLOR_RESET);
+			}
 		}
 		if(input[i] == '>') // use a while to understand if >> ?
 		{
