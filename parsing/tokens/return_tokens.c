@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 15:54:42 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:34:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_token_list *return_tokens(char *input)
 	// env var - we check during exec if in a double_s
 	// env var - shall we do the same if out of the string? can be seen as an arg first?
 	// invalid tokens.. unsure if needed to to give it a type be fair?
-	// char *invalid = ";#&,`*~";  // seen outside string also && $(..)
+	char *invalid = ";#&,`*~";  // seen outside string also && $(..)
 	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
@@ -73,17 +73,8 @@ t_token_list *return_tokens(char *input)
 		}
 		while(input[i] == ' ' && input[i] != '\0') // if we find 1 or more spaces after we got the close words we skip them
 			i++;
-		if(input[i] == '*') //checksfor invalid letter
-		{
-			printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-			return(NULL);
-		}
-
-		// if(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
-		// {
-		// 	printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-		// 	return(NULL);
-		// }
+		if(input[i] == '\0') // this was to handle the weird error
+			break;
 		if(input[i] == '|')
 		{
 			int k = i + 1;
@@ -131,11 +122,26 @@ t_token_list *return_tokens(char *input)
 				printf(COLOR_YELLOW"<---- OUT_REDIR\n"COLOR_RESET);
 			}
 		}
-		if(input[i] != '\0')
+		//PART TO CHECK BELOW
+		if(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
 		{
-			// printf("\n");
-			i++;
+			int h = i + 1;
+			while(ft_strchr(invalid, input[h]))
+				h++;
+			h++;
+			// printf("%c\n", input[i]);
+			if(input[h] == '\0' || input[h] == ' ') // problem when followed by other invalid symbls
+			{
+				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
+				return(NULL);
+			}
 		}
+			// if(input[i] != '\0')
+			// {
+			// 	// printf("\n");
+			// 	i++;
+			// }
+		//PART TO CHECK ABOVE
 	}
 	// printf("\n");
 	return(NULL); // <- return error as this
