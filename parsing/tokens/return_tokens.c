@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 15:33:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/10 15:54:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_token_list *return_tokens(char *input)
 
 	while (input[i] != '\0')
 	{
-		while(!ft_strchr(bounds, input[i]) && input[i] != '\0')
+		while(!ft_strchr(bounds, input[i]) && input[i] != '\0') // this grabs leters attached together as tokens, even when we have strings
 		{
 			if(ft_strchr(quotes, input[i]) && input[i] != '\0')
 			{
@@ -71,9 +71,17 @@ t_token_list *return_tokens(char *input)
 					printf(COLOR_YELLOW" <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 		}
-		// if(ft_strchr(invalid, input[i])) // <- says invalid
+		while(input[i] == ' ' && input[i] != '\0') // if we find 1 or more spaces after we got the close words we skip them
+			i++;
+		if(input[i] == '*') //checksfor invalid letter
+		{
+			printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
+			return(NULL);
+		}
+
+		// if(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
 		// {
-		// 	printf("\nMinishell: invalid token %c at input[%d]\n", input[i], i);
+		// 	printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
 		// 	return(NULL);
 		// }
 		if(input[i] == '|')
