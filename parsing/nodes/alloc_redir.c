@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void append_new_redir(t_redir **head_redir, t_redir *curr_redir)
 	}
 }
 
-bool	add_target(t_token_list *token, t_redir *redir)
+bool	add_target(t_tokens *token, t_redir *redir)
 {
 	redir->target = ft_strdup(token->next->value);
 	if(!redir->target) // if dup fails.. do we even have to use dup??
@@ -54,7 +54,7 @@ bool	add_target(t_token_list *token, t_redir *redir)
 	return(true);
 }
 
-t_redir *init_new_redir(t_token_list **token)
+t_redir *init_new_redir(t_tokens **token)
 {
 	t_redir *redir;
 
@@ -71,7 +71,7 @@ t_redir *init_new_redir(t_token_list **token)
 	return (redir);
 }
 
-bool parse_redir(t_token_list **token, t_node_list	*new_node, int *redir_i)
+bool parse_redir(t_tokens **token, t_node_list	*new_node, int *redir_i)
 {
 	t_redir *new_redir;
 

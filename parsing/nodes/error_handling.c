@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:36:50 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // These functions return true if error or false if not error
 
-bool	unknown_token(t_token_list *token)
+bool	unknown_token(t_tokens *token)
 {
 		if (token->type == UNKNOWN) // ERROR AND FREE
 		{
@@ -24,7 +24,7 @@ bool	unknown_token(t_token_list *token)
 		return(false);
 }
 
-bool	pipe_error(t_token_list *token, bool check_pipestart)
+bool	pipe_error(t_tokens *token, bool check_pipestart)
 {
 	if (token->type == PIPE) // ERROR AND FREE
 	{
@@ -41,7 +41,7 @@ bool	pipe_error(t_token_list *token, bool check_pipestart)
 	}
 	return(false);
 }
-bool	redir_error(t_token_list *token)
+bool	redir_error(t_tokens *token)
 {
 	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
 	{

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:21:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:55:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	quote_closed(int i, char *input, char quote)
 	return(false);
 }
 
-t_token_list *return_tokens(char *input)
+t_tokens *return_tokens(char *input)
 {
 	int i = 0;
 	char *invalid = ";#&,`*~";  // seen outside string also && $(..)
@@ -45,16 +45,16 @@ t_token_list *return_tokens(char *input)
 
 	while (input[i] != '\0')
 	{
-		while(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
+		int h = i;
+		while(ft_strchr(invalid, input[h])) //FTSTRCHR DOES NOT WORK AS I WANT TO
 		{
-			int h = i + 1;
 			h++;
 			if(input[h] == '\0' || input[h] == ' ') // problem when followed by other invalid symbls
 			{
 				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
 				return(NULL);
 			}
-			else
+			if(!ft_strchr(invalid, input[h]))
 				break;
 		}
 		while(!ft_strchr(bounds, input[i]) && input[i] != '\0') // this grabs leters attached together as tokens, even when we have strings

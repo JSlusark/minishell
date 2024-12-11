@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 15:34:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	char			*input;
-	t_token_list	*tokens;
+	t_tokens	*tokens;
 	// t_node_list		*node_list;
 	(void)argc;
 	(void)argv;

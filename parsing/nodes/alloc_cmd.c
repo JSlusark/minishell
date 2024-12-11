@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-bool alloc_cmd(t_node_list *curr_node, t_token_list *token)
+bool alloc_cmd(t_node_list *curr_node, t_tokens *token)
 {
 	t_cmd *cmd;
 

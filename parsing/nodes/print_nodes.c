@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 16:14:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:27:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ char *return_token_enum(int token_type)
 		return "HEREDOC (<<)"; // Here-document redirection ("<<")
 	else if (token_type == PIPE)
 		return "PIPE"; // Pipe operator ("|")
-	else if (token_type == D_STRING)
+	else if (token_type == DQ_ARG)
 		return "STRING_D_QUOTES"; // Strings inside double quotes
-	else if (token_type == S_STRING)
+	else if (token_type == SQ_ARG)
 		return "STRING_S_QUOTES"; // Strings inside single quotes
-	else if (token_type == WORD)
-		return "WORD"; // Any letter or number that is not quoted
+	else if (token_type == ARG)
+		return "ARG"; // Any letter or number that is not quoted
 	else if (token_type == UNKNOWN)
 		return "UNKNOWN"; // Invalid token (e.g., \, ;, &&, ||, etc.)
 	else

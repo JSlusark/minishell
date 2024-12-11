@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:10:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:27:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ improve the lexical analysis and tokenization part of the project
 
 #include "../../minishell.h"
 
-void free_mock_tokens(t_token_list *head) {
-	t_token_list *current = head;
-	t_token_list *next;
+void free_mock_tokens(t_tokens *head) {
+	t_tokens *current = head;
+	t_tokens *next;
 
 	while (current != NULL)
 	{
@@ -32,17 +32,17 @@ void free_mock_tokens(t_token_list *head) {
 }
 
 // Splits the input into words and assigns enum types
-t_token_list *create_mock_tokens(char *input)
+t_tokens *create_mock_tokens(char *input)
 {
 	char *word;
-	t_token_list *head = NULL;      // Head of the linked list
-	t_token_list *current = NULL;   // Current node in the linked list
+	t_tokens *head = NULL;      // Head of the linked list
+	t_tokens *current = NULL;   // Current node in the linked list
 
 	// Tokenize input based on spaces
 	word = strtok(input, " ");
 	while (word != NULL) {
 		// Allocate memory for a new node
-		t_token_list *new_token = malloc(sizeof(t_token_list));
+		t_tokens *new_token = malloc(sizeof(t_tokens));
 		if (!new_token) {
 			perror("malloc failed");
 			exit(EXIT_FAILURE);
@@ -88,7 +88,7 @@ t_token_list *create_mock_tokens(char *input)
 		else if (word[0] == '-')
 			new_token->type = OPTION; // OPTION <- i don't know if we need this
 		else
-			new_token->type = WORD; // any thing else
+			new_token->type = ARG; // any thing else
 		// Set the value and initialize the next pointer
 		new_token->value = strdup(word); // Duplicate the word for storage
 		new_token->next = NULL;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   node.h                                             :+:      :+:    :+:   */
+/*   nodes.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:03:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,36 +93,36 @@ typedef struct s_node_list // A node typically has this data: command, command a
 /* ---- Function that parse the tokens into a linked list of nodes --- */
 
 // MAIN PARSING FUNCTION - returns a node list (or null if error) to the main
-t_node_list	*return_nodes(t_token_list *token_list);
+t_node_list	*return_nodes(t_tokens *token_list);
 
 // PARSES EACH TOKEN TO ASSIGN ITS FUNCTION INSIDE ITS NODE - *p contains data that allows us to do that
-bool parse_token(t_flags *p, t_token_list **token, t_node_list **head, t_node_list **new_node); // iterates through each token to replicate how bash distrobute their role in the node
+bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list **new_node); // iterates through each token to replicate how bash distrobute their role in the node
 t_flags assign_data(); // stores data that we pass to the parse_token function as we cannot send more than 4 params to it
 
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
 t_node_list	*init_new_node(int node_n, bool *start_node); // allocates a new node at the start of parsing or after we encounter a pipe
 void	append_node(t_node_list **head, t_node_list *new_node); // appends current node to list as head or last node of the list
-void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_token_list *token, int token_n); // ends new node when we encounter a pipe and alerts us that we have to start a new node
+void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_tokens *token, int token_n); // ends new node when we encounter a pipe and alerts us that we have to start a new node
 
 // PARSE NODE ERRORS - error_handling.c stops node creation and prints error to the terminal
-bool	unknown_token(t_token_list *token); // gives errors with unknown tokens
-bool	pipe_error(t_token_list *token, bool check_pipestart); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
-bool	redir_error(t_token_list *token); // gives an error to when redir symbol is followed by |, another redir symbol and \n
+bool	unknown_token(t_tokens *token); // gives errors with unknown tokens
+bool	pipe_error(t_tokens *token, bool check_pipestart); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
+bool	redir_error(t_tokens *token); // gives an error to when redir symbol is followed by |, another redir symbol and \n
 
 // REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
-bool	parse_redir(t_token_list **token, t_node_list	*new_node, int *redir_i); // creates redir data to add to the node
-t_redir	*init_new_redir(t_token_list **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
-bool	add_target(t_token_list *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
+bool	parse_redir(t_tokens **token, t_node_list	*new_node, int *redir_i); // creates redir data to add to the node
+t_redir	*init_new_redir(t_tokens **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
+bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
 void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
 // PARSES THE COMMAND, OPTIONS AND ARGUMENTS OF A NODE
-bool parse_rest(bool *find_cmd, t_token_list **token, t_node_list *new_node, int token_n);
+bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int token_n);
 //Assigns token as command of the node
-bool alloc_cmd(t_node_list *curr_node, t_token_list *token);
+bool alloc_cmd(t_node_list *curr_node, t_tokens *token);
 //Flags if option -n is present and handles order which is written on the CLI
-void	check_option(t_token_list **token, t_node_list *new_node);
+void	check_option(t_tokens **token, t_node_list *new_node);
 //Assigns token as arg of the node and appends to the arg list
-t_args *init_new_arg(t_token_list *token);
+t_args *init_new_arg(t_tokens *token);
 void append_new_arg(t_args **args, t_args *new_arg);
 
 //Frees the node list at evert error and at end of the execution
@@ -132,8 +132,8 @@ void free_node_list(t_node_list *node_list);
 
 
 //My mock tocken_list creation functions
-t_token_list			*create_mock_tokens(char *input);
-void			free_mock_tokens(t_token_list *head);
+t_tokens			*create_mock_tokens(char *input);
+void			free_mock_tokens(t_tokens *head);
 
 // Printing and debugging functions (we comment or remove them from our code when ready to submit)
 void print_nodes(t_node_list *head);

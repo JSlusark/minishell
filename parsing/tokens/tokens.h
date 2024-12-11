@@ -14,9 +14,9 @@ typedef enum e_token_type // good to have an order like below
 	APPEND_OUT,     		// 7 Append redirection (">>")
 	HEREDOC,        		// 8 Here-document redirection ("<<")
 	PIPE,           		// 9 Pipe operator ("|")
-	WORD,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
-	D_STRING,        // CALL IT DQ_ARG? 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
-	S_STRING,        // CALL IT SQ_ARG String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
+	ARG,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
+	DQ_ARG,        // CALL IT DQ_ARG? 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
+	SQ_ARG,        // CALL IT SQ_ARG String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
 
 	UNKNOWN,         		//DO NOT NEED
 	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
@@ -36,8 +36,8 @@ typedef struct s_token_list
 	char *value;
 	t_token_type type;
 	struct s_token_list *next;
-} t_token_list;
+} t_tokens;
 
-t_token_list *return_tokens(char *input);
+t_tokens *return_tokens(char *input);
 
 #endif
