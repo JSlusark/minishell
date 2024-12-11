@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 20:51:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 22:02:19 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,45 @@ void	collect_str(int *i, char *input, char quote, int *len)
 	{
 		if(input[*i] == quote)
 			(*i)++;
-		if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
+
+		else
 		{
-			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
-			int j = *i + 1; // Start after the '$'
-			while (input[j] && !ft_strchr(not_env, input[j]))
+			if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
 			{
-				j++;
-			}
-			// Check if the substring matches "USER"
-			if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
-				(size_t)(j - *i - 1) == ft_strlen("USER"))
-			{
-				printf("jjs"); // Replace with the actual expansion
-				*len += 3;    // Add the length of "jjs" to the token length
+				char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
+				int j = *i + 1; // Start after the '$'
+				while (input[j] && !ft_strchr(not_env, input[j]))
+				{
+					j++;
+				}
+				// Check if the substring matches "USER"
+				if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
+					(size_t)(j - *i - 1) == ft_strlen("USER"))
+				{
+					printf("jjs"); // Replace with the actual expansion
+					*len += 3;    // Add the length of "jjs" to the token length
+				}
+				else
+				{
+					// Print the variable name literally if no match
+					while (*i < j)
+					{
+						// printf("%c", input[*i]);
+						(*i)++;
+						// (*len)++;
+					}
+				}
+				*i = j; // Move *i past the variable name
 			}
 			else
 			{
-				// Print the variable name literally if no match
-				while (*i < j)
-				{
-					// printf("%c", input[*i]);
-					(*i)++;
-					// (*len)++;
-				}
+				// Print non-variable characters
+				printf("%c", input[*i]);
+				(*len)++; // <----- len is effed up when non existing env var
+				(*i)++;
 			}
-			*i = j; // Move *i past the variable name
 		}
-		else
-		{
-			// Print non-variable characters
-			printf("%c", input[*i]);
-			(*i)++;
-			(*len)++; // <----- len is effed up when non existing env var
-		}
+
 	}
 }
 
