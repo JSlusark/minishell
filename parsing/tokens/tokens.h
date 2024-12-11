@@ -31,11 +31,11 @@ typedef enum e_token_type // good to have an order like below
 	// PATH_EXP,			// we do not need this
 } t_token_type;
 
-typedef struct s_token_list
+typedef struct s_tokens
 {
 	char *value;
 	t_token_type type;
-	struct s_token_list *next;
+	struct s_tokens *next;
 } t_tokens;
 
 t_tokens *return_tokens(char *input);
