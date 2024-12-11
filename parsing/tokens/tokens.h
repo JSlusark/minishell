@@ -3,24 +3,22 @@
 
 typedef enum e_token_type // good to have an order like below
 {
-	BUILT_IN,        		// NEED TO REMOVE 0 These are the commands we need to create ("echo, cd, pwd, export, unset, env, exit")
-	ENV_VAR,        		// 1 Environment variable are words that start with $ (e.g., "$HOME", "$USER"), we do error handling for this after the tokenizing and node creation
-	ABS_PATH,           	// 2 A path starting with / (e.g., /directory/directory/  or /directory/file ) is an absolute path and refers to the exact location of the file or command file system staring from root directory
-	REL_PATH,           	// 3 A path that doesn’t start with ./ or ../ It is relative to the current working directory. (example ./directory/directory/  or ../directory/directory/  or ../directory/directory/ or ../directory/file )
-	OPTION,         		// 4 Command options (only "-n" with echo needs to handled), if not "-n" it should be UKNOWN (unless if the -n is bwtween quotes i think)
+	BUILT_IN,        		// REMOVE (NQ_ARG)
+	ENV_VAR,        		// REMOVE (NQ_ARG)
+	ABS_PATH,           	// REMOVE (NQ_ARG)
+	REL_PATH,           	// REMOVE (NQ_ARG)
 
+	OPTION,         		// REMOVE (ASSIGN ITS TYPE AFTER TOKENIZATION as "-n" or -"n" is still valid)
 	REDIR_IN,       		// 5 Input redirection ("<")
 	REDIR_OUT,      		// 6 Output redirection (">")
 	APPEND_OUT,     		// 7 Append redirection (">>")
 	HEREDOC,        		// 8 Here-document redirection ("<<")
-
 	PIPE,           		// 9 Pipe operator ("|")
+	WORD,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
 	D_STRING,        // CALL IT DQ_ARG? 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
 	S_STRING,        // CALL IT SQ_ARG String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
 
-	WORD,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
-	UNKNOWN,         		// 13 An invalid token type is a symbol that our shell won't have to execute: "\", ";", "&&", "||", unclosed " and ', "(", ")", "#", "&", "$(...)", `backticks, "*", "~" etc.. --- what about tilde?
-
+	UNKNOWN,         		//DO NOT NEED
 	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
 	// D_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
 	// S_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES

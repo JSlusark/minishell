@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 18:34:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:21:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,24 @@ bool	quote_closed(int i, char *input, char quote)
 t_token_list *return_tokens(char *input)
 {
 	int i = 0;
-	// file abs and rel path we check after during exec
-	// env var - we check during exec if in a double_s
-	// env var - shall we do the same if out of the string? can be seen as an arg first?
-	// invalid tokens.. unsure if needed to to give it a type be fair?
 	char *invalid = ";#&,`*~";  // seen outside string also && $(..)
 	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
 	while (input[i] != '\0')
 	{
+		while(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
+		{
+			int h = i + 1;
+			h++;
+			if(input[h] == '\0' || input[h] == ' ') // problem when followed by other invalid symbls
+			{
+				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
+				return(NULL);
+			}
+			else
+				break;
+		}
 		while(!ft_strchr(bounds, input[i]) && input[i] != '\0') // this grabs leters attached together as tokens, even when we have strings
 		{
 			if(ft_strchr(quotes, input[i]) && input[i] != '\0')
@@ -61,20 +69,16 @@ t_token_list *return_tokens(char *input)
 				}
 				collect_str(&i, input, input[i]);
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
-					printf(COLOR_YELLOW" <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
+					printf(COLOR_YELLOW"<---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 			else
 			{
 				printf("%c", input[i]);
 				i++;
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
-					printf(COLOR_YELLOW" <---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
+					printf(COLOR_YELLOW"<---- ARG (parsing assigns later as cmd, arg or file)\n"COLOR_RESET);
 			}
 		}
-		while(input[i] == ' ' && input[i] != '\0') // if we find 1 or more spaces after we got the close words we skip them
-			i++;
-		if(input[i] == '\0') // this was to handle the weird error
-			break;
 		if(input[i] == '|')
 		{
 			int k = i + 1;
@@ -118,31 +122,12 @@ t_token_list *return_tokens(char *input)
 			}
 			else
 			{
-				printf("\n%c", input[i]);
+				printf("%c", input[i]);
 				printf(COLOR_YELLOW"<---- OUT_REDIR\n"COLOR_RESET);
 			}
 		}
-		//PART TO CHECK BELOW
-		if(ft_strchr(invalid, input[i])) //FTSTRCHR DOES NOT WORK AS I WANT TO
-		{
-			int h = i + 1;
-			while(ft_strchr(invalid, input[h]))
-				h++;
-			h++;
-			// printf("%c\n", input[i]);
-			if(input[h] == '\0' || input[h] == ' ') // problem when followed by other invalid symbls
-			{
-				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-				return(NULL);
-			}
-		}
-			// if(input[i] != '\0')
-			// {
-			// 	// printf("\n");
-			// 	i++;
-			// }
-		//PART TO CHECK ABOVE
+		if(input[i] != '\0')
+			i++;
 	}
-	// printf("\n");
 	return(NULL); // <- return error as this
 }
