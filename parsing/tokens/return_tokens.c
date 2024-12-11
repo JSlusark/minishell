@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:55:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:52:04 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	quote_closed(int i, char *input, char quote)
 t_tokens *return_tokens(char *input)
 {
 	int i = 0;
-	char *invalid = ";#&,`*~";  // seen outside string also && $(..)
+	char *invalid = ";#&,`*~\\";  // seen outside string also && $(..)
 	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
@@ -49,7 +49,7 @@ t_tokens *return_tokens(char *input)
 		while(ft_strchr(invalid, input[h])) //FTSTRCHR DOES NOT WORK AS I WANT TO
 		{
 			h++;
-			if(input[h] == '\0' || input[h] == ' ') // problem when followed by other invalid symbls
+			if(input[h] == '\0' || ft_strchr(bounds, input[h])) // problem when followed by other invalid symbls
 			{
 				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
 				return(NULL);

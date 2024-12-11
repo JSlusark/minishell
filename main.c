@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:48:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-		if (ft_strlen(input) > 0) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
+		if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
 		{
 			add_history(input);
 			tokens = return_tokens(input);
 			// tokens = create_mock_tokens(input); // <---- change with actual token freeing function
 			// if(!tokens)
 			// {
-			// 	free(input);
+			free(input);
 			// 	free_mock_tokens(tokens); // <---- change with actual token freeing function
 			// }
 			// else // if tokenizing succeeds proceed with parsing the tokens into a node list
@@ -51,6 +51,11 @@ int	main(int argc, char **argv)
 			// 		free_node_list(node_list);// after we execute the input we free the node
 			// 	}
 			// }
+		}
+		else
+		{
+			free(input);// fixed history navigation -> not when adding more input to the history
+			input = NULL; // unsure if thsi is needed
 		}
 	}
 	clear_history();
