@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:51:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list *
 	else // Process redirection, command, or arguments of the new node
 	{
 		p->pipestart = false; // this flag is set to false when the first token is not a pipe
-		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
+		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);

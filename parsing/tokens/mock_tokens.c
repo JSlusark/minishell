@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:27:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_tokens *create_mock_tokens(char *input)
 		else if (strcmp(word, ">") == 0)
 			new_token->type = REDIR_OUT; // REDIR_OUT (when outside quotes)
 		else if (strcmp(word, ">>") == 0)
-			new_token->type = APPEND_OUT; // APPEND_OUT (when outside quotes)
+			new_token->type = APPEND; // APPEND (when outside quotes)
 		else if (strcmp(word, "<<") == 0)
 			new_token->type = HEREDOC; // HEREDOC (when outside quotes)
 		else if (word[0] == '$')

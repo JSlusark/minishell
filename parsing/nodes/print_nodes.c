@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:27:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char *return_token_enum(int token_type)
 		return "REDIR_IN (<)"; // Input redirection ("<")
 	else if (token_type == REDIR_OUT)
 		return "REDIR_OUT (>)"; // Output redirection (">")
-	else if (token_type == APPEND_OUT)
-		return "APPEND_OUT (>>)"; // Append redirection (">>")
+	else if (token_type == APPEND)
+		return "APPEND (>>)"; // Append redirection (">>")
 	else if (token_type == HEREDOC)
 		return "HEREDOC (<<)"; // Here-document redirection ("<<")
 	else if (token_type == PIPE)

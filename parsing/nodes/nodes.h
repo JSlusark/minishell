@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nodes.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_target_type
 typedef struct s_redir
 {
 	struct s_redir *prev; // we need this so that the curr redir can communicate with the previous if a node had more than 1 redir
-	int		type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND_OUT, hEREDOC)
+	int		type;   // Type of redirection (REDIR_IN, REDIR_OUT, APPEND, hEREDOC)
 	int		redir_i; // can be useful when we have more than 1 redirection in a node
 	char	*target;		// Target is filename (for input, output and append) or delimiter (for HEREDOC)
 	int		target_type;	// can be delimiter for heredoc, for else it can be file name or a valid path to a file (abs, relative or env_var like $PATH)

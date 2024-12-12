@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 13:25:21 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:27:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void print_tokens(t_tokens *token)
 			printf(COLOR_YELLOW" <-- Redirection input\n"COLOR_RESET);
 		else if (token->type == REDIR_OUT)
 			printf(COLOR_YELLOW" <-- Redirection output\n"COLOR_RESET);
-		else if (token->type == APPEND_OUT)
+		else if (token->type == APPEND)
 			printf(COLOR_YELLOW" <-- Append output\n"COLOR_RESET);
 		else if (token->type == HEREDOC)
 			printf(COLOR_YELLOW" <-- Heredoc redirection\n"COLOR_RESET);
@@ -94,7 +94,7 @@ bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list *
 	else // Process redirection, command, or arguments of the new node
 	{
 		p->pipestart = false; // this flag is set to false when the first token is not a pipe
-		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND_OUT || (*token)->type == HEREDOC)
+		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
 			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
 			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);

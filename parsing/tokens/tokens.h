@@ -11,7 +11,7 @@ typedef enum e_token_type // good to have an order like below
 	OPTION,         		// REMOVE (ASSIGN ITS TYPE AFTER TOKENIZATION as "-n" or -"n" is still valid)
 	REDIR_IN,       		// 5 Input redirection ("<")
 	REDIR_OUT,      		// 6 Output redirection (">")
-	APPEND_OUT,     		// 7 Append redirection (">>")
+	APPEND,     		// 7 Append redirection (">>")
 	HEREDOC,        		// 8 Here-document redirection ("<<")
 	PIPE,           		// 9 Pipe operator ("|")
 	ARG,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word

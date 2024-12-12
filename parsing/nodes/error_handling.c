@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:36:50 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	pipe_error(t_tokens *token, bool check_pipestart)
 }
 bool	redir_error(t_tokens *token)
 {
-	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND_OUT || token->type == HEREDOC)
+	if (token->type == REDIR_IN || token->type == REDIR_OUT || token->type == APPEND || token->type == HEREDOC)
 	{
 		if(token->next == NULL) // error and free
 		{
@@ -51,7 +51,7 @@ bool	redir_error(t_tokens *token)
 			return(true); // we break the loop
 		}
 		else if (token->next->type == PIPE || token->next->type == REDIR_IN
-			|| token->next->type == REDIR_OUT || token->next->type == APPEND_OUT
+			|| token->next->type == REDIR_OUT || token->next->type == APPEND
 			|| token->next->type == HEREDOC || token->next->type == UNKNOWN)
 		{
 			printf("Minishell: syntax error near unexpected token `%s'\n", token->next->value);
