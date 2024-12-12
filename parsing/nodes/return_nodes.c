@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 15:38:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 15:58:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int token_n)
 {
 	t_args *new_arg;
+	(void)token_n;
 
 	if (*find_cmd) // triggers command storing if true and checks if next token is -n
 	{
-		printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
-		printf("%s ", (*token)->value);
-		printf(COLOR_YELLOW" <--becomes the cmd of the node\n"COLOR_RESET);
+		// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
+		// printf("%s ", (*token)->value);
+		// printf(COLOR_YELLOW" <--becomes the cmd of the node\n"COLOR_RESET);
 		if(!alloc_cmd(new_node, *token))// had to return as error
 			return(false);
 		*find_cmd = false; // command found, if we have other tokens they are args if not redir data
@@ -36,9 +37,9 @@ bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int tok
 			if(!new_arg)
 				return(false);
 			append_new_arg(&(new_node->args), new_arg); // Pass args as a double pointer
-			printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
-			printf(" %s", (*token)->value); // he
-			printf(COLOR_YELLOW" <--becomes an arg of the node\n"COLOR_RESET);
+			// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
+			// printf(" %s", (*token)->value); // he
+			// printf(COLOR_YELLOW" <--becomes an arg of the node\n"COLOR_RESET);
 		}
 	}
 	return(true);
@@ -53,19 +54,19 @@ bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list *
 		p->pipestart = false; // this flag is set to false when the first token is not a pipe
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
-			printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
-			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
-			printf(" %s", (*token)->value);
-			printf(COLOR_YELLOW" <--becomes redirection\n"COLOR_RESET);
+			// printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
+			// printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
+			// printf(" %s", (*token)->value);
+			// printf(COLOR_YELLOW" <--becomes redirection\n"COLOR_RESET);
 			if (!parse_redir(token, *new_node, &(p->redir_i))) // adds redirection and target (and advances 2 tokens from the list)
 				return(false);
 			p->token_n++; // used just for print
-			printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
-			printf(" %s", (*token)->value);
-			if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-				printf(COLOR_YELLOW" <--becomes redirection's delimiter\n"COLOR_RESET);
-			else // if redir is <, > and >> the next token is seen as file
-				printf(COLOR_YELLOW" <--becomes redirection's file\n"COLOR_RESET);
+			// printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
+			// printf(" %s", (*token)->value);
+			// if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
+				// printf(COLOR_YELLOW" <--becomes redirection's delimiter\n"COLOR_RESET);
+			// else // if redir is <, > and >> the next token is seen as file
+				// printf(COLOR_YELLOW" <--becomes redirection's file\n"COLOR_RESET);
 		}
 		else // Parses commands and arguments
 			if(!parse_rest(&(p->find_cmd), token, *new_node, p->token_n))
@@ -98,7 +99,7 @@ t_node_list *return_nodes(t_tokens *token)
 
 	p = assign_data();
 	head = NULL;
-	printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
+	// printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (token) //at every token iteration from the list - 1. check if token is unknown or a pipe error, 2.Start a new node, 3.Add token as element of the node and when pipe is encountered we end the node
 		{
 			if (unknown_token(token) || pipe_error(token, p.pipestart)) // Checks if token is unknown or a pipe error

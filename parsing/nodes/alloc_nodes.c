@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/11 17:23:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/12 16:00:43 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void append_node(t_node_list **head, t_node_list *new_node)
 }
 t_node_list *init_new_node(int node_n, bool *start_node) // nothing else needed
 {
-	printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
+	// printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 	t_node_list *new_node;
 
 	new_node = calloc(1, sizeof(t_node_list));
