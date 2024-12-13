@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 16:51:12 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:24:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 				}
 				else // if parser is successful we execute and free the node list after we executed
 				{
-					// print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
+					print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
 					exec_nodes(node_list); // <-------- we traverse the node list to handle various execution cases based on the data we assigned to our nodes duting the parsing
 					free_node_list(node_list);// after we execute the input we free the node
 				}

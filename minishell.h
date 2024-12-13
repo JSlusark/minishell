@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2024/12/09 15:17:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:30:07 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 #define COLOR_RED    "\x1b[31m"
 #define COLOR_YELLOW "\x1b[33m"
 #define COLOR_BLUE "\x1b[34m"
+#define COLOR_CYAN   "\x1b[36m"
 #define COLOR_RESET  "\x1b[0m"
 
 // Parsing headers

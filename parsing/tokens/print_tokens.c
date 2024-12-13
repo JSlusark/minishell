@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:24:59 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 17:07:59 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:16:47 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,21 @@ char *return_enum(int token_type)
 		return "PIPE"; // Pipe operator ("|")
 	else if (token_type == ARG)
 		return "ARG"; // Any letter or number that is not quoted
-	else if (token_type == UNKNOWN)
-		return "UNKNOWN"; // Invalid token (e.g., \, ;, &&, ||, etc.)
 	else
-		return "INVALID_ENUM"; // For invalid enum values
+		return "UNRECOGNISED ENUM"; // For invalid enum values
 }
 
 void print_tokens(t_tokens *tokens)
 {
 	printf(COLOR_GREEN"TOKEN LIST\n"COLOR_RESET);
-    t_tokens *current = tokens; // Start at the head of the token list
-    int i = 0;
+	t_tokens *current = tokens; // Start at the head of the token list
+	int i = 0;
 	while (current != NULL) // Traverse until the end of the list
-    {
-        printf(COLOR_BLUE"Token %d:"COLOR_RESET, i);
-        printf("%s", current->value);
-        printf(COLOR_YELLOW"<--- %s\n"COLOR_RESET, return_enum(current->type));
-        current = current->next; // Move to the next token
+	{
+		printf(COLOR_BLUE"Token %d:"COLOR_RESET, i);
+		printf("%s", current->value);
+		printf(COLOR_YELLOW"<--- %s\n"COLOR_RESET, return_enum(current->type));
+		current = current->next; // Move to the next token
 		i++;
-    }
+	}
 }
