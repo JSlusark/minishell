@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 16:00:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 14:50:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
+		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
 		{
 			add_history(input);
@@ -31,7 +32,7 @@ int	main(int argc, char **argv)
 			// tokens = create_mock_tokens(input); // <---- change with actual token freeing function
 			if(!tokens)
 			{
-				printf("tokenlist is null (I just print the tokens and still need to allocate the list for parsing)\n"); // added this just to test the real token list
+				// printf("tokenlist is null (I just print the tokens and still need to allocate the list for parsing)\n"); // added this just to test the real token list
 				free(input);
 				free_mock_tokens(tokens); // <---- change with actual token freeing function
 			}

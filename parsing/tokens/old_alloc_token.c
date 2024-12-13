@@ -1,16 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   old_alloc_token.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:29:11 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 16:29:14 by jslusark         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../minishell.h"
+//list of tests:
+//https://docs.google.com/spreadsheets/d/1AUQk0Nrnvj7-9RQHEaSSQJgBb0VGlHvQt78khxBv5UQ/edit?gid=1887111398#gid=1887111398
 
 // void free_tokens(t_tokens *head)
 // {
@@ -68,50 +58,54 @@ void free_tokens(t_tokens *head)
 void	collect_str(int *i, char *input, char quote, int *len, char *buff)
 {
 	// printf("%c %c\n", input[*i], quote);
+    // int buff_index = 0; // Local index for buff
+	(*i)++; // jump first quote
 	while(input[*i] != '\0') // echo "hello""" does not print error
 	{
 		printf("C:%c I: %i\n", input[*i], *i);
 		if(input[*i] == quote)
 			(*i)++;
+		// else
+		// {
+		// 	if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
+		// 	{
+		// 		char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
+		// 		int j = *i + 1; // Start after the '$'
+		// 		while (input[j] && !ft_strchr(not_env, input[j]))
+		// 		{
+		// 			j++;
+		// 		}
+		// 		// Check if the substring matches "USER"
+		// 		if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
+		// 			(size_t)(j - *i - 1) == ft_strlen("USER"))
+		// 		{
+		// 			const char *expansion = "jjs"; // <--- should have a func that does return_exp() if false returns null if true returns the actual exp as a string?
+		// 			// int exp_len = strlen(expansion);
+		// 			printf("%s", expansion); // Replace with the actual expansion
+		// 			// *len += 3;    // Add the length of "jjs" to the token length
+		// 			// while jjs buff[i++]= buff[len++];
+		// 		}
+		// 		else
+		// 		{
+		// 			// Print the variable name literally if no match
+		// 			while (*i < j)
+		// 			{
+		// 				// printf("%c", input[*i]);
+		// 				buff[*i++]= buff[*len++]; /// CHECK IF I AND LEN
+		// 				// (*i)++;
+		// 				// (*len)++;
+		// 			}
+		// 		}
+		// 		*i = j; // Move *i past the variable name
+		// 	}
 		else
 		{
-			if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
-			{
-				char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
-				int j = *i + 1; // Start after the '$'
-				while (input[j] && !ft_strchr(not_env, input[j]))
-				{
-					j++;
-				}
-				// Check if the substring matches "USER"
-				if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
-					(size_t)(j - *i - 1) == ft_strlen("USER"))
-				{
-					printf("jjs"); // Replace with the actual expansion
-					*len += 3;    // Add the length of "jjs" to the token length
-					// while jjs buff[i++]= buff[len++];
-				}
-				else
-				{
-					// Print the variable name literally if no match
-					while (*i < j)
-					{
-						// printf("%c", input[*i]);
-						buff[*i++]= buff[*len++]; /// CHECK IF I AND LEN
-						// (*i)++;
-						// (*len)++;
-					}
-				}
-				*i = j; // Move *i past the variable name
-			}
-			else
-			{
-				// Print non-variable characters
-				printf("%c", input[*i]);
-				buff[*i++]= buff[*len++]; /// CHECK IF I AND LEN
-				// (*len)++; // <----- len is effed up when non existing env var
-				// (*i)++;
-			}
+			// Print non-variable characters
+			printf("%c", input[*i]);
+			buff[*len] = input[*i];
+			(*len)++;
+			(*i)++;
+		// }
 		}
 
 	}
@@ -179,7 +173,9 @@ t_tokens *return_tokens(char *input)
 			else
 			{
 				printf("%c", input[i]);
-				buff[len++] = input[i++];
+				buff[len] = input[i];
+				len++;
+				i++;
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
 				{
 					// as this is where i get the full printed token i should terminate and append here?
