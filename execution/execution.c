@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 16:42:52 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:26:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,10 @@
 Exit Codes and meaning (we should remember to assign them after parsing and executing)
 	0 	- Success: Command executed successfully.
 	1 	- General error: Command failed for a generic reason.
-	2 	- Incorrect usage: Invalid arguments or syntax in the command (Jess can add this in main.c - if(!node_list) after the node is freed)
+	2 	- Incorrect usage: Invalid arguments or syntax in the command <----- will be added as parsing error
 	126	- Cannot execute: File exists but is not executable.
-	127	- Command not found: Command is missing in the system's PATH.
+	127	- Command not found: Command is missing in the system's PATH.   -
 	130	- Script interrupted (SIGINT): Process terminated via Ctrl+C.
-
  */
 
 void exec_command(t_node_list	*node)
@@ -75,10 +74,10 @@ void exec_command(t_node_list	*node)
 		printf(COLOR_GREEN"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->value, "unset") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
-	else if(node->cmd->type == ENV_VAR) // there are cases like "$PATH echo hello" which made me consider this but there might be other ways.. will think about it in the futue
+	else if(node->cmd->type == ENV_VAR) // should be FILE OR PATHNAME and see if an executable is put as cmd
 		printf(COLOR_GREEN"\nFound env_var as node command, still need to figure out how thinsg work here! Try <$PATH echo hello> on bash !\n"COLOR_RESET);
 	else
-		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->value);
+		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->value); // if this fails - error code 127 (command not found)
 }
 
 int count_nodes(t_node_list	*node_list)

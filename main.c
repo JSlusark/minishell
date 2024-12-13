@@ -6,20 +6,42 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 17:24:27 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 18:24:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_node_list	*parse(char *input, t_node_list *nodes)
+{
+	t_tokens	*tokens;
+	tokens = return_tokens(input);
+	if(!tokens)
+	{
+		free(input);
+		free_tokens(tokens); // <---- change with actual token freeing function
+		printf("- TOKEN FAILED TO ALLOCATE - add error code 2 to $?\n");
+	}
+	else // if tokenizing succeeds create execution nodes from tokens
+	{
+		print_tokens(tokens); // for tokenization error handling
+		nodes = return_nodes(tokens);
+		free_tokens(tokens);
+		free(input);
+		if(!nodes) // if parsing has error it returns null and frees everything
+		{
+			printf("- NODE FAILED TO ALLOCATE - add error code 2 to $?\n");
+		}
+	}
+	return(nodes);
+}
+
 int	main(int argc, char **argv)
 {
 	char			*input;
-	t_tokens	*tokens;
-	t_node_list		*node_list;
+	t_node_list		*nodes = NULL;
 	(void)argc;
 	(void)argv;
-	// (void)tokens;
 
 	while (1)
 	{
@@ -28,36 +50,13 @@ int	main(int argc, char **argv)
 		if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
 		{
 			add_history(input);
-			tokens = return_tokens(input);
-			if(!tokens)
+			nodes = parse(input, nodes);
+			if(nodes)
 			{
-				// printf("tokenlist is null (I just print the tokens and still need to allocate the list for parsing)\n"); // added this just to test the real token list
-				free(input);
-				free_tokens(tokens); // <---- change with actual token freeing function
+				print_nodes(nodes); // for node error handling
+				exec_nodes(nodes); // <-------- we traverse the node list to handle various execution cases based on the data we assigned to our nodes duting the parsing
+				free_node_list(nodes);// after we execute the input we free the node
 			}
-			else // if tokenizing succeeds proceed with parsing the tokens into a node list
-			{
-				print_tokens(tokens);
-				node_list = return_nodes(tokens);
-				free_tokens(tokens);
-				free(input);
-				if(!node_list) // if parsing has error it returns null and frees everything
-				{
-					// do not need to free the nodelist as it's null and we do ilaready  in the return_nodes function
-					// I think we should use this to create the error code 0 for situation like for situations like echo $?
-				}
-				else // if parser is successful we execute and free the node list after we executed
-				{
-					print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
-					exec_nodes(node_list); // <-------- we traverse the node list to handle various execution cases based on the data we assigned to our nodes duting the parsing
-					free_node_list(node_list);// after we execute the input we free the node
-				}
-			}
-		}
-		else
-		{
-			free(input);// fixed history navigation -> not when adding more input to the history
-			input = NULL; // unsure if thsi is needed
 		}
 	}
 	clear_history();
