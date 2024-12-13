@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:55:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 char *return_token_enum(int token_type)
 {
-	if (token_type == BUILT_IN)
-		return "BUILT_IN"; // Commands like echo, cd, pwd, etc.
-	else if (token_type == ENV_VAR)
+	if (token_type == ENV_VAR)
 		return "ENV_VAR"; // Environment variables starting with $ (e.g., $HOME)
 	else if (token_type == ABS_PATH)
 		return "ABS_PATH"; // Absolute path starting with /
@@ -34,10 +32,6 @@ char *return_token_enum(int token_type)
 		return "HEREDOC (<<)"; // Here-document redirection ("<<")
 	else if (token_type == PIPE)
 		return "PIPE"; // Pipe operator ("|")
-	else if (token_type == DQ_ARG)
-		return "STRING_D_QUOTES"; // Strings inside double quotes
-	else if (token_type == SQ_ARG)
-		return "STRING_S_QUOTES"; // Strings inside single quotes
 	else if (token_type == ARG)
 		return "ARG"; // Any letter or number that is not quoted
 	else if (token_type == UNKNOWN)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mock_tokens.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 22:13:44 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 15:38:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:54:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@ improve the lexical analysis and tokenization part of the project
 */
 
 #include "../../minishell.h"
-
-void free_mock_tokens(t_tokens *head) {
-	t_tokens *current = head;
-	t_tokens *next;
-
-	while (current != NULL)
-	{
-		next = current->next; // Store the next token
-		free(current->value); // Free the duplicated string
-		free(current);             // Free the current node
-		current = next;            // Move to the next token
-	}
-}
 
 // Splits the input into words and assigns enum types
 t_tokens *create_mock_tokens(char *input)
@@ -47,15 +34,6 @@ t_tokens *create_mock_tokens(char *input)
 			perror("malloc failed");
 			exit(EXIT_FAILURE);
 		}
-		if (strcmp(word, "exit") == 0
-			|| strcmp(word, "unset") == 0
-			|| strcmp(word, "cd") == 0
-			|| strcmp(word, "pwd") == 0
-			|| strcmp(word, "export") == 0
-			|| strcmp(word, "echo") == 0
-			|| strcmp(word, "cd") == 0
-			|| strcmp(word, "env") == 0)
-			new_token->type = BUILT_IN; // COMMANDS WE NEED TO CREATE
 		else if (strcmp(word, "|") == 0)
 			new_token->type = PIPE; // PIPE (when outside quotes)
 		else if (strcmp(word, "&&") == 0

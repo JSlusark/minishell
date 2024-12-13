@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/09 15:11:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:42:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,19 @@ void exec_command(t_node_list	*node)
 	if(strcmp(node->cmd->value, "cd") == 0)
 		printf(COLOR_GREEN"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->value, "echo") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
+	{
+		t_args *current = node->args; // Assuming args is a linked list
+		while (current != NULL) // Traverse until the end of the list
+		{
+			if (current->value != NULL) // Check if the current value is not NULL
+				printf("%s", current->value); // Print the current argument value
+			if (current->next != NULL)
+				printf(" ");
+			current = current->next; // Move to the next argument in the list
+		}
+		if(!node->option_n)
+			printf("\n"); // print newline at end if -n_option is false
+	}
 	else if(strcmp(node->cmd->value, "exit") == 0)
 	{
 		printf(COLOR_GREEN"\nMinishell> "COLOR_RESET); // does not create leaks for now

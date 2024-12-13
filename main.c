@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 14:50:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:51:12 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ int	main(int argc, char **argv)
 		{
 			add_history(input);
 			tokens = return_tokens(input);
-			// tokens = create_mock_tokens(input); // <---- change with actual token freeing function
 			if(!tokens)
 			{
 				// printf("tokenlist is null (I just print the tokens and still need to allocate the list for parsing)\n"); // added this just to test the real token list
 				free(input);
-				free_mock_tokens(tokens); // <---- change with actual token freeing function
+				free_tokens(tokens); // <---- change with actual token freeing function
 			}
 			else // if tokenizing succeeds proceed with parsing the tokens into a node list
 			{
+				print_tokens(tokens);
 				node_list = return_nodes(tokens);
-				free_mock_tokens(tokens);
+				free_tokens(tokens);
 				free(input);
 				if(!node_list) // if parsing has error it returns null and frees everything
 				{
@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 				}
 				else // if parser is successful we execute and free the node list after we executed
 				{
-					print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
+					// print_nodes(node_list); // let's leave this function for error handling, we can comment it our or remove it once we submit the project
 					exec_nodes(node_list); // <-------- we traverse the node list to handle various execution cases based on the data we assigned to our nodes duting the parsing
 					free_node_list(node_list);// after we execute the input we free the node
 				}

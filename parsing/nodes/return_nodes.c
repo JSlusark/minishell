@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/12 15:58:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 17:04:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,31 +101,31 @@ t_node_list *return_nodes(t_tokens *token)
 	head = NULL;
 	// printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (token) //at every token iteration from the list - 1. check if token is unknown or a pipe error, 2.Start a new node, 3.Add token as element of the node and when pipe is encountered we end the node
+	{
+		if (unknown_token(token) || pipe_error(token, p.pipestart)) // Checks if token is unknown or a pipe error
 		{
-			if (unknown_token(token) || pipe_error(token, p.pipestart)) // Checks if token is unknown or a pipe error
-			{
-				free_node_list(head);
-				free_node_list(new_node);
-				return NULL;
-			}
-			if(p.start_node == true)
-			{
-				new_node = init_new_node(p.node_n, &p.start_node);
-				if (!new_node)
-					return(NULL);
-				p.find_cmd = true;
-				p.redir_i = 0;
-				p.node_n++; // increases nodes count,
-			}
-			if(!parse_token(&p, &token, &head, &new_node)) // gets elements for the node that we created
-			{
-				free_node_list(head);
-				free_node_list(new_node);
-				return(NULL);
-			}
-			p.token_n++;
+			free_node_list(head);
+			free_node_list(new_node);
+			return NULL;
 		}
-		if (new_node) // Append the last node if no pipe ends it
-			append_node(&head, new_node);
+		if(p.start_node == true)
+		{
+			new_node = init_new_node(p.node_n, &p.start_node);
+			if (!new_node)
+				return(NULL);
+			p.find_cmd = true;
+			p.redir_i = 0;
+			p.node_n++; // increases nodes count,
+		}
+		if(!parse_token(&p, &token, &head, &new_node)) // gets elements for the node that we created
+		{
+			free_node_list(head);
+			free_node_list(new_node);
+			return(NULL);
+		}
+		p.token_n++;
+	}
+	if (new_node) // Append the last node if no pipe ends it
+		append_node(&head, new_node);
 	return (head);
 }

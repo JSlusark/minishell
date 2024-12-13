@@ -2,6 +2,7 @@ NAME = minishell
 LIBFT = libft/libft.a
 
 TOKENIZATION  = ./parsing/tokens/return_tokens.c \
+				 ./parsing/tokens/print_tokens.c \
 				./parsing/tokens/mock_tokens.c
 
 NODE_CREATION = 	./parsing/nodes/return_nodes.c \

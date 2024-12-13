@@ -3,11 +3,10 @@
 
 typedef enum e_token_type // good to have an order like below
 {
-	BUILT_IN,        		// REMOVE (NQ_ARG)
+	// BUILT_IN,        		// REMOVE (NQ_ARG)
 	ENV_VAR,        		// REMOVE (NQ_ARG)
 	ABS_PATH,           	// REMOVE (NQ_ARG)
 	REL_PATH,           	// REMOVE (NQ_ARG)
-
 	OPTION,         		// REMOVE (ASSIGN ITS TYPE AFTER TOKENIZATION as "-n" or -"n" is still valid)
 	REDIR_IN,       		// 5 Input redirection ("<")
 	REDIR_OUT,      		// 6 Output redirection (">")
@@ -15,10 +14,10 @@ typedef enum e_token_type // good to have an order like below
 	HEREDOC,        		// 8 Here-document redirection ("<<")
 	PIPE,           		// 9 Pipe operator ("|")
 	ARG,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
-	DQ_ARG,        // CALL IT DQ_ARG? 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
-	SQ_ARG,        // CALL IT SQ_ARG String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
-
 	UNKNOWN,         		//DO NOT NEED
+	// DQ_ARG,        // CALL IT DQ_ARG? 10 Strings inside double quotes (e.g., "hello world"), after the string is ready we have to add a function that will see if we have $var inside here because it can be expanded inside double quotes only, we should also have a function that cheks if there is a command token type only inside
+	// SQ_ARG,        // CALL IT SQ_ARG String inside single quotes (e.g., "hello world"), after the string is ready we should have a function that cheks if there is a command token type only inside
+
 	// I DON'T THINK WE NEED THESE ESPECIALLY BECAUSE THESE DETAILS ARE PART OF THE INVALID TOKENS CATEGORY OR THINGS WE WILL CHECK AFTER WE PARSE TOKENS TO NODES
 	// D_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
 	// S_STR,         	// we can handle unclosed quotes as an unknown token, we can tokenize closed double quotes strings as STRING_D_QUOTES
@@ -39,5 +38,6 @@ typedef struct s_tokens
 } t_tokens;
 
 t_tokens *return_tokens(char *input);
-
+void free_tokens(t_tokens *head);
+void print_tokens(t_tokens *tokens);
 #endif

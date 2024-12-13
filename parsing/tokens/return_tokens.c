@@ -6,23 +6,38 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 15:00:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/13 16:40:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+//list of tests:
+//https://docs.google.com/spreadsheets/d/1AUQk0Nrnvj7-9RQHEaSSQJgBb0VGlHvQt78khxBv5UQ/edit?gid=1887111398#gid=1887111398
 
-// void free_tokens(t_tokens *head)
-// {
-//     t_tokens *current;
-//     while (head)
-//     {
-//         current = head;
-//         head = head->next;
-//         free(current->value);
-//         free(current);
-//     }
+// void free_mock_tokens(t_tokens *head) {
+// 	t_tokens *current = head;
+// 	t_tokens *next;
+
+// 	while (current != NULL)
+// 	{
+// 		next = current->next; // Store the next token
+// 		free(current->value); // Free the duplicated string
+// 		free(current);             // Free the current node
+// 		current = next;            // Move to the next token
+// 	}
 // }
+
+void free_tokens(t_tokens *head)
+{
+	t_tokens *current;
+	while (head)
+	{
+		current = head;
+		head = head->next;
+		free(current->value);
+		free(current);
+	}
+}
 
 t_tokens *create_token(const char *value, int type)
 {
@@ -37,7 +52,7 @@ t_tokens *create_token(const char *value, int type)
 		}
 		new_token->type = type;
 		new_token->next = NULL;
-		printf("TOKEN:%s", new_token->value);
+		// printf("TOKEN:%s", new_token->value);
 		return new_token;
 }
 
@@ -54,26 +69,45 @@ void append_token(t_tokens **head, t_tokens *new_token)
 	current->next = new_token;
 }
 
-void free_tokens(t_tokens *head)
-{
-	t_tokens *current;
-	while (head)
-	{
-		current = head;
-		head = head->next;
-		free(current->value);
-		free(current);
-	}
-}
 
 void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote)
 {
-	while(*i <= *last_quote) // echo "hello""" does not print error
+	while (*i <= *last_quote) // echo "hello""" does not print error
 	{
-		// printf("C:%c I: %i\n", input[*i], *i);
-		if(input[*i] != quote)
+		// Check for variable expansion inside double quotes
+		if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
 		{
-			if (*len >= 1023) // Preventing buffer overflow, unsure if ok
+			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
+			int j = *i + 1; // Start after the '$'
+
+			// Identify the variable name
+			while (input[j] && !ft_strchr(not_env, input[j]))
+			{
+				j++;
+			}
+			// Expand the variable if it matches
+			if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
+				(size_t)(j - *i - 1) == ft_strlen("USER")) // could do a while loop taht check ll env_var names and compares
+			{
+				const char *expansion = "jjs"; // Simulate expansion
+				int exp_len = strlen(expansion);
+				if (*len + exp_len >= 1023) // Prevent buffer overflow
+				{
+					printf("Error: Buffer overflow during variable expansion\n");
+					return;
+				}
+				for (int k = 0; k < exp_len; k++)
+				{
+					buff[*len] = expansion[k];
+					(*len)++;
+				}
+			}
+			*i = j-1; // Move *i to the last character that matches the env_name
+		}
+		else if (input[*i] != quote) // Copy other characters except for quotes
+		{
+			// printf("HIT I after exp: %c at input[%d]\n", input[*i], *i);
+			if (*len >= 1023) // Preventing buffer overflow
 			{
 				printf("Error: Buffer overflow in collect_str\n");
 				return;
@@ -84,6 +118,7 @@ void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 		(*i)++;
 	}
 }
+
 
 bool	quote_closed(int *i, char *input, char quote, int *last_quote)
 {
@@ -186,7 +221,7 @@ t_tokens *return_tokens(char *input)
 					if (len > 0)
 					{
 						append_token(&tokens, create_token(buff, ARG));
-						printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
+						// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
 					}
 				}
 			}
@@ -204,7 +239,7 @@ t_tokens *return_tokens(char *input)
 					{
 						append_token(&tokens, create_token(buff, ARG));
 					}
-					printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
+					// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
 				}
 			}
 		}
@@ -215,7 +250,7 @@ t_tokens *return_tokens(char *input)
 			if(input[k] == '|')
 			{
 				printf("||");
-				printf(COLOR_YELLOW"<---- OPERATOR\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- OPERATOR\n"COLOR_RESET);
 				printf("Minishell: error || operator are just for bonus\n");
 				return(NULL);
 				// i++; // wtf i have put that?
@@ -224,7 +259,7 @@ t_tokens *return_tokens(char *input)
 			{
 				append_token(&tokens, create_token("|", PIPE));
 				// printf("%c", input[i]);
-				printf(COLOR_YELLOW"<---- PIPE len 1\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- PIPE len 1\n"COLOR_RESET);
 			}
 		}
 		else if(input[i] == '>') // use a while to understand if >> ?
@@ -234,14 +269,14 @@ t_tokens *return_tokens(char *input)
 			{
 				append_token(&tokens, create_token(">>", APPEND));
 				// printf(">>");
-				printf(COLOR_YELLOW"<---- APPEND_REDIR len 2\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- APPEND_REDIR len 2\n"COLOR_RESET);
 				i++;
 			}
 			else
 			{
 				append_token(&tokens, create_token(">", REDIR_OUT));
 				// printf("%c", input[i]);
-				printf(COLOR_YELLOW"<---- IN_REDIR len 1\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- IN_REDIR len 1\n"COLOR_RESET);
 			}
 		}
 		else if(input[i] == '<') // use a while to understand if >> ?
@@ -251,14 +286,14 @@ t_tokens *return_tokens(char *input)
 			{
 				append_token(&tokens, create_token("<<", HEREDOC));
 				// printf("<<");
-				printf(COLOR_YELLOW"<---- HEREDOC_REDIR len 2\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- HEREDOC_REDIR len 2\n"COLOR_RESET);
 				i++;
 			}
 			else
 			{
 				append_token(&tokens, create_token("<", REDIR_IN));
 				// printf("%c", input[i]);
-				printf(COLOR_YELLOW"<---- OUT_REDIR len 1\n"COLOR_RESET);
+				// printf(COLOR_YELLOW"<---- OUT_REDIR len 1\n"COLOR_RESET);
 			}
 		}
 		if(input[i] != '\0')
