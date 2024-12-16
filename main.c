@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 18:24:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2024/12/16 11:43:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ t_node_list	*parse(char *input, t_node_list *nodes)
 	if(!tokens)
 	{
 		free(input);
-		free_tokens(tokens); // <---- change with actual token freeing function
+		free_tokens(tokens); //
 		printf("- TOKEN FAILED TO ALLOCATE - add error code 2 to $?\n");
 	}
 	else // if tokenizing succeeds create execution nodes from tokens
 	{
-		print_tokens(tokens); // for tokenization error handling
+		// print_tokens(tokens); // for tokenization error handling
 		nodes = return_nodes(tokens);
 		free_tokens(tokens);
 		free(input);
@@ -47,15 +47,20 @@ int	main(int argc, char **argv)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
+		if (!input) // Handle EOF (Ctrl+D)
+		{
+			printf("exit\n");
+			break;
+		}
 		if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
 		{
 			add_history(input);
 			nodes = parse(input, nodes);
 			if(nodes)
 			{
-				print_nodes(nodes); // for node error handling
+				// print_nodes(nodes); // for node error handling
 				exec_nodes(nodes); // <-------- we traverse the node list to handle various execution cases based on the data we assigned to our nodes duting the parsing
-				free_node_list(nodes);// after we execute the input we free the node
+				free_node_list(nodes);// after we execute the input we free the nodes
 			}
 		}
 	}
