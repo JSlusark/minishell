@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 12:09:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/15 20:08:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,19 @@ bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int tok
 	else // triggers args storing
 	{
 		// if(!new_node->cmd->args && new_node->cmd->option_n == false && (*token)->value[0] == '-') // need to put condition of cmd args is null to avoid taking -n that follow args
-		// {
-		// 	check_option(token, new_node);
-		// 	if(new_node->cmd->option_n == false)
-		// 	{
-		// 	 add_argument(&(new_node->cmd->args), (*token)->value); // this makes sure to add -nmm to arg when echo -nmm aths shshshs
-		// 	}
-		// }
-		// else
-		// {
+		if(!new_node->cmd->args && new_node->cmd->option_n == false) // need to put condition of cmd args is null to avoid taking -n that follow args
+		{
+			add_option_n(token, new_node);
+		}
+		else
+		{
 			 if (!add_argument(&(new_node->cmd->args), (*token)->value))
 				return false;
-			// new_arg = init_new_arg(*token);
-			// if(!new_arg)
-			// 	return(false);
-			// append_new_arg(&(new_node->args), new_arg); // Pass args as a double pointer
+
 			// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
 			// printf(" %s", (*token)->value); // he
 			// printf(COLOR_YELLOW" <--becomes an arg of the node\n"COLOR_RESET);
-		// }
+		}
 	}
 	return(true);
 }

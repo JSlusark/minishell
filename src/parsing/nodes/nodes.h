@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 10:39:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/15 18:40:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int tok
 //Assigns token as command of the node
 bool alloc_cmd(t_node_list *curr_node, t_tokens *token);
 //Flags if option -n is present and handles order which is written on the CLI
-void	check_option(t_tokens **token, t_node_list *new_node);
+void	add_option_n(t_tokens **token, t_node_list *new_node);
 // //Assigns token as arg of the node and appends to the arg list
 // t_args *init_new_arg(t_tokens *token);
 // void append_new_arg(t_args **args, t_args *new_arg);

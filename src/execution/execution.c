@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 12:43:09 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:03:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	print_exec(t_node_list	*node)
 	int i; // index used for looping thorugh args array
 	if(strcmp(node->cmd->cmd, "cd") == 0)
 	{
-		printf(COLOR_GREEN"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
+		printf(COLOR_YELLOW"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
 	}
 	else if (strcmp(node->cmd->cmd, "env") == 0)
 	{
-		printf(COLOR_GREEN"\nEXECUTING < ENV > BUILT-IN...\n\n"COLOR_RESET);
+		printf(COLOR_YELLOW"\nEXECUTING < ENV > BUILT-IN...\n\n"COLOR_RESET);
 		handle_env(node->msh->ms_env);
 	}
 	else if(strcmp(node->cmd->cmd, "echo") == 0)
@@ -77,13 +77,13 @@ void	print_exec(t_node_list	*node)
 		//why free_node_list, clear history and exit 0 where removed?
 	}
 	else if(strcmp(node->cmd->cmd, "export") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
+		printf(COLOR_YELLOW"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->cmd, "pwd") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
+		printf(COLOR_YELLOW"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
 	else if(strcmp(node->cmd->cmd, "unset") == 0)
-		printf(COLOR_GREEN"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
+		printf(COLOR_YELLOW"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
 	else
-		printf(COLOR_GREEN"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->cmd); // if this fails - error code 127 (command not found)?
+		printf(COLOR_YELLOW"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->cmd); // if this fails - error code 127 (command not found)?
 }
 
 void 	exec_command(t_node_list	*node_list)
@@ -119,6 +119,7 @@ void 	exec_command(t_node_list	*node_list)
 	}
 	else
 	{
+		printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
 		printf("Command not found: %s\n", node_list->cmd->cmd);
 	}
 }
@@ -139,7 +140,7 @@ void	exec_nodes(t_node_list	*node_list)
 	int node_amount = count_nodes(node_list); // <---- secondo me possiamo togliere questa funzione
 	if (node_amount > 1) 					 // e sostituire qui con "if (node->next)"
 	{
-		printf(COLOR_GREEN"\nEXECUTING PIPES WITH %d NODES...\n"COLOR_RESET, node_amount);
+		printf(COLOR_YELLOW"\nEXECUTING PIPES WITH %d NODES...\n"COLOR_RESET, node_amount);
 	}
 	else
 	{
