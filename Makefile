@@ -1,56 +1,68 @@
-NAME = minishell
-LIBFT = libft/libft.a
+# Makefile for the shell project
 
-TOKENIZATION  = ./parsing/tokens/return_tokens.c \
-				 ./parsing/tokens/print_tokens.c \
-				./parsing/tokens/mock_tokens.c
+# Compiler and flags
+CC := cc
+CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
+INCLUDE := -Iinclude -Ilib/libft -Ilib/dprintf
+#cacca
+# Directories
+SRC_DIR := src
+OBJ_DIR := obj
+LIB_DIR := lib
+LIBFT_DIR := $(LIB_DIR)/libft
+DPRINTF_DIR := $(LIB_DIR)/dprintf
 
-NODE_CREATION = 	./parsing/nodes/return_nodes.c \
-					./parsing/nodes/error_handling.c \
-					./parsing/nodes/alloc_nodes.c \
-					./parsing/nodes/alloc_redir.c \
-					./parsing/nodes/alloc_cmd.c \
-					./parsing/nodes/alloc_option.c \
-					./parsing/nodes/alloc_args.c \
-					./parsing/nodes/free_nodes.c \
-					./parsing/nodes/print_nodes.c
+LIBFT_OBJ_DIR := $(LIBFT_DIR)/obj
+DPRINTF_OBJ_DIR := $(LIB_DIR)/dprintf
 
-EXECUTION	= ./execution/execution.c
+# Libraries
+LIBFT := $(LIBFT_DIR)/libft.a
+DPRINTF := $(DPRINTF_DIR)/libdprintf.a
 
-SRC	= $(TOKENIZATION) \
-	$(NODE_CREATION) \
-	$(EXECUTION)
+# Executable name
+NAME := minishell
 
-HEADERS	= ./minishell.h \
+# Source files and object files
+SRC := $(shell find $(SRC_DIR) -type f -name "*.c")
+OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-OBJS = $(SRC:.c=.o)
+# Rules
+all: $(NAME)
 
-CC	= cc
+$(NAME): $(LIBFT) $(DPRINTF) $(OBJ)
+	@if [ ! -f $(LIBFT) ]; then \
+		echo "Error: libft.a not found in $(LIBFT_DIR)"; exit 1; \
+	fi
+	@if [ ! -f $(DPRINTF) ]; then \
+		echo "Error: libftdprintf.a not found in $(DPRINTF_DIR)"; exit 1; \
+	fi
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(DPRINTF) -lreadline -o $(NAME)
 
-RM	= rm -f
+# Compile object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-CFLAGS	= -Wall -Wextra -Werror -I./include -I./libft -g
-PFLAGS = -lreadline
-
-all:	$(LIBFT) $(NAME)
-
+# Build libft
 $(LIBFT):
-		@make -C libft
+	$(MAKE) OBJ_DIR=$(LIBFT_OBJ_DIR) -C $(LIBFT_DIR)
 
-$(NAME):	$(OBJS) $(HEADERS) $(LIBFT)
-		$(CC) $(CFLAGS) main.c -o $(NAME) $(OBJS) $(LIBFT) $(PFLAGS)
+# Build ft_dprintf
+$(DPRINTF):
+	@echo "Building libdprintf.a in $(DPRINTF_DIR)"
+	$(MAKE) OBJ_DIR=$(DPRINTF_OBJ_DIR) -C $(DPRINTF_DIR)
 
-.c.o:
-		$(CC) $(CFLAGS) -c $< -o $@
-
+# Clean rules
 clean:
-		$(RM) $(OBJS)
-		@make -C libft clean
+	$(MAKE) clean OBJ_DIR=$(LIBFT_OBJ_DIR) -C $(LIBFT_DIR)
+	$(MAKE) clean OBJ_DIR=$(DPRINTF_OBJ_DIR) -C $(DPRINTF_DIR)
+	rm -rf $(OBJ_DIR)
 
-fclean:		clean
-		$(RM) $(NAME)
-		@make -C libft fclean
+fclean: clean
+	$(MAKE) fclean OBJ_DIR=$(LIBFT_OBJ_DIR) -C $(LIBFT_DIR)
+	$(MAKE) fclean OBJ_DIR=$(DPRINTF_OBJ_DIR) -C $(DPRINTF_DIR)
+	rm -f $(NAME)
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+.PHONY: all clean fclean re
