@@ -6,28 +6,27 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 12:01:00 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 12:55:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+void free_arg_array(char **args)
+{
+	int i = 0;
 
-// static void free_arg_list (t_args *head)
-// {
-// 	if (!head)
-// 		return; // unsure if needed
-// 	t_args *curr = head;
-// 	// traverse and free each arg data inside the list
-// 	while(curr)
-	// 	{
-// 		// free(curr->arg_type);
-// 		free(curr->value);
-// 		t_args *temp = curr->next;
-// 		free(curr);
-// 		curr = temp;
-	// 	}
-// }
+	if (!args)
+		return;
+	while (args[i]) // Loop through the array until NULL
+	{
+		free(args[i]); // Free each argument string
+		i++;
+	}
+
+	free(args); // Free the array itself
+}
+
 
 static void free_redir_list (t_redir *head) // need to add other frees
 {
@@ -51,7 +50,8 @@ static void free_cmd_struct (t_cmd *cmd)
 	if (!cmd)
 		return; // unsure if needed
 	free(cmd->cmd);
-	// free(cmd->type);
+	if(cmd->args)
+		free_arg_array(cmd->args);
 }
 
 void free_node_list(t_node_list *head) // frees each node in the list and its data if it was assigned
@@ -64,16 +64,10 @@ void free_node_list(t_node_list *head) // frees each node in the list and its da
 	{
 		if(curr->cmd)
 			free_cmd_struct (curr->cmd); // free elements in the cmd struct if memory was allocated to them
-		free(curr->cmd); // free the cmd struct container
+		free(curr->cmd); // free the cmd struct container - without it it will give leak
 		if(curr->redir)
 			free_redir_list (curr->redir); // free elements in the redir struct if memory was allocated to them
 		// free(curr->redir);  // free the redir struct container
-		// if(curr->args)
-		// 	free_arg_list (curr->args); // free elements in the struct if memory was allocated to them
-		// free(curr->args);  // <--- gives issues unsure why check if without it will leak
-		// free(curr->pipe); // undure if we still need this as (if node->next_node_list == NULL is what will tell us ther is another node to pipe into)
-		// free(curr->node_i); // this can be useful to see the order of the node in the list
-		// free(curr->node_amout); // this can be useful to see how many forks we need
 		t_node_list *temp = curr->next; //stores the next node of curr to then continue the loop
 		free(curr);
 		curr = temp;
