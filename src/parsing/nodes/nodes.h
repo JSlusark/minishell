@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 18:40:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:44:28 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_node_list	*return_nodes(t_tokens *token_list, t_msh *msh);
 
 // PARSES EACH TOKEN TO ASSIGN ITS FUNCTION INSIDE ITS NODE - *p contains data that allows us to do that
 bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list **new_node); // iterates through each token to replicate how bash distrobute their role in the node
-t_flags assign_data(); // stores data that we pass to the parse_token function as we cannot send more than 4 params to it
+t_flags assign_data(); // stores data that we pass to the parse_token function to avoid norm error of sending more than 4 params to it
 
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
 t_node_list	*init_new_node(int node_n, bool *start_node, t_msh *msh); // allocates a new node at the start of parsing or after we encounter a pipe
@@ -84,32 +84,22 @@ t_redir	*init_new_redir(t_tokens **token); // allocates redirection struct and w
 bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
 void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
-// PARSES THE COMMAND, OPTIONS AND ARGUMENTS OF A NODE
+// CMD STRUCT CREATION - after we parsed pipes and redird we create the cmd struct and assign cmd, args and n_option (if the command is echo)
 bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int token_n);
-//Assigns token as command of the node
 bool alloc_cmd(t_node_list *curr_node, t_tokens *token);
-//Flags if option -n is present and handles order which is written on the CLI
-void	add_option_n(t_tokens **token, t_node_list *new_node);
-// //Assigns token as arg of the node and appends to the arg list
-// t_args *init_new_arg(t_tokens *token);
-// void append_new_arg(t_args **args, t_args *new_arg);
 bool add_argument(char ***args, char *new_arg); // new function to allocat arg as array and not ll
+void	add_option_n(t_tokens **token, t_node_list *new_node);
 
-//Frees the node list at evert error and at end of the execution
+//FREEING FUNCTIONS FOR NODE AND MSH
 void free_node_list(t_node_list *node_list);
+void free_msh(t_msh *msh); // needs to be called independently from the free node list
 
 /* ------------------------------ */
-
-
-//My mock tocken_list creation functions
-t_tokens			*create_mock_tokens(char *input);
-void			free_mock_tokens(t_tokens *head);
-
-// Printing and debugging functions (we comment or remove them from our code when ready to submit)
+// NODE PRINTING AND DEBUGGING
 void print_nodes(t_node_list *head);
 void print_nodes_in_outfile(t_node_list *head);
 
-// exec test
+// ECOMMUNICATION BETWEEN PARSING AND EXECUTION
 void	exec_nodes(t_node_list	*node_list);
 
 #endif

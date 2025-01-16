@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 18:43:28 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:31:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ int	main(int argc, char **argv, char **envp)
 			if(nodes)
 			{
 				print_nodes(nodes); // to print on terminal
-				// print_nodes_in_outfile(nodes); // <--- X STEFANO: puoi controllare dprintf? perche' non stampa gli args con echo e se gli args sono piu' di uno va in seg fault - la logica e' uguale al printnodes del terminale che non da questi problemi
-				exec_nodes(nodes); // <-------- we traverse the node list and execute
-				free_node_list(nodes);// after we execute the input we free the nodes
+				// print_nodes_in_outfile(nodes);
+				exec_nodes(nodes);
+				free_node_list(nodes);// after we execute the input we free the nodes )
 			}
 		}
 	}
-	free(msh); // jess -> just in case, check if this is enough for freeing
+	free_msh(msh); // <------ from JESS: ho cambiato free(msh) in free_msh(msh) per libreare anche cioe' che e' all'interno della struttura (non in che casi questa funzione cerra' chiamata in questo punto, l'ho messa anche in cmd exit prima di liberare la node list)
 	clear_history();
 	return 0;
 }

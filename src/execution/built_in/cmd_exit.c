@@ -48,6 +48,7 @@ int    handle_exit(t_node_list	*node_l) //char *av will become a char **av
     // }
     exit_code = 0; //node_l->msh->exit_code;
     clear_history();
+    free_msh(node_l->msh); // <----------- unico edit from JESS: l'ho messo per liberare la memoria correttamente da msh prima di uscire ed evutare che ci sia della memoria "still rechable" per via degli envar in msh
     free_node_list(node_l);
     exit (exit_code);
 }
