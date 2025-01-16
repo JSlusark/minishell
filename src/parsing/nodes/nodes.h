@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 15:44:28 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:50:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	append_node(t_node_list **head, t_node_list *new_node); // appends current 
 void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_tokens *token, int token_n); // ends new node when we encounter a pipe and alerts us that we have to start a new node
 
 // PARSE NODE ERRORS - error_handling.c stops node creation and prints error to the terminal
-bool	unknown_token(t_tokens *token); // gives errors with unknown tokens
-bool	pipe_error(t_tokens *token, bool check_pipestart); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
+bool	pipe_error(t_tokens *token, bool check_pipestart, t_node_list *head, t_node_list *new_node); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
 bool	redir_error(t_tokens *token); // gives an error to when redir symbol is followed by |, another redir symbol and \n
+// bool	unknown_token(t_tokens *token, t_node_list *head, t_node_list * new_node); // gives errors with unknown tokens
 
 // REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
 bool	parse_redir(t_tokens **token, t_node_list	*new_node, int *redir_i); // creates redir data to add to the node

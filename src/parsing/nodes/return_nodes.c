@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 20:08:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:50:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,8 @@ t_node_list *return_nodes(t_tokens *token, t_msh *msh)
 	// printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (token != NULL) //at every token iteration from the list - 1. check if token is unknown or a pipe error, 2.Start a new node, 3.Add token as element of the node and when pipe is encountered we end the node
 	{
-		if (unknown_token(token) || pipe_error(token, p.pipestart)) // Checks if token is unknown or a pipe error
-		{
-			free_node_list(head);
-			free_node_list(new_node);
+		if (pipe_error(token, p.pipestart, head, new_node)) // removed unknow token as that error is covere already in the tokenizer
 			return NULL;
-		}
 		if(p.start_node == true)
 		{
 			new_node = init_new_node(p.node_n, &p.start_node, msh);

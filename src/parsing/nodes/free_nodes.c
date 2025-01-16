@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 15:51:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:51:12 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void free_cmd_struct (t_cmd *cmd)
 {
 	if (!cmd)
 		return; // unsure if needed
-	free(cmd->cmd);
+	if(cmd->cmd)
+		free(cmd->cmd);
 	if(cmd->args)
 		free_arg_array(cmd->args);
 	free(cmd);

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 12:09:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/16 17:38:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,7 @@ t_tokens *return_tokens(char *input)
 			if(input[h] == '\0' || ft_strchr(bounds, input[h])) // problem when followed by other invalid symbls
 			{
 				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
+				free_tokens(tokens);
 				return(NULL);
 			}
 			if(!ft_strchr(invalid, input[h]))
@@ -212,7 +213,7 @@ t_tokens *return_tokens(char *input)
 				int last_quote = 0;
 				if (!quote_closed(&i, input, input[i], &last_quote))
 				{
-					// printf("Minishell: %c at input[%d] had no closure\n", input[i], i);
+					printf("Minishell: %c at input[%d] had no closure\n", input[i], i);
 					return (NULL);
 				}
 				collect_str(&i, input, input[i], &len, buff, &last_quote);
