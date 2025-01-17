@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 12:00:12 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:51:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ bool	add_target(t_tokens *token, t_redir *redir)
 		redir = NULL;// unsure
 		return(false);
 	}
-	// redir->target_token_type = token->next->type;
-	// if(redir->type == HEREDOC)
-	// 	redir->target_type = TARGET_DELIMITER;
-	// else
-	// {
-	// 	if(token->next->type == ABS_PATH || token->next->type == REL_PATH)
-	// 		redir->target_type = TARGET_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-	// 	else if(token->next->type == ENV_VAR)
-	// 		redir->target_type = TARGET_ENV_PATHNAME; // after parsing we need to see if the target is an ENV_VAR
-	// 	else
-	// 		redir->target_type = TARGET_FILENAME;
-	// }
 	return(true);
 }
 

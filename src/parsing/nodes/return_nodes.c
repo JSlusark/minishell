@@ -6,44 +6,32 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 13:40:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:15:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-// add check for cli input limit
 
 bool parse_rest(t_tokens **token, t_node_list *new_node, int token_n, t_flags **p)
 {
-	// t_args *new_arg;
-	(void)token_n;
-
 	if ((*p)->find_cmd) // triggers command storing if true and checks if next token is -n
 	{
-		// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
-		// printf("%s ", (*token)->value);
-		// printf(COLOR_YELLOW" <--becomes the cmd of the node\n"COLOR_RESET);
+		(void)token_n;
 		if(!alloc_cmd(new_node, *token, p))// had to return as error
 			return(false);
 		(*p)->find_cmd = false; // command found, if we have other tokens they are args if not redir data
 	}
 	else // triggers args storing // this should not execute i
 	{
-		if((*p)->found_echo && !new_node->cmd->args && new_node->cmd->option_n == false) // need to put condition of cmd args is null to avoid taking -n that follow args
-		{
-			add_option_n(token, new_node); // <--- adds -n flag and skips other -n until token->next is not -n
-		}
+		if((*p)->found_echo && !new_node->cmd->args && new_node->cmd->option_n == false) // adds -n flag if cmd of node is echo, there are no args yet and flag is false
+			add_option_n(token, new_node); // <--- adds -n flag and skips other -n until token->next is not -n, it lands to the last -n before non -n token
 		else
 		{
 			 if (!add_argument(&(new_node->cmd->args), (*token)->value))
 				return false;
-
-			// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
-			// printf(" %s", (*token)->value); // he
-			// printf(COLOR_YELLOW" <--becomes an arg of the node\n"COLOR_RESET);
 		}
 	}
-	return(true);
+	return (true);
 }
 
 bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list **new_node)
@@ -55,19 +43,9 @@ bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list *
 		p->pipestart = false; // this flag is set to false when the first token is not a pipe
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT || (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
-			// printf(COLOR_BLUE"		- REDIR STRUCT:\n"COLOR_RESET);
-			// printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
-			// printf(" %s", (*token)->value);
-			// printf(COLOR_YELLOW" <--becomes redirection\n"COLOR_RESET);
-			if (!parse_redir(token, *new_node, &(p->redir_i))) // adds redirection and target (and advances 2 tokens from the list)
+			if (!parse_redir(token, *new_node, &(p->redir_i))) // adds redirection and target (and advances the only the redire tokens from the list, we advance the redir in line 60 as it applies to the main token iteration )
 				return(false);
-			p->token_n++; // used just for print
-			// printf(COLOR_BLUE"			TOKEN_%d:"COLOR_RESET, p->token_n);
-			// printf(" %s", (*token)->value);
-			// if((*token)->type == HEREDOC) // the next token is seen as delimiter for the heredoc array
-				// printf(COLOR_YELLOW" <--becomes redirection's delimiter\n"COLOR_RESET);
-			// else // if redir is <, > and >> the next token is seen as file
-				// printf(COLOR_YELLOW" <--becomes redirection's file\n"COLOR_RESET);
+			p->token_n++; // used just for printer
 		}
 		else // Parses commands and arguments
 			if(!parse_rest(token, *new_node, p->token_n, &p))
@@ -87,24 +65,23 @@ t_flags assign_data()
 	param.start_node = true;		// Flag to indicate if a new node needs to start
 	param.find_cmd = true;			// Flag to indicate if a command needs to be found
 	param.pipestart = true;	// Flag to check if the first token is a pipe
+	param.found_echo = false; // <--- added this flag so that we use alloc option only with echo, it turns true when cmd token is echo
 
-	return param;
+	return (param);
 }
-
 
 t_node_list *return_nodes(t_tokens *token, t_msh *msh)
 {
 	t_flags	p;				// i created this to avoud putting more than 4 args in the parse tokens
-	t_node_list *head; 			// First node in the list
+	t_node_list *head;		// First node in the list
 	t_node_list *new_node;
 
 	p = assign_data();
 	head = NULL;
-	// printf(COLOR_GREEN"\nPARSING TOKENS...\n"COLOR_RESET);
 	while (token != NULL) //at every token iteration from the list - 1. check if token is unknown or a pipe error, 2.Start a new node, 3.Add token as element of the node and when pipe is encountered we end the node
 	{
 		if (pipe_error(token, p.pipestart, head, new_node)) // removed unknow token as that error is covere already in the tokenizer
-			return NULL;
+			return (NULL);
 		if(p.start_node == true)
 		{
 			new_node = init_new_node(p.node_n, &p.start_node, msh);

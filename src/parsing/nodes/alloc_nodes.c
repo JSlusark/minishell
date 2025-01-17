@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/13 17:24:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:59:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void append_node(t_node_list **head, t_node_list *new_node)
 
 t_node_list *init_new_node(int node_n, bool *start_node, t_msh *msh) // nothing else needed
 {
-	// printf(COLOR_RED"	- NODE %i: \n"COLOR_RESET, node_n);
 	t_node_list *new_node;
 
 	new_node = calloc(1, sizeof(t_node_list));

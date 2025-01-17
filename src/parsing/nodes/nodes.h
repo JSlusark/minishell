@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 13:00:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:14:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_msh
 	char **ms_env; // Environment variables
 	//char	**ms_env_export;
 	int exit_code; // Exit code (suggested by copilot for error handling)
+	// JESS: in futuro penso di incollare i flags per il parser (copio ed incollo da t_flags) per diminuire il num di righe in return_nodes
 } t_msh;
 
 typedef struct s_flags
