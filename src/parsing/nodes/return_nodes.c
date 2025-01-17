@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 12:15:41 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:40:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool parse_rest(t_tokens **token, t_node_list *new_node, int token_n, t_flags **
 	{
 		if((*p)->found_echo && !new_node->cmd->args && new_node->cmd->option_n == false) // need to put condition of cmd args is null to avoid taking -n that follow args
 		{
-			add_option_n(token, new_node);
+			add_option_n(token, new_node); // <--- adds -n flag and skips other -n until token->next is not -n
 		}
 		else
 		{
