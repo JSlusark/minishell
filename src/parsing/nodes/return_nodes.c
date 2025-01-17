@@ -6,31 +6,30 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 17:50:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:15:41 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 // add check for cli input limit
 
-bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int token_n)
+bool parse_rest(t_tokens **token, t_node_list *new_node, int token_n, t_flags **p)
 {
 	// t_args *new_arg;
 	(void)token_n;
 
-	if (*find_cmd) // triggers command storing if true and checks if next token is -n
+	if ((*p)->find_cmd) // triggers command storing if true and checks if next token is -n
 	{
 		// printf(COLOR_BLUE"		TOKEN_%d:"COLOR_RESET, token_n);
 		// printf("%s ", (*token)->value);
 		// printf(COLOR_YELLOW" <--becomes the cmd of the node\n"COLOR_RESET);
-		if(!alloc_cmd(new_node, *token))// had to return as error
+		if(!alloc_cmd(new_node, *token, p))// had to return as error
 			return(false);
-		*find_cmd = false; // command found, if we have other tokens they are args if not redir data
+		(*p)->find_cmd = false; // command found, if we have other tokens they are args if not redir data
 	}
-	else // triggers args storing
+	else // triggers args storing // this should not execute i
 	{
-		// if(!new_node->cmd->args && new_node->cmd->option_n == false && (*token)->value[0] == '-') // need to put condition of cmd args is null to avoid taking -n that follow args
-		if(!new_node->cmd->args && new_node->cmd->option_n == false) // need to put condition of cmd args is null to avoid taking -n that follow args
+		if((*p)->found_echo && !new_node->cmd->args && new_node->cmd->option_n == false) // need to put condition of cmd args is null to avoid taking -n that follow args
 		{
 			add_option_n(token, new_node);
 		}
@@ -71,7 +70,7 @@ bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list *
 				// printf(COLOR_YELLOW" <--becomes redirection's file\n"COLOR_RESET);
 		}
 		else // Parses commands and arguments
-			if(!parse_rest(&(p->find_cmd), token, *new_node, p->token_n))
+			if(!parse_rest(token, *new_node, p->token_n, &p))
 				return(false);
 	}
 	*token = (*token)->next; // Move to the next token (usually hits cmd, arg or redir symbol)
@@ -112,6 +111,7 @@ t_node_list *return_nodes(t_tokens *token, t_msh *msh)
 			if (!new_node)
 				return(NULL);
 			p.find_cmd = true;
+			p.found_echo = false; // <--- added this flag so that we use alloc option only with echo, it turns true when cmd token is echo
 			p.redir_i = 0;
 			p.node_n++; // increases nodes count,
 		}

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 17:50:59 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/17 11:27:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_flags
 	bool start_node;		// Flags minishell to start a new node, it is set to false after we init the new node and set to true when we end the new node.
 	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
+	bool found_echo;
 }		t_flags;
 
 typedef struct s_redir				// linked list of redirections as 1 node can have 1 or more redirections, double linked might be useful perhaps?
@@ -85,8 +86,8 @@ bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows
 void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
 // CMD STRUCT CREATION - after we parsed pipes and redird we create the cmd struct and assign cmd, args and n_option (if the command is echo)
-bool parse_rest(bool *find_cmd, t_tokens **token, t_node_list *new_node, int token_n);
-bool alloc_cmd(t_node_list *curr_node, t_tokens *token);
+bool parse_rest(t_tokens **token, t_node_list *new_node, int token_n, t_flags **p);
+bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_flags **p);
 bool add_argument(char ***args, char *new_arg); // new function to allocat arg as array and not ll
 void	add_option_n(t_tokens **token, t_node_list *new_node);
 
