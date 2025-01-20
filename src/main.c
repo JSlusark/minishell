@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 17:40:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:17:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 {
 	t_tokens	*tokens;
-	tokens = return_tokens(input);
+	tokens = return_tokens(input, msh);
 	if(!tokens)
 	{
 		free(input);

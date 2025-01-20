@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:36:50 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 17:51:41 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:17:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	redir_error(t_tokens *token)
 		}
 		else if (token->next->type == PIPE || token->next->type == REDIR_IN
 			|| token->next->type == REDIR_OUT || token->next->type == APPEND
-			|| token->next->type == HEREDOC || token->next->type == UNKNOWN)
+			|| token->next->type == HEREDOC || token->next->type == INVALID)
 		{
 			printf("Minishell: syntax error near unexpected token `%s'\n", token->next->value);
 			return(true); // we break the loop as there is no point in continuing to build a node if it's an error

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 13:21:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:16:40 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,7 @@
 
 char *return_token_enum(int token_type)
 {
-	if (token_type == ENV_VAR)
-		return "ENV_VAR"; // Environment variables starting with $ (e.g., $HOME)
-	else if (token_type == ABS_PATH)
-		return "ABS_PATH"; // Absolute path starting with /
-	else if (token_type == REL_PATH)
-		return "REL_PATH"; // Relative path starting with ./ or ../
-	else if (token_type == OPTION)
-		return "OPTION"; // Options like -n for echo
-	else if (token_type == REDIR_IN)
+	if (token_type == REDIR_IN)
 		return "REDIR_IN (<)"; // Input redirection ("<")
 	else if (token_type == REDIR_OUT)
 		return "REDIR_OUT (>)"; // Output redirection (">")
@@ -37,10 +29,10 @@ char *return_token_enum(int token_type)
 		return "PIPE"; // Pipe operator ("|")
 	else if (token_type == ARG)
 		return "ARG"; // Any letter or number that is not quoted
-	else if (token_type == UNKNOWN)
-		return "UNKNOWN"; // Invalid token (e.g., \, ;, &&, ||, etc.)
+	else if (token_type == INVALID)
+		return "INVALID"; // Any letter or number that is not quoted
 	else
-		return "INVALID_ENUM"; // For invalid enum values
+		return "UNRECOGNISED_ENUM"; // For invalid enum values
 }
 
 char *return_target_enum(int redir_type)

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   return_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 17:38:54 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:21:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
 //list of tests:
 //https://docs.google.com/spreadsheets/d/1AUQk0Nrnvj7-9RQHEaSSQJgBb0VGlHvQt78khxBv5UQ/edit?gid=1887111398#gid=1887111398
 
@@ -174,7 +175,7 @@ bool	quote_closed(int *i, char *input, char quote, int *last_quote)
 	return(true);
 }
 
-t_tokens *return_tokens(char *input)
+t_tokens *return_tokens(char *input, t_msh *msh)
 {
 	int i = 0;
 	char *invalid = ";#&,`*~\\";  // seen outside string also && $(..)
@@ -182,8 +183,7 @@ t_tokens *return_tokens(char *input)
 	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 
 	t_tokens *tokens = NULL;
-	// t_tokens *token = NULL;
-
+	(void)msh; // <--- JESS: added to avoid compilation warnings
 
 	while (input[i] != '\0')
 	{

@@ -1,17 +1,26 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   nodes.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/08 12:34:31 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 17:14:06 by jslusark         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#ifndef PARSER_H
+#define PARSER_H
 
-#ifndef NODE_H
-# define NODE_H
+/* _____________TOKENS DATA_____________ */
+
+typedef enum e_token_type // good to have an order like below
+{
+	REDIR_IN,       		// 5 Input redirection ("<")
+	REDIR_OUT,      		// 6 Output redirection (">")
+	APPEND,     		// 7 Append redirection (">>")
+	HEREDOC,        		// 8 Here-document redirection ("<<")
+	PIPE,           		// 9 Pipe operator ("|")
+	ARG,         			//  CAL IT NQ_ARG? 12 Any letter or number that is not surrounded in " " and '', after we create the tokens and nodes, we need a function that will see if the word is an external command or just a word
+	INVALID,
+} t_token_type;
+
+typedef struct s_tokens
+{
+	char *value;
+	t_token_type type;
+	struct s_tokens *next;
+} t_tokens;
+
 
 typedef struct s_msh
 {
@@ -60,8 +69,12 @@ typedef struct s_node_list
 	struct s_node_list *next;
 } t_node_list;
 
+/* _____________TOKENS FUNCTIONS_____________ */
+t_tokens *return_tokens(char *input, t_msh *msh);
+void free_tokens(t_tokens *head);
+void print_tokens(t_tokens *tokens);
 
-/* ---- Function that parses the tokens into a linked list of nodes --- */
+/* _____________NODES FUNCTIONS_____________ */
 
 // MAIN PARSING FUNCTION - returns a node list (or null if error) to the main
 t_node_list	*return_nodes(t_tokens *token_list, t_msh *msh);
@@ -96,23 +109,10 @@ void	add_option_n(t_tokens **token, t_node_list *new_node);
 void free_node_list(t_node_list *node_list);
 void free_msh(t_msh *msh); // needs to be called independently from the free node list
 
-/* ------------------------------ */
 // NODE PRINTING AND DEBUGGING
 void print_nodes(t_node_list *head);
 void print_nodes_in_outfile(t_node_list *head);
 
-// ECOMMUNICATION BETWEEN PARSING AND EXECUTION
+// COMMUNICATION BETWEEN PARSING AND EXECUTION
 void	exec_nodes(t_node_list	*node_list);
-
 #endif
-
-
-
-//Good resources that helped getting me into this and that will allow us to expand our logic:
-//https://github.com/DimitriDaSilva/42_minishell/blob/master/src/parse/parse.c#L100
-//https://github.com/mit-pdos/xv6-riscv/blob/riscv/user/sh.c
-// brainstorming and asking questions to chat_gpt
-// testing command lines in bash
-// google & youtube
-
-
