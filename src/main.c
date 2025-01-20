@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 16:53:24 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:23:58 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	tokens = return_tokens(input, msh);
 	if(!tokens)
 	{
+		// print_tokens(tokens); // for tokenization error handling
 		free(input);
 		free_tokens(tokens); // need to better check this when hitting error as it did not work for invalid tokens
 		printf("- TOKEN FAILED TO ALLOCATE - add error code 2 to $?\n");

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 17:10:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:20:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,56 @@ void append_token(t_tokens **head, t_tokens *new_token)
 }
 
 
-void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh)
+void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh)
 {
-	while (*i <= *last_quote) // echo "hello""" does not print error
+	while (*i <= *last_quote) // Process characters within the quoted string
 	{
 		// Check for variable expansion inside double quotes
-		if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
+		if (input[*i] == '$' && quote == '"') // Expand variables only inside double quotes
 		{
-			// ACTUAL EXPANSION
-			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // "$US-ER"
 			int j = *i + 1; // Start after the '$'
-			//if after $ is space, expansion is just $ and we should not expand the the env var
-			//if after $ is ?, expansion is msh->exit_code and we should not expand the env var
-			while (input[j] && !ft_strchr(not_env, input[j]))
+
+			// Check for $ followed by ?
+			if (input[j] == '?')
+			{
+				char *exit_code_str = ft_itoa(msh->exit_code); // Convert exit code to string
+				int exp_len = strlen(exit_code_str);
+				if (*len + exp_len >= 1023) // Prevent buffer overflow
+				{
+					printf("Error: Buffer overflow during $? expansion\n");
+					free(exit_code_str);
+					return;
+				}
+				for (int k = 0; k < exp_len; k++) // Append the exit code string to the buffer
+				{
+					buff[*len] = exit_code_str[k];
+					(*len)++;
+				}
+				free(exit_code_str); // Free the dynamically allocated exit code string
+				*i = j + 1; // input[*] is ? so move past by j++;
+				continue; // Skip the rest of the loop
+			}
+
+			// IF SHOULD BE ANY INVALID IS GUESS (echo "$'US'ER" comes $'US'ER)
+			// Check for $ followed by space (ex: "? ", "? hello") or " (ex" "?")
+			if (input[j] == ' ' || input[j] == '"') // works now
+			{
+				if (*len + 1 >= 1023) // Prevent buffer overflow
+				{
+					printf("Error: Buffer overflow during $ expansion\n");
+					return;
+				}
+				buff[*len] = '$'; // Add the literal '$' to the buffer
+				(*len)++;
+				*i = j; // Move past the space
+				continue; // Skip the rest of the loop and process the last quote
+			}
+
+			// Handle regular variable expansion
+			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // Characters not valid in variable names
+			while (input[j] && !ft_strchr(not_env, input[j])) // Find the end of the variable name
 				j++;
-			char *var_name = ft_substr(input, *i + 1, j - (*i + 1)); // Get the variable name
+			char *var_name = ft_substr(input, *i + 1, j - (*i + 1)); // Extract the variable name
 			if (!var_name)
 			{
 				printf("Error: Failed to allocate memory for variable name\n");
@@ -152,62 +187,9 @@ void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 			(*len)++;
 		}
 		(*i)++;
-
-
-			// while(input[j] != " ") // we collect the var, then compare until it exists "$US-ER"
-			// {
-			// 	var[y] = input[j];
-			// 	y++;
-			// 	j++;
-			// }
-			// // we have to compa
-			// // find_envar(var, msh->ms_env);
-			// printf("%s", find_envar(var, msh->ms_env));
-		}
-
-
-
-
-
-
-		// 	char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
-		// 	int j = *i + 1; // Start after the '$'
-
-		// 	// Identify the variable name
-		// 	while (input[j] && !ft_strchr(not_env, input[j]))
-		// 		j++;
-		// 	// Expand the variable if it matches
-		// 	if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
-		// 		(size_t)(j - *i - 1) == ft_strlen("USER")) // could do a while loop taht check ll env_var names and compares
-		// 	{
-		// 		const char *expansion = "jjs"; // Simulate expansion
-		// 		int exp_len = strlen(expansion);
-		// 		if (*len + exp_len >= 1023) // Prevent buffer overflow
-		// 		{
-		// 			printf("Error: Buffer overflow during variable expansion\n");
-		// 			return;
-		// 		}
-		// 		for (int k = 0; k < exp_len; k++)
-		// 		{
-		// 			buff[*len] = expansion[k];
-		// 			(*len)++;
-		// 		}
-		// 	}
-		// 	*i = j-1; // Move *i to the last character that matches the env_name
-		// }
-		// else if (input[*i] != quote) // Copy other characters except for quotes
-		// {
-		// 	// printf("HIT I after exp: %c at input[%d]\n", input[*i], *i);
-		// 	if (*len >= 1023) // Preventing buffer overflow
-		// 	{
-		// 		printf("Error: Buffer overflow in collect_str\n");
-		// 		return;
-		// 	}
-		// 	buff[*len] = input[*i];
-		// 	(*len)++;
-		// }
-		// (*i)++;
 	}
+}
+
 
 
 
