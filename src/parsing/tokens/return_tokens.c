@@ -6,27 +6,54 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 13:21:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:10:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-//list of tests:
-//https://docs.google.com/spreadsheets/d/1AUQk0Nrnvj7-9RQHEaSSQJgBb0VGlHvQt78khxBv5UQ/edit?gid=1887111398#gid=1887111398
-
-// void free_mock_tokens(t_tokens *head) {
-// 	t_tokens *current = head;
-// 	t_tokens *next;
-
-// 	while (current != NULL)
+// char *expand(char *var, char **env) // NOT MINE
+// {
+// 	int i;
+// 	char *var_content;
+// 	i = 0;
+// 	var_content = NULL;
+// 	while (env[i])
 // 	{
-// 		next = current->next; // Store the next token
-// 		free(current->value); // Free the duplicated string
-// 		free(current);             // Free the current node
-// 		current = next;            // Move to the next token
+// 		if (strncmp(env[i], var, strlen(var)) == 0 && env[i][strlen(var)] == '=')
+// 		{
+// 			var_content = env[i] + strlen(var) + 1;
+// 			break;
+// 		}
+// 		i++;
 // 	}
+// 	if (!env[i])
+// 	{
+// 		perror("variable not found among environment variables");
+// 		return (NULL);
+// 	}
+// 	return ft_strdup(var_content);
 // }
+
+char *find_envar(char *var, char **env) // finds only the var, does not expand
+{
+	int i;
+	char *var_content;
+	i = 0;
+	var_content = NULL;
+	while (env[i])
+	{
+		if (strncmp(env[i], var, strlen(var)) == 0 && env[i][strlen(var)] == '=')
+		{
+			var_content = env[i] + strlen(var) + 1;
+			break;
+		}
+		i++;
+	}
+	if (!env[i]) // if var does not exists it expans to null
+		return (NULL);
+	return ft_strdup(var_content);
+}
 
 void free_tokens(t_tokens *head)
 {
@@ -71,54 +98,117 @@ void append_token(t_tokens **head, t_tokens *new_token)
 }
 
 
-void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote)
+void	collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh)
 {
 	while (*i <= *last_quote) // echo "hello""" does not print error
 	{
 		// Check for variable expansion inside double quotes
 		if (input[*i] == '$' && quote == '"') // Expand variable only inside double quotes
 		{
-			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
+			// ACTUAL EXPANSION
+			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // "$US-ER"
 			int j = *i + 1; // Start after the '$'
-
-			// Identify the variable name
+			//if after $ is space, expansion is just $ and we should not expand the the env var
+			//if after $ is ?, expansion is msh->exit_code and we should not expand the env var
 			while (input[j] && !ft_strchr(not_env, input[j]))
-			{
 				j++;
-			}
-			// Expand the variable if it matches
-			if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
-				(size_t)(j - *i - 1) == ft_strlen("USER")) // could do a while loop taht check ll env_var names and compares
+			char *var_name = ft_substr(input, *i + 1, j - (*i + 1)); // Get the variable name
+			if (!var_name)
 			{
-				const char *expansion = "jjs"; // Simulate expansion
+				printf("Error: Failed to allocate memory for variable name\n");
+				// msh->exit_code = "NON SO ANCORA"
+				// needs to also stop the tokenization
+				return;
+			}
+			char *expansion = find_envar(var_name, msh->ms_env);
+			free(var_name); // Free the temporary variable name
+			if (expansion)
+			{
 				int exp_len = strlen(expansion);
 				if (*len + exp_len >= 1023) // Prevent buffer overflow
 				{
 					printf("Error: Buffer overflow during variable expansion\n");
+					free(expansion);
 					return;
 				}
-				for (int k = 0; k < exp_len; k++)
+				for (int k = 0; k < exp_len; k++) // Copies the expansion into the buffer
 				{
 					buff[*len] = expansion[k];
 					(*len)++;
 				}
+				free(expansion); // Frees the copied expansion
 			}
-			*i = j-1; // Move *i to the last character that matches the env_name
+			*i = j - 1; // Move *i to the last character of the variable name
 		}
 		else if (input[*i] != quote) // Copy other characters except for quotes
 		{
-			// printf("HIT I after exp: %c at input[%d]\n", input[*i], *i);
-			if (*len >= 1023) // Preventing buffer overflow
+			if (*len >= 1023) // Prevent buffer overflow
 			{
 				printf("Error: Buffer overflow in collect_str\n");
+				// error code and stop
 				return;
 			}
 			buff[*len] = input[*i];
 			(*len)++;
 		}
 		(*i)++;
+
+
+			// while(input[j] != " ") // we collect the var, then compare until it exists "$US-ER"
+			// {
+			// 	var[y] = input[j];
+			// 	y++;
+			// 	j++;
+			// }
+			// // we have to compa
+			// // find_envar(var, msh->ms_env);
+			// printf("%s", find_envar(var, msh->ms_env));
+		}
+
+
+
+
+
+
+		// 	char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
+		// 	int j = *i + 1; // Start after the '$'
+
+		// 	// Identify the variable name
+		// 	while (input[j] && !ft_strchr(not_env, input[j]))
+		// 		j++;
+		// 	// Expand the variable if it matches
+		// 	if (ft_strncmp(&input[*i + 1], "USER", j - *i - 1) == 0 &&
+		// 		(size_t)(j - *i - 1) == ft_strlen("USER")) // could do a while loop taht check ll env_var names and compares
+		// 	{
+		// 		const char *expansion = "jjs"; // Simulate expansion
+		// 		int exp_len = strlen(expansion);
+		// 		if (*len + exp_len >= 1023) // Prevent buffer overflow
+		// 		{
+		// 			printf("Error: Buffer overflow during variable expansion\n");
+		// 			return;
+		// 		}
+		// 		for (int k = 0; k < exp_len; k++)
+		// 		{
+		// 			buff[*len] = expansion[k];
+		// 			(*len)++;
+		// 		}
+		// 	}
+		// 	*i = j-1; // Move *i to the last character that matches the env_name
+		// }
+		// else if (input[*i] != quote) // Copy other characters except for quotes
+		// {
+		// 	// printf("HIT I after exp: %c at input[%d]\n", input[*i], *i);
+		// 	if (*len >= 1023) // Preventing buffer overflow
+		// 	{
+		// 		printf("Error: Buffer overflow in collect_str\n");
+		// 		return;
+		// 	}
+		// 	buff[*len] = input[*i];
+		// 	(*len)++;
+		// }
+		// (*i)++;
 	}
-}
+
 
 
 bool	quote_closed(int *i, char *input, char quote, int *last_quote)
@@ -216,7 +306,7 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 					printf("Minishell: %c at input[%d] had no closure\n", input[i], i);
 					return (NULL);
 				}
-				collect_str(&i, input, input[i], &len, buff, &last_quote);
+				collect_str(&i, input, input[i], &len, buff, &last_quote, msh);
 				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
 				{
 					if (len > 0)
@@ -238,7 +328,10 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 					buff[len] = '\0';
 					if (len > 0)
 					{
-						append_token(&tokens, create_token(buff, ARG));
+						if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
+							append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
+						else
+							append_token(&tokens, create_token(buff, ARG));
 					}
 					// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
 				}
