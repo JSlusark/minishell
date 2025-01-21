@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 10:55:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:53:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,28 +298,87 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 					}
 				}
 			}
-			else // logic to create token without quotes
+			else // this collects tokens that are not in quotes or attached to quotes <- NE
 			{
-				// printf("%c", input[i]);
-				buff[len] = input[i];
-				len++;
-				i++;
-				if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
+				// printf("%c\n", input[i]);
+				// if(input[i] == '$')
+				// 	printf("HIIIT!!\n"); // <-- goes here duh
+				if(input[i] == '$')
 				{
-					// as this is where i get the full printed token i should terminate and append here?
-					buff[len] = '\0';
-					if (len > 0)
+					// collects in buff everything until not_env char is found
+					// sends the buff to see if expansion is valid
+					// the function should be the same for the d_quotes one
+					// i could probably use the same and then a cased to see if D_quote
+					// exists or not
+
+					//CHECK FIRST THE $? - did this silly thing because of not envar  in if statement
+					int q = i+1;
+					if(input[q] == '?')
 					{
-						if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
-							append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
-						else
-							append_token(&tokens, create_token(buff, ARG));
+						q++; // move past ?
+						append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
+						i = q;
+						continue;
 					}
-					// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
+					char exp_name[1024] = {0}; // Buffer for the environment variable name
+					int exp_len = 0;
+					int j = i + 1; // Start after the '$'
+					char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // Invalid characters for env names
+
+					// Collect valid characters for an environment variable name into exp_name
+					while (input[j] && !ft_strchr(not_env, input[j])) // && exp_len < 1023 unsure - not env includes ? :(
+					{
+						exp_name[exp_len] = input[j];
+						exp_len++;
+						j++;
+					}
+					exp_name[exp_len] = '\0'; // Null-terminate the buffer
+					// printf("EXPANDED VAR: %s\n", exp_name);
+					if (exp_len == 0) // If no valid characters followed the '$'
+					{
+						append_token(&tokens, create_token("$", ARG)); // Treat $ as a literal
+						i++; // Move past the '$'
+						continue;
+					}
+					// if(strcmp(exp_name, "?") == 0)
+					// {
+					// 	append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // Append the expanded value
+					// 	i++;
+					// 	continue;
+					// }
+					// Check if the variable exists in the environment
+					char *expansion = find_envar(exp_name, msh->ms_env);
+					if (expansion)
+					{
+						append_token(&tokens, create_token(expansion, ARG)); // Append the expanded value
+						free(expansion); // Free the dynamically allocated expansion
+					}
+					 // OTHERWISE IF EXP IS NULL IT DOES NOTHING, JUST SKIPS
+
+					i = j; // Move i to the last character of the variable name
+				}
+				else // i guess the problem here is that
+				{
+					buff[len] = input[i];
+					len++;
+					i++;
+					if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]) || input[i] == '$')
+					{
+						// as this is where i get the full printed token i should terminate and append here?
+						buff[len] = '\0';
+						if (len > 0)
+						{
+							// if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
+							// 	append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
+							// else
+								append_token(&tokens, create_token(buff, ARG));
+						}
+						// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
+					}
 				}
 			}
 		}
-		// CHECK BOUNDS
+		// CHECK BOUNDS <- anlso $ is a bound
 		if(input[i] == '|')
 		{
 			int k = i + 1;

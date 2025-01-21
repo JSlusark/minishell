@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 15:48:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:06:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void 	exec_command(t_node_list	*node_list)
 	else
 	{
 		printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
-		printf("Command not found: %s\n", node_list->cmd->cmd);
+		printf("%s: command not found\n", node_list->cmd->cmd); // JESS: aggiunto per replicare lo stesso mesaggio di bash
 		node_list->msh->exit_code = 127;
 	}
 }
