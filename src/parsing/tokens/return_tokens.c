@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 18:20:51 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 10:55:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 		// Check for variable expansion inside double quotes
 		if (input[*i] == '$' && quote == '"') // Expand variables only inside double quotes
 		{
+			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // Characters not valid in variable names
 			int j = *i + 1; // Start after the '$'
 
 			// Check for $ followed by ?
@@ -130,7 +131,7 @@ void collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 
 			// IF SHOULD BE ANY INVALID IS GUESS (echo "$'US'ER" comes $'US'ER)
 			// Check for $ followed by space (ex: "? ", "? hello") or " (ex" "?")
-			if (input[j] == ' ' || input[j] == '"') // works now
+			if (input[j] == ' ' || ft_strchr(not_env, input[j])) // $ does not expand if followed by space or not_env
 			{
 				if (*len + 1 >= 1023) // Prevent buffer overflow
 				{
@@ -144,7 +145,6 @@ void collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 			}
 
 			// Handle regular variable expansion
-			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // Characters not valid in variable names
 			while (input[j] && !ft_strchr(not_env, input[j])) // Find the end of the variable name
 				j++;
 			char *var_name = ft_substr(input, *i + 1, j - (*i + 1)); // Extract the variable name
