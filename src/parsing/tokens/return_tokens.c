@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 10:55:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:03:21 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,7 +298,7 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 					}
 				}
 			}
-			else // logic to create token without quotes
+			else
 			{
 				// printf("%c", input[i]);
 				buff[len] = input[i];
@@ -310,16 +310,16 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 					buff[len] = '\0';
 					if (len > 0)
 					{
-						if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
-							append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
-						else
+						// if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
+						// 	append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
+						// else
 							append_token(&tokens, create_token(buff, ARG));
 					}
 					// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
 				}
 			}
 		}
-		// CHECK BOUNDS
+		// CHECK BOUNDS <- anlso $ is a bound
 		if(input[i] == '|')
 		{
 			int k = i + 1;
@@ -337,6 +337,14 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 				// printf("%c", input[i]);
 				// printf(COLOR_YELLOW"<---- PIPE len 1\n"COLOR_RESET);
 			}
+		}
+		else if(input[i]=='$')
+		{
+			// collects in buff everything until not_env char is found
+			// sends the buff to see if expansion is valid
+			// the function should be the same for the d_quotes one
+			// i could probably use the same and then a cased to see if D_quote
+			// exists or not
 		}
 		else if(input[i] == '>') // use a while to understand if >> ?
 		{
