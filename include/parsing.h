@@ -60,6 +60,8 @@ typedef struct s_cmd		// command struct, everything that is not seen as part of 
 
 typedef struct s_node_list
 {
+	int fd_in; // file descriptor for input
+	int fd_out; // file descriptor for output
 	t_msh *msh; // we need this to access the env variables and the exit code
 	struct s_node_list *prev; //link to prev node
 	t_cmd *cmd; // struct that has a command (1st arg), array of args (for the command/cmd), and flag n alert (for echo only)

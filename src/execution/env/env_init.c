@@ -20,20 +20,20 @@ int env_compare(char **env, char **av, int i)
     return (i);
 }
 
-void    ms_set_env(char **ms_env, char *value)
+void    ms_set_env(t_msh *msh, char *value)
 {
     int     i;
     char    **av;
 
     i = 0;
-    av = ft_split (value, '=');
-    i = env_compare(ms_env, av, i);
-    if (ms_env[i] == NULL)
-        ms_env = ms_matrix_add_line(ms_env, value);
+    av = ft_split (value, '='); //if split does not find '=', av [0] == nome della variabile.
+    i = env_compare(msh->ms_env, av, i);
+    if (msh->ms_env[i] == NULL)
+        msh->ms_env = ms_matrix_add_line(msh->ms_env, value);
     else
     {
-        free (ms_env[i]);
-        ms_env[i] = ft_strdup (value);
+        free (msh->ms_env[i]);
+        msh->ms_env[i] = ft_strdup (value);
     }
     ft_free_tab (av);
 }
@@ -95,15 +95,15 @@ char	**ms_matrix_add_line(char **matrix, char *new_line)
 	return (new_matrix);
 }
 
-char    *ms_get_env(char **ms_env, char *av)
+char    *ms_get_env(t_msh *msh, char *av)
 {
     int     i;
     char    **split;
 
     i = 0;
-    while (ms_env[i])
+    while (msh->ms_env[i])
     {
-        split = ft_split (ms_env[i], '=');
+        split = ft_split (msh->ms_env[i], '=');
         if (ft_strcmp(split[0], av) == 0)
         {
             ft_free_tab (split);
@@ -113,30 +113,30 @@ char    *ms_get_env(char **ms_env, char *av)
             i++;
         ft_free_tab (split);
     }
-    if (ms_env[i] == NULL)
+    if (msh->ms_env[i] == NULL)
         return (NULL);
-    return (ms_env[i]);
+    return (msh->ms_env[i]);
 }
 
-void    check_shlvl(char **ms_env)
+void    check_shlvl(t_msh *msh)
 {
     char    *var;
     char    *value;
     int     shlvl;
     char    *new_var;
 
-    var = ms_get_env (ms_env, "SHLVL");
+    var = ms_get_env (msh, "SHLVL");
     if (!var)
     {
-        ms_env = ms_matrix_add_line(ms_env, "SHLVL=1");
+        msh->ms_env = ms_matrix_add_line(msh->ms_env, "SHLVL=1");
         return ;
     }
-    value = ms_get_varenv (ms_env, "SHLVL");
+    value = ms_get_varenv (msh->ms_env, "SHLVL");
     if (!value || ft_isdigit(value[0]) == 0)
     {
         printf("Warning: invalid SHLVL value. Resetting to 1\n");
         free (value);
-        ms_env = ms_matrix_add_line (ms_env, "SHLVL=1");
+        msh->ms_env = ms_matrix_add_line (msh->ms_env, "SHLVL=1");
         return ;
     }
     shlvl = ft_atoi (value);
@@ -148,7 +148,7 @@ void    check_shlvl(char **ms_env)
     value = ft_itoa (shlvl);
     new_var = ft_strjoin ("SHLVL=", value);
     free (value);
-    ms_set_env (ms_env, new_var);
+    ms_set_env (msh, new_var);
     free (new_var);
 }
 
@@ -163,7 +163,7 @@ void    ms_env_init(t_msh **msh, char **envp)
         exit(EXIT_FAILURE);
     }
     *msh = malloc(sizeof(t_msh));
-    if (*msh == NULL)
+    if (msh == NULL)
     {
         fprintf(stderr, "msh malloc failed\n");
         exit(EXIT_FAILURE);
@@ -183,6 +183,6 @@ void    ms_env_init(t_msh **msh, char **envp)
         i++;
     }
     (*msh)->ms_env[i] = NULL;
-    check_shlvl((*msh)->ms_env);
+    check_shlvl((*msh));
     (*msh)->exit_code = 0;
 }

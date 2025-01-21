@@ -29,13 +29,15 @@ char	**ms_matrix_add_line(char **matrix, char *new_line);
 void    ft_free_tab(char **tab);
 int     check_exit(t_msh *msh, char *av);
 void    ms_env_init(t_msh **msh, char**envp);
-char    *ms_get_env(char **env, char *av);
+char    *ms_get_env(t_msh *msh, char *av);
+void    ms_set_env(t_msh *msh, char *value);
 
 /******************BUILTINS********************/
 //int     handle_cd(t_node_list *node);
 int     handle_pwd(void);
-int     handle_env(char **ms_env);
-void    ms_set_env(char **env, char *value);
+int     handle_env(t_node_list	*node_l);
 int     handle_exit(t_node_list	*node_l);
-
+void	handle_echo (t_node_list	*node);
+void		handle_export(char **av, t_node_list *node);
+void		handle_unset (char **av, t_node_list *node);
 # endif

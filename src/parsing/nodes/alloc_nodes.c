@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 16:59:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:38:47 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_node_list *init_new_node(int node_n, bool *start_node, t_msh *msh) // nothing 
 	}
 	new_node->node_i = node_n - 1;
 	new_node->msh = msh;
+	new_node->fd_in = 0;
+	new_node->fd_out = 1;
 	*start_node = false; // Node has started
 	return new_node;
 }

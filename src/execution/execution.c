@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 18:23:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:48:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ Exit Codes and meaning (we should remember to assign them after parsing and exec
 
 void	print_exec(t_node_list	*node)
 {
-	int i; // index used for looping thorugh args array
 	if(strcmp(node->cmd->cmd, "cd") == 0)
 	{
 		// printf(COLOR_YELLOW"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
@@ -55,27 +54,14 @@ void	print_exec(t_node_list	*node)
 	else if (strcmp(node->cmd->cmd, "env") == 0)
 	{
 		// printf(COLOR_YELLOW"\nEXECUTING < ENV > BUILT-IN...\n\n"COLOR_RESET);
-		handle_env(node->msh->ms_env);
 	}
 	else if(strcmp(node->cmd->cmd, "echo") == 0)
 	{
-		i = 0;
-		if (node->cmd->args) // Check if the args array is NULL or empty
-		{
-			while(node->cmd->args[i])
-			{
-				printf("%s", node->cmd->args[i]);
-				i++;
-				if (node->cmd->args[i])
-					printf(" ");
-			}
-		}
-		if(!node->cmd->option_n)
-			printf("\n"); // print newline at end if -n_option is false (which is default value unless we find -n)
+		// printf(COLOR_YELLOW"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
 	}
 	else if(strcmp(node->cmd->cmd, "exit") == 0)
 	{
-		printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
+		// printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
 		printf("Exiting minishell...\n");
 		//why free_node_list, clear history and exit 0 where removed?
 	}
@@ -94,7 +80,6 @@ void	print_exec(t_node_list	*node)
 	else
 	{
 		// printf(COLOR_YELLOW"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->cmd);
-		// if this fails - error code 127 (command not found)?
 	}
 }
 
@@ -103,7 +88,7 @@ void 	exec_command(t_node_list	*node_list)
 	print_exec(node_list);
 	if (strcmp(node_list->cmd->cmd, "echo") == 0)
 	{
-		//handle_echo(node->cmd->args);
+		handle_echo(node_list);
 	}
 	else if (strcmp(node_list->cmd->cmd, "cd") == 0)
 	{
@@ -115,15 +100,15 @@ void 	exec_command(t_node_list	*node_list)
 	}
 	else if (strcmp(node_list->cmd->cmd, "export") == 0)
 	{
-		//handle_export(node_list->cmd->args, node_list->msh->ms_env);
+		handle_export(node_list->cmd->args, node_list);
 	}
 	else if (strcmp(node_list->cmd->cmd, "unset") == 0)
 	{
-		//handle_unset(node_list->cmd->args, node_list->msh->ms_env);
+		handle_unset(node_list->cmd->args, node_list);
 	}
 	else if (strcmp(node_list->cmd->cmd, "env") == 0)
 	{
-		handle_env(node_list->msh->ms_env);
+		handle_env(node_list);
 	}
 	else if (strcmp(node_list->cmd->cmd, "exit") == 0)
 	{
@@ -133,6 +118,7 @@ void 	exec_command(t_node_list	*node_list)
 	{
 		printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
 		printf("Command not found: %s\n", node_list->cmd->cmd);
+		node_list->msh->exit_code = 127;
 	}
 }
 
