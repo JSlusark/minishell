@@ -86,8 +86,7 @@ declare -a TESTS=(
     "echo -n arg > file hey"
     "echo -n | echo -n"
     "echo -n| echo -n"
-
-    ## expansion
+    ## expansion with quotes
     "echo\"\"$_\"\""
     # "echo \"$(""
     "echo $$"
@@ -176,26 +175,36 @@ FAILED_OUTPUTS=()
 FAILED_EXITS=()
 
 # Function to print test results
-print_result() {
+print_result()
+{
     local description=$1
     local color=$2
     echo -e "$color$description$RESET"
 }
 
-# Function to clean Minishell output
-clean_minishell_output() {
+# Function to clean Bash output
+clean_bash_output()
+{
     local output=$1
-    # Remove the first line, any 'Minishell> exit', and any line exactly matching 'exit'
-    echo "$output" | sed -n '2,$p' | sed '/^Minishell> exit$/d' | sed '/^exit$/d'
+    # Remove "/bin/bash: line 1:" prefix from Bash errors
+    echo "$output" | sed 's|/bin/bash: line [0-9]*: ||'
+}
+
+# Function to clean Minishell output
+clean_minishell_output()
+{
+    local output=$1
+    # Remove the first line, any 'Minishell> exit', and the 'Minishell>' prompt
+    echo "$output" | sed -n '2,$p' | sed '/^Minishell> exit$/d' | sed '/^Minishell>/d'
 }
 
 # Run the test cases
 for i in "${!TESTS[@]}"; do
     TEST="${TESTS[i]}"
-    # echo "Running Test $((i+1)): \"$TEST\""
 
     # Run command in Bash
-    BASH_OUT=$(echo "$TEST" | $BASH 2>&1)
+    RAW_BASH_OUT=$(echo "$TEST" | $BASH 2>&1)
+    BASH_OUT=$(clean_bash_output "$RAW_BASH_OUT")
     BASH_EXIT=$?
 
     # Run command in Minishell
@@ -246,7 +255,7 @@ if [ ${#FAILED_OUTPUTS[@]} -eq 0 ]; then
     echo "None"
 else
     for failure in "${FAILED_OUTPUTS[@]}"; do
-        echo "1. $failure"
+        echo "$failure"
     done
 fi
 echo
@@ -255,7 +264,7 @@ if [ ${#FAILED_EXITS[@]} -eq 0 ]; then
     echo "None"
 else
     for failure in "${FAILED_EXITS[@]}"; do
-        echo "1. $failure"
+        echo "$failure"
     done
 fi
 
