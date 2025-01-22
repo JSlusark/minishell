@@ -171,54 +171,93 @@ declare -a TESTS=(
     "echo$?ciao"
   )
 
-  # Function to print test results
-  print_result() {
+# Arrays to store failed tests
+FAILED_OUTPUTS=()
+FAILED_EXITS=()
+
+# Function to print test results
+print_result() {
     local description=$1
     local color=$2
     echo -e "$color$description$RESET"
-  }
+}
 
-  # Function to clean Minishell output
-  clean_minishell_output() {
+# Function to clean Minishell output
+clean_minishell_output() {
     local output=$1
     # Remove the first line, any 'Minishell> exit', and any line exactly matching 'exit'
     echo "$output" | sed -n '2,$p' | sed '/^Minishell> exit$/d' | sed '/^exit$/d'
-  }
+}
 
-
-
-  # Run the test cases
-  for i in "${!TESTS[@]}"; do
+# Run the test cases
+for i in "${!TESTS[@]}"; do
     TEST="${TESTS[i]}"
-    echo "Running Test $((i+1)): \"$TEST\""
+    # echo "Running Test $((i+1)): \"$TEST\""
 
     # Run command in Bash
     BASH_OUT=$(echo "$TEST" | $BASH 2>&1)
+    BASH_EXIT=$?
 
     # Run command in Minishell
     RAW_MINISHELL_OUT=$(echo "$TEST" | $MINISHELL 2>&1)
     MINISHELL_OUT=$(clean_minishell_output "$RAW_MINISHELL_OUT")
+    MINISHELL_EXIT=$?
 
     # Print results
-    echo -e "Test $((i+1)): \"$TEST\""
+    echo
+    echo -e "$MAGENTA------------ Test $((i+1)): \"$TEST\" ------------$RESET"
 
     # Bash Output
-    print_result "$BLUE - Bash:$RESET"
-    print_result " $CYAN OUT: $RESET $BASH_OUT"
-
-    # Minishell Output
-    print_result "$BLUE - Minishell:$RESET"
-    print_result " $CYAN OUT $RESET: $MINISHELL_OUT"
+   echo
+    print_result "$GREEN - Bash:$RESET $BASH_OUT"
+    print_result "$YELLOW Exit Code:$RESET $BASH_EXIT"
+   echo
+    print_result "$GREEN - Mini:$RESET $MINISHELL_OUT"
+    print_result "$YELLOW Exit Code:$RESET $MINISHELL_EXIT"
+   echo
 
     # Match Results
     if [ "$BASH_OUT" == "$MINISHELL_OUT" ]; then
-      print_result "- OUTPUT MATCHES" "$GREEN"
+        print_result "Result: ✅" "$GREEN"
     else
-      print_result "- OUTPUT DOES NOT MATCH" "$RED"
+        print_result "Result: ❌" "$RED"
+        # Add to failed outputs
+        FAILED_OUTPUTS+=("Test $((i+1)): \"$TEST\"")
     fi
 
-  echo
+    # Match Results for Exit Code
+    if [ "$BASH_EXIT" -eq "$MINISHELL_EXIT" ]; then
+        print_result "Exit code: ✅" "$GREEN"
+    else
+        print_result "Exit code: ❌" "$RED"
+        # Add to failed exits
+        FAILED_EXITS+=("Test $((i+1)): \"$TEST\"")
+    fi
+
+    echo
 done
+    echo -e "$MAGENTA------------------------------------------------$RESET"
+
+echo
+
+# Final summary
+echo -e "❌ $RED Failed Output:$RESET"
+if [ ${#FAILED_OUTPUTS[@]} -eq 0 ]; then
+    echo "None"
+else
+    for failure in "${FAILED_OUTPUTS[@]}"; do
+        echo "1. $failure"
+    done
+fi
+echo
+echo -e "❌$RED Failed Exit Code:$RESET"
+if [ ${#FAILED_EXITS[@]} -eq 0 ]; then
+    echo "None"
+else
+    for failure in "${FAILED_EXITS[@]}"; do
+        echo "1. $failure"
+    done
+fi
 
 # Final message
-echo "Testing Complete."
+echo
