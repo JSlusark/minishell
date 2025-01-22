@@ -1,4 +1,4 @@
-# Updating the script content to include the requested format and color-coded output
+#!/bin/bash
 
 # Paths to executables
 MINISHELL="./minishell"
@@ -19,7 +19,7 @@ echo "Starting Minishell Tests" > $LOGFILE
 
 # Define test cases
 declare -a TESTS=(
-  "echo $USER"
+  "echo jslusark"
   "pwd"
   "ls -l"
   "export TEST_VAR=42 && echo $TEST_VAR"
@@ -33,6 +33,13 @@ print_result() {
   echo -e "$color$description$RESET" | tee -a $LOGFILE
 }
 
+# Function to clean Minishell output
+clean_minishell_output() {
+  local output=$1
+  # Skip the first line and any trailing prompt lines (e.g., "Minishell> exit")
+  echo "$output" | sed -n '2,$p' | sed '/^Minishell> exit$/d'
+}
+
 # Run the test cases
 for i in "${!TESTS[@]}"; do
   TEST="${TESTS[i]}"
@@ -43,7 +50,8 @@ for i in "${!TESTS[@]}"; do
   BASH_EXIT=$?
 
   # Run command in Minishell
-  MINISHELL_OUT=$(echo "$TEST" | $MINISHELL 2>&1)
+  RAW_MINISHELL_OUT=$(echo "$TEST" | $MINISHELL 2>&1)
+  MINISHELL_OUT=$(clean_minishell_output "$RAW_MINISHELL_OUT")
   MINISHELL_EXIT=$?
 
   # Print results
@@ -77,11 +85,3 @@ done
 
 # Final message
 echo "Testing Complete. Results saved to $LOGFILE."
-# """
-
-# # Save the updated script
-# script_path_updated = "/mnt/data/minishell_tester_v2.sh"
-# with open(script_path_updated, "w") as file:
-#     file.write(script_content_updated)
-
-# script_path_updated
