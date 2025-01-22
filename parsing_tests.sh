@@ -18,157 +18,168 @@ echo "Starting Minishell Tests"
 
 # Define test cases
 declare -a TESTS=(
-    # "echo jslusark"
-    # "pwd"
-    # "ls -l"
-    # "export TEST_VAR=42 && echo $TEST_VAR"
-    # "cat < missing_file"
+    # #SINGLE TOKENS
+      " "
+      ""
+      "|"
+      #pipes involved
+      "echo | \"   \""
 
-    ##
-    " "
-    ""
-    "|"
-    ## echo -n option
-    "echo -n hello"
-    "echo -n -n hello"
-    "echo -n -n -n hello"
-    "echo -n -n hello -n"
-    "echo hello -n"
-    "echo -nnnn hello"
-    "echo -nnnn -n -nn hello"
-    "echo hello -nnnnn"
-    "echo hello -nnnnn -n"
-    "echo -nnnnm -n -nnnn hello"
-    "echo -n"
-    "echo -nnnn"
-    "echo -nnnn -n -nn -nnnnn"
-    "echo -nnnn -nm hello -n"
-    "echo -nnm hello -n"
-    "echo -l"
-    "echo - n"
-    "echo-n"
-    "echo -"
-    "echo -n      -"
-    "echo -n                  "
-    "echo -n  \"              \""
-    "echo-"
-    "echo -N"
-    "echo \"-n\"nnn hello"
-    "echo \"-n\"nnm hello"
-    "echo '-n'nnn hello"
-    "echo '-n'nnm hello"
-    "echo \"-n\" hello"
-    "echo '-n' hello"
-    "echo\"-n\" hello"
-    "echo'-n' hello"
-    "echo \"\"\"\"\"\"-n\"\" hello"
-    "echo \"\"\"-\"\"\"n\"\" hello"
-    "echo -\"\"\"\"\"\"n\"\" hello"
-    "echo ''''''-n'' hello"
-    "echo ''''-''n'' hello"
-    "echo -''''''n'' hello"
-    "echo \"''\"\"-n\"\"''\""
-    "echo \"'\"-n\"'\""
-    "echo \"'\"'\"\"-n\"'\"'\""
-    "echo '\"-n\"'"
-    "-n"
-    "echo > file -n hey"
-    "echo > file hey -n"
-    "echo hey -n > file"
-    "echo > -n ciao"
-    "echo > file -nm"
-    "cd -n hello ciao"
-    "echo > -n"
-    "echo > -n ciao"
-    "echo > -n ciao -n"
-    "echo -n > file hey"
-    "echo -n arg > file"
-    "echo -n arg > file hey"
-    "echo -n | echo -n"
-    "echo -n| echo -n"
-    ## expansion with quotes
-    "echo\"\"$_\"\""
-    # "echo \"$(""
-    "echo $$"
-    "echo $$$"
-    "echo $$$$"
-    "echo CIAO=\"$USER\""
-    "echo \"$\""
-    "echo \"$ \""
-    "echo \"$  ciao\""
-    "echo \" $\""
-    "echo \"$ ciao\" come stai"
-    "echo \"$'US'ER\""
-    "echo \"$?\""
-    "echo \"$? \""
-    "echo \" $?\""
-    "echo \"$? ciao\""
-    "echo \"$? ciao      \" come stai"
-    "echo \"$PWD\""
-    "echo \"$USER\""
-    "echo \"$US-ER\""
-    "echo \"$GNOME_TERMINAL_SERVICE\""
-    "echo \"$US\"ER"
-    "echo \"$\"USER\"\""
-    "echo \"$US\"ER\"\""
-    "echo \"'$'USER \""
-    "echo \"$US 'ER' \""
-    "echo \"$0\""
-    "echo \"$1\""
-    "echo \"$-\""
-    "\"$?$USER\""
-    "\"$/USER\""
-    "\"$USER/\""
-    "\"export echo=\"\"echo\"\""
-    "\"\"$echo\"\" hello\""
-    "\"$NOTREAL\" ciao"
-    "$USER"
-    "$NOTREAL ciao"
-    "\" \" ciao"
-    "\"\" ciao"
-    "' ciao"
-    "\"export echo=\"\"echo\"\""
-    "\"\"$echo\"\" hello\""
-    "echo \"\"$\"\""
-    "echo \"\"\"$\"\"\""
-    "echo \"\"\"\"$\"\"\"\""
-    "echo \"\"\"\"\"$\"\"\"\"\""
-    "echo \"$\"$\"\""
-    "echo \"$$\"$\"\""
-    "echo \"$\"$\"\"$\"\""
-    "echo \"$\"\"$\"\"$\"\"\""
-    "echo \"$\"$\"\"$\"\"$\"\""
-    "echo \"$\"$\"\"\"$\"\"$\"\""
-    "echo |\"$\""
-    "echo \"$\"|"
-    "echo \"$\"|echo hello"
-    "echo$US\"ER\""
-    "echo $US\"ER\""
-    "echo$\"US\"ER"
-    "echo $\"US\"ER"
-    "\"export echo=\"\"echo\"\""
-    "$echo hello\""
-    "\"export echo=\"\"echo\"\""
-    "echo |$echo hello\""
-    "echo $|"
-    "echo $| echo"
-    "echo $| echo hello"
-    "echo |$?"
-    "echo|$"
-    "echo|$ciacia"
-    "echo | \"   \""
-    "\"export CI=CA=ca"
-    "echo \"\"$CI=CA\"\"\""
-    "echo$USER"
-    "echo $USERciao"
-    "echo$USERciao"
-    "echo$"
-    "echo $USER$USER"
-    "echo $?"
-    "echo$?"
-    "echo $?ciao"
-    "echo$?ciao"
-  )
+    #ECHO TESTS BY CATEGORY
+      #echo -n option
+        "echo -n hello"
+        "echo -n -n hello"
+        "echo -n -n -n hello"
+        "echo -n -n hello -n"
+        "echo hello -n"
+        "echo -nnnn hello"
+        "echo -nnnn -n -nn hello"
+        "echo hello -nnnnn"
+        "echo hello -nnnnn -n"
+        "echo -nnnnm -n -nnnn hello"
+        "echo -n"
+        "echo -nnnn"
+        "echo -nnnn -n -nn -nnnnn"
+        "echo -nnnn -nm hello -n"
+        "echo -nnm hello -n"
+        "echo -l"
+        "echo - n"
+        "echo-n"
+        "echo -"
+        "echo -n      -"
+        "echo -n                  "
+        "echo -n  \"              \""
+        "echo-"
+        "echo -N"
+        "echo \"-n\"nnn hello"
+        "echo \"-n\"nnm hello"
+        "echo '-n'nnn hello"
+        "echo '-n'nnm hello"
+        "echo \"-n\" hello"
+        "echo '-n' hello"
+        "echo\"-n\" hello"
+        "echo'-n' hello"
+        "echo \"\"\"\"\"\"-n\"\" hello"
+        "echo \"\"\"-\"\"\"n\"\" hello"
+        "echo -\"\"\"\"\"\"n\"\" hello"
+        "echo ''''''-n'' hello"
+        "echo ''''-''n'' hello"
+        "echo -''''''n'' hello"
+        "echo \"''\"\"-n\"\"''\""
+        "echo \"'\"-n\"'\""
+        "echo \"'\"'\"\"-n\"'\"'\""
+        "echo '\"-n\"'"
+        "-n"
+        #Redir Inbolved
+        "echo > file -n hey"
+        "echo > file hey -n"
+        "echo hey -n > file"
+        "echo > -n ciao"
+        "echo > file -nm"
+        "cd -n hello ciao"
+        "echo > -n"
+        "echo > -n ciao"
+        "echo > -n ciao -n"
+        "echo -n > file hey"
+        "echo -n arg > file"
+        "echo -n arg > file hey"
+        #Pipes involved
+        "echo -n | echo -n"
+        "echo -n| echo -n"
+
+      #EXPANSIONS
+        #no quotes involved
+          "echo\"\"$_\"\""
+          "echo $$"
+          "echo $$$"
+          "echo $$$$"
+          "$USER"
+          "$NOTREAL ciao"
+          "echo$USER"
+          "echo $USERciao"
+          "echo$USERciao"
+          "echo$"
+          "echo $USER$USER"
+          "echo $?"
+          "echo$?"
+          "echo $?ciao"
+          "echo$?ciao"
+          # not-env characters
+          "echo$US\"ER\""
+          "echo $US\"ER\""
+          #with pipes
+            "echo |$echo hello\""
+            "echo $|"
+            "echo $| echo"
+            "echo $| echo hello"
+            "echo |$?"
+            "echo|$"
+            "echo|$ciacia"
+          #redir involved
+
+
+        # double "quotes"
+          # "echo \"$(""
+          "echo CIAO=\"$USER\""
+          "echo \"$\""
+          "echo \"$ \""
+          "echo \"$  ciao\""
+          "echo \" $\""
+          "echo \"$ ciao\" come stai"
+          "echo \"$'US'ER\""
+          "echo \"$?\""
+          "echo \"$? \""
+          "echo \" $?\""
+          "echo \"$? ciao\""
+          "echo \"$? ciao      \" come stai"
+          "echo \"$PWD\""
+          "echo \"$USER\""
+          "echo \"$US-ER\""
+          "echo \"$GNOME_TERMINAL_SERVICE\""
+          "echo \"$US\"ER"
+          "echo \"$\"USER\"\""
+          "echo \"$US\"ER\"\""
+          "\"$?$USER\""
+          "\"$/USER\""
+          "\"$USER/\""
+          "\"$NOTREAL\" ciao"
+          "echo \"$0\""
+          "echo \"$1\""
+          "echo \"$-\""
+          # not-env characters
+            "echo$\"US\"ER"
+            "echo $\"US\"ER"
+          # double "quotes" with 'single' quotes inside
+            "echo \"'$'USER \""
+            "echo \"$US 'ER' \""
+          # double "quotes" with many 'double' quotes inside
+            "echo \"\"$\"\""
+            "echo \"\"\"$\"\"\""
+            "echo \"\"\"\"$\"\"\"\""
+            "echo \"\"\"\"\"$\"\"\"\"\""
+            "echo \"$\"$\"\""
+            "echo \"$$\"$\"\""
+            "echo \"$\"$\"\"$\"\""
+            "echo \"$\"\"$\"\"$\"\"\""
+            "echo \"$\"$\"\"$\"\"$\"\""
+            "echo \"$\"$\"\"\"$\"\"$\"\""
+            #pipes involved
+            "echo |\"$\""
+            "echo \"$\"|"
+            "echo \"$\"|echo hello"
+            #redir involved
+
+
+
+
+
+    ##EXPORT STUFF (not to be used in tester for now)
+    # "\"export echo=\"\"echo\"\""
+    # "$echo hello\""
+
+    # "\"export CI=CA=ca"
+    # "echo \"\"$CI=CA\"\"\""
+)
 
 # Arrays to store failed tests
 FAILED_OUTPUTS=()
@@ -217,56 +228,54 @@ for i in "${!TESTS[@]}"; do
     echo -e "$MAGENTA------------ Test $((i+1)): \"$TEST\" ------------$RESET"
 
     # Bash Output
-   echo
+    echo
     print_result "$GREEN - Bash:$RESET $BASH_OUT"
     print_result "$YELLOW Exit Code:$RESET $BASH_EXIT"
-   echo
+    echo
     print_result "$GREEN - Mini:$RESET $MINISHELL_OUT"
     print_result "$YELLOW Exit Code:$RESET $MINISHELL_EXIT"
-   echo
+    echo
 
     # Match Results
-    if [ "$BASH_OUT" == "$MINISHELL_OUT" ]; then
-        print_result "Result: ✅" "$GREEN"
-    else
-        print_result "Result: ❌" "$RED"
-        # Add to failed outputs
+    OUTPUT_RESULT="✅"
+    EXIT_RESULT="✅"
+
+    if [ "$BASH_OUT" != "$MINISHELL_OUT" ]; then
+        OUTPUT_RESULT="❌"
         FAILED_OUTPUTS+=("Test $((i+1)): \"$TEST\"")
     fi
 
-    # Match Results for Exit Code
-    if [ "$BASH_EXIT" -eq "$MINISHELL_EXIT" ]; then
-        print_result "Exit code: ✅" "$GREEN"
-    else
-        print_result "Exit code: ❌" "$RED"
-        # Add to failed exits
+    if [ "$BASH_EXIT" -ne "$MINISHELL_EXIT" ]; then
+        EXIT_RESULT="❌"
         FAILED_EXITS+=("Test $((i+1)): \"$TEST\"")
     fi
 
-    echo
+echo
 done
-    echo -e "$MAGENTA------------------------------------------------$RESET"
-
-echo
-
-# Final summary
-echo -e "❌ $RED Failed Output:$RESET"
-if [ ${#FAILED_OUTPUTS[@]} -eq 0 ]; then
-    echo "None"
+echo -e "📋 $BLUE Fail Summary:$RESET"
+if [ ${#FAILED_OUTPUTS[@]} -eq 0 ] && [ ${#FAILED_EXITS[@]} -eq 0 ]; then
+    echo -e "$GREEN All tests passed! 🎉$RESET"
 else
-    for failure in "${FAILED_OUTPUTS[@]}"; do
-        echo "$failure"
+    printf "%-10s %-40s %-10s %-10s\n" "Test No." "Command" "OUT" "EXIT"
+    printf "%-10s %-40s %-10s %-10s\n" "--------" "----------------------------------------" "----" "-----"
+
+    for i in "${!TESTS[@]}"; do
+        TEST="${TESTS[i]}"
+        OUT_STATUS="✅"
+        EXIT_STATUS="✅"
+
+        if [[ " ${FAILED_OUTPUTS[*]} " =~ "Test $((i+1)): \"$TEST\"" ]]; then
+            OUT_STATUS="❌"
+        fi
+        if [[ " ${FAILED_EXITS[*]} " =~ "Test $((i+1)): \"$TEST\"" ]]; then
+            EXIT_STATUS="❌"
+        fi
+
+        if [ "$OUT_STATUS" == "❌" ] || [ "$EXIT_STATUS" == "❌" ]; then
+            printf "%-10s %-40s %-10s %-10s\n" "$((i+1))" "$TEST" "$OUT_STATUS" "$EXIT_STATUS"
+        fi
     done
 fi
+echo -e "$MAGENTA------------------------------------------------$RESET"
 echo
-echo -e "❌$RED Failed Exit Code:$RESET"
-if [ ${#FAILED_EXITS[@]} -eq 0 ]; then
-    echo "None"
-else
-    for failure in "${FAILED_EXITS[@]}"; do
-        echo "$failure"
-    done
-fi
-
-# Final message
-echo
+echo -e "$GREEN Testing Complete.$RESET"
