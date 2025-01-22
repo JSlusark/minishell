@@ -9,10 +9,20 @@ if [[ $1 ]]; then
 	)
 else
 	test_lists=(
+		#main tests
 		"builtins"
 		"pipes"
 		"redirects"
 		"extras"
+
+		#My own tests from my csv
+		# "j_echo_general"
+		# "j_echo_exp"
+		# "j_echo_exp_quotes"
+		# "j_echo_n" #disable the if statement in cmd_echo to print the new line always
+		# "j_echo_pipes"
+		# "j_echo_quotes"
+
 	)
 fi
 

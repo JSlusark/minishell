@@ -1,0 +1,60 @@
+#order of -n
+echo -n hello
+echo -n -n hello
+echo -n -n -n hello
+echo -n -n hello -n
+echo hello -n
+echo -nnnn hello
+echo -nnnn -n -nn hello
+echo hello -nnnnn
+echo hello -nnnnn -n
+echo -nnnnm -n -nnnn hello
+echo -n
+echo -nnnn
+echo -nnnn -n -nn -nnnnn
+echo -nnnn -nm hello -n
+echo -nnm hello -n
+echo -l
+echo - n
+echo-n
+echo -
+echo -n      -
+echo -n
+echo -n  "              "
+echo-
+echo -N
+#with quotes
+echo "-n"nnn hello
+echo "-n"nnm hello
+echo '-n'nnn hello
+echo '-n'nnm hello
+echo "-n" hello
+echo '-n' hello
+echo"-n" hello
+echo'-n' hello
+echo """"""-n"" hello
+echo """-"""n"" hello
+echo -""""""n"" hello
+echo ''''''-n'' hello
+echo ''''-''n'' hello
+echo -''''''n'' hello
+echo "''""-n""''"
+echo "'"-n"'"
+echo "'"'"-n"'"'"
+echo '"-n"'
+-n
+# with redirection
+echo > file -n hey
+echo > file hey -n
+echo hey -n > file
+echo > -n ciao
+echo > file -nm
+cd -n hello ciao
+echo > -n
+echo > -n ciao
+echo > -n ciao -n
+echo -n > file hey
+echo -n arg > file
+echo -n arg > file hey
+echo -n | echo -n
+echo -n| echo -n

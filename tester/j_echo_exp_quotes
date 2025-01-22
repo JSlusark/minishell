@@ -1,0 +1,45 @@
+# echo CIAO="$USER"
+echo "$"
+echo "$ "
+echo "$  ciao"
+echo " $"
+echo "$ ciao" come stai
+echo "$'US'ER"
+echo "$?"
+echo "$? "
+echo " $?"
+echo "$? ciao"
+echo "$? ciao      " come stai
+echo "$PWD"
+echo "$USER"
+echo "$US-ER"
+echo "$GNOME_TERMINAL_SERVICE"
+echo "$US"ER
+echo "$"USER""
+echo "$US"ER""
+echo "'$'USER "
+echo "$US 'ER' "
+echo "$0"
+echo "$1"
+echo "$-"
+"$?$USER"
+"$/USER"
+"$USER/"
+# "export echo=""echo""
+# ""$echo"" hello"
+"$NOTREAL" ciao
+#many
+echo ""$""
+echo """$"""
+echo """"$""""
+echo """""$"""""
+echo "$"$""
+echo "$$"$""
+echo "$"$""$""
+echo "$""$""$"""
+ echo "$"$""$""$""
+echo "$"$"""$""$"""
+#with pipes
+echo |"$"
+echo "$"|
+echo "$"|echo hello
