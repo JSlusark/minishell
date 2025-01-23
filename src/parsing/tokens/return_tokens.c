@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 15:25:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 18:53:13 by jslusark         ###   ########.fr       */
+/*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
+/*   Updated: 2025/01/23 15:05:40 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,35 +247,74 @@ bool	quote_closed(int *i, char *input, char quote, int *last_quote)
 	return(true);
 }
 
+
+
+
+
+
+
+
+
+
+
+bool invalid_char(char *input, int i, t_tokens *tokens)
+{
+	char *invalid;				// seen outside string also && $(..)
+	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	int j;
+
+	invalid = ";#&,`*~\\";  // seen outside string also && $(..)
+	bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	j = i;
+
+	while(ft_strchr(invalid, input[j]))
+	{
+		j++;
+		if(input[j] == '\0' || ft_strchr(bounds, input[j])) // problem when followed by other invalid symbls
+		{
+			printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
+			free_tokens(tokens);
+			return(false);
+		}
+		if(!ft_strchr(invalid, input[j]))
+			break;
+	}
+	return(true);
+}
+
+
+
+
+
 t_tokens *return_tokens(char *input, t_msh *msh)
 {
-	int i = 0;
-	char *invalid = ";#&,`*~\\";  // seen outside string also && $(..)
-	char *bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
-	char *quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
+	int i;
+	char *invalid;				// seen outside string also && $(..)
+	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	char *quotes;				// anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
+	t_tokens *tokens;
+	char buff[1024]; // i then strcpy - strcpy(buff, "your value");
 
-	t_tokens *tokens = NULL;
+	invalid = ";#&,`*~\\";  // seen outside string also && $(..)
+	bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
+	i = 0;
+
+	tokens = NULL;
 	(void)msh; // <--- JESS: added to avoid compilation warnings
 
 	while (input[i] != '\0')
 	{
-		char buff[1024] = {0};
 		int len = 0;
-		int h = i;
+		// int h = i;
 
-		// CHECK INVALID FUNCTION
-		while(ft_strchr(invalid, input[h]))
+		if(!invalid_char(input, i, tokens)) //should we actually do this or just avoid and print?
 		{
-			h++;
-			if(input[h] == '\0' || ft_strchr(bounds, input[h])) // problem when followed by other invalid symbls
-			{
-				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-				free_tokens(tokens);
-				return(NULL);
-			}
-			if(!ft_strchr(invalid, input[h]))
-				break;
+			// unsure if update exit code as it's not really an error but we don't need to do this
+			return(NULL);
 		}
+
+
 		// IF NOT INVALID, CREATE ARGS
 		while(!ft_strchr(bounds, input[i]) && input[i] != '\0') // this grabs leters attached together as tokens, even when we have strings
 		{
