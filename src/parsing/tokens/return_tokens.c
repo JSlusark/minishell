@@ -6,34 +6,11 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/23 17:30:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:40:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-// char *expand(char *var, char **env) // NOT MINE
-// {
-// 	int i;
-// 	char *var_content;
-// 	i = 0;
-// 	var_content = NULL;
-// 	while (env[i])
-// 	{
-// 		if (strncmp(env[i], var, strlen(var)) == 0 && env[i][strlen(var)] == '=')
-// 		{
-// 			var_content = env[i] + strlen(var) + 1;
-// 			break;
-// 		}
-// 		i++;
-// 	}
-// 	if (!env[i])
-// 	{
-// 		perror("variable not found among environment variables");
-// 		return (NULL);
-// 	}
-// 	return ft_strdup(var_content);
-// }
 
 char *find_envar(char *var, char **env) // finds only the var, does not expand
 {
@@ -360,57 +337,61 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 	return tokens;
 }
 
+bool valid_bound(char *input, int *i, t_tokens **tokens)
+{
+	int k;
 
+	k = *i +1;
+	if (input[*i] == '|')
+	{
+		if (input[k] == '|')
+		{
+			printf("Minishell: error || operator are just for bonus\n");
+			return false; // Invalid operator
+		}
+		else
+			append_token(tokens, create_token("|", PIPE));
+	}
+	else if (input[*i] == '>')
+	{ // Handle > and >>
+		if (input[k] != '\0' && input[k] == '>')
+		{
+			append_token(tokens, create_token(">>", APPEND));
+			(*i)++;
+		}
+		else
+			append_token(tokens, create_token(">", REDIR_OUT));
+	}
+	else if (input[*i] == '<')
+	{
+		if (input[k] != '\0' && input[k] == '<') {
+			append_token(tokens, create_token("<<", HEREDOC));
+			(*i)++;
+		}
+		else
+			append_token(tokens, create_token("<", REDIR_IN));
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	return true; // Boundary was handled successfully
+}
 
 t_tokens *return_tokens(char *input, t_msh *msh)
 {
 	int i;
-	char *invalid;				// seen outside string also && $(..)
-	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
-	char *quotes;				// anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
 	t_tokens *tokens;
-	// bool e;
-	// char buff[1024]; // i then strcpy - strcpy(buff, "your value");
 
-	invalid = ";#&,`*~\\";  // seen outside string also && $(..)
-	bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
-	quotes = "\"'";  // anything inside quotes is considered an arg, for expansion we check if token is D STRING and if it has $ inside
-	// error = false;
 	i = 0;
-	msh->exit_code = 0; // neeed to define exit code every time to avoid prev codes being permanent
-
 	tokens = NULL;
-	(void)msh; // <--- JESS: added to avoid compilation warnings
+	msh->exit_code = 0; // neeed to define exit code every time to avoid prev codes being permanent
 
 	while (input[i] != '\0')
 	{
 		if(!invalid_char(input, i, tokens)) //should we actually do this or just avoid and print?
 		{
 			// unsure if update exit code as it's not really an error but we don't need to do this
+			free_tokens(tokens);
 			return(NULL);
 		}
-
 		tokens = parse_string(input, &i, msh, tokens); // Call the parsing function
 		// if(error)
 		if(msh->exit_code != 0)
@@ -418,161 +399,10 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 			free_tokens(tokens);
 			return(NULL);
 		}
-
-		// IF NOT INVALID, CREATE ARGS
-		// while(!ft_strchr(bounds, input[i]) && input[i] != '\0') // this grabs leters attached together as tokens, even when we have strings
-		// {
-		// 	if(ft_strchr(quotes, input[i]) && input[i] != '\0') // logic to create token within quotes
-		// 	{
-		// 		// CHECK QUOTEDARG
-		// 		int last_quote = 0;
-		// 		if (!quote_closed(&i, input, input[i], &last_quote))
-		// 		{
-		// 			printf("Minishell: %c at input[%d] had no closure\n", input[i], i);
-		// 			return (NULL);
-		// 		}
-		// 		collect_str(&i, input, input[i], &len, buff, &last_quote, msh);
-		// 		if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]))
-		// 		{
-		// 			if (len > 0)
-		// 			{
-		// 				append_token(&tokens, create_token(buff, ARG));
-		// 				// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
-		// 			}
-		// 		}
-		// 	}
-		// 	else // this collects tokens that are not in quotes or attached to quotes <- NE
-		// 	{
-		// 		// printf("%c\n", input[i]);
-		// 		// if(input[i] == '$')
-		// 		// 	printf("HIIIT!!\n"); // <-- goes here duh
-		// 		if(input[i] == '$')
-		// 		{
-		// 			// collects in buff everything until not_env char is found
-		// 			// sends the buff to see if expansion is valid
-		// 			// the function should be the same for the d_quotes one
-		// 			// i could probably use the same and then a cased to see if D_quote
-		// 			// exists or not
-
-		// 			//CHECK FIRST THE $? - did this silly thing because of not envar  in if statement
-		// 			int q = i+1;
-		// 			if(input[q] == '?')
-		// 			{
-		// 				q++; // move past ?
-		// 				append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
-		// 				i = q;
-		// 				continue;
-		// 			}
-		// 			char exp_name[1024] = {0}; // Buffer for the environment variable name
-		// 			int exp_len = 0;
-		// 			int j = i + 1; // Start after the '$'
-		// 			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ "; // Invalid characters for env names
-
-		// 			// Collect valid characters for an environment variable name into exp_name
-		// 			while (input[j] && !ft_strchr(not_env, input[j])) // && exp_len < 1023 unsure - not env includes ? :(
-		// 			{
-		// 				exp_name[exp_len] = input[j];
-		// 				exp_len++;
-		// 				j++;
-		// 			}
-		// 			exp_name[exp_len] = '\0'; // Null-terminate the buffer
-		// 			// printf("EXPANDED VAR: %s\n", exp_name);
-		// 			if (exp_len == 0) // If no valid characters followed the '$'
-		// 			{
-		// 				append_token(&tokens, create_token("$", ARG)); // Treat $ as a literal
-		// 				i++; // Move past the '$'
-		// 				continue;
-		// 			}
-		// 			// if(strcmp(exp_name, "?") == 0)
-		// 			// {
-		// 			// 	append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // Append the expanded value
-		// 			// 	i++;
-		// 			// 	continue;
-		// 			// }
-		// 			// Check if the variable exists in the environment
-		// 			char *expansion = find_envar(exp_name, msh->ms_env);
-		// 			if (expansion)
-		// 			{
-		// 				append_token(&tokens, create_token(expansion, ARG)); // Append the expanded value
-		// 				free(expansion); // Free the dynamically allocated expansion
-		// 			}
-		// 			 // OTHERWISE IF EXP IS NULL IT DOES NOTHING, JUST SKIPS
-
-		// 			i = j; // Move i to the last character of the variable name
-		// 		}
-		// 		else // i guess the problem here is that
-		// 		{
-		// 			buff[len] = input[i];
-		// 			len++;
-		// 			i++;
-		// 			if(input[i] == ' ' || input[i] == '\0' || ft_strchr(bounds, input[i]) || input[i] == '$')
-		// 			{
-		// 				// as this is where i get the full printed token i should terminate and append here?
-		// 				buff[len] = '\0';
-		// 				if (len > 0)
-		// 				{
-		// 					// if(ft_strcmp(buff, "$?") == 0) // NOT FINAL
-		// 					// 	append_token(&tokens, create_token(ft_itoa((*msh).exit_code), ARG)); // LEAKS OFC - EXIT EXPANSION ADDED MOMENTARILY, NEEDS TO BE DONE ALSO WITHIN ""
-		// 					// else
-		// 						append_token(&tokens, create_token(buff, ARG));
-		// 				}
-		// 				// printf(COLOR_YELLOW"<---- ARG LEN %d (parsing assigns later as cmd, arg or file)\n"COLOR_RESET, len);
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// CHECK BOUNDS <- anlso $ is a bound
-		if(input[i] == '|')
+		if (!valid_bound(input, &i, &tokens))
 		{
-			int k = i + 1;
-			if(input[k] == '|')
-			{
-				printf("||");
-				// printf(COLOR_YELLOW"<---- OPERATOR\n"COLOR_RESET);
-				printf("Minishell: error || operator are just for bonus\n");
-				return(NULL);
-				// i++; // wtf i have put that?
-			}
-			else
-			{
-				append_token(&tokens, create_token("|", PIPE));
-				// printf("%c", input[i]);
-				// printf(COLOR_YELLOW"<---- PIPE len 1\n"COLOR_RESET);
-			}
-		}
-		else if(input[i] == '>') // use a while to understand if >> ?
-		{
-			int j = i + 1;
-			if(input[j] != '\0' && input[j] == '>')
-			{
-				append_token(&tokens, create_token(">>", APPEND));
-				// printf(">>");
-				// printf(COLOR_YELLOW"<---- APPEND_REDIR len 2\n"COLOR_RESET);
-				i++;
-			}
-			else
-			{
-				append_token(&tokens, create_token(">", REDIR_OUT));
-				// printf("%c", input[i]);
-				// printf(COLOR_YELLOW"<---- IN_REDIR len 1\n"COLOR_RESET);
-			}
-		}
-		else if(input[i] == '<') // use a while to understand if >> ?
-		{
-			int y = i + 1;
-			if(input[y] != '\0' && input[y] == '<')
-			{
-				append_token(&tokens, create_token("<<", HEREDOC));
-				// printf("<<");
-				// printf(COLOR_YELLOW"<---- HEREDOC_REDIR len 2\n"COLOR_RESET);
-				i++;
-			}
-			else
-			{
-				append_token(&tokens, create_token("<", REDIR_IN));
-				// printf("%c", input[i]);
-				// printf(COLOR_YELLOW"<---- OUT_REDIR len 1\n"COLOR_RESET);
-			}
+			free_tokens(tokens);
+			return NULL;
 		}
 		if(input[i] != '\0')
 			i++;
