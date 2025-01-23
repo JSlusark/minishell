@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/23 15:06:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:29:30 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	tokens = return_tokens(input, msh);
 	if(!tokens)
 	{
-		print_tokens(tokens); // for tokenization error handling
+		// print_tokens(tokens); // for tokenization error handling
 		if(input)
 			free(input);
 		if (tokens)
