@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 18:19:19 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:36:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,22 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	if(!tokens)
 	{
 		// print_tokens(tokens); // for tokenization error handling
-		free(input);
-		free_tokens(tokens); // need to better check this when hitting error as it did not work for invalid tokens
-		printf("- TOKEN FAILED TO ALLOCATE - add error code 2 to $?\n");
+		if(input)
+			free(input);
+		if (tokens)
+			free_tokens(tokens); // need to better check this when hitting error as it did not work for invalid tokens
 		nodes = NULL;
 	}
 	else // if tokenizing succeeds create execution nodes from tokens
 	{
 		// print_tokens(tokens); // for tokenization error handling
 		nodes = return_nodes(tokens, msh);
-		free_tokens(tokens);
-		free(input);
+		if(tokens)
+			free_tokens(tokens);
+		if(input)
+			free(input);
 		if(!nodes) // if parsing has error it returns null and frees everything
-			printf("- NODE FAILED TO ALLOCATE - add error code 2 to $?\n");
+			return(NULL);
 	}
 	return(nodes);
 }

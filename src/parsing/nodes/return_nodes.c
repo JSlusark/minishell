@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_nodes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 17:15:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:15:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ t_node_list *return_nodes(t_tokens *token, t_msh *msh)
 	while (token != NULL) //at every token iteration from the list - 1. check if token is unknown or a pipe error, 2.Start a new node, 3.Add token as element of the node and when pipe is encountered we end the node
 	{
 		if (pipe_error(token, p.pipestart, head, new_node)) // removed unknow token as that error is covere already in the tokenizer
+		{
+			msh->exit_code = 2;
 			return (NULL);
+		}
 		if(p.start_node == true)
 		{
 			new_node = init_new_node(p.node_n, &p.start_node, msh);
