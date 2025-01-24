@@ -1,6 +1,8 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+#define BOUNDS " |><" // scared of adding \t and \n
+#define QUOTES "\'\""
 typedef enum e_token_type // good to have an order like below
 {
 	REDIR_IN,       		// 5 Input redirection ("<")

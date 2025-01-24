@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:25:13 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 19:05:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:11:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,13 @@ bool invalid_char(char *input, int i)
 
 	if(ft_strchr(invalid, input[j])) // if char is invalid
 	{
-		printf("YO\n");
-		j++; // pass after the invalid
-		if(ft_strchr(bounds, input[j]) || input[i] == '\0') // if next char is bound or end return error
-		{
-			printf("YO 2\n");
-			return(true);
-		}
-		else
-		{
 			while(ft_strchr(invalid, input[j]) && input[j] != '\0') //skip all invalid if attached together
 				j++;
-			// we land on a character that is not invalid
 			if(ft_strchr(bounds, input[j]) || input[i] == '\0') // if next char is bound or end return error
+			{
+				printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
 				return(true);
-		}
+			}
 	}
 	return(false); // is not invalid so we process as a str
 }

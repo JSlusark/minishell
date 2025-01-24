@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 19:05:42 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:33:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,25 +154,26 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 	{
 		while(input[*i] == ' ' && input[*i] != '\0') // added to solve some "" edge cases
 		{
+			if(input[*i + 1] != ' ') // so we land on last space and skip in the main loop, instead onf doing i-- later
+				break;
 			printf("SKIPPED SPACE AT input[%d]: %c\n", *i, input[*i]);
 			(*i)++;
 		}
-		(*i)--;
 	}
-	else if(invalid_char(input, *i)) // lands to last invalid character
+	else if(invalid_char(input, *i)) // check if inv chars, if false goes to next if statement
 	{
-		printf("INV\n");
+		// printf("INV\n");
 		msh->exit_code = 2;
 		return (tokens);
 	}
-	else if(!ft_strchr("|><", input[*i]))
+	else if(!ft_strchr(BOUNDS, input[*i])) // before itdid npt have space in bouhnds only here
 	{
-		printf("STR\n");
+		// printf("STR\n");
 		tokens = parse_string(input, i, msh, tokens);
 	}
 	else if (!valid_bound(input, i, &tokens))
 	{
-		printf("BOUND\n");
+		// printf("BOUND\n");
 		msh->exit_code = 2;
 		return (tokens);
 	}
@@ -190,7 +191,7 @@ t_tokens *return_tokens(char *input, t_msh *msh) //only free tokens here and whe
 
 	while (input[i] != '\0')
 	{
-		// printf("EXIT: %d\n", msh->exit_code);
+		printf("EXIT: %d\n", msh->exit_code);
 		if (msh->exit_code != 0)
 		{
 			printf("ERROR\n");
