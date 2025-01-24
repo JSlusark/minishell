@@ -6,91 +6,128 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 14:10:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:43:17 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+bool check_empty_string(int *i, char *input)
+{
+	printf("last_quote_pos: %d c: %c\n", *i, input[*i]); // ""
+	int prev_i = *i - 2; // character before the 2nd and 1st quote
+	int next_i = *i + 1; // character after the 2nd quote
+	printf("prev_i: %d next_i: %d\n", prev_i, next_i);
+
+	if((prev_i  < 0 || input[prev_i] == ' ') && (input[next_i] == ' ' || input[next_i] == '\0' ))
+		return(true); // stops and appends a token with space (cases where "" is empty and delimited by spaces or start/end string delimiters)
+
+	return(false);
+}
+
 t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 {
-	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
+	// char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes;
 	char buff[1024];
+	char *bounds;
+	int buff_len;
 
+	buff_len = 0;
 	memset(buff, 0, sizeof(buff));
-	int len = 0;
+	// int len = 0;
 	bounds = " \t\n|><"; // Add more boundaries if needed
 	quotes = "\'\"";
 
 	while (!ft_strchr(bounds, input[*i]) && input[*i] != '\0')
 	{
-		// Handles quoted tokens - OK should return err too
 		if (ft_strchr(quotes, input[*i]))
 		{
-			printf(COLOR_CYAN"PART OF QUOTE STRING - "COLOR_RESET);
+			printf(COLOR_CYAN"START OF QUOTE STRING - "COLOR_RESET);
 			printf("input[%d]: %c\n", *i, input[*i]);
-			int last_quote = 0;
-			if (!quote_closed(i, input, input[*i], &last_quote))
+			bool closure = false;
+			char quote = input[*i];
+			// printf("Found quote: %c at input[%d]\n", quote, *i);
+			(*i)++; // Skip the opening quote
+			if(input[*i] == '\0') // if first quote followed by \0 error
 			{
-				// printf("Minishell: %c at input[%d] had no closure\n", input[*i], *i);
 				msh->exit_code = 2;
-				return (NULL);
+				printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
+				return(tokens);
 			}
-			collect_str(i, input, input[*i], &len, buff, &last_quote, msh);
-			if(input[*i] == ' ' || input[*i] == '\0' || ft_strchr(bounds, input[*i]))
+			// int buff_len = 0;
+			while (input[*i] != '\0') // collect buffer until end
 			{
-				if (len > 0)
+				if (input[*i] == quote) // or until closed quote
 				{
+					printf("Closing quote: %c at input[%d]\n", quote, *i);
+					closure = true;
+					break;
+				}
+				buff[buff_len++] = input[*i]; // add characters to buff
+				if (buff_len >= 1024) // if buff overflow
+				{
+					printf("Minishell: buffer overflow\n");
+					msh->exit_code = 1;
+					return (tokens);
+				}
+				(*i)++;
+			}
+			// i stops at \0 or quote
+			if(input[*i] == '\0' && !closure) // if not closed  and stops at null error
+			{
+				msh->exit_code = 2;
+				printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
+				return(tokens);
+			}
+			if(input[*i + 1] == ' ' || input[*i + 1] == '\0' || ft_strchr(bounds, input[*i + 1])) // we append only if we find space or bounds
+			{
+				buff[buff_len] = '\0'; // Null-terminate only when we know e have to
+				if (buff_len > 0)
+					append_token(&tokens, create_token(buff, ARG));
+				else if(check_empty_string(i, input)) // if empty string is delimited by spaces or delimiters returns
+				{
+					*buff = ' ';
+					// char empty = ' ';
 					append_token(&tokens, create_token(buff, ARG));
 				}
+				buff_len = 0; // reset the len of the buff
+				return(tokens); // last i is on last QUOTE
 			}
+			(*i)++; // skip the ending quote only if we have to continue because no space or bounds found
 		}
-		// Handle environment variable expansion
-		else if (input[*i] == '$')
+		else
 		{
-			char exp_name[1024] = {0};
-			int exp_len = 0;
-			int j = *i + 1;
-			char *not_env = "!@#$%%^&*()-+=[]{}|\\:;'\"/<>?,.`~ ";
-
-			if (input[j] == '?') { // Special case for $?
-				append_token(&tokens, create_token(ft_itoa(msh->exit_code), ARG));
-				*i = j + 1;
-				continue;
-			}
-
-			while (input[j] && !ft_strchr(not_env, input[j])) {
-				exp_name[exp_len++] = input[j++];
-			}
-			exp_name[exp_len] = '\0';
-
-			if (exp_len == 0) { // No valid environment variable
-				append_token(&tokens, create_token("$", ARG));
+			// int buff_len = 0;
+			while (input[*i] != '\0') // collect buffer and stop at bounds
+			{
+				printf("input[%d]: %c\n", *i , input[*i]);
+				// if (input[*i] == ' ')
+				if (ft_strchr(bounds, input[*i]) || ft_strchr(quotes, input[*i]))
+					break;
+				// Add character to the buffer
+				buff[buff_len++] = input[*i];
+				if (buff_len >= 1024)
+				{
+					printf("Minishell: buffer overflow\n");
+					msh->exit_code = 1;
+					return (tokens);
+				}
 				(*i)++;
-				continue;
 			}
-
-			char *expansion = find_envar(exp_name, msh->ms_env);
-			if (expansion) {
-				append_token(&tokens, create_token(expansion, ARG));
-				free(expansion);
-			}
-			*i = j;
-		}
-		// Handle unquoted, normal tokens
-		else {
-			printf(COLOR_BLUE"PART OF NO_Q STRING - "COLOR_RESET);
-			printf("input[%d]: %c\n", *i, input[*i]);
-			buff[len++] = input[*i];
-			(*i)++;
-			if (input[*i] == ' ' || input[*i] == '\0' || ft_strchr(bounds, input[*i])) {
-				buff[len] = '\0';
-				if (len > 0) {
+			// stops at bounds or quotes
+			if(input[*i] == ' ' || input[*i] == '\0' || ft_strchr(bounds, input[*i])) // we append only if we find space or bounds
+			{
+				(*i)--; // go back to avoid bound being skipped by main loop
+				buff[buff_len] = '\0'; // Null-terminate only when we know e have to
+				if (buff_len > 0)
+				{
 					append_token(&tokens, create_token(buff, ARG));
+					buff_len = 0; // reset the len of the buff
+					return(tokens);
 				}
 			}
 		}
 	}
-	return tokens;
+	return(tokens);
 }

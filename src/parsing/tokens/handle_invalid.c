@@ -6,33 +6,39 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:25:13 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 13:49:58 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 19:05:29 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool invalid_char(char *input, int i, t_tokens *tokens)
+bool invalid_char(char *input, int i)
 {
 	char *invalid;				// seen outside string also && $(..)
 	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	int j;
-	(void)tokens;
 
 	invalid = ";#&,`*~\\";  // seen outside string also && $(..)
 	bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	j = i;
 
-	while(ft_strchr(invalid, input[j]))
+	if(ft_strchr(invalid, input[j])) // if char is invalid
 	{
-		j++;
-		if(input[j] == '\0' || ft_strchr(bounds, input[j])) // problem when followed by other invalid symbls
+		printf("YO\n");
+		j++; // pass after the invalid
+		if(ft_strchr(bounds, input[j]) || input[i] == '\0') // if next char is bound or end return error
 		{
-			printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-			return(false);
+			printf("YO 2\n");
+			return(true);
 		}
-		if(!ft_strchr(invalid, input[j]))
-			break;
+		else
+		{
+			while(ft_strchr(invalid, input[j]) && input[j] != '\0') //skip all invalid if attached together
+				j++;
+			// we land on a character that is not invalid
+			if(ft_strchr(bounds, input[j]) || input[i] == '\0') // if next char is bound or end return error
+				return(true);
+		}
 	}
-	return(true);
+	return(false); // is not invalid so we process as a str
 }

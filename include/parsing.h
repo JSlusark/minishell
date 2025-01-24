@@ -81,7 +81,7 @@ t_tokens *create_token(const char *value, int type);
 void free_tokens(t_tokens *head);
 
 // handle_invalid.c - handles characters that are part of the bonus <----------- unsure if we need this tbh
-bool invalid_char(char *input, int i, t_tokens *tokens);
+bool invalid_char(char *input, int i);
 
 // tokenize_bounds.c : creates and appends tokens for | > < << and >>
 bool valid_bound(char *input, int *i, t_tokens **tokens);
