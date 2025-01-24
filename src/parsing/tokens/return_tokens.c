@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   return_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/23 18:40:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:17:19 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ bool invalid_char(char *input, int i, t_tokens *tokens)
 	char *invalid;				// seen outside string also && $(..)
 	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	int j;
+	(void)tokens;
 
 	invalid = ";#&,`*~\\";  // seen outside string also && $(..)
 	bounds = "|>< "; // characters that flag minishell we are starting a new token, unless these characters are inside " or '
@@ -250,7 +251,6 @@ bool invalid_char(char *input, int i, t_tokens *tokens)
 		if(input[j] == '\0' || ft_strchr(bounds, input[j])) // problem when followed by other invalid symbls
 		{
 			printf("Minishell: invalid token %c at input[%d]\n", input[i], i); // why wrong input
-			free_tokens(tokens);
 			return(false);
 		}
 		if(!ft_strchr(invalid, input[j]))
@@ -337,42 +337,22 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 	return tokens;
 }
 
-bool valid_bound(char *input, int *i, t_tokens **tokens)
+t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens)
 {
-	int k;
-
-	k = *i +1;
-	if (input[*i] == '|')
-	{
-		if (input[k] == '|')
-		{
-			printf("Minishell: error || operator are just for bonus\n");
-			return false; // Invalid operator
-		}
-		else
-			append_token(tokens, create_token("|", PIPE));
+	if (!invalid_char(input, *i, tokens)) {
+		free_tokens(tokens);
+		return NULL;
 	}
-	else if (input[*i] == '>')
-	{ // Handle > and >>
-		if (input[k] != '\0' && input[k] == '>')
-		{
-			append_token(tokens, create_token(">>", APPEND));
-			(*i)++;
-		}
-		else
-			append_token(tokens, create_token(">", REDIR_OUT));
+	tokens = parse_string(input, i, msh, tokens);
+	if (msh->exit_code != 0) {
+		free_tokens(tokens);
+		return NULL;
 	}
-	else if (input[*i] == '<')
-	{
-		if (input[k] != '\0' && input[k] == '<') {
-			append_token(tokens, create_token("<<", HEREDOC));
-			(*i)++;
-		}
-		else
-			append_token(tokens, create_token("<", REDIR_IN));
+	if (!valid_bound(input, i, &tokens)) {
+		free_tokens(tokens);
+		return NULL;
 	}
-
-	return true; // Boundary was handled successfully
+	return tokens;
 }
 
 t_tokens *return_tokens(char *input, t_msh *msh)
@@ -386,25 +366,10 @@ t_tokens *return_tokens(char *input, t_msh *msh)
 
 	while (input[i] != '\0')
 	{
-		if(!invalid_char(input, i, tokens)) //should we actually do this or just avoid and print?
-		{
-			// unsure if update exit code as it's not really an error but we don't need to do this
-			free_tokens(tokens);
-			return(NULL);
-		}
-		tokens = parse_string(input, &i, msh, tokens); // Call the parsing function
-		// if(error)
-		if(msh->exit_code != 0)
-		{
-			free_tokens(tokens);
-			return(NULL);
-		}
-		if (!valid_bound(input, &i, &tokens))
-		{
-			free_tokens(tokens);
-			return NULL;
-		}
-		if(input[i] != '\0')
+		tokens = tokenize(input, &i, msh, tokens);
+		if (!tokens)
+			return NULL; // Exit on error
+		if (input[i] != '\0')
 			i++;
 	}
 	return(tokens); // <- return error as this

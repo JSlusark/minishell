@@ -71,10 +71,30 @@ typedef struct s_node_list
 	struct s_node_list *next;
 } t_node_list;
 
+
+
 /* _____________TOKENS FUNCTIONS_____________ */
+// Main
 t_tokens *return_tokens(char *input, t_msh *msh);
+
+// token allocation
+void append_token(t_tokens **head, t_tokens *new_token);
+t_tokens *create_token(const char *value, int type);
+// tokenize | > < << and >>
+bool valid_bound(char *input, int *i, t_tokens **tokens);
+void handle_left(char *input, int *i, t_tokens **tokens);
+void handle_right(char *input, int *i, t_tokens **tokens);
+
+
+// memory management and debugging
 void free_tokens(t_tokens *head);
 void print_tokens(t_tokens *tokens);
+
+
+// still to be cleaned and organised
+
+
+
 
 /* _____________NODES FUNCTIONS_____________ */
 
