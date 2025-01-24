@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_strings.c                                   :+:      :+:    :+:   */
+/*   tokenize_strings.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 11:43:12 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:10:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 {
 	char *bounds;				// characters that flag minishell we are starting a new token, unless these characters are inside " or '
 	char *quotes;
-	char buff[1024] = {0};
+	char buff[1024];
+
+	memset(buff, 0, sizeof(buff));
 	int len = 0;
 	bounds = " \t\n|><"; // Add more boundaries if needed
 	quotes = "\'\"";
@@ -26,6 +28,8 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 		// Handles quoted tokens - OK should return err too
 		if (ft_strchr(quotes, input[*i]))
 		{
+			printf(COLOR_CYAN"PART OF QUOTE STRING - "COLOR_RESET);
+			printf("input[%d]: %c\n", *i, input[*i]);
 			int last_quote = 0;
 			if (!quote_closed(i, input, input[*i], &last_quote))
 			{
@@ -76,6 +80,8 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 		}
 		// Handle unquoted, normal tokens
 		else {
+			printf(COLOR_BLUE"PART OF NO_Q STRING - "COLOR_RESET);
+			printf("input[%d]: %c\n", *i, input[*i]);
 			buff[len++] = input[*i];
 			(*i)++;
 			if (input[*i] == ' ' || input[*i] == '\0' || ft_strchr(bounds, input[*i])) {

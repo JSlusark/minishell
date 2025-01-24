@@ -6,14 +6,58 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 11:43:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 14:35:44 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+bool check_empty_string(int *i, char *input, int *len, char *buff, int *last_quote)
+{
+	printf("start i: %d last_quote_pos: %d\n", *i, *last_quote); // ""
+	int prev_i = *i - 1; // character before the 1st quote
+	int next_i = *last_quote + 1; // character after the last quote
+	printf("prev_i: %d next_i: %d len: %d\n", prev_i, next_i, *len);
+
+	if(*i + 1 == *last_quote)
+	{
+		if((prev_i  < 0 || input[prev_i] == ' ') && (input[next_i] == ' ' || input[next_i] == '\0' ))
+			{
+				printf(COLOR_RED"HIT\n"COLOR_RESET);
+				*i = next_i;
+				buff[*len] = ' ';
+				(*len)++;
+				return(true); // stops and appends a token with space (cases where "" is empty and delimited by spaces or start/end string delimiters)
+			}
+	}
+	return(false);
+}
+
 void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh)
 {
+
+	if(check_empty_string(i, input, len, buff, last_quote)) // if empty string is delimited by spaces or delimiters returns
+		return;
+
+	// if(*i + 1 == *last_quote)
+	// {
+	// 	//if i -1 is  - 1 || if input[i - 1] == space
+	// 	// &&
+	// 	// if input[i + 1] == space || input[i + 1] == '\0'
+	// 	// then we have an empty string of 1 space
+	// 	if( (*i - 1) == -1 || input[*i - 1] == ' ')
+	// 	{
+	// 		if(input[*i + 1] == ' ' || input[*i + 1] == '\0')
+	// 		{
+	// 			buff[*len] = ' ';
+	// 			(*len)++;
+	// 			(*i)++;
+	// 			return;
+	// 		}
+	// 	}
+	// }
+
+
 	while (*i <= *last_quote) // Process characters within the quoted string
 	{
 		// Check for variable expansion inside double quotes
@@ -104,14 +148,20 @@ void collect_str(int *i, char *input, char quote, int *len, char *buff, int *las
 	}
 }
 
-t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens)
+t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everything should be freed here only
 {
+	while(input[*i] == ' ') // added to solve some "" edge cases
+	{
+		printf("SKIPPED SPACE AT input[%d]: %c\n", *i, input[*i]);
+		(*i)++;
+	}
 	if (!invalid_char(input, *i, tokens)) {
 		free_tokens(tokens);
 		return NULL;
 	}
 	tokens = parse_string(input, i, msh, tokens);
-	if (msh->exit_code != 0) {
+	if (msh->exit_code != 0)
+	{
 		free_tokens(tokens);
 		return NULL;
 	}
