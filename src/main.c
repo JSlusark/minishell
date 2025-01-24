@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/23 17:29:30 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:26:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	}
 	else // if tokenizing succeeds create execution nodes from tokens
 	{
-		print_tokens(tokens); // for tokenization error handling
+		// if(tokens)
+			print_tokens(tokens); // for tokenization error handling
 		nodes = return_nodes(tokens, msh);
 		if(tokens)
 			free_tokens(tokens);

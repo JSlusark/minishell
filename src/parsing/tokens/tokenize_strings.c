@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 20:36:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 22:31:41 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void quote_buff(char *input, int *i, t_msh *msh, char *buff)
 	char quote;
 
 
-	len = 0;
+	len = ft_strlen(buff); // if buff is null strlen is 0, if it contains stuff it will be added after
 	printf(COLOR_CYAN"START OF QUOTE STRING - "COLOR_RESET);
 	printf("input[%d]: %c\n", *i, input[*i]);
 	closure = false;
@@ -79,65 +79,42 @@ void quote_buff(char *input, int *i, t_msh *msh, char *buff)
 t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 {
 	char buff[1024];
-	int buff_len;
+	int len;
 
-
-	buff_len = 0;
+	len = 0;
 	memset(buff, 0, sizeof(buff));
-
 	while (!ft_strchr(BOUNDS, input[*i]) && input[*i] != '\0')
 	{
-		if (ft_strchr(QUOTES, input[*i]))
+		if (ft_strchr(QUOTES, input[*i])) // handles str in q
 		{
 			quote_buff(input, i, msh, buff);
 			if(msh->exit_code != 0)
 				return(tokens);
 			if(input[*i + 1] == ' ' || input[*i + 1] == '\0' || ft_strchr(BOUNDS, input[*i + 1])) // we append only if we find space or BOUNDS
 			{
-				// buff[buff_len] = '\0'; // Null-terminate only when we know e have to
 				if (ft_strlen(buff) > 0)
-					append_token(&tokens, create_token(buff, ARG));
+					append_token(&tokens, create_token(buff, ARG)); // free buff?
 				else if(check_empty_string(i, input)) // if empty string is delimited by spaces or delimiters returns
 				{
 					*buff = ' ';
 					append_token(&tokens, create_token(buff, ARG));
+					// free buff?
 				}
-				// buff_len = 0; // reset the len of the buff
 				return(tokens); // last i is on last QUOTE
 			}
 			(*i)++; // skip the ending quote only if we have to continue because no space or BOUNDS found
-			buff_len = ft_strlen(buff);
+			len = ft_strlen(buff);
 		}
-		else
+		else // handles c attached (will add to buffer if close to "")
 		{
-			// int buff_len = 0;
-			while (input[*i] != '\0') // collect buffer and stop at BOUNDS
+			buff[len++] = input[*i];
+			(*i)++;
+			if (input[*i] == '\0' || ft_strchr(BOUNDS, input[*i]))
 			{
-				printf("input[%d]: %c\n", *i , input[*i]);
-				// if (input[*i] == ' ')
-				if (ft_strchr(BOUNDS, input[*i]) || ft_strchr(QUOTES, input[*i]))
-					break;
-				// Add character to the buffer
-				buff[buff_len++] = input[*i];
-				if (buff_len >= 1024)
-				{
-					printf("Minishell: buffer overflow\n");
-					msh->exit_code = 1;
-					return (tokens);
-				}
-				(*i)++;
-			}
-			// stops at BOUNDS or QUOTES
-			if(input[*i] == ' ' || input[*i] == '\0' || ft_strchr(BOUNDS, input[*i])) // we append only if we find space or BOUNDS
-			{
-				(*i)--; // go back to avoid bound being skipped by main loop
-				buff[buff_len] = '\0'; // Null-terminate only when we know e have to
-				if (buff_len > 0)
-				{
+				buff[len] = '\0';
+				if (len > 0)
 					append_token(&tokens, create_token(buff, ARG));
-					buff_len = 0; // reset the len of the buff
-					return(tokens);
-				}
+				// free buff?
 			}
 		}
 	}
