@@ -1,8 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-/* _____________TOKENS DATA_____________ */
-
 typedef enum e_token_type // good to have an order like below
 {
 	REDIR_IN,       		// 5 Input redirection ("<")
@@ -71,23 +69,38 @@ typedef struct s_node_list
 	struct s_node_list *next;
 } t_node_list;
 
-
-
 /* _____________TOKENS FUNCTIONS_____________ */
-// Main
-t_tokens *return_tokens(char *input, t_msh *msh);
 
-// token allocation
+// return_tokens.c - main function
+t_tokens *return_tokens(char *input, t_msh *msh);
+t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens);
+
+// allocate_tokens.c - creates a linked list of tokens and frees it
 void append_token(t_tokens **head, t_tokens *new_token);
 t_tokens *create_token(const char *value, int type);
-// tokenize | > < << and >>
+void free_tokens(t_tokens *head);
+
+// handle_invalid.c - handles characters that are part of the bonus <----------- unsure if we need this tbh
+bool invalid_char(char *input, int i, t_tokens *tokens);
+
+// tokenize_bounds.c : creates and appends tokens for | > < << and >>
 bool valid_bound(char *input, int *i, t_tokens **tokens);
 void handle_left(char *input, int *i, t_tokens **tokens);
 void handle_right(char *input, int *i, t_tokens **tokens);
 
+// tokenize strings (anything between " ", ' ' and any character that is not divided by a space, pipe or redirection symbol)
+t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens); // main function that checks interaction with quotes, expansiona and characters
+void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh); // collects chater in string and expands $ if quotes are ""
+
+// handle_quotes.c - checks if quotes are closed
+bool	quote_closed(int *i, char *input, char quote, int *last_quote);
+
+// handle_expansions.c
+char *find_envar(char *var, char **env); // finds only the var, does not expand - finds environment variables and returns their value
+
+
 
 // memory management and debugging
-void free_tokens(t_tokens *head);
 void print_tokens(t_tokens *tokens);
 
 
