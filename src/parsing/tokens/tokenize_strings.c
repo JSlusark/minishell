@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 19:42:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/24 20:36:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,61 @@ bool check_empty_string(int *i, char *input)
 }
 
 
+void quote_buff(char *input, int *i, t_msh *msh, char *buff)
+{
+	int len;
+	bool closure;
+	char quote;
+
+
+	len = 0;
+	printf(COLOR_CYAN"START OF QUOTE STRING - "COLOR_RESET);
+	printf("input[%d]: %c\n", *i, input[*i]);
+	closure = false;
+	quote = input[*i];
+	// printf("Found quote: %c at input[%d]\n", quote, *i);
+	(*i)++; // Skip the opening quote
+	if(input[*i] == '\0') // if first quote followed by \0 error
+	{
+		msh->exit_code = 2;
+		printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
+		return;
+	}
+	// int len = 0;
+	while (input[*i] != '\0') // collect buffer until end
+	{
+		if (input[*i] == quote) // or until closed quote
+		{
+			// printf("Closing quote: %c at input[%d]\n", quote, *i);
+			closure = true;
+			break;
+		}
+		buff[len++] = input[*i]; // add characters to buff
+		if (len >= 1024) // if buff overflow
+		{
+			printf("Minishell: buffer overflow\n");
+			msh->exit_code = 1;
+			return;
+		}
+		(*i)++;
+	}
+	// i stops at \0 or quote
+	if(input[*i] == '\0' && !closure) // if not closed  and stops at null error
+	{
+		msh->exit_code = 2;
+		printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
+		return;
+	}
+	buff[len] = '\0'; // Null-terminate only when we know e have to
+}
+
+
 
 t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 {
 	char buff[1024];
 	int buff_len;
+
 
 	buff_len = 0;
 	memset(buff, 0, sizeof(buff));
@@ -39,58 +89,24 @@ t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens)
 	{
 		if (ft_strchr(QUOTES, input[*i]))
 		{
-			printf(COLOR_CYAN"START OF QUOTE STRING - "COLOR_RESET);
-			printf("input[%d]: %c\n", *i, input[*i]);
-			bool closure = false;
-			char quote = input[*i];
-			// printf("Found quote: %c at input[%d]\n", quote, *i);
-			(*i)++; // Skip the opening quote
-			if(input[*i] == '\0') // if first quote followed by \0 error
-			{
-				msh->exit_code = 2;
-				printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
+			quote_buff(input, i, msh, buff);
+			if(msh->exit_code != 0)
 				return(tokens);
-			}
-			// int buff_len = 0;
-			while (input[*i] != '\0') // collect buffer until end
-			{
-				if (input[*i] == quote) // or until closed quote
-				{
-					printf("Closing quote: %c at input[%d]\n", quote, *i);
-					closure = true;
-					break;
-				}
-				buff[buff_len++] = input[*i]; // add characters to buff
-				if (buff_len >= 1024) // if buff overflow
-				{
-					printf("Minishell: buffer overflow\n");
-					msh->exit_code = 1;
-					return (tokens);
-				}
-				(*i)++;
-			}
-			// i stops at \0 or quote
-			if(input[*i] == '\0' && !closure) // if not closed  and stops at null error
-			{
-				msh->exit_code = 2;
-				printf("Minishell: %c at input[%d] had no closure\n", quote, *i);
-				return(tokens);
-			}
 			if(input[*i + 1] == ' ' || input[*i + 1] == '\0' || ft_strchr(BOUNDS, input[*i + 1])) // we append only if we find space or BOUNDS
 			{
-				buff[buff_len] = '\0'; // Null-terminate only when we know e have to
-				if (buff_len > 0)
+				// buff[buff_len] = '\0'; // Null-terminate only when we know e have to
+				if (ft_strlen(buff) > 0)
 					append_token(&tokens, create_token(buff, ARG));
 				else if(check_empty_string(i, input)) // if empty string is delimited by spaces or delimiters returns
 				{
 					*buff = ' ';
-					// char empty = ' ';
 					append_token(&tokens, create_token(buff, ARG));
 				}
-				buff_len = 0; // reset the len of the buff
+				// buff_len = 0; // reset the len of the buff
 				return(tokens); // last i is on last QUOTE
 			}
 			(*i)++; // skip the ending quote only if we have to continue because no space or BOUNDS found
+			buff_len = ft_strlen(buff);
 		}
 		else
 		{
