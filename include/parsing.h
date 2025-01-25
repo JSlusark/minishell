@@ -91,8 +91,8 @@ void handle_left(char *input, int *i, t_tokens **tokens);
 void handle_right(char *input, int *i, t_tokens **tokens);
 
 // tokenize strings (anything between " ", ' ' and any character that is not divided by a space, pipe or redirection symbol)
-t_tokens *parse_string(char *input, int *i, t_msh *msh, t_tokens *tokens); // main function that checks interaction with quotes, expansiona and characters
-void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh); // collects chater in string and expands $ if quotes are ""
+void parse_string(char *input, int *i, t_msh *msh, char *buff); // main function that checks interaction with quotes, expansiona and characters
+// void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh); // collects chater in string and expands $ if quotes are ""
 
 // handle_quotes.c - checks if quotes are closed
 bool	quote_closed(int *i, char *input, char quote, int *last_quote);

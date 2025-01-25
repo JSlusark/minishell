@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 22:28:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/25 18:27:16 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@
 
 t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everything should be freed here only
 {
+	char buff[1024];
+	memset(buff, 0, sizeof(buff)); // Correct usage
+	(void)msh;
 	if(input[*i] == ' ') // added to solve some "" edge cases
 	{
 		printf("- SPACE\n");
@@ -168,8 +171,8 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 	}
 	else if(!ft_strchr(BOUNDS, input[*i])) // before itdid npt have space in bouhnds only here
 	{
-		printf("- STR\n");
-		tokens = parse_string(input, i, msh, tokens);
+		parse_string(input, i, msh, buff);
+		append_token(&tokens, create_token(buff, ARG));
 	}
 	else if (!valid_bound(input, i, &tokens))
 	{
@@ -195,13 +198,18 @@ t_tokens *return_tokens(char *input, t_msh *msh) //only free tokens here and whe
 		if (msh->exit_code != 0)
 		{
 			printf("ERROR\n");
-			free_tokens(tokens);
-			return(NULL);
+			break; // just break, we check the error and free at the end (or at the main?)
 		}
 		tokens = tokenize(input, &i, msh, tokens);
 		if (input[i] != '\0')
 			i++;
 	}
 	printf("EXIT: %d\n", msh->exit_code);
+	if (msh->exit_code != 0) // if the last exit code is not 0 we free and return null - this processes all errors (also the ones gave back after the loop)
+	{
+		printf("ERROR\n");
+		free_tokens(tokens);
+		return(NULL);
+	}
 	return(tokens); // <- return error as this
 }
