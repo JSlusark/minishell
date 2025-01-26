@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:41:21 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 21:52:04 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:25:28 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool unclosed_quote(char *input, int *i, t_msh *msh, bool *closure)
 bool closed_quote(char *input,int *i, char quote, bool *closure)
 {
 	(void)closure;
-	*closure = false;
+	// *closure = false;
 		if (input[*i] == quote) // or until closed quote
 		{
 			*closure = true;
@@ -53,6 +53,7 @@ void quoted_buff(char *input, int *i, t_msh *msh, char *buff)
 	char quote;
 
 	quote = input[*i];
+	closure = false;
 	(*i)++; // Skip the opening quote
 	while (input[*i] != '\0') // collect buffer until end
 	{

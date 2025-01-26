@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 16:51:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:26:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_redir *init_new_redir(t_tokens **token)
 {
 	t_redir *redir;
 
-	redir = calloc(1, sizeof(t_redir));
+	redir = ft_calloc(1, sizeof(t_redir));
 	if (!redir) // i do not free as i do it on the main
 	{
 		printf("Minishell: Failed to allocate redirection struct\n");

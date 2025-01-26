@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 11:29:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:26:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_flags **p)
 {
 	t_cmd *cmd;
 
-	cmd = calloc(1, sizeof(t_cmd));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	if (!cmd)
 	{
 		printf("Failed to allocate cmd in node\n");

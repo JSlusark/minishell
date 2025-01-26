@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 21:56:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:20:17 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void parse_string(char *input, int *i, t_msh *msh, char *buff)
 			if (input[*i] == '\0' || ft_strchr(BOUNDS, input[*i]))
 			{
 				buff[len] = '\0';
+				// if(ft_strchr(BOUNDS, input[*i]) || ft_strchr(QUOTES, input[*i]))
 				(*i)--; // added this to go back on last character of the token so that it moves forward in the main loop
 				if (len > 0)
 					break;

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 21:59:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:26:58 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 {
 	char buff[1024];
 
-	memset(buff, 0, sizeof(buff)); // Correct usage
+	ft_memset(buff, 0, sizeof(buff)); // Correct usage
 	(void)msh;
 	skip_spaces(input, i);
 	if(invalid_char(input, *i)) // check if inv chars, if false goes to next if statement

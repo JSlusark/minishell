@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:41 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/15 11:56:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:26:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool add_argument(char ***args, char *new_arg)
 // {
 // 	t_args *new_arg;
 
-// 	new_arg = calloc(1, sizeof(t_args));
+// 	new_arg = ft_calloc(1, sizeof(t_args));
 // 	if (!new_arg)
 // 	{
 // 		printf("Minishell> Failed to allocate new argument of node\n");

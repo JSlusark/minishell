@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 11:38:47 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/01/26 22:26:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_node_list *init_new_node(int node_n, bool *start_node, t_msh *msh) // nothing 
 {
 	t_node_list *new_node;
 
-	new_node = calloc(1, sizeof(t_node_list));
+	new_node = ft_calloc(1, sizeof(t_node_list));
 	if (!new_node) //not freeing things here as i will do in the main if error
 	{
 		printf("Minishell: Failed to allocate node number %d\n", node_n);
