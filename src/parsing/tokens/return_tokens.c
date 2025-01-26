@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 16:36:27 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 17:27:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 	(void)msh;
 	if(input[*i] == ' ') // added to solve some "" edge cases
 	{
-		printf("- SPACE\n");
+		// printf("- SPACE\n");
 		while(input[*i] == ' ' && input[*i] != '\0') // added to solve some "" edge cases
 		{
 			if(input[*i + 1] != ' ') // so we land on last space and skip in the main loop, instead onf doing i-- later
@@ -30,19 +30,19 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 	}
 	else if(invalid_char(input, *i)) // check if inv chars, if false goes to next if statement
 	{
-		printf("- INV\n");
+		// printf("- INV\n");
 		msh->exit_code = 2;
 		return (tokens);
 	}
 	else if(!ft_strchr(BOUNDS, input[*i])) // before itdid npt have space in bouhnds only here
 	{
 		parse_string(input, i, msh, buff);
-		printf("--> APPENDING BUFF:%s\n", buff);
+		// printf("--> APPENDING BUFF:%s\n", buff);
 		append_token(&tokens, create_token(buff, ARG));
 	}
 	else if (!valid_bound(input, i, &tokens))
 	{
-		printf("- BOUND\n");
+		// printf("- BOUND\n");
 		msh->exit_code = 2;
 		return (tokens);
 	}
@@ -60,20 +60,20 @@ t_tokens *return_tokens(char *input, t_msh *msh) //only free tokens here and whe
 
 	while (input[i] != '\0')
 	{
-		printf("EXIT: %d\n", msh->exit_code);
+		// printf("EXIT: %d\n", msh->exit_code);
 		if (msh->exit_code != 0)
 		{
-			printf("ERROR\n");
+			// printf("ERROR\n");
 			break; // just break, we check the error and free at the end (or at the main?)
 		}
 		tokens = tokenize(input, &i, msh, tokens);
 		if (input[i] != '\0')
 			i++;
 	}
-	printf("EXIT: %d\n", msh->exit_code);
+	// printf("EXIT: %d\n", msh->exit_code);
 	if (msh->exit_code != 0) // if the last exit code is not 0 we free and return null - this processes all errors (also the ones gave back after the loop)
 	{
-		printf("ERROR\n");
+		// printf("ERROR\n");
 		free_tokens(tokens);
 		return(NULL);
 	}

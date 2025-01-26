@@ -92,24 +92,17 @@ void handle_right(char *input, int *i, t_tokens **tokens);
 
 // tokenize strings (anything between " ", ' ' and any character that is not divided by a space, pipe or redirection symbol)
 void parse_string(char *input, int *i, t_msh *msh, char *buff); // main function that checks interaction with quotes, expansiona and characters
-// void collect_str(int *i, char *input, char quote, int *len, char *buff, int *last_quote, t_msh *msh); // collects chater in string and expands $ if quotes are ""
-
-// handle_quotes.c - checks if quotes are closed
-bool	quote_closed(int *i, char *input, char quote, int *last_quote);
-
+void quoted_buff(char *input, int *i, t_msh *msh, char *buff);
+bool empty_quoted(int *i, char *input); // I NEED ALSO TO MANAGE """""" CASE - should be easy
+void unquoted_buff(char *input, int *i, t_msh *msh, char *buff);
 // handle_expansions.c
-char *find_envar(char *var, char **env); // finds only the var, does not expand - finds environment variables and returns their value
+char *find_envar(char *var, char **env); // finds only the var, does not expand
+void collect_expansion(char *input, int *i, char *buff, t_msh *msh);
+// stops buffer collection and if no error found appends node
+bool stop_buffer(char *input, int *i, char *buff, t_msh *msh);
 
-
-
-// memory management and debugging
+//debugging
 void print_tokens(t_tokens *tokens);
-
-
-// still to be cleaned and organised
-
-
-
 
 /* _____________NODES FUNCTIONS_____________ */
 
