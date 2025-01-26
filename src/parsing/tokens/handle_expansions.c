@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:17 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 11:40:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:36:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char *find_envar(char *var, char **env) // finds only the var, does not expand
 {
-	int i;
+	// printf("ENVAR NAME %s\n", var)
+;	int i;
 	char *var_content;
 	i = 0;
 	var_content = NULL;

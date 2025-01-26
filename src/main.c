@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/24 22:26:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/26 16:04:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 			free_tokens(tokens);
 		if(input)
 			free(input);
-	// if(!nodes) // if parsing has error it returns null and frees everything
+	if(!nodes) // if parsing has error it returns null and frees everything
 		return(NULL); // using this without if just to test tokens
 	}
 	return(nodes);
