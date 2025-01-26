@@ -3,6 +3,7 @@
 
 #define BOUNDS " |><" // scared of adding \t and \n
 #define QUOTES "\'\""
+#define EXP_LIMIT "!@#$%%^&*()-+=[]{}|\\:;'\"/<>,.`~ "
 typedef enum e_token_type // good to have an order like below
 {
 	REDIR_IN,       		// 5 Input redirection ("<")
