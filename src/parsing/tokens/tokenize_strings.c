@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:42:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 22:20:17 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:28:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void parse_string(char *input, int *i, t_msh *msh, char *buff)
 	{
 		if (ft_strchr(QUOTES, input[*i])) // handles str in q
 		{
+			// printf(COLOR_YELLOW"Hit QUOTED->"COLOR_RESET);
+			// printf("input[%d]:%c\n", *i, input[*i]);
 			quoted_buff(input, i, msh, buff);
 			if (stop_buffer(input, i, buff, msh))
 				break;
@@ -59,15 +61,17 @@ void parse_string(char *input, int *i, t_msh *msh, char *buff)
 		}
 		else // handles c attached (will add to buffer if close to "")
 		{
+			// printf(COLOR_YELLOW"Hit UNQUOTED->"COLOR_RESET);
+			// printf("input[%d]:%c\n", *i, input[*i]);
 			unquoted_buff(input, i, msh, buff);
+			// printf(COLOR_YELLOW"AFTER UNQUOTED->"COLOR_RESET);
+			// printf("input[%d]:%c\n", *i, input[*i]);
 			len = ft_strlen(buff);
 			if (input[*i] == '\0' || ft_strchr(BOUNDS, input[*i]))
 			{
 				buff[len] = '\0';
-				// if(ft_strchr(BOUNDS, input[*i]) || ft_strchr(QUOTES, input[*i]))
 				(*i)--; // added this to go back on last character of the token so that it moves forward in the main loop
-				if (len > 0)
-					break;
+				break;
 			}
 		}
 	}
