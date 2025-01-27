@@ -27,7 +27,7 @@ typedef struct s_exec
 /*******************ENV************************/
 char	**ms_matrix_add_line(char **matrix, char *new_line);
 void    ft_free_tab(char **tab);
-int     check_exit(t_msh *msh, char *av);
+int check_exit(t_node_list *node, t_msh *msh, char **av);
 void    ms_env_init(t_msh **msh, char**envp);
 char    *ms_get_env(t_msh *msh, char *av);
 void    ms_set_env(t_msh *msh, char *value);
