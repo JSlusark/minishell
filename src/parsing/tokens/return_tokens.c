@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 13:29:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:21:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	skip_spaces(char *input, int *i)
 t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everything should be freed here only
 {
 	char buff[1024];
+	char start;
 
+	start = input[*i]; // <--- THIS FIXES CASES WHERE $NO ciao (cioa is command) while in "$NO" ciao (command is empty)
 	ft_memset(buff, 0, sizeof(buff)); // Correct usage
 	(void)msh;
 	skip_spaces(input, i);
@@ -45,6 +47,8 @@ t_tokens *tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens) // everyth
 		// printf(COLOR_RED"Hit string->"COLOR_RESET);
 		// printf("input[%d]:%c\n", *i, input[*i]);
 		parse_string(input, i, msh, buff);
+		if(ft_strlen(buff) == 0 && start == '$') // IMPORTANT FIX FOR $NO ciao (cmd is ciao instesd ofe mpty like when we have "$NO" ciao)
+			return tokens;
 		append_token(&tokens, create_token(buff, ARG));
 	}
 	else if (!valid_bound(input, i, &tokens))
