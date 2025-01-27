@@ -33,11 +33,11 @@ char    *ms_get_env(t_msh *msh, char *av);
 void    ms_set_env(t_msh *msh, char *value);
 
 /******************BUILTINS********************/
-//int     handle_cd(t_node_list *node);
-int     handle_pwd(void);
-int     handle_env(t_node_list	*node_l);
-int     handle_exit(t_node_list	*node_l);
-void	handle_echo (t_node_list	*node);
-void		handle_export(char **av, t_node_list *node);
-void		handle_unset (char **av, t_node_list *node);
+void     exec_cd(t_node_list *node);
+void     exec_pwd(t_node_list	*node_l);
+int     exec_env(t_node_list	*node_l);
+int     exec_exit(t_node_list	*node_l);
+void	exec_echo (t_node_list	*node);
+void		exec_export(char **av, t_node_list *node);
+void		exec_unset (char **av, t_node_list *node);
 # endif

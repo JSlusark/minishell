@@ -63,7 +63,7 @@ int ms_unset_env(char *var, t_node_list *node)
     return(1);
 }
 
-void    handle_unset (char **av, t_node_list *node)
+void    exec_unset (char **av, t_node_list *node)
 {
     if (!av[0])
     {

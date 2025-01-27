@@ -1,6 +1,6 @@
 #include "../../../include/minishell.h"
 
-int handle_env(t_node_list *node)
+int exec_env(t_node_list *node)
 {
 	int i;
 

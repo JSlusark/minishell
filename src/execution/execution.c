@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 17:18:34 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/21 19:06:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:16:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,75 +45,22 @@ Exit Codes and meaning (we should remember to assign them after parsing and exec
 	130	- Script interrupted (SIGINT): Process terminated via Ctrl+C.
  */
 
-void	print_exec(t_node_list	*node)
-{
-	if(strcmp(node->cmd->cmd, "cd") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < CD > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else if (strcmp(node->cmd->cmd, "env") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < ENV > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else if(strcmp(node->cmd->cmd, "echo") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < ECHO > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else if(strcmp(node->cmd->cmd, "exit") == 0)
-	{
-		// printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto
-		printf("Exiting minishell...\n");
-		//why free_node_list, clear history and exit 0 where removed?
-	}
-	else if(strcmp(node->cmd->cmd, "export") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < EXPORT > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else if(strcmp(node->cmd->cmd, "pwd") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < PWD > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else if(strcmp(node->cmd->cmd, "unset") == 0)
-	{
-		// printf(COLOR_YELLOW"\nEXECUTING < UNSET > BUILT-IN...\n\n"COLOR_RESET);
-	}
-	else
-	{
-		// printf(COLOR_YELLOW"\nSEARCHING FOR /usr/bin/%s binary data AND EXECUTING..\n"COLOR_RESET, node->cmd->cmd);
-	}
-}
-
 void 	exec_command(t_node_list	*node_list)
 {
-	print_exec(node_list);
 	if (strcmp(node_list->cmd->cmd, "echo") == 0)
-	{
-		handle_echo(node_list);
-	}
-	else if (strcmp(node_list->cmd->cmd, "cd") == 0)
-	{
-		//handle_cd(node->msh->ms_env);
-	}
+		exec_echo(node_list);
 	else if (strcmp(node_list->cmd->cmd, "pwd") == 0)
-	{
-		handle_pwd(); // <------- commentato per evitare comp error dato che non e' stato aggiunto nel tuo push
-	}
+		exec_pwd(node_list); // <------- commentato per evitare comp error dato che non e' stato aggiunto nel tuo push
+	else if (strcmp(node_list->cmd->cmd, "cd") == 0)
+		exec_cd(node_list);
 	else if (strcmp(node_list->cmd->cmd, "export") == 0)
-	{
-		handle_export(node_list->cmd->args, node_list);
-	}
+		exec_export(node_list->cmd->args, node_list);
 	else if (strcmp(node_list->cmd->cmd, "unset") == 0)
-	{
-		handle_unset(node_list->cmd->args, node_list);
-	}
+		exec_unset(node_list->cmd->args, node_list);
 	else if (strcmp(node_list->cmd->cmd, "env") == 0)
-	{
-		handle_env(node_list);
-	}
+		exec_env(node_list);
 	else if (strcmp(node_list->cmd->cmd, "exit") == 0)
-	{
-		handle_exit(node_list);//handle_exit(node_list, node_list->args->value); TO BE IMPLEMENTED ONCE THE CMD STRUCT IS UPDATED
-	}
+		exec_exit(node_list);//exec_exit(node_list, node_list->args->value); TO BE IMPLEMENTED ONCE THE CMD STRUCT IS UPDATED
 	else
 	{
 		printf(COLOR_GREEN"Minishell> "COLOR_RESET); // <-- era stato rimosso prima, non so se era voluto

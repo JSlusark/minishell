@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:20:00 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/21 13:16:31 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:15:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void    handle_export(char **av, t_node_list *node)
+void    exec_export(char **av, t_node_list *node)
 {
     if (av == NULL)
     {
@@ -26,5 +26,5 @@ void    handle_export(char **av, t_node_list *node)
         node->msh->exit_code = 0;
     }
     ms_set_env(node->msh, av[0]);
-    
+
 }

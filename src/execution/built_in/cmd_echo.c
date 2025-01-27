@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:08 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/21 11:13:29 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:17:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void handle_echo (t_node_list	*node)
+void exec_echo (t_node_list	*node)
 {
 	int i;
-	
+
 	i = 0;
-	ft_dprintf("FUNCTION HANDLE_ECHO\nfd_in: %i\nfd_out: %i\n\n", node->fd_in, node->fd_out);
+	// ft_dprintf("FUNCTION HANDLE_ECHO\nfd_in: %i\nfd_out: %i\n\n", node->fd_in, node->fd_out);
 	if (node->cmd->args) // Check if the args array is NULL or empty
 	{
 		while(node->cmd->args[i])
