@@ -6,22 +6,23 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:37:41 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 17:57:30 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:38:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // OLD FROM STEFANO
 #include "../../../include/minishell.h"
 
-void	exec_pwd(t_node_list	*node_l)
+void	exec_pwd(t_node_list	*node)
 {
 	char *cwd;
 
 	cwd = getcwd(NULL, 0); // gets current working directory and allocates the necessary memory dynamically
 	if (cwd != NULL)
 	{
-		printf("%s\n", cwd);
-		free(cwd); // Free the dynamically allocated memory
+		write(node->fd_out, cwd, ft_strlen(cwd));
+		write(node->fd_out, "\n", 1); // Write a newline at the end
+		free(cwd); // Free allocated memory
 	}
 	else // commented the other ifs as I am unsure if we have to do this
 	{
@@ -49,7 +50,7 @@ void	exec_pwd(t_node_list	*node_l)
 		// else
 		// {
 			perror("pwd");
-			node_l->msh->exit_code = 1; // Generic error
+			node->msh->exit_code = 1; // Generic error
 		// }
 	}
 

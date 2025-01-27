@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:01:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 18:14:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:41:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void exec_cd(t_node_list *node)
 	if (node->cmd->args)
 	{
 		new_dir = node->cmd->args[0]; // First argument after `cd`
-		printf("Moving to /%s\n", node->cmd->args[0]);
+		printf("Moving to %s\n", node->cmd->args[0]);
 	}
 	// else
 	// {
