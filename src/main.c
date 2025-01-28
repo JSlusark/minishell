@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 13:33:39 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:27:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int argc, char **argv, char **envp)
 	ms_env_init(&msh, envp);
 	while (1)
 	{
-		msh->exit_code = 0; // <-------- JESS: settiamo l'exit code di default qui per sicurezza, penso possiamo evitare di riscriverlo quando l'exec e' success
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (!input) // Handle EOF (Ctrl+D)
