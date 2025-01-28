@@ -28,6 +28,7 @@ typedef struct s_msh
 	char **ms_env; // Environment variables
 	//char	**ms_env_export;
 	int exit_code; // Exit code (suggested by copilot for error handling)
+	int prev_exit;  /// the exit code returned from the previous execution
 	// JESS: in futuro penso di incollare i flags per il parser (copio ed incollo da t_flags) per diminuire il num di righe in return_nodes
 } t_msh;
 

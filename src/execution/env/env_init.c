@@ -185,4 +185,5 @@ void    ms_env_init(t_msh **msh, char **envp)
     (*msh)->ms_env[i] = NULL;
     check_shlvl((*msh));
     (*msh)->exit_code = 0;
+    (*msh)->prev_exit = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 17:27:39 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:17:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	if(!tokens)
 	{
 		// print_tokens(tokens); // for tokenization error handling
+		msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
 		if(input)
 			free(input);
 		if (tokens)
@@ -34,8 +35,11 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 			free_tokens(tokens);
 		if(input)
 			free(input);
-	if(!nodes) // if parsing has error it returns null and frees everything
-		return(NULL); // using this without if just to test tokens
+		if(!nodes) // if parsing has error it returns null and frees everything
+		{
+			msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
+			return(NULL); // using this without if just to test tokens}
+		}
 	}
 	return(nodes);
 }
@@ -68,6 +72,7 @@ int	main(int argc, char **argv, char **envp)
 				// print_nodes(nodes); // to print on terminal
 				// print_nodes_in_outfile(nodes);
 				exec_nodes(nodes);
+				msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
 				free_node_list(nodes);// after we execute the input we free the nodes )
 			}
 		}

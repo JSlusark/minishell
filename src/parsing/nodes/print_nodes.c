@@ -6,9 +6,11 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 17:13:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:08:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../../include/minishell.h"
 
 #include "../../../include/minishell.h"
 
@@ -88,6 +90,12 @@ void print_nodes(t_node_list *head)
 		printf(COLOR_YELLOW"	- NODE %d\n"COLOR_RESET, n); // Print the node_i value
 		printf(COLOR_BLUE"		- int node_i:"COLOR_RESET); // Print the node_i value
 		printf(" %d\n", curr->node_i); // Print the node_i value
+		// Print msh->exit_code if it exists
+		if (curr->msh)
+		{
+			printf(COLOR_RED"		- msh->prev_exit: "COLOR_RESET);
+			printf("%d\n", curr->msh->prev_exit);
+		}
 		if (!curr->cmd)
 		{
 			printf(COLOR_BLUE"		- t_cmd cmd: "COLOR_RESET); // Print the node_i value

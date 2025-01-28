@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:17 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 15:03:52 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:03:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void handle_exit_expansion(int *i, char *buff, int *len, t_msh *msh)
 	char *exp_exit;
 	int j;
 
-	exp_exit = ft_itoa(msh->exit_code); // Convert exit code to string
+	exp_exit = ft_itoa(msh->prev_exit); // Convert exit code to string
 	exp_len = strlen(exp_exit);
 	(*i)++; // skips ? as it's expanded
 	j = 0;

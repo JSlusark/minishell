@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 18:45:46 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:16:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ void exec_export(char **av, t_node_list *node)
 			}
 			else // DO NOT NEED TO UPDATE THE EXIT CODE (check export = caca=ca  exit code is 1)
 			{
-				if(ft_strlen(av[j]) < 0) // to handle bugs like " export "" "
+				if(ft_strlen(av[j]) <= 0) // to handle bugs like " export "" "
 				{
 					print_exp_error(NULL);
 					node->msh->exit_code = 1; // seen in bash
