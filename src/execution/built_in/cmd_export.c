@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 17:28:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:50:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,21 @@ void print_env_vars(char **env)
 }
 ///__________________________________________________________
 
+bool is_only_spaces(const char *str)
+{
+	int i;
+	i = 0;
 
+	// Traverse the string, skipping spaces
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ' && str[i] != '\t') // Skip spaces and tabs
+			return false; // Found a non-space character
+		i++;
+	}
+
+	return (true); // Only spaces or empty
+}
 
 
 
@@ -189,5 +203,18 @@ void exec_export(char **av, t_node_list *node)
 			}
 		}
 		else
-			ms_set_env(node->msh, av[0]); // needs to change with if i have consecutive = i should skip it (export STR==hi)
+		{
+			if(ft_strlen(av[0]) < 0) // to handle bugs like " export "" "
+			{
+				printf("export: `': not a valid identifier\n");
+				node->msh->exit_code = 1; // seen in bash
+			}
+			else if(is_only_spaces(av[0]))
+			{
+				printf("export: `%s': not a valid identifier\n", av[0]);
+				node->msh->exit_code = 1; // seen in bash
+			}
+			else
+				ms_set_env(node->msh, av[0]); // needs to change with if i have consecutive = i should skip it (export STR==hi)
+		}
 }
