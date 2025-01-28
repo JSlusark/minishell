@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:01:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 18:41:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:27:47 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 	0. when we move to the dire
 	1. updating msh->envar->$PWD might be a problem when we have pipes no?
 	2. We should check also permissions when executing no?
-	3. we have to see if the directory exist? or if it's even a directory?
+	3. we have to see if the directory exist? or if it's even a directory?4
+	4. if we move to new folder $old_PWD needs to also be updated
  */
 
 void exec_cd(t_node_list *node)
