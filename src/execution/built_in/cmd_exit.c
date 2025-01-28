@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 19:53:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:23:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int check_exit(t_node_list *node, t_msh *msh, char **av)
 
 	if(av[1])
 	{
-		printf (" too many arguments\n");
+		// printf (" too many arguments\n");
+        write(2, "exit: too many arguments\n", 25);
 		msh->exit_code = 1;
 		return(1);
 	}
@@ -32,14 +33,16 @@ int check_exit(t_node_list *node, t_msh *msh, char **av)
 	if (!ft_isdigit(av[0][i]))
 	{
 		// printf ("exit: %s isn't numeric argument\n", av);
-		printf ("%s numeric argument required\n", av[0]);
-		msh->exit_code = 255;
+		// printf (" numeric argument required\n");
+        write(2, "exit: numeric argument required\n", 32);
+		msh->exit_code = 2;/// <---------- it is 2 on linux (255 on mac?)
 		return (1);
 	}
 	exit_code = ft_atoll(av[0]);
 	if (ft_isllong(av[0]) != 0 || exit_code < LLONG_MIN || exit_code > LLONG_MAX)
 	{
 		// printf ("exit: %s isn't numeric argument\n", av[0]);
+        write(2, "exit: numeric argument required\n", 32);
 		msh->exit_code = 255;
 		return (1);
 	}
@@ -54,7 +57,7 @@ int    exec_exit(t_node_list	*node) //char *av will become a char **av
 {
 	int exit_code;
 
-	printf("Exiting minishell...\n");
+	// printf("Exiting minishell...\n");
 	if (node->cmd->args)
 		exit_code = check_exit(node, node->msh, node->cmd->args); //av will become av[0]
 	exit_code = node->msh->exit_code; // <--- jess: conserviamo l'esxit code aggiornato qua per non cancellarlo con free_msh prima dell'exit
