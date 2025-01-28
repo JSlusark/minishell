@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 17:50:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:45:46 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,58 +163,50 @@ bool is_only_spaces(const char *str)
 }
 
 
-
+void print_exp_error(const char *identifier)
+{
+    write(2, "export: `", 9);                      // Write the beginning of the message
+	write(2, identifier, strlen(identifier));     // Write the invalid identifier
+    write(2, "': not a valid identifier", 25);  // Write the rest of the message
+	write(2, "\n", 1);
+}
 
 // Main exec_export function
 void exec_export(char **av, t_node_list *node)
 {
 	if (av == NULL)
 	{
-		// Print sorted environment variables
 		print_env_vars(node->msh->ms_env);
 		node->msh->exit_code = 0;
-		// return;
 	}
-	else if(av[1]) // if we have more args in export we have diff edge cases
+	else // if we have 1 or more args in export we have diff cases
 	{
-			int j;
-			j = 0;
-			bool op_sign;
+		int j;
 
-			op_sign = false;
-			while (av[j]) // 1 - if we find the op sign in the other args
-			{
-				if (ft_strchr(av[j], '=')) // error in cases like "export sjsj =dd =ss dd" BUT NOT ERROR in "export x=1 y=2" or "export ci= ca=" where we create 2 exp
-				{
-					printf("export: `%s': not a valid identifier\n", av[j]);
-					op_sign= true;
-					break;
-				}
-				j++;
-			}
-			if(!op_sign) // cases like "export hello ciao" will create 2 envar with null assignation
-			{
-				j = 0;
-				while (av[j])
-				{
-					ms_set_env(node->msh, av[j]);
-					j++;
-				}
-			}
-		}
-		else
+		j = 0;
+		while (av[j]) // 1 - if we find the op sign in the other args
 		{
-			if(ft_strlen(av[0]) < 0) // to handle bugs like " export "" "
+			if (av[j][0] ==  '=') // error in cases like "export sjsj =dd =ss dd" BUT NOT ERROR in "export x=1 y=2" or "export ci= ca=" where we create 2 exp
 			{
-				printf("export: `': not a valid identifier\n");
-				node->msh->exit_code = 1; // seen in bash
+				print_exp_error(av[j]);
+				node->msh->exit_code = 1; // <- does not get updated
 			}
-			else if(is_only_spaces(av[0]))
+			else // DO NOT NEED TO UPDATE THE EXIT CODE (check export = caca=ca  exit code is 1)
 			{
-				printf("export: `%s': not a valid identifier\n", av[0]);
-				node->msh->exit_code = 1; // seen in bash
+				if(ft_strlen(av[j]) < 0) // to handle bugs like " export "" "
+				{
+					print_exp_error(NULL);
+					node->msh->exit_code = 1; // seen in bash
+				}
+				else if(is_only_spaces(av[j])) // to handle bugs like "  export "     "  "
+				{
+					print_exp_error(av[j]);
+					node->msh->exit_code = 1; // seen in bash
+				}
+				else
+					ms_set_env(node->msh, av[j]); // needs to change with if i have consecutive = i should skip it (export STR==hi) and if "export "ciao "= ci should be error"
 			}
-			else
-				ms_set_env(node->msh, av[0]); // needs to change with if i have consecutive = i should skip it (export STR==hi)
+			j++;
 		}
+	}
 }
