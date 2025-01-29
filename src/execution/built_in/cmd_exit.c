@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 11:23:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:41:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int check_exit(t_node_list *node, t_msh *msh, char **av)
 	return (0);
 }
 
-int    exec_exit(t_node_list	*node) //char *av will become a char **av
+int    handle_exit(t_node_list	*node) //char *av will become a char **av
 										//once the cmd struct is updated to include char **args
 {
 	int exit_code;

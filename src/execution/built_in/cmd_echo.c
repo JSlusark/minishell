@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:08 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/27 18:17:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:36:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void exec_echo (t_node_list	*node)
+int handle_echo (t_node_list	*node)
 {
 	int i;
 
@@ -32,6 +32,9 @@ void exec_echo (t_node_list	*node)
 				write(1, " ", 1);
 		}
 	}
+	else
+	return (1);
 	if(!node->cmd->option_n)
 		write(1, "\n", 1);
+	return (0);
 }

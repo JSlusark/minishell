@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:01:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 13:27:47 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:01:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,32 @@
 #include "../../../include/minishell.h"
 
 /*
-	JESS NOTES:
-	0. when we move to the dire
-	1. updating msh->envar->$PWD might be a problem when we have pipes no?
-	2. We should check also permissions when executing no?
-	3. we have to see if the directory exist? or if it's even a directory?4
-	4. if we move to new folder $old_PWD needs to also be updated
+	JESS - notes for cmd
+	0. when we move to the directory we need to update also msh->envar->$PWD
+	1. would updating msh->envar->$PWD be a problem when we having pipes?
+	2. need to check also permissions when moving to directories
+	3. we have to also see if the directory exists or if it's even a directory
+	6. when using cd with no args we are redirected to home
  */
 
-void exec_cd(t_node_list *node)
+int handle_cd(t_node_list *node)
 {
-	// char cwd[1024];
 	char *new_dir = NULL;
 	(void) new_dir;
 
-	// Get the directory to change to
+	if (node->cmd->args[1]) // cannot have more than 2 args with cd so need to return error
+	{
+		write(2, node->cmd->cmd, ft_strlen(node->cmd->cmd));
+		write(2, "too many arguments\n", 20);
+		node->msh->exit_code = 1; // correct exit code
+		return(1);
+	}
+
 	if (node->cmd->args)
 	{
 		new_dir = node->cmd->args[0]; // First argument after `cd`
 		printf("Moving to %s\n", node->cmd->args[0]);
+		return(0);
 	}
 	// else
 	// {
@@ -73,7 +80,7 @@ void exec_cd(t_node_list *node)
 	// else
 	// {
 	// 	perror("cd: getcwd");
-	// 	return 1;
+		return 1;
 	// }
 }
 
@@ -88,7 +95,7 @@ void exec_cd(t_node_list *node)
 // 	free (string);
 // }
 
-// int    exec_cd(t_node_list *node)
+// int    handle_cd(t_node_list *node)
 // {
 // 	char    cwd[1024];
 // 	char    *avs;

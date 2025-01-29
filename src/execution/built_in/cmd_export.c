@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/29 15:05:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:42:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,8 +198,8 @@ bool valid_var_name(char *av)
 
 }
 
-// Main exec_export function
-void exec_export(char **av, t_node_list *node)
+// Main handle_export function
+void handle_export(char **av, t_node_list *node)
 {
 	if (av == NULL)
 	{

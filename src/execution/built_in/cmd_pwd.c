@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:37:41 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/27 18:38:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:51:12 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // OLD FROM STEFANO
 #include "../../../include/minishell.h"
 
-void	exec_pwd(t_node_list	*node)
+int	handle_pwd(t_node_list	*node)
 {
 	char *cwd;
 
@@ -23,6 +23,7 @@ void	exec_pwd(t_node_list	*node)
 		write(node->fd_out, cwd, ft_strlen(cwd));
 		write(node->fd_out, "\n", 1); // Write a newline at the end
 		free(cwd); // Free allocated memory
+		return (0);
 	}
 	else // commented the other ifs as I am unsure if we have to do this
 	{
@@ -51,6 +52,7 @@ void	exec_pwd(t_node_list	*node)
 		// {
 			perror("pwd");
 			node->msh->exit_code = 1; // Generic error
+			return (1);
 		// }
 	}
 
