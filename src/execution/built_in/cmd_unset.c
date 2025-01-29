@@ -50,7 +50,7 @@ int	ms_remove_line(t_msh *msh, int index)
 	return 0;
 }
 
-int ms_unset_env(char *var, t_node_list *node)
+void remove_env(char *var, t_node_list *node)
 {
     int index;
 
@@ -58,21 +58,25 @@ int ms_unset_env(char *var, t_node_list *node)
     if (index != -1)
     {
         ms_remove_line(node->msh, index);
-        return (0);
     }
-    return(1);
 }
 
 void    exec_unset (char **av, t_node_list *node)
 {
-    if (!av[0])
+    /*
+        da jess:
+        - quando unset non trova la env var o ha 0 args l'exit code e' sempre 0, perche' semplicemente non succede nulla
+        - unset puo' avere piu' args, rimuove solo le env esistenti
+     */
+    int i;
+
+    i = 0;
+    if(node->cmd->args) // important to avoid seg fault if args are NULL
     {
-        printf ("unset: not enough arguments\n");//da rivedere implementazione exit_code
-        node->msh->exit_code = 1;//da rivedere implementazione exit_code
-    }
-    if ((ms_unset_env(av[0], node)) != 0)
-    {
-        perror ("unset");//da rivedere implementazione exit_code
-        node->msh->exit_code = 1;//da rivedere implementazione exit_code
+        while(node->cmd->args[i])
+        {
+            remove_env(av[i], node);
+            i++;
+        }
     }
 }
