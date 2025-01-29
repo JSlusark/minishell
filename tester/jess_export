@@ -1,0 +1,28 @@
+export hello
+export ZO=dd
+export ZO="dd"
+export ZO="dd""ss"
+export ZO = dd
+export ZO = dd"ss"
+export ZO = "dd""ss"
+export ZO
+export ZO=
+export ZO==ssxx
+export cici caca
+export str=hey ciao
+export str=hey sw=ciao
+export ""
+export ''
+export "     "
+export '     '
+export "ciao   "=ci
+export ""=you
+export ''=you
+export '   '=you
+export "   "=you
+export cicci = "dd" "ss"
+export "vat==="ya
+export "vat="=ya
+export $USER=ciao
+export $NO_EXP=ciao
+export USER=ciao

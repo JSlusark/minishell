@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/29 10:04:22 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:39:31 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,16 @@ void print_env_vars(char **env)
 		ft_putchar_fd('\n', 1); // Add a newline
 		i++;
 	}
-
 	// Free the sorted environment variables
-	free(sorted_env);
-}
+	int x;
+	x = 0;
+	while (sorted_env[i] != NULL)
+	{
+		free(sorted_env[i]); // Free each duplicated string
+		i++;
+	}
+	free(sorted_env); // Finally, free the pointer array
+	}
 ///__________________________________________________________
 
 bool is_only_spaces(const char *str)
@@ -170,6 +176,26 @@ void print_exp_error(const char *identifier)
 		write(2, identifier, strlen(identifier));     // Write the invalid identifier
     write(2, "': not a valid identifier", 25);  // Write the rest of the message
 	write(2, "\n", 1);
+}
+
+bool valid_var_name(char *av)
+{
+	int i;
+
+	i = 0;
+	if (av == NULL || av[0] == '\0' || av[0] == '=')
+		return false;
+	while(av[i] != '\0')
+	{
+		if(av[i] == '=')
+			break;
+		if (!ft_isalpha(av[i]) && av[i] != '_') // need to make sure they are none of these
+			return false;
+		i++;
+	}
+	// printf("av: %s\n", av);
+	return(true);
+
 }
 
 // Main exec_export function
@@ -205,7 +231,16 @@ void exec_export(char **av, t_node_list *node)
 					node->msh->exit_code = 1; // seen in bash
 				}
 				else
-					ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
+				{
+					if(!valid_var_name(av[j]))
+					{
+						print_exp_error(av[j]);
+						node->msh->exit_code = 1;
+						break;
+					}
+					else
+						ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
+				}
 			}
 			j++;
 		}
