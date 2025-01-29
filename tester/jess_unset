@@ -1,0 +1,73 @@
+unset ZO=dd
+unset ZO="dd"
+unset ZO="dd""ss"
+unset ZO = dd
+unset ZO = dd"ss"
+unset ZO = "dd""ss"
+unset ZO
+unset ZO=
+unset ZO==ssxx
+unset cici caca
+unset str=hey ciao
+unset str=hey sw=ciao
+unset ""
+unset ''
+unset "     "
+unset '     '
+unset "ciao   "=ci
+unset ""=you
+unset ''=you
+unset '   '=you
+unset "   "=you
+unset cicci = "dd" "ss"
+unset "vat==="ya
+unset "vat="=ya
+unset $USER=ciao
+unset $NO_EXP=ciao
+unset USER=ciao
+unset notexist
+unset notexist exists
+unset exists notexists
+unset .
+unset \
+unset --
+unset ++
+
+
+unset ""
+unset ''
+unset "     "
+unset '     '
+unset =VAR
+unset =
+unset ===
+unset VAR==VALUE
+unset VAR=
+unset "VAR="=value
+unset "=VAR"
+unset "$NOTSET"
+unset "$USER"
+unset "$((2+2))"
+unset "echo hey"
+unset "unset"
+unset *
+unset ?
+unset -n VAR
+unset VAR-THING
+unset VAR.NAME
+unset VAR!
+unset VAR#FOO
+unset VAR$FOO
+unset VAR@HOME
+unset VAR%FOO
+unset VAR&FOO
+unset VAR()
+unset VAR;ls
+unset VAR|echo BAD
+unset VAR > file
+unset VAR1 VAR2 VAR3 VAR4
+unset NOTSET
+unset NOTSET EXISTING_VAR
+unset EXISTING_VAR NOTSET
+unset NOTEXIST NOTEXIST2
+unset EXISTS NOTEXISTS
