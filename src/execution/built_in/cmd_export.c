@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/29 11:39:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:05:14 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ bool valid_var_name(char *av)
 	{
 		if(av[i] == '=')
 			break;
-		if (!ft_isalpha(av[i]) && av[i] != '_') // need to make sure they are none of these
+		if (!ft_isalpha(av[i]) && av[i] != '_' && !ft_isdigit(av[i])) // need to make sure they are none of these
 			return false;
 		i++;
 	}
@@ -213,10 +213,11 @@ void exec_export(char **av, t_node_list *node)
 		j = 0;
 		while (av[j]) // 1 - if we find the op sign in the other args
 		{
-			if (av[j][0] ==  '=') // error in cases like "export sjsj =dd =ss dd" BUT NOT ERROR in "export x=1 y=2" or "export ci= ca=" where we create 2 exp
+			if (av[j][0] ==  '=' || (!ft_isalpha(av[j][0]) && ft_strlen(av[j]) > 1)) // error in cases like "export sjsj =dd =ss dd" BUT NOT ERROR in "export x=1 y=2" or "export ci= ca=" where we create 2 exp
 			{
 				print_exp_error(av[j]);
 				node->msh->exit_code = 1; // <- does not get updated
+					break;
 			}
 			else // DO NOT NEED TO UPDATE THE EXIT CODE (check export = caca=ca  exit code is 1)
 			{
@@ -224,11 +225,13 @@ void exec_export(char **av, t_node_list *node)
 				{
 					print_exp_error(NULL);
 					node->msh->exit_code = 1; // seen in bash
+					break;
 				}
 				else if(is_only_spaces(av[j])) // to handle bugs like "  export "     "  "
 				{
 					print_exp_error(av[j]);
 					node->msh->exit_code = 1; // seen in bash
+					break;
 				}
 				else
 				{

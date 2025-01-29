@@ -26,3 +26,150 @@ export "vat="=ya
 export $USER=ciao
 export $NO_EXP=ciao
 export USER=ciao
+
+
+
+
+export VAR
+export VAR=
+export VAR=123
+export VAR="hello world"
+export VAR='single quotes'
+export VAR="double'quotes"
+export VAR='single"quotes'
+export VAR=hello=world
+export VAR=123abc
+export VAR=_
+export VAR=1INVALID
+export VAR=VAR-NAME
+export VAR=VAR.NAME
+export VAR=VAR$HOME
+export VAR="VAR="
+export VAR==
+export VAR==="value"
+export VAR="==="
+export VAR="VAR SPACE"=value
+export VAR$NOT_SET
+export VAR!=value
+export VAR%value
+export VAR+value
+export VAR#value
+export VAR@value
+export VAR&value
+export VAR^value
+export VAR*value
+export VAR(value)
+export VAR)value(
+export VAR{value}
+export VAR}value{
+export VAR[value]
+export VAR]value[
+export VAR|value
+export VAR\value
+export VAR/value
+export VAR,value
+export VAR.value
+export VAR<value
+export VAR>value
+export VAR;value
+export VAR:value
+export VAR?value
+export VAR~value
+export VAR=value VAR2=value2
+export VAR="hello" VAR2="world"
+export VAR=="value" VAR2==value2
+export "VAR=VAL"
+export 'VAR=VAL'
+export "VAR='VAL'"
+export 'VAR="VAL"'
+export =VAL
+export "=="
+export '=='
+export -- VAR=VAL
+export - VAR=VAL
+export + VAR=VAL
+export VAR+=VAL
+export VAR-=VAL
+export VAR=VAL VALUE2
+export VAR=VAL VALUE2=VAL2
+export VAR="hello world" VAR2='quotes inside'
+export VAR=value VAR2 VAR3=123
+export "VAR NAME"=VAL
+export 'VAR NAME'=VAL
+export "VAR=VALUE=VALUE2"
+export 'VAR=VALUE=VALUE2'
+export "VAR=VALUE VAR2=VALUE2"
+export 'VAR=VALUE VAR2=VALUE2'
+export VAR=$HOME
+export VAR=$NON_EXISTENT
+export VAR=`pwd`
+export VAR=$(ls)
+export VAR="$(whoami)"
+export VAR='$(whoami)'
+export $VAR=value
+export $VAR=$HOME
+export $VAR=VAL
+export $(echo VAR)=VAL
+export "`echo VAR`"=VAL
+export $(date)
+export VAR="value with spaces"
+export VAR="value with spaces" VAR2="other value"
+export VAR=="=" VAR2=="=="
+export VAR"VAR2"=VALUE
+export VAR'VAR2'=VALUE
+export VAR""=VALUE
+export VAR''=VALUE
+export VAR=~value
+export VAR==~
+export VAR=="~"
+export VAR=VAR1 VAR2 VAR3
+export VAR=VAR1=VAR2=VAR3
+export VAR=VAR1=VAR2 VAR3
+export VAR==VAR2 VAR3
+export VAR==VAR2=VAR3
+export VAR="VAR1" VAR2="VAR3"
+export VAR=VAR1="VAR2"="VAR3"
+export VAR=="VAR1"==VAR2=="VAR3"
+export ""=VALUE
+export ''=VALUE
+export " "=VALUE
+export ' '=VALUE
+export "  "=VALUE
+export '  '=VALUE
+export VAR==
+export VAR==
+export VAR==
+export VAR===
+export VAR======
+export VAR=12345
+export VAR==12345
+export VAR=12345==67890
+export VAR==12345==67890
+export VAR=12345=67890
+export VAR==12345=67890
+export VAR=12345==67890
+export VAR=VAR1 VAR2=VAR3 VAR4
+export VAR==VAR1 VAR2=VAR3 VAR4
+export VAR=VAR1 VAR2 VAR3=VAR4
+export VAR VAR2=VAR3 VAR4
+export VAR VAR2 VAR3 VAR4
+export VAR=VAR1 VAR2=VAR3 VAR4
+export VAR=VAR1 VAR2 VAR3=VAR4
+export VAR=VAR1=VAR2 VAR3 VAR4
+export VAR=VAR1 VAR2=VAR3=VAR4
+export VAR="VAR1 VAR2 VAR3 VAR4"
+export VAR='VAR1 VAR2 VAR3 VAR4'
+export VAR="VAR1=VAR2=VAR3=VAR4"
+export VAR='VAR1=VAR2=VAR3=VAR4'
+export VAR==VAR1=VAR2=VAR3=VAR4
+export VAR=VAR1==VAR2==VAR3==VAR4
+export VAR==VAR1==VAR2==VAR3==VAR4
+export VAR=VAR1 VAR2 VAR3=VAR4 VAR5
+export VAR=VAR1 VAR2=VAR3 VAR4=VAR5
+export VAR=VAR1=VAR2=VAR3 VAR4 VAR5
+export VAR=VAR1 VAR2 VAR3 VAR4 VAR5
+export VAR VAR2 VAR3 VAR4 VAR5
+export VAR=VAR1 VAR2 VAR3=VAR4 VAR5
+export VAR=VAR1 VAR2 VAR3 VAR4=VAR5
+export VAR=VAR1 VAR2 VAR3=VAR4 VAR5
+export VAR VAR2 VAR3 VAR4 VAR5
