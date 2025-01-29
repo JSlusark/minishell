@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 22:16:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/29 10:04:22 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,8 @@ bool is_only_spaces(const char *str)
 void print_exp_error(const char *identifier)
 {
     write(2, "export: `", 9);                      // Write the beginning of the message
-	write(2, identifier, strlen(identifier));     // Write the invalid identifier
+	if(identifier)
+		write(2, identifier, strlen(identifier));     // Write the invalid identifier
     write(2, "': not a valid identifier", 25);  // Write the rest of the message
 	write(2, "\n", 1);
 }
@@ -204,7 +205,7 @@ void exec_export(char **av, t_node_list *node)
 					node->msh->exit_code = 1; // seen in bash
 				}
 				else
-					ms_set_env(node->msh, av[j]); // needs to change with if i have consecutive = i should skip it (export STR==hi) and if "export "ciao "= ci should be error"
+					ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
 			}
 			j++;
 		}
