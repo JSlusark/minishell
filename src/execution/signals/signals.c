@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/30 18:32:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:46:40 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ void	handle_sigint(int sig)
 
 void	setup_signals(void)
 {
+	struct termios term;
+
+	// Disables `^C` from being displayed, i can use the functions written below but unsure if i can use termios.h
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL; // Disables keys to appear in prompt as input
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+
 	signal(SIGINT, handle_sigint); // it shoudl also change the prev exit status to 1, prints ^C and unsure if ok
 	signal(SIGQUIT, handle_sigquit); // doesn't work well
 }
