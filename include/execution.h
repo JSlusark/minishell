@@ -64,4 +64,8 @@ void	close_pipes(int **pipes, int n);
 void    set_pipe_ends(int **pipes, int position, int n_pipe);
 void    free_pipes(int **pipes, int n);
 void	wait_pids(pid_t *pids, int n_pids);
+
+/********************SIGNALS**********************/;
+void    handle_eof(t_msh *msh);
+
 # endif

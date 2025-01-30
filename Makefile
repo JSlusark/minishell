@@ -10,7 +10,11 @@ CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
 # # Used when running "make valgrind" as Valgrind cannot be used on binaries compiled with -fsanitize=address. Use MAKE VALGRIND to run (uncomment it at the bottomo of the page)
 # CFLAGS := -Wall -Wextra -Werror -g
 
-INCLUDE := -Iinclude -Ilib/libft -Ilib/dprintf
+# Include directories
+CPPFLAGS := -Iinclude -Ilib/libft -Ilib/dprintf \
+			-I/usr/local/opt/readline/include
+# Readline library linking
+LDFLAGS := -L/usr/local/opt/readline/lib -lreadline -lhistory
 
 # Directories
 SRC_DIR := src
@@ -43,12 +47,12 @@ $(NAME): $(LIBFT) $(DPRINTF) $(OBJ)
 	@if [ ! -f $(DPRINTF) ]; then \
 		echo "Error: libftdprintf.a not found in $(DPRINTF_DIR)"; exit 1; \
 	fi
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(DPRINTF) -lreadline -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(DPRINTF) $(LDFLAGS) -o $(NAME)
 
-# Compile object files
+# Compile object files - cppflags is for realoine funcs to work
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
 
 # Build libft
 $(LIBFT):

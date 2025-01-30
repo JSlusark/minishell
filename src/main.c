@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 22:17:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:57:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,11 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
+		// printf("input len is %zu\n", ft_strlen(input));
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (!input) // Handle EOF (Ctrl+D)
-		{
-			printf("exit\n");
-			break;
-		}
-		if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
+			handle_eof(msh);
+		else if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
 		{
 			add_history(input);
 			nodes = parse(input, nodes, msh);
@@ -81,3 +79,4 @@ int	main(int argc, char **argv, char **envp)
 	clear_history();
 	return 0;
 }
+
