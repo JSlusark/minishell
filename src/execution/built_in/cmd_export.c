@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/29 15:42:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:57:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	notes:
-	1. variable expansion does not print delimited with "" as in bash
-	2. minishell shows a longer list of env_vars
-	3.LS_COLORS does not show in bash export or env while it does in our minishell
- */
-
+// JESS: i just need to clean and reduce lines for norminette but all testcases should pass
 #include "../../../include/minishell.h"
 #include <stdlib.h>
 #include <string.h>
@@ -125,6 +119,8 @@ void print_env_vars(char **env)
 				ft_putchar_fd(sorted_env[i][j], 1); // Write '='
 				ft_putchar_fd('"', 1);             // Add a quote after '=' only if env is not null (for example export ZO=)
 				inside_value = true;
+				if (sorted_env[i][j + 1] == '\0') // in the case of (export x=) we need this to avoid saving it as export x=" <- it needs both quotes
+					ft_putchar_fd('"', 1);             // Add a quote at the end of the value
 			}
 			else if (sorted_env[i][j + 1] == '\0' && inside_value)
 			{
@@ -132,24 +128,14 @@ void print_env_vars(char **env)
 				ft_putchar_fd('"', 1);             // Add a quote at the end of the value
 			}
 			else
-			{
-				ft_putchar_fd(sorted_env[i][j], 1); // Write the character as is
-			}
+				ft_putchar_fd(sorted_env[i][j], 1); // Write the character as is - useful for (export z)
 			j++;
 		}
 		ft_putchar_fd('\n', 1); // Add a newline
 		i++;
 	}
-	// Free the sorted environment variables
-	int x;
-	x = 0;
-	while (sorted_env[i] != NULL)
-	{
-		free(sorted_env[i]); // Free each duplicated string
-		i++;
-	}
-	free(sorted_env); // Finally, free the pointer array
-	}
+	free(sorted_env); // only the pointer array needs to be freed as we did just a shallow copy of the envs for the sorting
+}
 ///__________________________________________________________
 
 bool is_only_spaces(const char *str)
