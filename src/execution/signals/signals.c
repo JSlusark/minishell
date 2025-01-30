@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/30 18:46:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:57:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	handle_eof(t_msh *msh)
 void	handle_sigquit(int sig)
 {
 	(void)sig;
+	// printf("\b\b  \b\b"); // Remove `^\\` if it appears - probablt it's unneded
+	rl_on_new_line();
+	rl_redisplay();
 }
 
 void	handle_sigint(int sig)
