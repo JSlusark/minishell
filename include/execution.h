@@ -66,6 +66,8 @@ void    free_pipes(int **pipes, int n);
 void	wait_pids(pid_t *pids, int n_pids);
 
 /********************SIGNALS**********************/;
-void    handle_eof(t_msh *msh);
+void	handle_eof(t_msh *msh);
+void	setup_signals(void);
+
 
 # endif
