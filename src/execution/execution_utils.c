@@ -6,25 +6,46 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 12:44:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:21:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	close_wait_free(int **pipes, int node_amount)
+int close_wait_free(int **pipes, int node_amount)
 {
+    int status;
+    int exit_code;
+    int signal;
+    int j;
+    signal = 0;
+    status = 0;
     if (pipes)
     {
         close_pipes(pipes, node_amount - 1); // Close all pipe ends in the parent process
     }
-	    for (int j = 0; j < node_amount; j++) {
-        wait(NULL);
+    j = 0;
+    while (j < node_amount)
+    {
+        wait(&status); // Wait for any child process to terminate
+        if (WIFEXITED(status))
+        {
+            exit_code = WEXITSTATUS(status);
+            // printf("Child exited with status %d\n", exit_code);
+        }
+        else if (WIFSIGNALED(status))
+        {
+            signal = WTERMSIG(status);
+            // printf("Child terminated by signal %d\n", signal);
+            return (signal);
+        }
+        j++;
     }
     if (pipes)
     {
         free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
-	}
+    }
+    return (exit_code);
 }
 
 int count_nodes(t_node_list	*node_list)

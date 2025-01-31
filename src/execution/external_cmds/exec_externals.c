@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 12:45:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:49:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,22 +123,23 @@ int	exec_external(t_cmd *cmd, t_msh *msh)
 	path = find_path (cmds[0], msh->ms_env);
 	if (!path)
 	{
-		msh->exit_code = 1;
+		printf("No such file or directory\n");
+		//write(1, "No such file or directory\n", 27);
 		free_results(cmds);
-		return (1);
+		return (126);
 	}
 	if (access(path, X_OK) == -1)
 	{
-		msh->exit_code = 126;
+		printf("No permission to file or directory\n");
 		free_results(cmds);
 		free(path);
-		return (1);
+		return (126);
 	}
 	if (execve(path, cmds, msh->ms_env) == -1)
 	{
-		msh->exit_code = 127;
-		perror("command not found");
-		return (1);
+		printf("%s: command not found\n", cmd->cmd);
+		//write(1, "command not found\n", 19);
+		return (127);
 	}
 	return (0);
 }
