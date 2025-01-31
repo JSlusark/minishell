@@ -3,14 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   print_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 22:08:32 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:30:40 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../../include/minishell.h"
 
 #include "../../../include/minishell.h"
 

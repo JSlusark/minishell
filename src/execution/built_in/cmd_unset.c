@@ -61,7 +61,7 @@ void remove_env(char *var, t_node_list *node)
     }
 }
 
-void    handle_unset (char **av, t_node_list *node)
+void    exec_unset (char **av, t_node_list *node)
 {
     /*
         da jess:

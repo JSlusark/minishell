@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/27 18:54:12 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:45:26 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_results(char **results)
 	int	i;
 
 	i = 0;
-	while (results[i]) 
+	while (results[i])
 	{
 		free(results[i++]);
 	}
@@ -54,21 +54,23 @@ char	*find_path(char *cmd, char **envp)
 	int		i;
 
 	i = 0;
+	if(strchr(cmd, '/') != NULL)
+	{
+		path = ft_strdup(cmd);
+		return (path);
+	}
 	while (envp[i] && ft_strnstr (envp[i], "PATH", 4) == 0)
 		i++;
-	if (!envp[i]) 
+	if (!envp[i])
 	{
-		perror("PATH not found in environment variables");
 		return (NULL);
 	}
 	envp_paths = ft_split (envp[i] + 5, ':');
-	if (!envp_paths) 
+	if (!envp_paths)
 	{
-		perror ("Error: ft_split failed\n");
 		return (NULL);
 	}
 	path = ft_eiterate(&path, envp_paths, cmd);
-	ft_dprintf("path is: %s\n", path);
 	free_results(envp_paths);
 	if (path != NULL)
 		return (path);
@@ -108,27 +110,34 @@ char	**get_cmds(t_cmd *cmd)
 	return (cmds);
 }
 
-int	exec_external(t_cmd *cmd, char **envp)
+int	exec_external(t_cmd *cmd, t_msh *msh)
 {
 	char	**cmds;
 	char	*path;
 
-	cmds = get_cmds(cmd);			
-	if (!cmds) 
+	cmds = get_cmds(cmd);
+	if (!cmds)
 	{
-		perror ("Error: ft_split failed\n");
 		return (1);
 	}
-	path = find_path (cmds[0], envp);
+	path = find_path (cmds[0], msh->ms_env);
 	if (!path)
 	{
-		perror("Error, no path found");
+		msh->exit_code = 1;
 		free_results(cmds);
 		return (1);
 	}
-	if (execve(path, cmds, envp) == -1)
+	if (access(path, X_OK) == -1)
 	{
-		perror("Error at execve");
+		msh->exit_code = 126;
+		free_results(cmds);
+		free(path);
+		return (1);
+	}
+	if (execve(path, cmds, msh->ms_env) == -1)
+	{
+		msh->exit_code = 127;
+		perror("command not found");
 		return (1);
 	}
 	return (0);

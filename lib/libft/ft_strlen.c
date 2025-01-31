@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:49:27 by jslusark          #+#    #+#             */
-/*   Updated: 2024/05/07 10:53:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:27:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	// if (!s)
+	// 	return (0); // <---- JESS: Ste perche' lo hai messo? len 0 dovrebbe tornare gia'
 	len = 0;
 	while (s[len] != '\0')
 		len++;

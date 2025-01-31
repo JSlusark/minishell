@@ -5,16 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 18:01:14 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/29 18:01:22 by jslusark         ###   ########.fr       */
+/*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
+/*   Updated: 2025/01/31 12:32:52 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include "../../../include/minishell.h"
 
 /*
@@ -23,11 +18,13 @@
 	1. would updating msh->envar->$PWD be a problem when we having pipes?
 	2. need to check also permissions when moving to directories
 	3. we have to also see if the directory exists or if it's even a directory
-	6. when using cd with no args we are redirected to home
+	4. if we move to new folder $old_PWD needs to also be updated
+	5. when using cd with no args we are redirected to home
  */
 
-int handle_cd(t_node_list *node)
+void exec_cd(t_node_list *node)
 {
+	// char cwd[1024];
 	char *new_dir = NULL;
 	(void) new_dir;
 
@@ -36,14 +33,13 @@ int handle_cd(t_node_list *node)
 		write(2, node->cmd->cmd, ft_strlen(node->cmd->cmd));
 		write(2, "too many arguments\n", 20);
 		node->msh->exit_code = 1; // correct exit code
-		return(1);
+		return;
 	}
 
 	if (node->cmd->args)
 	{
 		new_dir = node->cmd->args[0]; // First argument after `cd`
 		printf("Moving to %s\n", node->cmd->args[0]);
-		return(0);
 	}
 	// else
 	// {
@@ -80,7 +76,7 @@ int handle_cd(t_node_list *node)
 	// else
 	// {
 	// 	perror("cd: getcwd");
-		return 1;
+	// 	return;
 	// }
 }
 
@@ -95,7 +91,7 @@ int handle_cd(t_node_list *node)
 // 	free (string);
 // }
 
-// int    handle_cd(t_node_list *node)
+// int    exec_cd(t_node_list *node)
 // {
 // 	char    cwd[1024];
 // 	char    *avs;

@@ -47,11 +47,15 @@
 
 void reset_in_out(int std_in, int std_out)
 {
-    dup2(STDIN_FILENO, std_in);
-    dup2(STDOUT_FILENO, std_out);
+    if (dup2(std_in, STDIN_FILENO) == -1)
+        return;
+    close(std_in);
+    if (dup2(std_out, STDOUT_FILENO) == -1)
+        return;
+    close(std_out);
 }
 
-void exec_child(t_node_list *node, int **pipes, int node_amount, int position)
+int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 {
 	pid_t pid;
 
@@ -64,23 +68,60 @@ void exec_child(t_node_list *node, int **pipes, int node_amount, int position)
     }
     if(pid == 0)
     {
-        if(node->redir)
-            set_redirection(node);
-
-		if (pipes) 
+        if (pipes)
 			set_pipe_ends(pipes, position, node_amount - 1);
-		if (node->cmd != NULL) 
+        if(node->redir)
+            set_redirection (node);
+		if (node->cmd != NULL)
 		{
 			if (exec_builtin(node) == 0)
 				_exit(EXIT_SUCCESS);
-			if (exec_external(node->cmd, node->msh->ms_env) == 1) 
+			if (exec_external(node->cmd, node->msh) == 1)
 			{
-				perror("exec_external");
+				printf("%s: command not found\n", node->cmd->cmd);
+                printf("exit code child_p is: %i\n", node->msh->exit_code);
+                // JESS: l'exit code non e' da updatare?
+                //  node->msh->exit_code= 127;
 				_exit(EXIT_FAILURE);
 			}
 		}
-    	_exit(EXIT_SUCCESS);
+		_exit(EXIT_SUCCESS);
     }
+	return (0);
+}
+
+int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int std_out)
+{
+    if (node_amount == 1 && (find_builtin(head) == 0))
+	{
+        if (head->redir)
+            set_redirection(head);
+        if ((exec_builtin(head)) == 0)
+        {
+		    free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
+	        reset_in_out(std_in, std_out);
+            return (0);
+        }
+	}
+    return (1);
+}
+
+int set_and_init(t_node_list *node_list, int *node_amount, int *std_in, int *std_out, int ***pipes)
+{
+    *node_amount = count_nodes(node_list);
+    *std_in = dup(STDIN_FILENO);
+    *std_out = dup(STDOUT_FILENO);
+    if (*std_in == -1 || *std_out == -1)
+        return (1);
+    if (*node_amount > 1)
+    {
+        *pipes = pipe_init(*node_amount - 1); // node_amount - 1 pipes needed for node_amount commands
+        if (*pipes == NULL)
+            return (1);
+    }
+	else
+		*pipes = NULL;
+    return (0);
 }
 
 void	exec_nodes (t_node_list *node_list)
@@ -93,44 +134,26 @@ void	exec_nodes (t_node_list *node_list)
     int std_out;
 
     ft_dprintf("exec_nodes\n");
-    head = node_list;
-	if(check_cmds(node_list) == 1)
-		return ;
-    node_amount = count_nodes(node_list);
-    std_in = dup(STDIN_FILENO);
-    std_out = dup(STDOUT_FILENO);
-    if (std_in == -1 || std_out == -1)
-        return;
-    if (node_amount > 1)
+    if (set_and_init(node_list, &node_amount, &std_in, &std_out, &pipes) == 1)
     {
-        pipes = pipe_init(node_amount - 1); // node_amount - 1 pipes needed for node_amount commands
-        if (pipes == NULL)
-            return;
+        ft_dprintf("Error: set_and_init function");
+        node_list->msh->exit_code = 1;
+        return ;
     }
-	else 
-		pipes = NULL;
     i = 0;
+    head = node_list;
     while (head)
     {
-        if(head->redir)
-            set_redirection(head);
-		if(node_amount == 1 && (exec_builtin(head)) == 0)
+        if (single_node(head, pipes, node_amount, std_in, std_out) == 0)
+            return ;
+		if (exec_child(head, pipes, node_amount, i) == 1)
 		{
-			free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
+			//head->msh->exit_code = 1;
 			break ;
 		}
-		exec_child(head, pipes, node_amount, i);
         head = head->next;
         i++;
     }
-    if (dup2(std_in, STDIN_FILENO) == -1)
-        return;
-    close(std_in);
-
-    if (dup2(std_out, STDOUT_FILENO) == -1)
-        return;
-    close(std_out);
+    reset_in_out(std_in, std_out);
 	close_wait_free(pipes, node_amount);
-
-    // reset_in_out(std_in, std_out);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/30 12:57:51 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:40:14 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,8 @@ bool valid_var_name(char *av)
 
 }
 
-// Main handle_export function
-void handle_export(char **av, t_node_list *node)
+// Main exec_export function
+void exec_export(char **av, t_node_list *node)
 {
 	if (av == NULL)
 	{

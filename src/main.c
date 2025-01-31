@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/30 18:35:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:31:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 			free_tokens(tokens);
 		if(input)
 			free(input);
-		if(!nodes) // if parsing has error it returns null and frees everything
+	if(!nodes) // if parsing has error it returns null and frees everything
 		{
 			msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
 			return(NULL); // using this without if just to test tokens}
@@ -54,11 +54,11 @@ int	main(int argc, char **argv, char **envp)
 
 	setup_signals();
 	msh = NULL;
+	// ft_dprintf("***-----NEW LOG---------***\n");
 	ms_env_init(&msh, envp);
 	while (1)
 	{
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-		// printf("input len is %zu\n", ft_strlen(input));
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (!input) // Handle EOF (Ctrl+D)
 			handle_eof(msh);
