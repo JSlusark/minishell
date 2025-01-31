@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/01/20 13:04:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:28:21 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@
 #include	<unistd.h>
 #include    <signal.h>
 #include    <sys/wait.h>
+#include	<sys/types.h>
 #include	<readline/readline.h>
 #include	<readline/history.h>
 #include	"../lib/libft/libft.h"
 #include    "../lib/dprintf/ft_dprintf.h"
 #include	"stdbool.h"
+#include	<errno.h>
+#include	<sys/stat.h>
 
 // CALL VALGRIND SUPPRESSION:
 // valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
@@ -38,6 +41,7 @@
 
 // Parsing header
 #include	"./parsing.h"
+char *read_input(void);
 
 //Execution header
 #include    "./execution.h" // parsing functions

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:25:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 12:29:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 22:25:28 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int 	exec_builtin(t_node_list	*node_list)
 	if ((exit = strcmp(node_list->cmd->cmd, "echo")) == 0)
 	exit = handle_echo(node_list);
 	else if ((exit = strcmp(node_list->cmd->cmd, "cd")) == 0)
-		printf("handle cd\n");//handle_cd(node->msh->ms_env);
+		exec_cd(node_list);
 	else if ((exit = strcmp(node_list->cmd->cmd, "pwd")) == 0)
 		handle_pwd(node_list);
 	else if ((exit = strcmp(node_list->cmd->cmd, "unset")) == 0)

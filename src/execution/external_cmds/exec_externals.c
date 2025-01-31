@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 14:49:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:02:41 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_results(char **results)
 	int	i;
 
 	i = 0;
-	while (results[i])
+	while (results[i]) 
 	{
 		free(results[i++]);
 	}
@@ -54,22 +54,13 @@ char	*find_path(char *cmd, char **envp)
 	int		i;
 
 	i = 0;
-	if(strchr(cmd, '/') != NULL)
-	{
-		path = ft_strdup(cmd);
-		return (path);
-	}
 	while (envp[i] && ft_strnstr (envp[i], "PATH", 4) == 0)
 		i++;
-	if (!envp[i])
-	{
+	if (!envp[i]) 
 		return (NULL);
-	}
 	envp_paths = ft_split (envp[i] + 5, ':');
 	if (!envp_paths)
-	{
 		return (NULL);
-	}
 	path = ft_eiterate(&path, envp_paths, cmd);
 	free_results(envp_paths);
 	if (path != NULL)
@@ -110,38 +101,49 @@ char	**get_cmds(t_cmd *cmd)
 	return (cmds);
 }
 
+int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
+{
+	struct stat sb;
+
+	if (!*path)
+	{
+		printf("%s: command not found\n", cmd->cmd);
+		free_results(*cmds);
+		return (127);
+	}
+	if (stat(*path, &sb) == 0 && S_ISDIR(sb.st_mode))
+    {
+        fprintf(stderr, "%s: Is a directory\n", *path);
+        free(*path);
+        return (126);
+    }
+	if (execve(*path, *cmds, msh->ms_env) == -1)
+	{	
+		write(2, cmd->cmd, ft_strlen(cmd->cmd));
+		write(2, ": ", 2);
+		perror("");
+		return (126);
+	}
+	return (1);
+}
+
 int	exec_external(t_cmd *cmd, t_msh *msh)
 {
 	char	**cmds;
 	char	*path;
+	int exit_code;
 
-	cmds = get_cmds(cmd);
-	if (!cmds)
+	cmds = get_cmds(cmd);			
+	if (!cmds) 
 	{
 		return (1);
 	}
-	path = find_path (cmds[0], msh->ms_env);
-	if (!path)
-	{
-		printf("No such file or directory\n");
-		//write(1, "No such file or directory\n", 27);
-		free_results(cmds);
-		return (126);
-	}
-	if (access(path, X_OK) == -1)
-	{
-		printf("No permission to file or directory\n");
-		free_results(cmds);
-		free(path);
-		return (126);
-	}
-	if (execve(path, cmds, msh->ms_env) == -1)
-	{
-		printf("%s: command not found\n", cmd->cmd);
-		//write(1, "command not found\n", 19);
-		return (127);
-	}
-	return (0);
+	if(strchr(cmds[0], '/') != NULL)
+		path = cmds[0];
+	else
+		path = find_path (cmds[0], msh->ms_env);
+	exit_code = checkandexec(&path, &cmds, msh, cmd);
+	return (exit_code);
 }
 
 // int	open_file(char *argv, int i)

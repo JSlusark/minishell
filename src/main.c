@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/31 12:31:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:14:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	main(int argc, char **argv, char **envp)
 	ms_env_init(&msh, envp);
 	while (1)
 	{
-		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
+		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET); // <------- DA JESS: input originale, usare questo ci fa passare 102 test
+		// input = read_input(); ///<----- DA JESS: non ci fa passare due test (non so ancora quali, ci fa passare 100 test)
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (!input) // Handle EOF (Ctrl+D)
 			handle_eof(msh);
@@ -68,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 			nodes = parse(input, nodes, msh);
 			if(nodes)
 			{
-				// print_nodes(nodes); // to print on terminal
+				//print_nodes(nodes); // to print on terminal
 				// print_nodes_in_outfile(nodes);
 				exec_nodes(nodes);
 				msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE

@@ -43,7 +43,7 @@ void set_redirection(t_node_list *node);
 
 /******************BUILTINS********************/
 int 	exec_builtin(t_node_list	*node_list);
-int     handle_cd(t_node_list *node);
+int     exec_cd(t_node_list *node);
 int     handle_pwd(t_node_list *node);
 int     handle_env(t_node_list	*node_l);
 int     exec_exit(t_node_list *node);

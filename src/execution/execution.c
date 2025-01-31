@@ -58,9 +58,9 @@ void reset_in_out(int std_in, int std_out)
 int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 {
 	pid_t pid;
-    int exit_code;
+	int exit_code;
 
-    exit_code = 1;
+	exit_code = 0;
     ft_dprintf("exec_child\n");
     pid  = fork();
     if(pid < 0)
@@ -70,20 +70,18 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
     }
     if(pid == 0)
     {
-        if (pipes)
+        if (pipes) 
 			set_pipe_ends(pipes, position, node_amount - 1);
         if(node->redir)
             set_redirection (node);
-		if (node->cmd != NULL)
+		if (node->cmd != NULL) 
 		{
 			if (exec_builtin(node) == 0)
 				_exit(0);
-			if ((exit_code = exec_external(node->cmd, node->msh)) != 0)
+			if ((exit_code = exec_external(node->cmd, node->msh)) != 0) 
 			{
+				//printf("exit_code in exec_child = %i\n", exit_code);
 				//printf("%s: command not found\n", node->cmd->cmd);
-                // printf("exit code child_p is: %i\n", exit_code);
-                // JESS: l'exit code non e' da updatare?
-                //  node->msh->exit_code= 127;
 				_exit(exit_code);
 			}
 		}
@@ -121,7 +119,7 @@ int set_and_init(t_node_list *node_list, int *node_amount, int *std_in, int *std
         if (*pipes == NULL)
             return (1);
     }
-	else
+	else 
 		*pipes = NULL;
     return (0);
 }
@@ -134,6 +132,7 @@ void	exec_nodes (t_node_list *node_list)
     int i;
     int std_in;
     int std_out;
+	int exit_code;
 
     ft_dprintf("exec_nodes\n");
     if (set_and_init(node_list, &node_amount, &std_in, &std_out, &pipes) == 1)
@@ -148,8 +147,9 @@ void	exec_nodes (t_node_list *node_list)
     {
         if (single_node(head, pipes, node_amount, std_in, std_out) == 0)
             return ;
-		if ((exec_child(head, pipes, node_amount, i)) != 0)
+		if ((exit_code = exec_child(head, pipes, node_amount, i)) != 0)
 		{
+			head->msh->exit_code = exit_code;
 			break ;
 		}
         head = head->next;
@@ -157,5 +157,4 @@ void	exec_nodes (t_node_list *node_list)
     }
     reset_in_out(std_in, std_out);
 	node_list->msh->exit_code = close_wait_free(pipes, node_amount);
-    // printf("exit_code is: %i\n", node_list->msh->exit_code);
 }
