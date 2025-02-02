@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/30 18:57:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/02 13:55:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	handle_sigint(int sig)
 	printf("\n"); // Move to a new line
 	rl_on_new_line(); // Tell readline we're on a new line
 	rl_replace_line("", 0); // Clear the current input
-	rl_redisplay(); // Redisplay the prompt
+	rl_redisplay(); // Redisplay the prompt //<------------------------ this redisplays twice when used ^c with cat
 }
 
 void	setup_signals(void)

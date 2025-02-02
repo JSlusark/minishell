@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 19:05:06 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:42:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,12 @@ int    exec_cd(t_node_list *node)
 	char    cwd[1024];
 	char    *avs;
 
+	if (node->cmd->args[1]) // se cd ha piu' di un argomento, questo triggera l'errore (tipo per cd $PWD hi)
+	{
+		ft_putstr_fd("cd: too many arguments\n", 2);
+		node->msh->exit_code = 1;
+		return (1);
+	}
 	avs = node->cmd->args[0];//token dopo cd (Ex. src con cd/src)
 	if (avs == NULL)
 	{
@@ -105,7 +111,8 @@ int    exec_cd(t_node_list *node)
 			return (1);
 		ft_putstr_fd ("cd: ", 2);
 		ft_putstr_fd (avs, 2);
-		ft_putendl_fd (": no such file or dir", 2);
+		ft_putendl_fd (": No such file or directory", 2);
+		node->msh->exit_code= 1;  /// JESS: non c'era prima e ho messo io
 		return (1);
 	}
 	set_pwd ("OLDPWD=", cwd, node->msh);
@@ -158,7 +165,7 @@ char *read_input(void)
         // Start with green color
         const char *green = "\033[32m";
         const char *reset = "\033[0m";
-        
+
         // Construct the prompt string
         while (*green)
             prompt[i++] = *green++;
@@ -185,3 +192,56 @@ char *read_input(void)
     }
 
 }
+
+// old code from jess
+// void exec_cd(t_node_list *node)
+// {
+// 	// char cwd[1024];
+// 	char *new_dir = NULL;
+// 	(void) new_dir;
+
+// 	// Get the directory to change to
+// 	if (node->cmd->args)
+// 	{
+// 		new_dir = node->cmd->args[0]; // First argument after `cd`
+// 		printf("Moving to %s\n", node->cmd->args[0]);
+// 	}
+// 	// else
+// 	// {
+// 	// 	// If no argument is given, fallback to HOME
+// 	// 	char *home = ms_get_env(node->t_msh->ms_env, "HOME");
+// 	// 	if (!home)
+// 	// 	{
+// 	// 		fprintf(stderr, "cd: HOME not set\n");
+// 	// 		return 1;
+// 	// 	}
+// 	// 	new_dir = home;
+// 	// }
+
+// 	// // Save the current directory in `OLDPWD`
+// 	// if (getcwd(cwd, sizeof(cwd)) == NULL)
+// 	// {
+// 	// 	perror("cd: getcwd");
+// 	// 	return 1;
+// 	// }
+// 	// set_env_var("OLDPWD=", cwd, node->t_msh->ms_env);
+
+// 	// // Attempt to change directory
+// 	// if (chdir(new_dir) == -1)
+// 	// {
+// 	// 	fprintf(stderr, "cd: %s: No such file or directory\n", new_dir);
+// 	// 	return 1;
+// 	// }
+
+// 	// // Update `PWD` in environment
+// 	// if (getcwd(cwd, sizeof(cwd)) != NULL)
+// 	// {
+// 	// 	set_env_var("PWD=", cwd, node->t_msh->ms_env);
+// 	// }
+// 	// else
+// 	// {
+// 	// 	perror("cd: getcwd");
+// 	// 	return 1;
+// 	// }
+// }
+

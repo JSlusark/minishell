@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:25:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 22:25:28 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:24:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int 	exec_builtin(t_node_list	*node_list)
 	if (!node_list->cmd)
 		return (exit);
 	if ((exit = strcmp(node_list->cmd->cmd, "echo")) == 0)
-	exit = handle_echo(node_list);
+		exit = handle_echo(node_list);
 	else if ((exit = strcmp(node_list->cmd->cmd, "cd")) == 0)
 		exec_cd(node_list);
 	else if ((exit = strcmp(node_list->cmd->cmd, "pwd")) == 0)

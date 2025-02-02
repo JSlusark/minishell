@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 18:02:41 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/02 16:19:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	free_results(char **results)
 	int	i;
 
 	i = 0;
-	while (results[i]) 
+	while (results[i])
 	{
 		free(results[i++]);
 	}
@@ -56,7 +56,7 @@ char	*find_path(char *cmd, char **envp)
 	i = 0;
 	while (envp[i] && ft_strnstr (envp[i], "PATH", 4) == 0)
 		i++;
-	if (!envp[i]) 
+	if (!envp[i])
 		return (NULL);
 	envp_paths = ft_split (envp[i] + 5, ':');
 	if (!envp_paths)
@@ -107,7 +107,7 @@ int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
 
 	if (!*path)
 	{
-		printf("%s: command not found\n", cmd->cmd);
+        ft_putstr_fd(" command not found\n", 2);
 		free_results(*cmds);
 		return (127);
 	}
@@ -118,11 +118,12 @@ int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
         return (126);
     }
 	if (execve(*path, *cmds, msh->ms_env) == -1)
-	{	
+	{
 		write(2, cmd->cmd, ft_strlen(cmd->cmd));
 		write(2, ": ", 2);
 		perror("");
-		return (126);
+		return (126);// <----- JESS: dobbiamo aggiungere un caso per i file non esistenti
+		// if invalid permission 127, if file does not exists it's 126
 	}
 	return (1);
 }
@@ -133,8 +134,8 @@ int	exec_external(t_cmd *cmd, t_msh *msh)
 	char	*path;
 	int exit_code;
 
-	cmds = get_cmds(cmd);			
-	if (!cmds) 
+	cmds = get_cmds(cmd);
+	if (!cmds)
 	{
 		return (1);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_echo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:27:08 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/29 15:36:59 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/02 12:40:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int handle_echo (t_node_list	*node)
 				write(1, " ", 1);
 		}
 	}
-	else
-	return (1);
+	// else
+	// return (1); <----------- JESS: perche'? echo e niente argomenti deve lo stesso proseguire, non e' errore!
 	if(!node->cmd->option_n)
 		write(1, "\n", 1);
 	return (0);
