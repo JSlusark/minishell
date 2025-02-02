@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/30 18:05:42 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/02 18:35:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,27 +68,27 @@ void handle_heredoc(t_redir *redir)
     close(fd[0]);
 }
 
-void set_redirection(t_node_list *node)
+int set_redirection(t_node_list *node)
 {
     while (node->redir)
     {
         ft_dprintf("set_redirection\n");
         if (node->redir->type == REDIR_IN)
-        {   
+        {
             ft_dprintf("set redir IN\n");
             node->redir->fd = open(node->redir->target_name, O_RDONLY, 0777);
             if (node->redir->fd == -1)
             {
                 perror("open");
                 node->msh->exit_code = 1;
-                return;
+                return (node->msh->exit_code);
             }
             if (dup2(node->redir->fd, STDIN_FILENO) == -1)
             {
                 perror("dup2");
                 node->msh->exit_code = 1;
                 close(node->redir->fd);
-                return;
+                return (node->msh->exit_code);
             }
             close(node->redir->fd);
         }
@@ -103,14 +103,14 @@ void set_redirection(t_node_list *node)
             {
                 perror("open");
                 node->msh->exit_code = 1;
-                return;
+                return (node->msh->exit_code);
             }
             if (dup2(node->redir->fd, STDOUT_FILENO) == -1)
             {
                 perror("dup2");
                 node->msh->exit_code = 1;
                 close(node->redir->fd);
-                return;
+                return  (node->msh->exit_code);
             }
             close(node->redir->fd);
         }
@@ -118,4 +118,5 @@ void set_redirection(t_node_list *node)
             handle_heredoc(node->redir);
         node->redir = node->redir->next;
     }
+    return (0);
 }

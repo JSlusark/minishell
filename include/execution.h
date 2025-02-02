@@ -39,7 +39,7 @@ char    *ms_get_env(t_msh *msh, char *av);
 void    ms_set_env(t_msh *msh, char *value);
 
 /****************REDIRECTIONS*******************/
-void set_redirection(t_node_list *node);
+int set_redirection(t_node_list *node);
 
 /******************BUILTINS********************/
 int 	exec_builtin(t_node_list	*node_list);

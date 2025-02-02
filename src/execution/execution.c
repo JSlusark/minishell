@@ -40,8 +40,11 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
         if (pipes)
 			set_pipe_ends(pipes, position, node_amount - 1);
         if(node->redir)
-            set_redirection (node);
-		if (node->cmd != NULL)
+        {
+            if(set_redirection (node) == 1)
+                _exit(exit_code);
+        }
+        if (node->cmd != NULL)
 		{
 			if (exec_builtin(node) == 0)
 				_exit(0);
@@ -61,8 +64,11 @@ int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int
 {
     if (node_amount == 1 && (find_builtin(head) == 0))
 	{
-        if (head->redir)
-            set_redirection(head);
+        if(head->redir)
+        {
+            if(set_redirection (head) == 1)
+                _exit(1);
+        }
         if ((exec_builtin(head)) == 0)
         {
 		    free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
@@ -122,6 +128,6 @@ void	exec_nodes (t_node_list *node_list)
         head = head->next;
         i++;
     }
-        reset_in_out(std_in, std_out);
-        node_list->msh->exit_code = close_wait_free(pipes, node_amount);
+    reset_in_out(std_in, std_out);
+	node_list->msh->exit_code = close_wait_free(pipes, node_amount);
 }
