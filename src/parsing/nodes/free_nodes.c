@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 12:20:41 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:59:57 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	free_redir_list(t_redir *head)
 	curr = head;
 	while (curr)
 	{
-		// after need to add - if arg type is herdoc free this, if it's else free this other way???
 		free(curr->target_name);
 		temp = curr->next;
 		free(curr);

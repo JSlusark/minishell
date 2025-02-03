@@ -3,72 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quoted.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:41:21 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 22:25:28 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:51:51 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool buffer_overflow(int len, t_msh *msh)
+bool	buffer_overflow(int len, t_msh *msh)
 {
 	if (len >= 1024)
 	{
 		printf("Minishell: buffer overflow\n");
 		msh->exit_code = 2;
-		return true;
+		return (true);
 	}
-	return false;
+	return (false);
 }
 
-bool unclosed_quote(char *input, int *i, t_msh *msh, bool *closure)
+bool	unclosed_quote(char *input, int *i, t_msh *msh, bool *closure)
 {
-	if (input[*i] == '\0' && !(*closure)) // Handle unclosed quotes
+	if (input[*i] == '\0' && !(*closure))
 	{
 		msh->exit_code = 2;
 		printf("Minishell: quote at input[%d] had no closure\n", *i);
-		return(true);
+		return (true);
 	}
-	return(false);
-}
-bool closed_quote(char *input,int *i, char quote, bool *closure)
-{
-	(void)closure;
-	// *closure = false;
-		if (input[*i] == quote) // or until closed quote
-		{
-			*closure = true;
-			// (*i)++; // we skip the closed quote
-			return(true);
-		}
-		return(false);
+	return (false);
 }
 
-void quoted_buff(char *input, int *i, t_msh *msh, char *buff)
+bool	closed_quote(char *input, int *i, char quote, bool *closure)
 {
-	int len;
-	bool closure;
-	char quote;
+	if (input[*i] == quote)
+	{
+		*closure = true;
+		return (true);
+	}
+	return (false);
+}
+
+void	quoted_buff(char *input, int *i, t_msh *msh, char *buff)
+{
+	int		len;
+	bool	closure;
+	char	quote;
 
 	quote = input[*i];
 	closure = false;
-	(*i)++; // Skip the opening quote
-	while (input[*i] != '\0') // collect buffer until end
+	(*i)++;
+	while (input[*i] != '\0')
 	{
-		len = ft_strlen(buff); // if buff is null strlen is 0, if it contains stuff it will be added after
-		if (closed_quote(input, i, quote, &closure)) // or until closed quote
-			break;
-		else if(input[*i] == '$' && quote == '"') // checks expansion, if it stops at " it should hit the quote conditional below
-			collect_expansion(input, i, buff, msh); // func to be used even in the non quote collection
+		len = ft_strlen(buff);
+		if (closed_quote(input, i, quote, &closure))
+			break ;
+		else if (input[*i] == '$' && quote == '"')
+			collect_expansion(input, i, buff, msh);
 		else
-			buff[len++] = input[*i]; // add characters to buff
-		if (buffer_overflow(len, msh)) // Check buffer overflow
-			return;
+			buff[len++] = input[*i];
+		if (buffer_overflow(len, msh))
+			return ;
 		(*i)++;
 	}
-	if(unclosed_quote(input, i, msh, &closure))
-		return;
-	buff[len] = '\0'; // Null-terminate only when we know e have to
+	if (unclosed_quote(input, i, msh, &closure))
+		return ;
+	buff[len] = '\0';
 }

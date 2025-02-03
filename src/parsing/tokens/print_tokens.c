@@ -6,44 +6,46 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:24:59 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/20 13:15:50 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:14:58 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-
-char *return_enum(int token_type)
+char	*return_enum(int token_type)
 {
 	if (token_type == REDIR_IN)
-		return "REDIR_IN (<)"; // Input redirection ("<")
+		return ("REDIR_IN (<)");
 	else if (token_type == REDIR_OUT)
-		return "REDIR_OUT (>)"; // Output redirection (">")
+		return ("REDIR_OUT (>)");
 	else if (token_type == APPEND)
-		return "APPEND (>>)"; // Append redirection (">>")
+		return ("APPEND (>>)");
 	else if (token_type == HEREDOC)
-		return "HEREDOC (<<)"; // Here-document redirection ("<<")
+		return ("HEREDOC (<<)");
 	else if (token_type == PIPE)
-		return "PIPE"; // Pipe operator ("|")
+		return ("PIPE");
 	else if (token_type == ARG)
-		return "ARG"; // Any letter or number that is not quoted
+		return ("ARG");
 	else if (token_type == INVALID)
-		return "REDIR_IN (<)"; // Input redirection ("<")
+		return ("REDIR_IN (<)");
 	else
-		return "UNRECOGNISED ENUM"; // For invalid enum values
+		return ("UNRECOGNISED ENUM");
 }
 
-void print_tokens(t_tokens *tokens)
+void	print_tokens(t_tokens *tokens)
 {
+	t_tokens	*current;
+	int			i;
+
+	current = tokens;
+	i = 0;
 	printf(COLOR_GREEN"TOKEN LIST\n"COLOR_RESET);
-	t_tokens *current = tokens; // Start at the head of the token list
-	int i = 0;
-	while (current != NULL) // Traverse until the end of the list
+	while (current != NULL)
 	{
 		printf(COLOR_BLUE"Token %d:"COLOR_RESET, i);
 		printf("%s", current->value);
 		printf(COLOR_YELLOW"<--- %s\n"COLOR_RESET, return_enum(current->type));
-		current = current->next; // Move to the next token
+		current = current->next;
 		i++;
 	}
 }

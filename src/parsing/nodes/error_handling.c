@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:36:50 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 12:14:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:57:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ bool	pipe_error(t_tokens *token, bool check_pipestart,
 	}
 	return (false);
 }
+
 bool	redir_error(t_tokens *token)
 {
 	if (token->type == REDIR_IN || token->type == REDIR_OUT
