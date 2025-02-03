@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/03 13:24:31 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:17:43 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int set_redirection(t_node_list *node)
             {
                 perror("open");
                 node->msh->exit_code = 1;
-				printf("exit_code in set_redirection = %i\n", node->msh->exit_code);
                 return (-1); // <----- JESS: DOES NOT OVERWRITE EXIT CODE, WHY?
             }
             if (dup2(node->redir->fd, STDIN_FILENO) == -1)

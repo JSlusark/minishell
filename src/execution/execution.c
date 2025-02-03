@@ -50,8 +50,7 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 				_exit(0);
 			if ((exit_code = exec_external(node->cmd, node->msh)) != 0)
 			{
-				//printf("exit_code in exec_child = %i\n", exit_code);
-				//printf("%s: command not found\n", node->cmd->cmd);
+				node->msh->exit_code = exit_code;
 				_exit(exit_code);
 			}
 		}
@@ -70,7 +69,6 @@ int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int
 			{
 				free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
 				reset_in_out(std_in, std_out);
-				printf("exit_code in single_node = %i\n", head->msh->exit_code);
                 return(-1);
 			}
         }
@@ -134,6 +132,8 @@ void	exec_nodes (t_node_list *node_list)
     reset_in_out(std_in, std_out);
 	if((exit_code = close_wait_free(pipes, node_amount)) == 255)
 		node_list->msh->exit_code = 1;
+	else if(exit_code == 13)
+		node_list->msh->exit_code = 0;
 	else
 		node_list->msh->exit_code = exit_code;
 	return ;

@@ -5407,3 +5407,12748 @@ exec_nodes
 exec_nodes
 exec_nodes
 exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+esxeect__crheidlidr
+ection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_child
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir OUT
+set_redirection
+set redir OUT
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+pipes initialized
+exec_child
+exec_child
+set_redirection
+set redir IN
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_child
+exec_nodes
+exec_nodes
+exec_nodes
+exec_child

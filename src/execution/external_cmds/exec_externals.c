@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/02 16:19:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:12:46 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,13 +117,26 @@ int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
         free(*path);
         return (126);
     }
+		if (access(*path, F_OK) == -1)
+	{	
+		write(2, cmd->cmd, ft_strlen(cmd->cmd));
+		write(2, ": ", 2);
+		perror("");
+		return (127);
+	}
+	if (access(*path, X_OK) == -1)
+	{	
+		write(2, cmd->cmd, ft_strlen(cmd->cmd));
+		write(2, ": ", 2);
+		perror("");
+		return (126);
+	}
 	if (execve(*path, *cmds, msh->ms_env) == -1)
 	{
 		write(2, cmd->cmd, ft_strlen(cmd->cmd));
 		write(2, ": ", 2);
 		perror("");
-		return (126);// <----- JESS: dobbiamo aggiungere un caso per i file non esistenti
-		// if invalid permission 127, if file does not exists it's 126
+		return (127);
 	}
 	return (1);
 }
@@ -146,25 +159,3 @@ int	exec_external(t_cmd *cmd, t_msh *msh)
 	exit_code = checkandexec(&path, &cmds, msh, cmd);
 	return (exit_code);
 }
-
-// int	open_file(char *argv, int i)
-// {
-// 	int	file;
-
-// 	file = 0;
-// 	if (i == 0)
-// 		file = open(argv, O_WRONLY | O_CREAT | O_APPEND, 0777);
-// 	else if (i == 1)
-// 		file = open(argv, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-// 	else if (i == 2)
-// 		file = open(argv, O_RDONLY, 0777);
-// 	if (file == -1)
-// 		error();
-// 	return (file);
-// }
-
-// void	error(void)
-// {
-// 	perror("\033[31mError");
-// 	exit(EXIT_FAILURE);
-// }
