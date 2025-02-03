@@ -3,44 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_option.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 17:02:05 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/17 13:38:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:04:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool check_if_option(t_tokens **token)
+bool	check_if_option(t_tokens **token)
 {
-	if ((*token)->value[0] != '-' || ((*token)->value[0] == '-' && (*token)->value[1] == '\0')) // Check if the token doesn't start with '-' or token is '-' only
-		return(false);
-	t_tokens *temp = *token; // Use a temporary pointer to avoid modifying *token
-	int i = 1; // Start checking after the '-'
-	while (temp->value[i] == 'n') // Check for consecutive 'n's
+	int			i;
+	t_tokens	*temp;
+
+	if ((*token)->value[0] != '-'
+		|| ((*token)->value[0] == '-'
+			&& (*token)->value[1] == '\0'))
+		return (false);
+	temp = *token;
+	i = 1;
+	while (temp->value[i] == 'n')
 		i++;
-	if (temp->value[i] == '\0') // Valid -n flag (only contains '-n', '-nn', etc.)
-		return(true);
-	else // Invalid flag (e.g., '-nm') or regular argument
-		return(false);
+	if (temp->value[i] == '\0')
+		return (true);
+	else
+		return (false);
 }
 
-void add_option_n(t_tokens **token, t_node_list *new_node)// to call add option -n
+void	add_option_n(t_tokens **token, t_node_list *new_node)
 {
-	if(check_if_option(token)) // if the 1st token is -n
+	if (check_if_option(token))
 	{
-		new_node->cmd->option_n = true; // Set the -n option flag to true
-		while(check_if_option(token) && (*token)->next) // while the current token is n and next token exists
+		new_node->cmd->option_n = true;
+		while (check_if_option(token) && (*token)->next)
 		{
-			if(check_if_option(&(*token)->next)) // check if next token is -n
-				*token = (*token)->next;  // if so we move it as current token  (so that we do not jump non -n tokens)
+			if (check_if_option(&(*token)->next))
+				*token = (*token)->next;
 			else
-				break; // will always break when current token is -n so that we then move next in  the main return nodes loop
+				break ;
 		}
 	}
-	else // if 1st token is not n we add it to the args
-	{
-		add_argument(&(new_node->cmd->args), (*token)->value); // Add to args
-	}
+	else
+		add_argument(&(new_node->cmd->args), (*token)->value);
 }

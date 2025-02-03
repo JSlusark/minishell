@@ -3,34 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   free_msh.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:32:30 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 15:49:04 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:16:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-// msh and what it stores needs to be freed before we exit the program
-// I do not know if freeing what is inside will affect any type of data we need after we exit from minishell (i think not)
-// NOTE PER EXECUTION BRANCH:
-// aggiunto in cmd_exit.c(l:51)
-// aggiunto in main.c(l:70)
-
-void free_msh(t_msh *msh)
+void	free_msh(t_msh *msh)
 {
+	int	i;
+
 	if (!msh)
-		return;
+		return ;
 	if (msh->ms_env)
 	{
-		int i = 0;
+		i = 0;
 		while (msh->ms_env[i])
 		{
-			free(msh->ms_env[i]); // freeing each char env var to avoid data is stil reachable after exit
+			free (msh->ms_env[i]);
 			i++;
 		}
-		free(msh->ms_env); // freeing the environment variable array container
+		free(msh->ms_env);
 	}
-	free(msh); //  freeing the msh struct itself (IMPORTANT: CHECK IF ERROR COSE FOR EXIT IS AFFECTED)
+	free(msh);
 }

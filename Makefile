@@ -77,6 +77,10 @@ fclean: clean
 re: fclean all
 
 ## Added to use minishell with valgrind and avoid copy/past all the time - cannot be used when the program is compiled with fsanitise
+# leaks: CFLAGS=$(LEAK_CFLAGS)
+# leaks: re
+# 	@echo "Running Minishell with Valgrind Leak Check..."
+# 	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME)
 # valgrind:
 # 	valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./$(NAME)
 

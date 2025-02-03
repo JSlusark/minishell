@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   free_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/16 16:51:12 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:20:41 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void free_arg_array(char **args)
+void	free_arg_array(char **args)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!args)
-		return;
+		return ;
 	while (args[i])
 	{
 		free(args[i]);
@@ -26,48 +27,51 @@ void free_arg_array(char **args)
 	free(args);
 }
 
-
-static void free_redir_list (t_redir *head)
+static void	free_redir_list(t_redir *head)
 {
+	t_redir	*curr;
+	t_redir	*temp;
+
 	if (!head)
-		return; // unsure if needed
-	t_redir *curr = head;
-	while(curr)
+		return ;
+	curr = head;
+	while (curr)
 	{
-		// after need to add - if arg type is herdoc free this, if it's else free this other way
-		// free(curr->type);
+		// after need to add - if arg type is herdoc free this, if it's else free this other way???
 		free(curr->target_name);
-		t_redir *temp = curr->next;
+		temp = curr->next;
 		free(curr);
 		curr = temp;
 	}
 }
 
-static void free_cmd_struct (t_cmd *cmd)
+static void	free_cmd_struct(t_cmd *cmd)
 {
 	if (!cmd)
-		return; // unsure if needed
-	if(cmd->cmd)
+		return ;
+	if (cmd->cmd)
 		free(cmd->cmd);
-	if(cmd->args)
+	if (cmd->args)
 		free_arg_array(cmd->args);
 	free(cmd);
 }
 
 void free_node_list(t_node_list *head)
 {
+	t_node_list	*curr;
+	t_node_list *temp;
+
 	if (!head)
-		return;
-	t_node_list *curr = head;
+		return ;
+	curr = head;
 	while (curr)
 	{
-		if(curr->cmd)
+		if (curr->cmd)
 			free_cmd_struct (curr->cmd);
-		if(curr->redir)
+		if (curr->redir)
 			free_redir_list (curr->redir);
-		t_node_list *temp = curr->next;
+		temp = curr->next;
 		free(curr);
 		curr = temp;
 	}
 }
-

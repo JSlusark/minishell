@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/26 22:26:42 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:56:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,43 @@ void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t
 {
 	(void)token;
 	(void)token_n;
-	// printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
-	// printf(COLOR_RED"		TOKEN %d: PIPE %d\n"COLOR_RESET, token_n,  token->type);
-	// printf(COLOR_RED"		%s\n"COLOR_RESET, token->value);
-	append_node(head, new_node);// as we end the node we have to append it to our node list
-	*start_node = true;  // As we ended and appended a new node we have to flag that we are ready to start a new one
+	append_node(head, new_node);
+	*start_node = true;
 }
 
-void append_node(t_node_list **head, t_node_list *new_node)
+void	append_node(t_node_list **head, t_node_list *new_node)
 {
-	t_node_list *last_node;
+	t_node_list	*last_node;
 
-	if(!(*head))
+	if (!(*head))
 	{
 		new_node->prev = NULL;
-		*head = new_node; // This updates a local copy of head
+		*head = new_node;
 	}
 	else
 	{
-		last_node = *head; // we do this to traverse tthrough the list without affecting it
-		while(last_node->next) // we traverse the list until we reach the node that has NULL as next node
+		last_node = *head;
+		while (last_node->next)
 			last_node = last_node->next;
-		last_node->next = new_node; // we assign the new node as last in the list
-		new_node->prev = last_node; // we assign the 2nd last node as prev node of teh new node
+		last_node->next = new_node;
+		new_node->prev = last_node;
 	}
 }
 
-t_node_list *init_new_node(int node_n, bool *start_node, t_msh *msh) // nothing else needed
+t_node_list	*init_new_node(int node_n, bool *start_node, t_msh *msh)
 {
-	t_node_list *new_node;
+	t_node_list	*new_node;
 
 	new_node = ft_calloc(1, sizeof(t_node_list));
-	if (!new_node) //not freeing things here as i will do in the main if error
+	if (!new_node)
 	{
 		printf("Minishell: Failed to allocate node number %d\n", node_n);
-		return NULL;
+		return (NULL);
 	}
 	new_node->node_i = node_n - 1;
 	new_node->msh = msh;
 	new_node->fd_in = 0;
 	new_node->fd_out = 1;
-	*start_node = false; // Node has started
-	return new_node;
+	*start_node = false;
+	return (new_node);
 }

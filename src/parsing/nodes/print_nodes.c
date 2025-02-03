@@ -6,49 +6,50 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 09:30:24 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:27:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-char *return_token_enum(int token_type)
+char	*return_token_enum(int token_type)
 {
 	if (token_type == REDIR_IN)
-		return "REDIR_IN (<)"; // Input redirection ("<")
+		return ("REDIR_IN (<)");
 	else if (token_type == REDIR_OUT)
-		return "REDIR_OUT (>)"; // Output redirection (">")
+		return ("REDIR_OUT (>)");
 	else if (token_type == APPEND)
-		return "APPEND (>>)"; // Append redirection (">>")
+		return ("APPEND (>>)");
 	else if (token_type == HEREDOC)
-		return "HEREDOC (<<)"; // Here-document redirection ("<<")
+		return ("HEREDOC (<<)");
 	else if (token_type == PIPE)
-		return "PIPE"; // Pipe operator ("|")
+		return ("PIPE");
 	else if (token_type == ARG)
-		return "ARG"; // Any letter or number that is not quoted
+		return ("ARG");
 	else if (token_type == INVALID)
-		return "INVALID"; // Any letter or number that is not quoted
+		return ("INVALID");
 	else
-		return "UNRECOGNISED_ENUM"; // For invalid enum values
+		return ("UNRECOGNISED_ENUM");
 }
 
-char *return_target_enum(int redir_type)
+char	*return_target_enum(int redir_type)
 {
-	if(redir_type == 7) // enmum of heredoc
-		return("DELIMITER");
-	return("FILE");
+	if (redir_type == 7)
+		return ("DELIMITER");
+	return ("FILE");
 }
 
-
-void print_redir(t_redir *head)
+void	print_redir(t_redir *head)
 {
+	t_redir *current;
+
 	if (!head)
 	{
 		printf(COLOR_BLUE"		- t_redir redir:"COLOR_RESET);
 		printf(" null\n");
-		return;
+		return ;
 	}
-	t_redir *current = head;
+	current = head;
 	printf(COLOR_BLUE"		- t_redir redir:\n"COLOR_RESET);
 	while (current)
 	{
@@ -63,32 +64,33 @@ void print_redir(t_redir *head)
 
 void print_args(char **args)
 {
-if (!args || !args[0]) // Check if the args array is NULL or empty
+	if (!args || !args[0])
 	{
 		printf("			- char **args:");
 		printf(" null\n");
-		return;
+		return ;
 	}
 	printf("			- char **args:\n");
-	for (int i = 0; args[i]; i++) // Loop through the args array until NULL
+	for (int i = 0; args[i]; i++)
 	{
 		printf("			  *arg[%d]: %s\n",i , args[i]);
 	}
 }
 
-void print_nodes(t_node_list *head)
+void	print_nodes(t_node_list *head)
 {
-	int n = 0;
+	t_node_list	*curr;
+	int			n;
 
-	printf(COLOR_GREEN"\nNODE LIST TO ITERATE AND EXECUTE...\n"COLOR_RESET); // Print the node_i value
-	t_node_list *curr = head; // Start with the head of the node list
+	n = 0;
+	curr = head;
+	printf(COLOR_GREEN"\nNODE LIST TO ITERATE AND EXECUTE...\n"COLOR_RESET);
 	while (curr != NULL)
 	{
 		n++;
-		printf(COLOR_YELLOW"	- NODE %d\n"COLOR_RESET, n); // Print the node_i value
-		printf(COLOR_BLUE"		- int node_i:"COLOR_RESET); // Print the node_i value
-		printf(" %d\n", curr->node_i); // Print the node_i value
-		// Print msh->exit_code if it exists
+		printf(COLOR_YELLOW"	- NODE %d\n"COLOR_RESET, n);
+		printf(COLOR_BLUE"		- int node_i:"COLOR_RESET);
+		printf(" %d\n", curr->node_i);
 		if (curr->msh)
 		{
 			printf(COLOR_BLUE"		- node->msh: \n"COLOR_RESET);
@@ -99,32 +101,32 @@ void print_nodes(t_node_list *head)
 		}
 		if (!curr->cmd)
 		{
-			printf(COLOR_BLUE"		- t_cmd cmd: "COLOR_RESET); // Print the node_i value
-			printf("null\n"); // Print the node_i value
+			printf(COLOR_BLUE"		- t_cmd cmd: "COLOR_RESET);
+			printf("null\n");
 			printf("			- char **args:");
 			printf(" null\n");
-			printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET); // Print the node_i value
+			printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET);
 			printf(" null\n");
 		}
 		else
 		{
-			printf(COLOR_BLUE"		- t_cmd cmd:\n"COLOR_RESET); // Print the node_i value
-			printf("			- char *cmd: %s\n", curr->cmd->cmd); // Print the node_i value
+			printf(COLOR_BLUE"		- t_cmd cmd:\n"COLOR_RESET);
+			printf("			- char *cmd: %s\n", curr->cmd->cmd);
 			print_args(curr->cmd->args);
 			if (curr->cmd->option_n)
 			{
-				printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET); // Print the node_i value
-				printf(" true\n"); // Print the node_i value
+				printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET);
+				printf(" true\n");
 			}
 			if (!curr->cmd->option_n)
 			{
-				printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET); // Print the node_i value
-				printf(" false\n"); // Print the node_i value
+				printf(COLOR_YELLOW"			- bool option -n:"COLOR_RESET);
+				printf(" false\n");
 			}
 		}
 		print_redir(curr->redir);
-		curr = curr->next; // Move to the next node
+		curr = curr->next;
 	}
-	printf("\n	Total number of pipes: %d\n", n - 1); // Print the node_i value
-	printf("	Total number of nodes: %d\n", n); // Print the node_i value
+	printf("\n	Total number of pipes: %d\n", n - 1);
+	printf("	Total number of nodes: %d\n", n);
 }
