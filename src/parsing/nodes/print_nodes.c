@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/31 12:30:40 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:30:24 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,10 @@ void print_nodes(t_node_list *head)
 		// Print msh->exit_code if it exists
 		if (curr->msh)
 		{
-			printf(COLOR_RED"		- msh->prev_exit: "COLOR_RESET);
+			printf(COLOR_BLUE"		- node->msh: \n"COLOR_RESET);
+			printf("			- exit_code: ");
+			printf("%d\n", curr->msh->exit_code);
+			printf("			- prev_exit: ");
 			printf("%d\n", curr->msh->prev_exit);
 		}
 		if (!curr->cmd)

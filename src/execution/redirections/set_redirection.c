@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/02 18:35:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:50:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-#include "../../../include/minishell.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
 void handle_heredoc(t_redir *redir)
 {
@@ -81,7 +77,7 @@ int set_redirection(t_node_list *node)
             {
                 perror("open");
                 node->msh->exit_code = 1;
-                return (node->msh->exit_code);
+                return (node->msh->exit_code); // <----- JESS: DOES NOT OVERWRITE EXIT CODE, WHY?
             }
             if (dup2(node->redir->fd, STDIN_FILENO) == -1)
             {
