@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 14:59:57 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:51:59 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static void	free_cmd_struct(t_cmd *cmd)
 	free(cmd);
 }
 
-void free_node_list(t_node_list *head)
+void	free_node_list(t_node_list *head)
 {
 	t_node_list	*curr;
-	t_node_list *temp;
+	t_node_list	*temp;
 
 	if (!head)
 		return ;
