@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_expansions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:17 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/28 22:03:06 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:45:28 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char *find_envar(char *var, char **env) // finds only the var, does not expand
 	var_content = NULL;
 	while (env[i])
 	{
-		if (strncmp(env[i], var, strlen(var)) == 0 && env[i][strlen(var)] == '=')
+		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0 && env[i][ft_strlen(var)] == '=')
 		{
-			var_content = env[i] + strlen(var) + 1;
+			var_content = env[i] + ft_strlen(var) + 1;
 			break;
 		}
 		i++;
@@ -40,7 +40,7 @@ void	expand_to_buff(char *expansion, char *buff, int *len, t_msh *msh)
 	{
 		int exp_len;
 		int i;
-		exp_len = strlen(expansion);
+		exp_len = ft_strlen(expansion);
 		if (*len + exp_len >= 1023) // Prevent buffer overflow
 		{
 			printf("Error: Buffer overflow during variable expansion\n");
@@ -64,7 +64,6 @@ void handle_variable_expansion(char *input, int *i, char *buff, int *len, t_msh 
 	int end;
 	char *var_name; // Extract the variable name
 	char *expansion; // Extract the variable name
-
 
 	end = *i;
 	while (input[end] && !ft_strchr(EXP_LIMIT, input[end]))
@@ -94,7 +93,7 @@ void handle_exit_expansion(int *i, char *buff, int *len, t_msh *msh)
 	int j;
 
 	exp_exit = ft_itoa(msh->prev_exit); // Convert exit code to string
-	exp_len = strlen(exp_exit);
+	exp_len = ft_strlen(exp_exit);
 	(*i)++; // skips ? as it's expanded
 	j = 0;
 	if (*len + exp_len >= 1023) // Prevent buffer overflow
