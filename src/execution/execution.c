@@ -41,8 +41,8 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 			set_pipe_ends(pipes, position, node_amount - 1);
         if(node->redir)
         {
-            if(set_redirection (node) == 1)
-                _exit(exit_code);
+            if(set_redirection (node) == -1)
+                _exit(-1);
         }
         if (node->cmd != NULL)
 		{
@@ -57,7 +57,7 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 		}
 		_exit(0);
     }
-	return (exit_code);
+	return (0);
 }
 
 int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int std_out)
@@ -66,8 +66,13 @@ int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int
 	{
         if(head->redir)
         {
-            if(set_redirection (head) == 1)
-                _exit(1);
+            if(set_redirection (head) == -1)
+			{
+				free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
+				reset_in_out(std_in, std_out);
+				printf("exit_code in single_node = %i\n", head->msh->exit_code);
+                return(-1);
+			}
         }
         if ((exec_builtin(head)) == 0)
         {
@@ -118,16 +123,21 @@ void	exec_nodes (t_node_list *node_list)
     head = node_list;
     while (head)
     {
-        if (single_node(head, pipes, node_amount, std_in, std_out) == 0)
-            return ;
+        exit_code = single_node(head, pipes, node_amount, std_in, std_out);
+		if(exit_code == -1 || exit_code == 0)
+			return ;
 		if ((exit_code = exec_child(head, pipes, node_amount, i)) != 0)
-		{
-			head->msh->exit_code = exit_code;
 			break ;
-		}
         head = head->next;
         i++;
     }
     reset_in_out(std_in, std_out);
-	node_list->msh->exit_code = close_wait_free(pipes, node_amount);
+	if((exit_code = close_wait_free(pipes, node_amount)) == 255)
+		node_list->msh->exit_code = 1;
+	else
+		node_list->msh->exit_code = exit_code;
+	return ;
 }
+/*  REDIR error in single node = -1
+	BUILTIN success in single node = 0
+	CHILD error = 1*/
