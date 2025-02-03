@@ -6,65 +6,20 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:40:17 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 16:45:28 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:15:58 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-// ONLY THINGS TO HANDLE IS $"USER" -> spaceUSER because of invalid_exp part
-
-char *find_envar(char *var, char **env) // finds only the var, does not expand
+void	handle_variable_expansion(char *input, int *i, char *buff, t_msh *msh)
 {
-	int i;
-	char *var_content;
-	i = 0;
-	var_content = NULL;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], var, ft_strlen(var)) == 0 && env[i][ft_strlen(var)] == '=')
-		{
-			var_content = env[i] + ft_strlen(var) + 1;
-			break;
-		}
-		i++;
-	}
-	if (!env[i]) // if var does not exists it expans to null
-		return (NULL);
-	return ft_strdup(var_content);
-}
+	int		end;
+	char	*var_name;
+	char	*expansion;
+	int		len;
 
-void	expand_to_buff(char *expansion, char *buff, int *len, t_msh *msh)
-{
-	if (expansion)
-	{
-		int exp_len;
-		int i;
-		exp_len = ft_strlen(expansion);
-		if (*len + exp_len >= 1023) // Prevent buffer overflow
-		{
-			printf("Error: Buffer overflow during variable expansion\n");
-			msh->exit_code = 2;
-			free(expansion);
-			return;
-		}
-		i = 0;
-		while (i < exp_len)
-		{
-			buff[*len] = expansion[i];
-			(*len)++;
-			i++;
-		}
-		free(expansion);
-	}
-}
-
-void handle_variable_expansion(char *input, int *i, char *buff, int *len, t_msh *msh)
-{
-	int end;
-	char *var_name; // Extract the variable name
-	char *expansion; // Extract the variable name
-
+	len = ft_strlen(buff);
 	end = *i;
 	while (input[end] && !ft_strchr(EXP_LIMIT, input[end]))
 		end++;
@@ -73,35 +28,36 @@ void handle_variable_expansion(char *input, int *i, char *buff, int *len, t_msh 
 	{
 		printf("Error: Failed to allocate memory for variable name\n");
 		msh->exit_code = 2;
-		return;
+		return ;
 	}
 	expansion = find_envar(var_name, msh->ms_env);
 	free(var_name);
-	expand_to_buff(expansion, buff, len, msh);
-	*i = end; // Move *i to the last character of the variable name
+	expand_to_buff(expansion, buff, &len, msh);
+	*i = end;
 }
 
-void handle_invalid_expansion(char *buff, int *len)
+void	handle_invalid_expansion(char *buff, int *len)
 {
-	buff[*len] = '$'; // Adds just $
+	buff[*len] = '$';
 	(*len)++;
 }
-void handle_exit_expansion(int *i, char *buff, int *len, t_msh *msh)
-{
-	int exp_len;
-	char *exp_exit;
-	int j;
 
-	exp_exit = ft_itoa(msh->prev_exit); // Convert exit code to string
+void	handle_exit_expansion(int *i, char *buff, int *len, t_msh *msh)
+{
+	int		exp_len;
+	char	*exp_exit;
+	int		j;
+
+	exp_exit = ft_itoa(msh->prev_exit);
 	exp_len = ft_strlen(exp_exit);
-	(*i)++; // skips ? as it's expanded
+	(*i)++;
 	j = 0;
-	if (*len + exp_len >= 1023) // Prevent buffer overflow
+	if (*len + exp_len >= 1023)
 	{
 		printf("Error: Buffer overflow during $? expansion\n");
 		msh->exit_code = 2;
 		free(exp_exit);
-		return;
+		return ;
 	}
 	while (j < exp_len)
 	{
@@ -109,22 +65,20 @@ void handle_exit_expansion(int *i, char *buff, int *len, t_msh *msh)
 		(*len)++;
 		j++;
 	}
-	// // printf("\t- BUFF:%s\n", buff);
-	free(exp_exit); // Free the dynamically allocated exit code string
+	free(exp_exit);
 }
 
-void collect_expansion(char *input, int *i, char *buff, t_msh *msh)
+void	collect_expansion(char *input, int *i, char *buff, t_msh *msh)
 {
-	int len;
+	int	len;
 
 	len = ft_strlen(buff);
-	(*i)++; // skips $, lands on next char to see exp
-
-	if (ft_strchr(EXP_LIMIT, input[*i])) // if after $ there is not env
+	(*i)++;
+	if (ft_strchr(EXP_LIMIT, input[*i]))
 		handle_invalid_expansion(buff, &len);
 	else if (input[*i] == '?')
 		handle_exit_expansion(i, buff, &len, msh);
 	else
-		handle_variable_expansion(input, i, buff, &len, msh);
-	(*i)--; // To avoid skipping the last character in the main loop
+		handle_variable_expansion(input, i, buff, msh);
+	(*i)--;
 }

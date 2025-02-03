@@ -99,7 +99,9 @@ bool empty_quoted(int *i, char *input); // I NEED ALSO TO MANAGE """""" CASE - s
 void unquoted_buff(char *input, int *i, t_msh *msh, char *buff);
 // handle_expansions.c
 char *find_envar(char *var, char **env); // finds only the var, does not expand
+void	expand_to_buff(char *expansion, char *buff, int *len, t_msh *msh);
 void collect_expansion(char *input, int *i, char *buff, t_msh *msh);
+
 // stops buffer collection and if no error found appends node
 bool stop_buffer(char *input, int *i, char *buff, t_msh *msh);
 

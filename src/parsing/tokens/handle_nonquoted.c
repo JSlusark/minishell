@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:55:56 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 15:51:29 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:01:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	unquoted_buff(char *input, int *i, t_msh *msh, char *buff)
 {
 	int		len;
 	int		y;
-	(void)msh;
 
 	y = *i + 1;
 	len = ft_strlen(buff);
