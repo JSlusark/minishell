@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/04 10:31:27 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:07:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ bool	parse_nodes(t_msh *msh, t_tokens **token,
 	return (true);
 }
 
-
-
 t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 {
 	t_node_list		*head;
@@ -115,4 +113,3 @@ t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 		append_node(&head, new_node);
 	return (head);
 }
-

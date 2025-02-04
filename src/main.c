@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/04 10:04:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:09:32 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 			if(nodes)
 			{
 				// print_nodes(nodes); // to print on terminal
-				// print_nodes_in_outfile(nodes);
+				// print_nodes_file(nodes);
 				exec_nodes(nodes);
 				msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
 				free_node_list(nodes);// after we execute the input we free the nodes )

@@ -39,17 +39,6 @@ typedef struct s_msh
 	bool found_echo;
 } t_msh;
 
-// typedef struct s_flags  // MOVED TO S_MSH to avoid passing too many params in parse nodes
-// {
-// 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
-// 	int	redir_i;					// redir index
-// 	int token_n;
-// 	bool start_node;		// Flags minishell to start a new node, it is set to false after we init the new node and set to true when we end the new node.
-// 	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
-// 	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
-// 	bool found_echo;
-// }		t_flags;
-
 typedef struct s_redir				// linked list of redirections as 1 node can have 1 or more redirections, double linked might be useful perhaps?
 {
 	struct s_redir *prev;
@@ -151,8 +140,18 @@ void free_node_list(t_node_list *node_list);
 void free_msh(t_msh *msh); // needs to be called independently from the free node list
 
 // NODE PRINTING AND DEBUGGING
-void print_nodes(t_node_list *head);
-void print_nodes_in_outfile(t_node_list *head);
+char	*return_token_enum(int token_type);
+char	*return_target_enum(int redir_type);
+void	print_nodes(t_node_list *head);
+void	print_exit_codes(t_msh	*msh);
+void	print_null_cmd(void);
+void	print_cmd_struct(t_cmd *cmd);
+void	print_redir(t_redir *head);
+void	print_nodes_file(t_node_list *head);
+void	print_exit_codes_file(t_msh	*msh);
+void	print_null_cmd_file(void);
+void	print_cmd_struct_file(t_cmd *cmd);
+void	print_redir_file(t_redir *head);
 
 // COMMUNICATION BETWEEN PARSING AND EXECUTION
 void	exec_nodes(t_node_list	*node_list);
