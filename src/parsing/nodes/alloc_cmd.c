@@ -6,13 +6,13 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 11:54:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:21:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool	alloc_cmd(t_node_list *curr_node, t_tokens *token, t_flags **p)
+bool	alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh)
 {
 	t_cmd	*cmd;
 
@@ -29,7 +29,7 @@ bool	alloc_cmd(t_node_list *curr_node, t_tokens *token, t_flags **p)
 		return (false);
 	}
 	if (ft_strcmp(cmd->cmd, "echo") == 0)
-		(*p)->found_echo = true;
+		(*msh)->found_echo = true;
 	cmd->args = NULL;
 	curr_node->cmd = cmd;
 	return (true);

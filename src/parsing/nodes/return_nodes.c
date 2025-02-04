@@ -6,25 +6,23 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/04 09:57:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:31:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-bool	parse_rest(t_tokens **token, t_node_list *new_node,
-					int token_n, t_flags **p)
+bool	parse_rest(t_tokens **token, t_node_list *new_node, t_msh **msh)
 {
-	if ((*p)->find_cmd)
+	if ((*msh)->find_cmd)
 	{
-		(void)token_n; // remove
-		if (!alloc_cmd(new_node, *token, p))
+		if (!alloc_cmd(new_node, *token, msh))
 			return (false);
-		(*p)->find_cmd = false;
+		(*msh)->find_cmd = false;
 	}
 	else
 	{
-		if ((*p)->found_echo && !new_node->cmd->args
+		if ((*msh)->found_echo && !new_node->cmd->args
 			&& new_node->cmd->option_n == false)
 			add_option_n(token, new_node);
 		else
@@ -36,57 +34,54 @@ bool	parse_rest(t_tokens **token, t_node_list *new_node,
 	return (true);
 }
 
-bool	parse_token(t_flags *p, t_tokens **token,
+bool	parse_token(t_msh *msh, t_tokens **token,
 					t_node_list **head, t_node_list **new_node)
 {
 	if ((*token)->type == PIPE)
-		end_new_node(&(p->start_node), head, *new_node);
+		end_new_node(&(msh->start_node), head, *new_node);
 	else
 	{
-		p->pipestart = false;
+		msh->pipestart = false;
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT
 			|| (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
-			if (!parse_redir(token, *new_node, &(p->redir_i)))
+			if (!parse_redir(token, *new_node, &(msh->redir_i)))
 				return (false);
-			p->token_n++;
+			msh->token_n++;
 		}
 		else
-			if (!parse_rest(token, *new_node, p->token_n, &p))
+			if (!parse_rest(token, *new_node, &msh))
 				return (false);
 	}
 	*token = (*token)->next;
 	return (true);
 }
 
-t_flags	assign_data(void)
+void	start_flags(t_msh *msh)
 {
-	t_flags	param;
-
-	param.node_n = 1;
-	param.redir_i = 0;
-	param.token_n = 1;
-	param.start_node = true;
-	param.find_cmd = true;
-	param.pipestart = true;
-	param.found_echo = false;
-	return (param);
+	msh->node_n = 1;
+	msh->redir_i = 0;
+	msh->token_n = 1;
+	msh->start_node = true;
+	msh->find_cmd = true;
+	msh->pipestart = true;
+	msh->found_echo = false;
 }
 
-bool	parse_nodes(t_flags *p, t_msh *msh, t_tokens **token,
+bool	parse_nodes(t_msh *msh, t_tokens **token,
 				t_node_list **head, t_node_list **new_node)
 {
-	if (p->start_node == true)
+	if (msh->start_node == true)
 	{
-		*new_node = init_new_node(p->node_n, &p->start_node, msh);
+		*new_node = init_new_node(msh->node_n, &msh->start_node, msh);
 		if (!(*new_node))
 			return (false);
-		p->find_cmd = true;
-		p->found_echo = false;
-		p->redir_i = 0;
-		p->node_n++;
+		msh->find_cmd = true;
+		msh->found_echo = false;
+		msh->redir_i = 0;
+		msh->node_n++;
 	}
-	if (!parse_token(p, token, head, new_node))
+	if (!parse_token(msh, token, head, new_node))
 	{
 		free_node_list(*head);
 		free_node_list(*new_node);
@@ -99,23 +94,22 @@ bool	parse_nodes(t_flags *p, t_msh *msh, t_tokens **token,
 
 t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 {
-	t_flags			p;
 	t_node_list		*head;
 	t_node_list		*new_node;
 
-	p = assign_data();
+	start_flags(msh);
 	head = NULL;
 	new_node = NULL;
 	while (token != NULL)
 	{
-		if (pipe_error(token, p.pipestart, head, new_node))
+		if (pipe_error(token, msh->pipestart, head, new_node))
 		{
 			msh->exit_code = 2;
 			return (NULL);
 		}
-		if (!parse_nodes(&p, msh, &token, &head, &new_node))
+		if (!parse_nodes(msh, &token, &head, &new_node))
 			return (NULL);
-		p.token_n++;
+		msh->token_n++;
 	}
 	if (new_node)
 		append_node(&head, new_node);

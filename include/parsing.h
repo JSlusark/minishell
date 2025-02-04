@@ -29,11 +29,7 @@ typedef struct s_msh
 	//char	**ms_env_export;
 	int exit_code; // Exit code (suggested by copilot for error handling)
 	int prev_exit;  /// the exit code returned from the previous execution
-	// JESS: in futuro penso di incollare i flags per il parser (copio ed incollo da t_flags) per diminuire il num di righe in return_nodes
-} t_msh;
-
-typedef struct s_flags
-{
+	// MOVED from t_flags avoid passing too many params in parse nodes
 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
 	int	redir_i;					// redir index
 	int token_n;
@@ -41,7 +37,18 @@ typedef struct s_flags
 	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
 	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
 	bool found_echo;
-}		t_flags;
+} t_msh;
+
+// typedef struct s_flags  // MOVED TO S_MSH to avoid passing too many params in parse nodes
+// {
+// 	int	node_n;						// We this to track the amount of nodes in a list and know if and how many times we have to pipe between nodes
+// 	int	redir_i;					// redir index
+// 	int token_n;
+// 	bool start_node;		// Flags minishell to start a new node, it is set to false after we init the new node and set to true when we end the new node.
+// 	bool find_cmd;			// Flags minishell to find the command of the node: this helps with cases like "> input.txt echo hello" result and "> input.txt hello echo" error
+// 	bool pipestart;  	// Flags minishell to check also if pipe is the first token when checking for pipe errors. I set this flag to false when the first token is not a pipe.
+// 	bool found_echo;
+// }		t_flags;
 
 typedef struct s_redir				// linked list of redirections as 1 node can have 1 or more redirections, double linked might be useful perhaps?
 {
@@ -114,8 +121,8 @@ void print_tokens(t_tokens *tokens);
 t_node_list	*return_nodes(t_tokens *token_list, t_msh *msh);
 
 // PARSES EACH TOKEN TO ASSIGN ITS FUNCTION INSIDE ITS NODE - *p contains data that allows us to do that
-bool parse_token(t_flags *p, t_tokens **token, t_node_list **head, t_node_list **new_node); // iterates through each token to replicate how bash distrobute their role in the node
-t_flags assign_data(); // stores data that we pass to the parse_token function to avoid norm error of sending more than 4 params to it
+bool parse_token(t_msh *msh, t_tokens **token, t_node_list **head, t_node_list **new_node); // iterates through each token to replicate how bash distrobute their role in the node
+void assign_data(t_msh); // stores data that we pass to the parse_token function to avoid norm error of sending more than 4 params to it
 
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
 t_node_list	*init_new_node(int node_n, bool *start_node, t_msh *msh); // allocates a new node at the start of parsing or after we encounter a pipe
@@ -134,8 +141,8 @@ bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows
 void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
 // CMD STRUCT CREATION - after we parsed pipes and redird we create the cmd struct and assign cmd, args and n_option (if the command is echo)
-bool parse_rest(t_tokens **token, t_node_list *new_node, int token_n, t_flags **p);
-bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_flags **p);
+bool parse_rest(t_tokens **token, t_node_list *new_node, t_msh **msh);
+bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh);
 bool add_argument(char ***args, char *new_arg); // new function to allocat arg as array and not ll
 void	add_option_n(t_tokens **token, t_node_list *new_node);
 
