@@ -6,16 +6,15 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:57:22 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 11:56:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:34:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_tokens *token, int token_n)
+void	end_new_node(bool *start_node, t_node_list **head,
+						t_node_list *new_node)
 {
-	(void)token;
-	(void)token_n;
 	append_node(head, new_node);
 	*start_node = true;
 }

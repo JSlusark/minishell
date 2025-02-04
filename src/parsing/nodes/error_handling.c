@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 13:36:50 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 14:57:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:22:31 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	pipe_error(t_tokens *token, bool check_pipestart,
 			printf("found `%s' at begining of syntax\n", token->value);
 			return (true);
 		}
-		else if (!token->next) // Check if the next token is NULL
+		else if (!token->next)
 		{
 			printf("Minishell: ");
 			printf("found `%s' at end of syntax\n", token->value);

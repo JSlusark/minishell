@@ -120,7 +120,7 @@ t_flags assign_data(); // stores data that we pass to the parse_token function t
 // NODE FUNCTIONS (CREATE, APPEND, END) - alloc_nodes.c creates node list
 t_node_list	*init_new_node(int node_n, bool *start_node, t_msh *msh); // allocates a new node at the start of parsing or after we encounter a pipe
 void	append_node(t_node_list **head, t_node_list *new_node); // appends current node to list as head or last node of the list
-void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node, t_tokens *token, int token_n); // ends new node when we encounter a pipe and alerts us that we have to start a new node
+void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node); // ends new node when we encounter a pipe and alerts us that we have to start a new node
 
 // PARSE NODE ERRORS - error_handling.c stops node creation and prints error to the terminal
 bool	pipe_error(t_tokens *token, bool check_pipestart, t_node_list *head, t_node_list *new_node); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe

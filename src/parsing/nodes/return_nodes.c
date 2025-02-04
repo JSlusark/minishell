@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 13:22:58 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:57:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	parse_token(t_flags *p, t_tokens **token,
 					t_node_list **head, t_node_list **new_node)
 {
 	if ((*token)->type == PIPE)
-		end_new_node(&(p->start_node), head, *new_node, *token, p->token_n);
+		end_new_node(&(p->start_node), head, *new_node);
 	else
 	{
 		p->pipestart = false;
@@ -73,6 +73,30 @@ t_flags	assign_data(void)
 	return (param);
 }
 
+bool	parse_nodes(t_flags *p, t_msh *msh, t_tokens **token,
+				t_node_list **head, t_node_list **new_node)
+{
+	if (p->start_node == true)
+	{
+		*new_node = init_new_node(p->node_n, &p->start_node, msh);
+		if (!(*new_node))
+			return (false);
+		p->find_cmd = true;
+		p->found_echo = false;
+		p->redir_i = 0;
+		p->node_n++;
+	}
+	if (!parse_token(p, token, head, new_node))
+	{
+		free_node_list(*head);
+		free_node_list(*new_node);
+		return (false);
+	}
+	return (true);
+}
+
+
+
 t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 {
 	t_flags			p;
@@ -81,6 +105,7 @@ t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 
 	p = assign_data();
 	head = NULL;
+	new_node = NULL;
 	while (token != NULL)
 	{
 		if (pipe_error(token, p.pipestart, head, new_node))
@@ -88,25 +113,12 @@ t_node_list	*return_nodes(t_tokens *token, t_msh *msh)
 			msh->exit_code = 2;
 			return (NULL);
 		}
-		if (p.start_node == true)
-		{
-			new_node = init_new_node(p.node_n, &p.start_node, msh);
-			if (!new_node)
-				return (NULL);
-			p.find_cmd = true;
-			p.found_echo = false;
-			p.redir_i = 0;
-			p.node_n++;
-		}
-		if (!parse_token(&p, &token, &head, &new_node))
-		{
-			free_node_list(head);
-			free_node_list(new_node);
+		if (!parse_nodes(&p, msh, &token, &head, &new_node))
 			return (NULL);
-		}
 		p.token_n++;
 	}
 	if (new_node)
 		append_node(&head, new_node);
 	return (head);
 }
+
