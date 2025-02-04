@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/02 13:55:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:42:09 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,33 @@ void	handle_eof(t_msh *msh)
 	free_msh(msh);
 	clear_history();
 	exit(0); // returned exit code when we EOF and print echo $?
+	// exit(msh->exit_code); // Preserve last exit code when exiting
 }
 
 void	handle_sigquit(int sig)
 {
-	(void)sig;
+	g_sig = sig; // SIGQUIT
+	// printf("Handle sigquit: %d\n", sig); // 3
 	// printf("\b\b  \b\b"); // Remove `^\\` if it appears - probablt it's unneded
 	rl_on_new_line();
 	rl_redisplay();
+
+
+	// if (isatty(STDIN_FILENO)) // Ignore SIGQUIT in interactive mode
+	// 	return;
+	// g_sig = sig;
+	// write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
 }
 
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	printf("\n"); // Move to a new line
-	rl_on_new_line(); // Tell readline we're on a new line
-	rl_replace_line("", 0); // Clear the current input
+	g_sig = sig; // SIGINT
+	// printf("Handle signint: %d\n", sig); //2
+	// printf("\n"); // Move to a new line
+	write(STDOUT_FILENO, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
 	rl_redisplay(); // Redisplay the prompt //<------------------------ this redisplays twice when used ^c with cat
 }
 
