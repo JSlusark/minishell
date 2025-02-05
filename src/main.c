@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/04 19:44:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:46:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,12 @@ static void	check_signals(t_msh *msh)
 		g_sig = 0;
 		// printf("SIGINT 2 exit code %d\n", msh->prev_exit);
 	}
-	if (g_sig == SIGQUIT)
+	else if (g_sig == SIGQUIT)
 	{
-		// msh->prev_exit = 130
+		// msh->prev_exit = 131 (only when used on cat)
 		// printf("SIGQUIT 3 exit code %d\n", msh->prev_exit);
 		g_sig = 0;
+		// if cmd of node is cat update exit code to 131 and core dumped?
 	}
 }
 
@@ -71,7 +72,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 
 	setup_signals();
-	msh = NULL;
+	// msh = NULL;
 	// ft_dprintf("***-----NEW LOG---------***\n");
 	ms_env_init(&msh, envp);
 	while (1)
@@ -81,14 +82,15 @@ int	main(int argc, char **argv, char **envp)
 		// should we put a guard where is strlen of input is longer than INTMAX it gives error and reprompts user?
 		if (!input) // Handle EOF (Ctrl+D)
 			handle_eof(msh);
-		else if (input && *input) // <---- if the len of the input is more than 0 we have to parse and exec, if it's not, we reprompt the user
+		else
 		{
 			check_signals(msh);
-			add_history(input);
+			if (input && *input) // solved add_history navigation issues!! :D
+				add_history(input);
 			nodes = parse(input, nodes, msh);
 			if(nodes)
 			{
-				// print_nodes(nodes); // to print on terminal
+				print_nodes(nodes); // to print on terminal
 				// print_nodes_file(nodes);
 				exec_nodes(nodes);
 				// msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
