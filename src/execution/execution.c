@@ -28,9 +28,8 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 	int exit_code;
 
 	exit_code = 0;
-    ft_dprintf("exec_child\n");
-    // setup_signals(2);
-	// check_signals(node->msh, 3); // 3 so activates als signquit
+    // ft_dprintf("exec_child\n");
+	run_signals(2, node->msh);
     pid  = fork();
     if(pid < 0)
     {

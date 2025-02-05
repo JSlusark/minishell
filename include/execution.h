@@ -64,10 +64,15 @@ void    free_pipes(int **pipes, int n);
 void	wait_pids(pid_t *pids, int n_pids);
 
 /********************SIGNALS**********************/
-#include <termios.h>
+// #include <termios.h>
 extern int	g_sig;
 void	handle_eof(t_msh *msh);
-void	setup_signals(int sig);
-void	check_signals(t_msh *msh, int sig);
+void	ctrl_c(int sig);
+void	back_slash(int sig);
+void	restore_prompt(int sig);
+void	run_signals(int sig, t_msh *t_msh);
+
+
+
 
 # endif
