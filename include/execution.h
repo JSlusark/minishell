@@ -67,6 +67,7 @@ void	wait_pids(pid_t *pids, int n_pids);
 #include <termios.h>
 extern int	g_sig;
 void	handle_eof(t_msh *msh);
-void	setup_signals(void);
+void	setup_signals(int sig);
+void	check_signals(t_msh *msh, int sig);
 
 # endif

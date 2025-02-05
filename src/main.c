@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/05 11:46:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:26:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,24 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	return(nodes);
 }
 
-static void	check_signals(t_msh *msh)
+void	check_signals(t_msh *msh, int sig)
 {
-	if (g_sig == SIGINT)
+	printf("g_sig %d\n", sig);
+	if (g_sig == SIGINT && sig == 2)
 	{
 		msh->prev_exit = 130;
 		g_sig = 0;
+		// signal(SIGQUIT, SIG_IGN);
 		// printf("SIGINT 2 exit code %d\n", msh->prev_exit);
 	}
-	else if (g_sig == SIGQUIT)
+	else if (g_sig == SIGQUIT && sig == 3)
 	{
-		// msh->prev_exit = 131 (only when used on cat)
+		msh->prev_exit = 131; //(only when used on cat - WHY RET 3?!!)
+		// printf("Quit (core dumped)\n");
 		// printf("SIGQUIT 3 exit code %d\n", msh->prev_exit);
 		g_sig = 0;
+		printf("Quit (core dumped)\n");
+		write(1, "\n", 1);
 		// if cmd of node is cat update exit code to 131 and core dumped?
 	}
 }
@@ -71,7 +76,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 
-	setup_signals();
+	setup_signals(1); // if
 	// msh = NULL;
 	// ft_dprintf("***-----NEW LOG---------***\n");
 	ms_env_init(&msh, envp);
@@ -84,7 +89,7 @@ int	main(int argc, char **argv, char **envp)
 			handle_eof(msh);
 		else
 		{
-			check_signals(msh);
+			check_signals(msh, 2); // 2 so activates only signit
 			if (input && *input) // solved add_history navigation issues!! :D
 				add_history(input);
 			nodes = parse(input, nodes, msh);
