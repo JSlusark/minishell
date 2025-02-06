@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:33 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/26 18:26:34 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:00:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int handle_env(t_node_list *node)
+int	handle_env(t_node_list *node)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (node->msh->ms_env[i])
 	{
-		printf("%s\n", node->msh->ms_env[i++]);
+		ft_putstr_fd(node->msh->ms_env[i], 1);
+		ft_putstr_fd("\n", 1);
 	}
 	return (0);
 }
