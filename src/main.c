@@ -3,59 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/05 20:10:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:21:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int g_sig;
+int	g_sig;
 
 t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 {
 	t_tokens	*tokens;
+
 	tokens = return_tokens(input, msh);
-	if(!tokens)
+	free(input);
+	if (!tokens)
 	{
-		// print_tokens(tokens); // for tokenization error handling
-		msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
-		if(input)
-			free(input);
-		if (tokens)
-			free_tokens(tokens); // need to better check this when hitting error as it did not work for invalid tokens
+		msh->prev_exit = msh->exit_code;
 		nodes = NULL;
 	}
-	else // if tokenizing succeeds create execution nodes from tokens
+	else
 	{
-		// if(tokens)
-			// print_tokens(tokens); // for tokenization error handling
 		nodes = return_nodes(tokens, msh);
-		if(tokens)
-			free_tokens(tokens);
-		if(input)
-			free(input);
-	if(!nodes) // if parsing has error it returns null and frees everything
-		{
-			msh->prev_exit = msh->exit_code;  /// <---------------------------------------IMPORTANT TO PRINT CORRECT EXIT CODE
-			return(NULL); // using this without if just to test tokens}
-		}
+		if (!nodes)
+			msh->prev_exit = msh->exit_code;
 	}
-	return(nodes);
+	if (tokens)
+		free_tokens(tokens);
+	return (nodes);
+}
+
+void	handle_input(char *input, t_node_list *nodes, t_msh *msh)
+{
+	if (g_sig == SIGINT)
+	{
+		msh->prev_exit = 130;
+		g_sig = 0;
+	}
+	if (g_sig == SIGQUIT)
+	{
+		msh->prev_exit = 131;
+		g_sig = 0;
+	}
+	if (input && *input)
+		add_history(input);
+	nodes = parse(input, nodes, msh);
+	if (nodes)
+	{
+		exec_nodes(nodes);
+		free_node_list(nodes);
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	char			*input;
-	t_node_list		*nodes; // previously i assigned NULL to nodes probably for an allocation problem - check later
+	t_node_list		*nodes;
 	t_msh			*msh;
+
 	(void)argc;
 	(void)argv;
-
 	ms_env_init(&msh, envp);
-
+	nodes = NULL;
 	while (1)
 	{
 		run_signals(1, msh);
@@ -64,31 +76,10 @@ int	main(int argc, char **argv, char **envp)
 		if (!input)
 			handle_eof(msh);
 		else
-		{
-			if (g_sig == SIGINT) // based on what signal we trigger it will give be a certain exi code
-			{
-				msh->prev_exit = 130;
-				g_sig = 0;
-			}
-			if (g_sig == SIGQUIT)
-			{
-				msh->prev_exit = 131;
-				g_sig = 0;
-			}
-			if (input && *input) // solved add_history navigation issues!! :D
-				add_history(input);
-			nodes = parse(input, nodes, msh);
-			if (nodes)
-			{
-				// print_nodes(nodes); // to print on terminal
-				// print_nodes_file(nodes);
-				exec_nodes(nodes);
-				free_node_list(nodes);// after we execute the input we free the nodes )
-			}
-		}
-			msh->prev_exit = msh->exit_code;  // ✅ Preserve correct exit code
+			handle_input(input, nodes, msh);
+		msh->prev_exit = msh->exit_code;
 	}
-	free_msh(msh); // <------ from JESS: ho cambiato free(msh) in free_msh(msh) per libreare anche cioe' che e' all'interno della struttura (non in che casi questa funzione cerra' chiamata in questo punto, l'ho messa anche in cmd exit prima di liberare la node list)
+	free_msh(msh);
 	clear_history();
-	return 0;
+	return (0);
 }
