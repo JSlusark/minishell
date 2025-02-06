@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/06 17:14:08 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:29:15 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,27 @@ void	set_pwd(char *av, char *c, t_msh *msh)
 	string = ft_strjoin(av, c);
 	ms_set_env (msh, string);
 	free (string);
+}
+
+bool	move_to_dir(char *avs, t_node_list *node)
+{
+	char	cwd[1024];
+
+	getcwd(cwd, sizeof(cwd));
+	if (chdir(avs) == -1)
+	{
+		if (avs[0] == '\0')
+			return (1);
+		ft_putstr_fd ("cd: ", 2);
+		ft_putstr_fd (avs, 2);
+		ft_putendl_fd (": No such file or directory", 2);
+		node->msh->exit_code= 1;
+		return (false);
+	}
+	set_pwd ("OLDPWD=", cwd, node->msh);
+	getcwd(cwd, sizeof(cwd));
+	set_pwd("PWD=", cwd, node->msh);
+	return (true);
 }
 
 bool	cd_has_more_args(t_node_list *node)
@@ -44,7 +65,6 @@ bool	cd_has_more_args(t_node_list *node)
 int	exec_cd(t_node_list *node)
 {
 	char	*avs;
-	char	cwd[1024];
 
 	avs = NULL;
 	if (!node->cmd->args) // if we have CD only
@@ -63,19 +83,7 @@ int	exec_cd(t_node_list *node)
 			return (1);
 		avs = node->cmd->args[0]; // if not it assigns the 1st arg as avs
 	}
-	getcwd(cwd, sizeof(cwd));
-	if (chdir(avs) == -1)
-	{
-		if (avs[0] == '\0')
-			return (1);
-		ft_putstr_fd ("cd: ", 2);
-		ft_putstr_fd (avs, 2);
-		ft_putendl_fd (": No such file or directory", 2);
-		node->msh->exit_code= 1;
+	if (!move_to_dir(avs, node)) // if we fail to move to the dir (because it not exists)
 		return (1);
-	}
-	set_pwd ("OLDPWD=", cwd, node->msh);
-	getcwd(cwd, sizeof(cwd));
-	set_pwd("PWD=", cwd, node->msh);
 	return (0);
 }
