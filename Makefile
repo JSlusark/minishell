@@ -4,7 +4,7 @@
 CC := cc
 
 # Original: Used for AddressSanitizer to detect memory corruption issues like buffer overflows.
-CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -g #-fsanitize=address
 # # Updated: Added -fsanitize=leak for better memory leak detection since AddressSanitizer alone focuses more on buffer overflows.
 # CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address -fsanitize=leak
 # # Used when running "make valgrind" as Valgrind cannot be used on binaries compiled with -fsanitize=address. Use MAKE VALGRIND to run (uncomment it at the bottomo of the page)
