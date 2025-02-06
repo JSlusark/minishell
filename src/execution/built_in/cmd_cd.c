@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/06 17:31:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:34:16 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,8 @@ bool	cd_has_more_args(t_node_list *node)
 	int	i;
 
 	i = 0;
-	printf("cd has args");
 	while (node->cmd->args[i] != NULL)
-	{
-		printf("arg: %s\n", node->cmd->args[i]);
 		i++;
-	}
-	printf("arg total: %d\n", i);
 	if (i > 1)
 	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
@@ -70,7 +65,6 @@ int	exec_cd(t_node_list *node)
 	avs = NULL;
 	if (!node->cmd->args)
 	{
-		printf("cd has no args\n");
 		avs = ms_get_env (node->msh, "HOME") + 5;
 		if ((avs - 5) == NULL)
 		{
