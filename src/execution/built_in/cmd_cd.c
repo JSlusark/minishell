@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/06 17:29:15 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:31:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	move_to_dir(char *avs, t_node_list *node)
 		ft_putstr_fd ("cd: ", 2);
 		ft_putstr_fd (avs, 2);
 		ft_putendl_fd (": No such file or directory", 2);
-		node->msh->exit_code= 1;
+		node->msh->exit_code = 1;
 		return (false);
 	}
 	set_pwd ("OLDPWD=", cwd, node->msh);
@@ -62,12 +62,13 @@ bool	cd_has_more_args(t_node_list *node)
 	}
 	return (false);
 }
+
 int	exec_cd(t_node_list *node)
 {
 	char	*avs;
 
 	avs = NULL;
-	if (!node->cmd->args) // if we have CD only
+	if (!node->cmd->args)
 	{
 		printf("cd has no args\n");
 		avs = ms_get_env (node->msh, "HOME") + 5;
@@ -77,13 +78,13 @@ int	exec_cd(t_node_list *node)
 			return (1);
 		}
 	}
-	else // if cd has args
+	else
 	{
-		if (cd_has_more_args(node)) // checks if it has more than one arg and returns error if so
+		if (cd_has_more_args(node))
 			return (1);
-		avs = node->cmd->args[0]; // if not it assigns the 1st arg as avs
+		avs = node->cmd->args[0];
 	}
-	if (!move_to_dir(avs, node)) // if we fail to move to the dir (because it not exists)
+	if (!move_to_dir(avs, node))
 		return (1);
 	return (0);
 }
