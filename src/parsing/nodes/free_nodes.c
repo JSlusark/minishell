@@ -6,13 +6,13 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 16:51:59 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:11:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	free_arg_array(char **args)
+static void	free_arg_array(char **args)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ void	free_arg_array(char **args)
 	free(args);
 }
 
-static void	free_redir_list(t_redir *head)
+void	free_redir_list(t_redir *head)
 {
 	t_redir	*curr;
 	t_redir	*temp;
@@ -44,7 +44,7 @@ static void	free_redir_list(t_redir *head)
 	}
 }
 
-static void	free_cmd_struct(t_cmd *cmd)
+void	free_cmd_struct(t_cmd *cmd)
 {
 	if (!cmd)
 		return ;

@@ -133,11 +133,13 @@ void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the
 bool parse_rest(t_tokens **token, t_node_list *new_node, t_msh **msh);
 bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh);
 bool add_argument(char ***args, char *new_arg); // new function to allocat arg as array and not ll
-void	add_option_n(t_tokens **token, t_node_list *new_node);
+void add_option_n(t_tokens **token, t_node_list *new_node);
 
 //FREEING FUNCTIONS FOR NODE AND MSH
-void free_node_list(t_node_list *node_list);
 void free_msh(t_msh *msh); // needs to be called independently from the free node list
+void free_node_list(t_node_list *node_list);
+void	free_cmd_struct(t_cmd *cmd);
+void	free_redir_list(t_redir *head);
 
 // NODE PRINTING AND DEBUGGING
 char	*return_token_enum(int token_type);
