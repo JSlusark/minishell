@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/07 17:12:39 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:31:00 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,15 @@ t_redir	*init_new_redir(t_tokens **token, int *exit_code)
 	redir->type = (*token)->type;
 	if ((*token)->next != NULL && !add_target(*token, redir))
 	{
-		*exit_code = 1; // target failure
+		*exit_code = 1;
 		return (NULL);
 	}
 	*token = (*token)->next;
 	return (redir);
 }
 
-bool	parse_redir(t_tokens **token, t_node_list *new_node, int *redir_i, int *exit_code)
+bool	parse_redir(t_tokens **token, t_node_list *new_node,
+int *redir_i, int *exit_code)
 {
 	t_redir	*new_redir;
 

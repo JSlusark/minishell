@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 17:00:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:14:00 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ t_tokens	*tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens)
 	start = input[*i];
 	ft_memset(buff, 0, sizeof(buff));
 	skip_spaces(input, i);
-	if (invalid_char(input, *i))
-	{
-		msh->exit_code = 2;
-		return (tokens);
-	}
-	else if (!ft_strchr(BOUNDS, input[*i]))
+	if (!ft_strchr(BOUNDS, input[*i]))
 	{
 		parse_string(input, i, msh, buff);
 		if (ft_strlen(buff) == 0 && start == '$')

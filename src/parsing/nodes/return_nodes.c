@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 13:33:37 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/07 16:39:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:30:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ bool	parse_token(t_msh *msh, t_tokens **token,
 		if ((*token)->type == REDIR_IN || (*token)->type == REDIR_OUT
 			|| (*token)->type == APPEND || (*token)->type == HEREDOC)
 		{
-			if (!parse_redir(token, *new_node, &(msh->redir_i), &(msh->exit_code)))
+			if (!parse_redir(token, *new_node, &(msh->redir_i),
+					&(msh->exit_code)))
 				return (false);
 			msh->token_n++;
 		}
