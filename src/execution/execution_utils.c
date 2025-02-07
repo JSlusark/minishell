@@ -6,36 +6,42 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/01/31 16:45:04 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:44:54 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	close_wait_free(int **pipes, int node_amount)
+int	close_wait_free(int **pipes, int node_amount, int last_pid)
 {
-	int status;
+	int wstatus;
 	int exit_code;
 	int signal;
 	int j;
+	pid_t pid;
 
 	signal = 0;
-	status = 0;
+	wstatus = 0;
     if (pipes)
     {
         close_pipes(pipes, node_amount - 1); // Close all pipe ends in the parent process
     }
+	//printf("last_pid: %d\n", last_pid);
 	j = 0;
 	while (j < node_amount) 
 	{
-        wait(&status); // Wait for any child process to terminate
-        if (WIFEXITED(status))
-            exit_code = WEXITSTATUS(status);
-        else if (WIFSIGNALED(status))
-        {
-            signal = WTERMSIG(status);
-			return (signal);
-        }
+		pid = waitpid(-1, &wstatus, 0);
+		//printf("wait for pid: %d\n", pid);
+		if(pid == last_pid)
+		{
+			if (WIFEXITED(wstatus))
+				exit_code = WEXITSTATUS(wstatus);
+			else if (WIFSIGNALED(wstatus))
+			{
+				signal = WTERMSIG(wstatus);
+				return (signal);
+			}
+		}
 		j++;
     }
     if (pipes)

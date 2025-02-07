@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/03 15:12:46 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:21:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,27 +107,31 @@ int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
 
 	if (!*path)
 	{
-        ft_putstr_fd(" command not found\n", 2);
+        write(2, cmd->cmd, ft_strlen(cmd->cmd));
+		write(2, ": command not found\n", 20);
 		free_results(*cmds);
 		return (127);
 	}
 	if (stat(*path, &sb) == 0 && S_ISDIR(sb.st_mode))
     {
-        fprintf(stderr, "%s: Is a directory\n", *path);
-        free(*path);
-        return (126);
+		write(2, path, ft_strlen(*path));
+		write(2, ": Is a directory\n", 17);
+		free(*path);
+		return (126);
     }
-		if (access(*path, F_OK) == -1)
-	{	
+	if (access(*path, F_OK) == -1)
+	{
 		write(2, cmd->cmd, ft_strlen(cmd->cmd));
 		write(2, ": ", 2);
+		// Jess: we need the error message here
 		perror("");
 		return (127);
 	}
 	if (access(*path, X_OK) == -1)
-	{	
+	{
 		write(2, cmd->cmd, ft_strlen(cmd->cmd));
 		write(2, ": ", 2);
+		// Jess: we need the error message here
 		perror("");
 		return (126);
 	}
@@ -135,6 +139,7 @@ int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
 	{
 		write(2, cmd->cmd, ft_strlen(cmd->cmd));
 		write(2, ": ", 2);
+		// Jess: we need the error message here
 		perror("");
 		return (127);
 	}

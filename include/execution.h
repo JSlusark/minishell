@@ -29,7 +29,7 @@ int		count_nodes(t_node_list	*node_list);
 int		find_ext_cmd(t_node_list *node);
 int		find_builtin(t_node_list	*node);
 int		check_cmds(t_node_list *node_list);
-int		close_wait_free(int **pipes, int node_amount);
+int		close_wait_free(int **pipes, int node_amount, int last_pid);
 
 /*******************ENV************************/
 char	**ms_matrix_add_line(char **matrix, char *new_line);

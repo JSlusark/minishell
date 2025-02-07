@@ -34,7 +34,7 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
     if(pid < 0)
     {
         perror("fork");
-        exit(EXIT_FAILURE);
+        return -1;
     }
     if(pid == 0)
     {
@@ -43,21 +43,21 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
         if(node->redir)
         {
             if(set_redirection (node) == -1)
-                _exit(-1);
+                exit(-1);
         }
         if (node->cmd != NULL)
 		{
 			if (exec_builtin(node) == 0)
-				_exit(0);
+				exit(0);
 			if ((exit_code = exec_external(node->cmd, node->msh)) != 0)
 			{
 				node->msh->exit_code = exit_code;
-				_exit(exit_code);
+				exit(exit_code);
 			}
 		}
-		_exit(0);
+		exit(0);
     }
-	return (0);
+	return (pid);
 }
 
 int single_node(t_node_list *head, int **pipes, int node_amount, int std_in, int std_out)
@@ -110,6 +110,7 @@ void	exec_nodes (t_node_list *node_list)
     int std_in;
     int std_out;
 	int exit_code;
+	int last_pid;
 
     ft_dprintf("exec_nodes\n");
     if (set_and_init(node_list, &node_amount, &std_in, &std_out, &pipes) == 1)
@@ -125,18 +126,20 @@ void	exec_nodes (t_node_list *node_list)
         exit_code = single_node(head, pipes, node_amount, std_in, std_out);
 		if(exit_code == -1 || exit_code == 0)
 			return ;
-		if ((exit_code = exec_child(head, pipes, node_amount, i)) != 0)
+		if((last_pid = exec_child(head, pipes, node_amount, i)) == -1)
 			break ;
         head = head->next;
         i++;
     }
     reset_in_out(std_in, std_out);
-	if((exit_code = close_wait_free(pipes, node_amount)) == 255)
+	exit_code = close_wait_free(pipes, node_amount, last_pid);
+	if(exit_code == 255)
 		node_list->msh->exit_code = 1;
 	else if(exit_code == 13)
 		node_list->msh->exit_code = 0;
 	else
 		node_list->msh->exit_code = exit_code;
+	//printf("execution: exit code: %d\n", node_list->msh->exit_code);
 	return ;
 }
 /*  REDIR error in single node = -1
