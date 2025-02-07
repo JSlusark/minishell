@@ -124,8 +124,8 @@ bool	redir_error(t_tokens *token); // gives an error to when redir symbol is fol
 // bool	unknown_token(t_tokens *token, t_node_list *head, t_node_list * new_node); // gives errors with unknown tokens
 
 // REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
-bool	parse_redir(t_tokens **token, t_node_list	*new_node, int *redir_i); // creates redir data to add to the node
-t_redir	*init_new_redir(t_tokens **token); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
+bool	parse_redir(t_tokens **token, t_node_list *new_node, int *redir_i, int *exit_code); // creates redir data to add to the node
+t_redir	*init_new_redir(t_tokens **token, int *exit_code); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
 bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
 void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 

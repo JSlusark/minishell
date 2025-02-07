@@ -1,0 +1,100 @@
+echo hello >
+echo hello >>
+echo hello <
+echo hello <<
+cat <
+grep pattern >
+ls >>
+wc -l <
+
+echo hello > >
+echo hello >> >>
+echo hello < <
+echo hello << <<
+echo hello > <
+echo hello < >
+echo hello > >> >
+echo hello < << <
+echo hello > << >>
+
+echo hello >
+echo hello >>
+echo hello <
+echo hello <<
+echo hello > |
+echo hello | >
+echo hello < |
+echo hello | <
+echo hello | |
+
+> echo hello
+>> echo hello
+< echo hello
+<< echo hello
+> | echo hello
+< | echo hello
+| echo hello
+
+echo hello > | cat
+echo hello >> | cat
+echo hello < | cat
+echo hello << | cat
+echo hello < | wc -l
+
+| echo hello
+| ls -l
+| cat file.txt
+echo hello |
+ls -l |
+cat file.txt |
+
+echo hello | | cat
+ls -l | | | wc -l
+cat file.txt | | | | grep hello
+echo | | | echo
+
+echo hello | >
+echo hello | >>
+echo hello | <
+echo hello | <<
+echo hello > | cat
+echo hello < | cat
+echo hello >> | cat
+echo hello << | cat
+ls -l | > file.txt
+ls -l | >> file.txt
+ls -l | < file.txt
+ls -l | << file.txt
+
+echo hello | > output.txt | cat
+echo hello | >> output.txt | cat
+echo hello | < input.txt | cat
+echo hello | << input.txt | cat
+ls | > file | wc -l
+ls | >> file | wc -l
+ls | < file | wc -l
+ls | << file | wc -l
+
+
+echo hello > file >
+echo hello >> file >>
+echo hello < file <
+echo hello << file <<
+ls -l > file.txt <
+ls -l >> file.txt <
+ls -l < file.txt >
+ls -l << file.txt >>
+
+> < echo hello
+>> > echo hello
+< > echo hello
+| > echo hello
+| >> echo hello
+| << echo hello
+| < echo hello
+| | > echo hello
+| | < echo hello
+| | >> echo hello
+| | << echo hello
+| < < echo hello
+| > > echo hello

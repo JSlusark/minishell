@@ -1,0 +1,27 @@
+echo 'hello world'
+echo "hello world"
+echo "hello 'world'"
+echo 'hello "world"'
+echo "hello \"world\""
+echo 'hello \'world\''
+echo "hello \\ world"
+echo "hello 'world' \\"
+echo 'hello "world" \''
+
+echo hello | cat
+ls | wc -l
+cat file.txt | grep "pattern"
+
+
+echo hello >
+echo hello > >
+echo hello > <
+echo hello > >>
+echo hello > <<
+echo hello >
+
+
+
+
+cat < file.txt
+echo world >> file.txt

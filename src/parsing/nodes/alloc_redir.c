@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 12:09:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:12:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	add_target(t_tokens *token, t_redir *redir)
 	return (true);
 }
 
-t_redir	*init_new_redir(t_tokens **token)
+t_redir	*init_new_redir(t_tokens **token, int *exit_code)
 {
 	t_redir	*redir;
 
@@ -51,22 +51,29 @@ t_redir	*init_new_redir(t_tokens **token)
 	if (!redir)
 	{
 		printf("Minishell: Failed to allocate redirection struct\n");
+		*exit_code = 2;
 		return (NULL);
 	}
 	redir->type = (*token)->type;
 	if ((*token)->next != NULL && !add_target(*token, redir))
+	{
+		*exit_code = 1; // target failure
 		return (NULL);
+	}
 	*token = (*token)->next;
 	return (redir);
 }
 
-bool	parse_redir(t_tokens **token, t_node_list	*new_node, int *redir_i)
+bool	parse_redir(t_tokens **token, t_node_list *new_node, int *redir_i, int *exit_code)
 {
 	t_redir	*new_redir;
 
 	if (redir_error(*token))
+	{
+		*exit_code = 2;
 		return (false);
-	new_redir = init_new_redir(token);
+	}
+	new_redir = init_new_redir(token, exit_code);
 	if (!new_redir)
 		return (false);
 	new_redir->redir_i = *redir_i;
