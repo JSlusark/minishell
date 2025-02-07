@@ -6,32 +6,25 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/03 14:17:43 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/07 18:41:47 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void handle_heredoc(t_redir *redir)
+char *handle_heredoc(t_node_list *node)
 {
     char *line; // stringa in buffer
     char *doc = NULL; // heredoc string
-    int fd[2];
 	char *temp;
 
     ft_dprintf("handle_heredoc\n");
-    if (pipe(fd) == -1)
-    {
-        perror("pipe");
-        return;
-    }
-
     while (1)
     {
         line = readline("> ");
         if (!line)
             break;
-        if (strcmp(line, redir->target_name) == 0)
+        if (strcmp(line, node->redir->target_name) == 0)
         {
             free(line);
             break;
@@ -52,26 +45,37 @@ void handle_heredoc(t_redir *redir)
         free(line);
     }
 	if (doc)
-		write(fd[1], doc, strlen(doc));
-    close(fd[1]);
-    free(doc);
-    if (dup2(fd[0], STDIN_FILENO) == -1)
-    {
-        perror("dup2");
-        close(fd[0]);
-        return;
-    }
-    close(fd[0]);
+		return(doc);
+	return(NULL);
 }
 
-int set_redirection(t_node_list *node)
-{
-    while (node->redir)
+int redir_out_append(t_node_list *node)
+{            
+	ft_dprintf("set redir OUT\n");
+    if(node->redir->type == REDIR_OUT)
+        node->redir->fd = open(node->redir->target_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+    else if(node->redir->type == APPEND)
+        node->redir->fd = open(node->redir->target_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
+    if (node->redir->fd == -1)
     {
-        ft_dprintf("set_redirection\n");
-        if (node->redir->type == REDIR_IN)
-        {
-            ft_dprintf("set redir IN\n");
+        perror("open");
+        node->msh->exit_code = 1;
+        return (-1);
+    }
+    if (dup2(node->redir->fd, STDOUT_FILENO) == -1)
+    {
+        perror("dup2");
+        node->msh->exit_code = 1;
+        close(node->redir->fd);
+        return (-1);
+    }
+    close(node->redir->fd);
+	return (0);
+}
+
+int redir_in(t_node_list *node)
+{
+	ft_dprintf("set redir IN\n");
             node->redir->fd = open(node->redir->target_name, O_RDONLY, 0777);
             if (node->redir->fd == -1)
             {
@@ -87,32 +91,49 @@ int set_redirection(t_node_list *node)
                 return (-1);
             }
             close(node->redir->fd);
+		return (0);
+}
+
+int set_redirection(t_node_list *node)
+{
+	int fd[2];
+	char *doc;
+	int click;
+	
+	click = 1;
+    while (node->redir)
+    {
+        ft_dprintf("set_redirection\n");
+		if(node->redir->type == HEREDOC)
+		{
+            if((doc = handle_heredoc(node)) != NULL)
+				click = 0;
+		}
+		if (node->redir->type == REDIR_IN)
+        {
+            if(redir_in(node)== -1)
+				return (-1);
         }
         if(node->redir->type == REDIR_OUT || node->redir->type == APPEND)
         {
-            ft_dprintf("set redir OUT\n");
-            if(node->redir->type == REDIR_OUT)
-            node->redir->fd = open(node->redir->target_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-            else if(node->redir->type == APPEND)
-                node->redir->fd = open(node->redir->target_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-            if (node->redir->fd == -1)
-            {
-                perror("open");
-                node->msh->exit_code = 1;
-                return (-1);
-            }
-            if (dup2(node->redir->fd, STDOUT_FILENO) == -1)
-            {
-                perror("dup2");
-                node->msh->exit_code = 1;
-                close(node->redir->fd);
-                return (-1);
-            }
-            close(node->redir->fd);
+			if (redir_out_append(node)== -1)
+				return (-1);
         }
-        if(node->redir->type == HEREDOC)
-            handle_heredoc(node->redir);
         node->redir = node->redir->next;
     }
+	if (click == 0)
+	{
+		if (pipe(fd) == -1)
+		{
+			perror("pipe");
+			return (-1);
+		}
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		write(fd[1], doc, ft_strlen(doc));
+		close(fd[1]);
+		close(fd[0]);
+		free(doc);
+	}
     return (0);
 }

@@ -34,7 +34,7 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
     if(pid < 0)
     {
         perror("fork");
-        return -1;
+        return (-1);
     }
     if(pid == 0)
     {
@@ -51,7 +51,11 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 				exit(0);
 			if ((exit_code = exec_external(node->cmd, node->msh)) != 0)
 			{
-				node->msh->exit_code = exit_code;
+				clear_history();
+				close_pipes(pipes, node_amount - 1); // Close all pipe ends in the parent process
+				free_pipes(pipes, node_amount - 1); // Free allocated memory for pipes
+				free_msh(node->msh);
+				free_node_list(node);
 				exit(exit_code);
 			}
 		}
