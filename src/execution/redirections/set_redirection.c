@@ -6,11 +6,37 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/08 16:35:49 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:06:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
+char *expanded_line(char *line, t_msh *msh)
+{
+    int i = 0;
+    int j = 0;
+    char *buff = malloc(ft_strlen(line) + 1024); // Add extra space for expansions
+
+
+    while (line[i] != '\0')
+    {
+        if (line[i] == '$')
+        {
+            collect_expansion(line, &i, buff, msh);
+            i++;
+            // printf("yooo %s\n", buff);
+            j = ft_strlen(buff);
+        }
+        buff[j] = line[i];
+        i++;
+        j++;
+    }
+    buff[j] = '\0';
+    // printf("buff %s\n", buff);
+    return(buff);
+}
+
 
 char *handle_heredoc(t_node_list *node)
 {
@@ -30,6 +56,8 @@ char *handle_heredoc(t_node_list *node)
         line = readline("> ");
         if (!line)
                 break;
+        line = expanded_line(line, node->msh);
+        // check_expansions(line, node->msh); // i actually want to expand inside the line instead here
         if (strcmp(line, node->redir->target_name) == 0)
         {
             free(line);
