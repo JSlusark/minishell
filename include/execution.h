@@ -40,6 +40,7 @@ void    ms_set_env(t_msh *msh, char *value);
 
 /****************REDIRECTIONS*******************/
 int set_redirection(t_node_list *node);
+char	*handle_heredoc(t_node_list *node);
 
 /******************BUILTINS********************/
 int 	exec_builtin(t_node_list	*node_list);
