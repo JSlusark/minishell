@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/08 15:54:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:35:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ char *handle_heredoc(t_node_list *node)
         doc = temp;
         free(line);
     }
-    if (doc)
-        return(doc);
-    return(NULL);
+    if(!doc) // JESS: quando il contenuto di doc e' NULL cat si blocca, dobbiamo terminarlo per evitare questa cosa
+        doc[0] = '\0';
+    return(doc); // JESS: il doc e' quello che viene sempre returned, e' nullo o pieno dipendentemente da quello che succede nel loop
 }
 
 int redir_out_append(t_node_list *node)
