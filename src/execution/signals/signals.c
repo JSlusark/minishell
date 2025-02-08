@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/05 20:09:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:53:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,10 @@ void	run_signals(int sig, t_msh *msh)
 		signal(SIGINT, ctrl_c);
 		signal(SIGQUIT, back_slash);
 		// printf("SIGQUIT exit: %d\n", msh->exit_code);
+	}
+	else if (sig == 3) // herdoc sigint signal
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_IGN);
 	}
 }

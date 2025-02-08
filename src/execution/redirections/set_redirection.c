@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/07 18:41:47 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/08 15:54:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,30 @@ char *handle_heredoc(t_node_list *node)
 {
     char *line; // stringa in buffer
     char *doc = NULL; // heredoc string
-	char *temp;
+    char *temp;
 
-    ft_dprintf("handle_heredoc\n");
+    run_signals(3, NULL);
     while (1)
     {
+        if (g_sig == SIGINT)
+        {
+            node->msh->exit_code = 130;
+            g_sig = 0;
+            break;
+        }
         line = readline("> ");
         if (!line)
-            break;
+                break;
         if (strcmp(line, node->redir->target_name) == 0)
         {
             free(line);
             break;
         }
         if (doc == NULL)
-        {
             doc = ft_strdup(line);
-        }
         else
         {
-        	temp = ft_strjoin(doc, line);
+            temp = ft_strjoin(doc, line);
             free(doc);
             doc = temp;
         }
@@ -44,14 +48,14 @@ char *handle_heredoc(t_node_list *node)
         doc = temp;
         free(line);
     }
-	if (doc)
-		return(doc);
-	return(NULL);
+    if (doc)
+        return(doc);
+    return(NULL);
 }
 
 int redir_out_append(t_node_list *node)
-{            
-	ft_dprintf("set redir OUT\n");
+{
+    ft_dprintf("set redir OUT\n");
     if(node->redir->type == REDIR_OUT)
         node->redir->fd = open(node->redir->target_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
     else if(node->redir->type == APPEND)
@@ -70,12 +74,12 @@ int redir_out_append(t_node_list *node)
         return (-1);
     }
     close(node->redir->fd);
-	return (0);
+    return (0);
 }
 
 int redir_in(t_node_list *node)
 {
-	ft_dprintf("set redir IN\n");
+    ft_dprintf("set redir IN\n");
             node->redir->fd = open(node->redir->target_name, O_RDONLY, 0777);
             if (node->redir->fd == -1)
             {
@@ -91,49 +95,49 @@ int redir_in(t_node_list *node)
                 return (-1);
             }
             close(node->redir->fd);
-		return (0);
+        return (0);
 }
 
 int set_redirection(t_node_list *node)
 {
-	int fd[2];
-	char *doc;
-	int click;
-	
-	click = 1;
+    int fd[2];
+    char *doc;
+    int click;
+
+    click = 1;
     while (node->redir)
     {
         ft_dprintf("set_redirection\n");
-		if(node->redir->type == HEREDOC)
-		{
+        if(node->redir->type == HEREDOC)
+        {
             if((doc = handle_heredoc(node)) != NULL)
-				click = 0;
-		}
-		if (node->redir->type == REDIR_IN)
+                click = 0;
+        }
+        if (node->redir->type == REDIR_IN)
         {
             if(redir_in(node)== -1)
-				return (-1);
+                return (-1);
         }
         if(node->redir->type == REDIR_OUT || node->redir->type == APPEND)
         {
-			if (redir_out_append(node)== -1)
-				return (-1);
+            if (redir_out_append(node)== -1)
+                return (-1);
         }
         node->redir = node->redir->next;
     }
-	if (click == 0)
-	{
-		if (pipe(fd) == -1)
-		{
-			perror("pipe");
-			return (-1);
-		}
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		write(fd[1], doc, ft_strlen(doc));
-		close(fd[1]);
-		close(fd[0]);
-		free(doc);
-	}
+    if (click == 0)
+    {
+        if (pipe(fd) == -1)
+        {
+            perror("pipe");
+            return (-1);
+        }
+        dup2(fd[0], STDIN_FILENO);
+        close(fd[0]);
+        write(fd[1], doc, ft_strlen(doc));
+        close(fd[1]);
+        close(fd[0]);
+        free(doc);
+    }
     return (0);
 }
