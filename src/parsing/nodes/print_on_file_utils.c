@@ -34,7 +34,8 @@ void	print_redir_file(t_redir *head)
 		ft_dprintf("- char *target: %s (%s)\n", current->target_name,
 			return_token_enum(current->type));
 		ft_dprintf("			  ");
-		ft_dprintf("- int target_type: %s\n", return_target_enum(current->type));
+		ft_dprintf("- int target_type: %s\n",
+			return_target_enum(current->type));
 		current = current->next;
 	}
 }

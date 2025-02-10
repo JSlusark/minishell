@@ -6,46 +6,40 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/02/10 14:22:00 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:21:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<string.h>
-#include	<unistd.h>
-#include    <signal.h>
-#include    <sys/wait.h>
-#include	<sys/types.h>
-#include	<readline/readline.h>
-#include	<readline/history.h>
-#include	"../lib/libft/libft.h"
-#include    "../lib/dprintf/ft_dprintf.h"
-#include	"stdbool.h"
-#include	<errno.h>
-#include	<sys/stat.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../lib/libft/libft.h"
+# include "../lib/dprintf/ft_dprintf.h"
+# include "stdbool.h"
+# include <errno.h>
+# include <sys/stat.h>
 
-// CALL VALGRIND SUPPRESSION:
-// valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
-
-// ANSI color codes (added them just to test for now, we shouldn't lose time with making it pretty)
-#define COLOR_GREEN  "\x1b[32m"
-#define COLOR_RED    "\x1b[31m"
-#define COLOR_YELLOW "\x1b[33m"
-#define COLOR_BLUE "\x1b[34m"
-#define COLOR_CYAN   "\x1b[36m"
-#define COLOR_RESET  "\x1b[0m"
+/* COLOR CODES */
+# define COLOR_GREEN  "\x1b[32m"
+# define COLOR_RED    "\x1b[31m"
+# define COLOR_YELLOW "\x1b[33m"
+# define COLOR_BLUE   "\x1b[34m"
+# define COLOR_CYAN   "\x1b[36m"
+# define COLOR_RESET  "\x1b[0m"
 
 // Parsing header
-#include	"./parsing.h"
-// char *read_input(void);
+# include "./parsing.h"
 
 //Execution header
-#include    "./execution.h" // parsing functions
-
-//signal variable
+# include "./execution.h" // parsing functions
 
 #endif
