@@ -6,13 +6,13 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:43:11 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 15:43:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 16:40:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static int	find_env_index(char **env, char *var) // need to remove both to exp and env
+static int	find_env_index(char **env, char *var)
 {
 	int		i;
 	char	**split;
@@ -32,44 +32,46 @@ static int	find_env_index(char **env, char *var) // need to remove both to exp a
 	return (-1);
 }
 
-int	ms_remove_line(t_msh *msh, int index)
+int	ms_remove_line(char ***env, int index)
 {
 	int		i;
 	int		j;
 	char	**new_matrix;
 
 	i = 0;
-	while (msh->ms_env[i])
+	while ((*env)[i])
 		i++;
 	new_matrix = malloc(sizeof(char *) * i);
 	if (!new_matrix)
 		return (1);
 	i = 0;
 	j = 0;
-	while (msh->ms_env[i])
+	while ((*env)[i])
 	{
 		if (i != index)
 		{
-			new_matrix[j] = ft_strdup(msh->ms_env[i]);
+			new_matrix[j] = ft_strdup((*env)[i]);
 			j++;
 		}
 		i++;
 	}
 	new_matrix[j] = NULL;
-	ft_free_tab(msh->ms_env);
-	msh->ms_env = new_matrix;
+	ft_free_tab(*env);
+	*env = new_matrix;
 	return (0);
 }
 
 void	remove_env(char *var, t_node_list *node)
 {
-	int	index;
+	int	index_env;
+	int	index_exp;
 
-	index = find_env_index(node->msh->ms_env, var);
-	if (index != -1)
-	{
-		ms_remove_line(node->msh, index);
-	}
+	index_env = find_env_index(node->msh->ms_env, var);
+	if (index_env != -1)
+		ms_remove_line(&(node->msh->ms_env), index_env);
+	index_exp = find_env_index(node->msh->env_exp, var);
+	if (index_exp != -1)
+		ms_remove_line(&(node->msh->env_exp), index_exp);
 }
 
 void	exec_unset(char **av, t_node_list *node)
