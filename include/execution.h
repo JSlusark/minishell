@@ -37,6 +37,11 @@ void    ft_free_tab(char **tab);
 void    ms_env_init(t_msh **msh, char**envp);
 char    *ms_get_env(t_msh *msh, char *av);
 void    ms_set_env(t_msh *msh, char *value);
+void    ms_exp_init(t_msh **msh, char **envp);
+void    ms_set_exp(t_msh *msh, char *value);
+
+
+
 
 /****************REDIRECTIONS*******************/
 int set_redirection(t_node_list *node);

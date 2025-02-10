@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/01/31 22:28:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:22:00 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 
 // Parsing header
 #include	"./parsing.h"
-char *read_input(void);
+// char *read_input(void);
 
 //Execution header
 #include    "./execution.h" // parsing functions

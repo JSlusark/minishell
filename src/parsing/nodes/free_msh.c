@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_msh.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:32:30 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 12:16:55 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:41:14 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	free_msh(t_msh *msh)
 			i++;
 		}
 		free(msh->ms_env);
+	}
+	if (msh->env_exp)
+	{
+		i = 0;
+		while (msh->env_exp[i])
+		{
+			free (msh->env_exp[i]);
+			i++;
+		}
+		free(msh->env_exp);
 	}
 	free(msh);
 }

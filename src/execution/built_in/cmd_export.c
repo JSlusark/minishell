@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/31 12:40:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:48:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,12 +184,29 @@ bool valid_var_name(char *av)
 
 }
 
+
+int	handle_exp(t_node_list *node)
+{
+	int	i;
+
+	i = 0;
+	while (node->msh->env_exp[i])
+	{
+		ft_putstr_fd(node->msh->env_exp[i], 1);
+		ft_putstr_fd("\n", 1);
+		i++;
+	}
+	return (0);
+}
+
 // Main exec_export function
 void exec_export(char **av, t_node_list *node)
 {
 	if (av == NULL)
 	{
-		print_env_vars(node->msh->ms_env);
+		print_env_vars(node->msh->env_exp);
+		// handle_exp(node);
+		// print_env_vars(node->msh->ms_env);
 		node->msh->exit_code = 0;
 	}
 	else // if we have 1 or more args in export we have diff cases
@@ -203,7 +220,7 @@ void exec_export(char **av, t_node_list *node)
 			{
 				print_exp_error(av[j]);
 				node->msh->exit_code = 1; // <- does not get updated
-					break;
+					// break;
 			}
 			else // DO NOT NEED TO UPDATE THE EXIT CODE (check export = caca=ca  exit code is 1)
 			{
@@ -211,13 +228,13 @@ void exec_export(char **av, t_node_list *node)
 				{
 					print_exp_error(NULL);
 					node->msh->exit_code = 1; // seen in bash
-					break;
+					// break;
 				}
 				else if(is_only_spaces(av[j])) // to handle bugs like "  export "     "  "
 				{
 					print_exp_error(av[j]);
 					node->msh->exit_code = 1; // seen in bash
-					break;
+					// break;
 				}
 				else
 				{
@@ -225,10 +242,33 @@ void exec_export(char **av, t_node_list *node)
 					{
 						print_exp_error(av[j]);
 						node->msh->exit_code = 1;
-						break;
+						// break;
 					}
 					else
-						ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
+					{
+						int k = 0;
+						bool was_assigned = false;
+						while(av[j][k] != '\0')
+						{
+							if(av[j][k] == '=')
+							{
+								was_assigned = true;
+								break ;
+							}
+							k++;
+						}
+						if(was_assigned)
+						{
+							printf("%s to env and exp\n", av[j]);
+							ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
+							ms_set_exp(node->msh, av[j]); //if "export "ciao "= ci should be error"
+						}
+						else
+						{
+							printf("%s only to exp\n", av[j]);
+							ms_set_exp(node->msh, av[j]); //if "export "ciao "= ci should be error"
+						}
+					}
 				}
 			}
 			j++;
