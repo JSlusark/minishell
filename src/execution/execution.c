@@ -29,8 +29,8 @@ int exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 
 	exit_code = 0;
     // ft_dprintf("exec_child\n");
-	run_signals(2, node->msh);
     pid  = fork();
+	run_signals(2, node->msh);
     if(pid < 0)
     {
         perror("fork");
