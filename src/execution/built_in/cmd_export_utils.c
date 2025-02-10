@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:50:52 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 17:53:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:58:15 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	bubble_sort(char **env, int j)
 	char	*var_b;
 	int		len_a;
 	int		len_b;
+	int		min_len;
 
 	var_a = env[j];
 	var_b = env[j + 1];
@@ -36,7 +37,11 @@ void	bubble_sort(char **env, int j)
 		len_a++;
 	while (var_b[len_b] != '\0' && var_b[len_b] != '=')
 		len_b++;
-	if (strncmp(var_a, var_b, len_a < len_b ? len_a : len_b) > 0)
+	if (len_a < len_b)
+		min_len = len_a;
+	else
+		min_len = len_b;
+	if (strncmp(var_a, var_b, min_len) > 0)
 		swap_strings(&env[j], &env[j + 1]);
 }
 
