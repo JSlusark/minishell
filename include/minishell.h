@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/01/31 22:28:21 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/07 20:54:28 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@
 #define COLOR_YELLOW "\x1b[33m"
 #define COLOR_BLUE "\x1b[34m"
 #define COLOR_CYAN   "\x1b[36m"
+#define COLOR_ORANGE "\x1b[38;5;208m"
 #define COLOR_RESET  "\x1b[0m"
 
 // Parsing header
 #include	"./parsing.h"
-char *read_input(void);
+void print_banner(void);
 
 //Execution header
 #include    "./execution.h" // parsing functions
