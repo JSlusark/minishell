@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 18:43:11 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/06 18:59:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:43:31 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static int	find_env_index(char **env, char *var)
+static int	find_env_index(char **env, char *var) // need to remove both to exp and env
 {
 	int		i;
 	char	**split;

@@ -32,16 +32,16 @@ int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
 
 /*******************ENV************************/
-void    ms_env_init(t_msh **msh, char**envp);
+void	ms_env_init(t_msh **msh, char **envp);
+void	init_env_vars(char ***env, char **envp);
+void	check_shlvl(char ***env);
+bool	found_shlvl_value(char ***env, char **value);
+void	ms_set_env(char ***env, char *value);
+char	*ms_get_env(char **env, char *av);
 char	**ms_matrix_add_line(char **matrix, char *new_line);
-void    ft_free_tab(char **tab);
-char *ms_get_env(char **env, char *av);
-void ms_set_env(char ***env, char *value);
-void    ms_exp_init(t_msh **msh, char **envp);
-void check_shlvl(char ***env);
-
-
-
+char	*ms_get_varenv(char **env, char *av);
+void	ft_free_tab(char **tab);
+int		env_compare(char **env, char **av, int i);
 
 /****************REDIRECTIONS*******************/
 int set_redirection(t_node_list *node);
