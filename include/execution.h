@@ -54,8 +54,10 @@ int     handle_pwd(t_node_list *node);
 int     handle_env(t_node_list	*node_l);
 int     exec_exit(t_node_list *node);
 int		handle_echo (t_node_list	*node);
-void    exec_export(char **av, t_node_list *node);
 void    exec_unset (char **av, t_node_list *node);
+void    exec_export(char **av, t_node_list *node);
+void    print_exported(char **env);
+
 
 /******************EXTERNAL********************/
 int		exec_external(t_cmd *cmd, t_msh *msh);
