@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:02:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 18:17:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:22:48 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_msh
 {
 	char	**ms_env;
 	char	**env_exp;
+	char	*home_path;
 	int		exit_code;
 	int		prev_exit;
 	int		node_n;

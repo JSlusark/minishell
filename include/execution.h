@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 18:26:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:05:04 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		close_wait_free(int **pipes, int node_amount, int last_pid);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
+void	store_home(char **env, t_msh *msh);
 void	init_env_vars(char ***env, char **envp);
 void	check_shlvl(char ***env);
 bool	found_shlvl_value(char ***env, char **value);

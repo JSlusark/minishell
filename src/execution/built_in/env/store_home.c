@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_msh.c                                         :+:      :+:    :+:   */
+/*   store_home.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 15:32:30 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 21:15:49 by jslusark         ###   ########.fr       */
+/*   Created: 2025/02/10 20:59:25 by jslusark          #+#    #+#             */
+/*   Updated: 2025/02/10 21:05:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../../../include/minishell.h"
 
-void	free_env(char **env)
+void	store_home(char **env, t_msh *msh)
 {
-	int	i;
+	int		i;
 
-	i = 0;
-	if (env)
-	{
-		while (env[i])
-		{
-			free (env[i]);
-			i++;
-		}
-		free(env);
-	}
-}
-
-void	free_msh(t_msh *msh)
-{
-	if (!msh)
+	if (!env)
 		return ;
-	free_env(msh->ms_env);
-	free_env(msh->env_exp);
-	if (msh->home_path)
-		free(msh->home_path);
-	free(msh);
+	i = 0;
+	while (env[i])
+	{
+		if (strncmp(env[i], "HOME=", 5) == 0)
+		{
+			msh->home_path = strdup(env[i] + 5);
+			if (!msh->home_path)
+				return ;
+			return ;
+		}
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 15:43:47 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:05:47 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	ms_env_init(&msh, envp);
+	store_home(msh->ms_env, msh);
 	nodes = NULL;
 	while (1)
 	{
 		run_signals(1, msh);
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-
 		if (!input)
 			handle_eof(msh);
 		else

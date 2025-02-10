@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/10 15:30:02 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:28:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	set_pwd(char *av, char *c, t_node_list *node)
 	char	*string;
 
 	string = ft_strjoin(av, c);
-	ms_set_env (&(node->msh->ms_env), string); // this was changed due to change is set_env and exp
+	ms_set_env (&(node->msh->ms_env), string);
 	free (string);
 }
 
@@ -78,6 +78,8 @@ int	exec_cd(t_node_list *node)
 			return (1);
 		avs = node->cmd->args[0];
 	}
+	if (ft_strlen(avs) == 1 && avs[0] == '~')
+		avs = node->msh->home_path;
 	if (!move_to_dir(avs, node))
 		return (1);
 	return (0);
