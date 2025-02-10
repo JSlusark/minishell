@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 14:48:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:24:55 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,13 +260,13 @@ void exec_export(char **av, t_node_list *node)
 						if(was_assigned)
 						{
 							printf("%s to env and exp\n", av[j]);
-							ms_set_env(node->msh, av[j]); //if "export "ciao "= ci should be error"
-							ms_set_exp(node->msh, av[j]); //if "export "ciao "= ci should be error"
+							ms_set_env(&(node->msh->ms_env), av[j]); //if "export "ciao "= ci should be error"
+							ms_set_env(&(node->msh->env_exp), av[j]); //if "export "ciao "= ci should be error"
 						}
 						else
 						{
 							printf("%s only to exp\n", av[j]);
-							ms_set_exp(node->msh, av[j]); //if "export "ciao "= ci should be error"
+							ms_set_env(&(node->msh->env_exp), av[j]); //if "export "ciao "= ci should be error"
 						}
 					}
 				}

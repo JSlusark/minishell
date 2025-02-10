@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_cd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/06 17:34:16 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 15:30:02 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	set_pwd(char *av, char *c, t_msh *msh)
+void	set_pwd(char *av, char *c, t_node_list *node)
 {
 	char	*string;
 
 	string = ft_strjoin(av, c);
-	ms_set_env (msh, string);
+	ms_set_env (&(node->msh->ms_env), string); // this was changed due to change is set_env and exp
 	free (string);
 }
 
@@ -36,9 +36,9 @@ bool	move_to_dir(char *avs, t_node_list *node)
 		node->msh->exit_code = 1;
 		return (false);
 	}
-	set_pwd ("OLDPWD=", cwd, node->msh);
+	set_pwd ("OLDPWD=", cwd, node);
 	getcwd(cwd, sizeof(cwd));
-	set_pwd("PWD=", cwd, node->msh);
+	set_pwd("PWD=", cwd, node);
 	return (true);
 }
 
@@ -65,7 +65,7 @@ int	exec_cd(t_node_list *node)
 	avs = NULL;
 	if (!node->cmd->args)
 	{
-		avs = ms_get_env (node->msh, "HOME") + 5;
+		avs = ms_get_env (node->msh->ms_env, "HOME") + 5; // CHECK
 		if ((avs - 5) == NULL)
 		{
 			printf ("cd: HOME not set\n");

@@ -32,13 +32,13 @@ int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
 
 /*******************ENV************************/
+void    ms_env_init(t_msh **msh, char**envp);
 char	**ms_matrix_add_line(char **matrix, char *new_line);
 void    ft_free_tab(char **tab);
-void    ms_env_init(t_msh **msh, char**envp);
-char    *ms_get_env(t_msh *msh, char *av);
-void    ms_set_env(t_msh *msh, char *value);
+char *ms_get_env(char **env, char *av);
+void ms_set_env(char ***env, char *value);
 void    ms_exp_init(t_msh **msh, char **envp);
-void    ms_set_exp(t_msh *msh, char *value);
+void check_shlvl(char ***env);
 
 
 
