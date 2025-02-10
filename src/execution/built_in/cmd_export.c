@@ -6,20 +6,11 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:02:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 17:20:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:53:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-void	print_exp_error(const char *identifier)
-{
-	write(2, "export: `", 9);
-	if (identifier)
-		write(2, identifier, strlen(identifier));
-	write(2, "': not a valid identifier", 25);
-	write(2, "\n", 1);
-}
 
 bool	is_only_spaces(const char *str)
 {

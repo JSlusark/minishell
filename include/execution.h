@@ -57,6 +57,9 @@ int		handle_echo (t_node_list	*node);
 void    exec_unset (char **av, t_node_list *node);
 void    exec_export(char **av, t_node_list *node);
 void    print_exported(char **env);
+void	print_exp_error(const char *identifier);
+void	sort_env_vars(char **env);
+
 
 
 /******************EXTERNAL********************/
