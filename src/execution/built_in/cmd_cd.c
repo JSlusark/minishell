@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:26:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/10 20:28:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:43:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	exec_cd(t_node_list *node)
 	avs = NULL;
 	if (!node->cmd->args)
 	{
-		avs = ms_get_env (node->msh->ms_env, "HOME") + 5; // CHECK
+		avs = ms_get_env (node->msh->ms_env, "HOME") + 5;
 		if ((avs - 5) == NULL)
 		{
 			printf ("cd: HOME not set\n");
