@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/07 20:53:53 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 02:10:23 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	main(int argc, char **argv, char **envp)
 	{
 		run_signals(1, msh);
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
-
 		if (!input)
 			handle_eof(msh);
 		else

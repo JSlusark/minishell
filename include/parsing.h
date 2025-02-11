@@ -44,7 +44,7 @@ typedef struct s_redir				// linked list of redirections as 1 node can have 1 or
 	struct s_redir *prev;
 	int				type;			// Type of redirection (REDIR_IN, REDIR_OUT, APPEND, hEREDOC)
 	int				redir_i;		// used for printing
-	char			*target_name;	// Target of the redirection -> the filename (for input, output and append) or delimiter name (for HEREDOC)
+	char			*target;	// Target of the redirection -> the filename (for input, output and append) or delimiter name (for HEREDOC)
 	int				fd;				// file descriptor
 	struct s_redir *next;
 } t_redir;
@@ -155,3 +155,4 @@ void	print_redir_file(t_redir *head);
 // COMMUNICATION BETWEEN PARSING AND EXECUTION
 void	exec_nodes(t_node_list	*node_list);
 #endif
+

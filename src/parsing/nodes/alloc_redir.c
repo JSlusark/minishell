@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:08:44 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/07 17:31:00 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:38:14 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	append_new_redir(t_redir **head_redir, t_redir *curr_redir)
 
 bool	add_target(t_tokens *token, t_redir *redir)
 {
-	redir->target_name = ft_strdup(token->next->value);
-	if (!redir->target_name)
+	redir->target = ft_strdup(token->next->value);
+	if (!redir->target)
 	{
 		printf("Minishell: Failed to add target to redir data\n");
 		redir = (NULL);

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:25:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/02 12:24:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 02:08:56 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int 	exec_builtin(t_node_list	*node_list)
+int	exec_builtin(t_node_list	*node_list)
 {
-	int exit;
+	int	exit;
 
 	exit = 1;
 	if (!node_list->cmd)
