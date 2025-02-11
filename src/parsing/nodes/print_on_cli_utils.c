@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:06:38 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/04 12:07:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:29:04 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_redir(t_redir *head)
 		printf("			  ");
 		printf("- int type: %s\n", return_token_enum(current->type));
 		printf("			  ");
-		printf("- char *target: %s (%s)\n", current->target_name,
+		printf("- char *target: %s (%s)\n", current->target,
 			return_token_enum(current->type));
 		printf("			  ");
 		printf("- int target_type: %s\n", return_target_enum(current->type));

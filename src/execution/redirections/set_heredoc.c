@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/08 19:33:14 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/10 20:39:03 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	add_line_to_doc(char *line, t_node_list *node, char **doc)
 	if (!line)
 		return (false);
 	line = expanded_line(line, node->msh);
-	if (strcmp(line, node->redir->target_name) == 0)
+	if (strcmp(line, node->redir->target) == 0)
 	{
 		free(line);
 		return (false);
@@ -57,15 +57,12 @@ bool	add_line_to_doc(char *line, t_node_list *node, char **doc)
 		free(*doc);
 		*doc = temp;
 	}
-
 	temp = ft_strjoin(*doc, "\n");
 	free(*doc);
 	*doc = temp;
-
 	free(line);
 	return (true);
 }
-
 
 char	*handle_heredoc(t_node_list *node)
 {

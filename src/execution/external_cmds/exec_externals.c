@@ -3,48 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/07 09:21:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:00:42 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static void	free_results(char **results)
+int	checkandexec(char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
 {
-	int	i;
+	int			exit_code_access;
+	struct stat	sb;
 
-	i = 0;
-	while (results[i])
+	if (!*path)
 	{
-		free(results[i++]);
+		print_error(cmd->cmd, "command not found\n", 0);
+		free_results(*cmds);
+		return (127);
 	}
-	free(results);
-}
-
-static char	*ft_eiterate(char **path, char **envp_paths, char *cmd)
-{
-	char	*add_slash;
-	int		i;
-
-	i = 0;
-	while (envp_paths[i])
+	if (stat(*path, &sb) == 0 && S_ISDIR(sb.st_mode))
 	{
-		add_slash = ft_strjoin (envp_paths[i], "/");
-		if (add_slash == NULL)
-			return (NULL);
-		(*path) = ft_strjoin (add_slash, cmd);
-		if (*path == NULL)
-			return (NULL);
-		free(add_slash);
-		if (access (*path, X_OK) == 0)
-			return (*path);
+		print_error(cmd->cmd, "Is a directory\n", 0);
 		free(*path);
-		i++;
+		return (126);
 	}
-	return (NULL);
+	exit_code_access = check_access(path, cmd);
+	if (exit_code_access != 0)
+		return (exit_code_access);
+	if (execve(*path, *cmds, msh->ms_env) == -1)
+	{
+		print_error(cmd->cmd, NULL, 1);
+		return (127);
+	}
+	return (1);
 }
 
 char	*find_path(char *cmd, char **envp)
@@ -74,26 +67,13 @@ char	**get_cmds(t_cmd *cmd)
 	int		i;
 
 	i = 0;
+	cmds = NULL;
 	if (cmd->args)
-	{
-		while (cmd->args[i])
-			i++;
-		cmds = malloc(sizeof(char*) * (i + 2));
-		if(cmds == NULL)
-			return (NULL);
-		cmds[0] = ft_strdup(cmd->cmd);
-		i = 1;
-		while (cmd->args[i - 1])
-		{
-			cmds[i] = ft_strdup(cmd->args[i - 1]);
-			i++;
-		}
-		cmds[i] = NULL;
-	}
+		cmds = cmd_str(cmd);
 	else
 	{
-		cmds = malloc(sizeof(char*) * 2);
-		if(cmds == NULL)
+		cmds = malloc(sizeof(char *) * 2);
+		if (cmds == NULL)
 			return (NULL);
 		cmds[0] = ft_strdup(cmd->cmd);
 		cmds[1] = NULL;
@@ -101,63 +81,18 @@ char	**get_cmds(t_cmd *cmd)
 	return (cmds);
 }
 
-int checkandexec (char **path, char ***cmds, t_msh *msh, t_cmd *cmd)
-{
-	struct stat sb;
-
-	if (!*path)
-	{
-        write(2, cmd->cmd, ft_strlen(cmd->cmd));
-		write(2, ": command not found\n", 20);
-		free_results(*cmds);
-		return (127);
-	}
-	if (stat(*path, &sb) == 0 && S_ISDIR(sb.st_mode))
-    {
-		write(2, path, ft_strlen(*path));
-		write(2, ": Is a directory\n", 17);
-		free(*path);
-		return (126);
-    }
-	if (access(*path, F_OK) == -1)
-	{
-		write(2, cmd->cmd, ft_strlen(cmd->cmd));
-		write(2, ": ", 2);
-		// Jess: we need the error message here
-		perror("");
-		return (127);
-	}
-	if (access(*path, X_OK) == -1)
-	{
-		write(2, cmd->cmd, ft_strlen(cmd->cmd));
-		write(2, ": ", 2);
-		// Jess: we need the error message here
-		perror("");
-		return (126);
-	}
-	if (execve(*path, *cmds, msh->ms_env) == -1)
-	{
-		write(2, cmd->cmd, ft_strlen(cmd->cmd));
-		write(2, ": ", 2);
-		// Jess: we need the error message here
-		perror("");
-		return (127);
-	}
-	return (1);
-}
-
 int	exec_external(t_cmd *cmd, t_msh *msh)
 {
 	char	**cmds;
 	char	*path;
-	int exit_code;
+	int		exit_code;
 
 	cmds = get_cmds(cmd);
 	if (!cmds)
 	{
 		return (1);
 	}
-	if(strchr(cmds[0], '/') != NULL)
+	if (strchr(cmds[0], '/') != NULL)
 		path = cmds[0];
 	else
 		path = find_path (cmds[0], msh->ms_env);

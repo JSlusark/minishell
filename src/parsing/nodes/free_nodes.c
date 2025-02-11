@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/06 14:11:55 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:29:04 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	free_redir_list(t_redir *head)
 	curr = head;
 	while (curr)
 	{
-		free(curr->target_name);
+		free(curr->target);
 		temp = curr->next;
 		free(curr);
 		curr = temp;

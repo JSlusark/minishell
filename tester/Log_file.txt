@@ -19577,3 +19577,420 @@ exec_nodes
 exec_nodes
 exec_nodes
 exec_nodes
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+ssete tr erdeidri rI NI
+N
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+set sreedti rr eIdNi
+r IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+set redir IN
+pipes initialized
+sest erte drierd iIrN 
+IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+sseett  rreeddiirr  OOUUTT
+
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
+set redir IN
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir IN
+set redir IN
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
+set redir IN
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OsUTe
+t redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+pipes initialized
+set redir OUT
+set redir OUT
+set redir IN
+set redir IN
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN

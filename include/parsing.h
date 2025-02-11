@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:02:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 20:22:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:37:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_redir
 	struct s_redir	*prev;
 	int				type;
 	int				redir_i;
-	char			*target_name;
+	char			*target;
 	int				fd;
 	struct s_redir	*next;
 }	t_redir;
@@ -173,4 +173,5 @@ void		print_redir_file(t_redir *head);
 
 /* COMMUNICATION BETWEEN PARSING AND EXECUTION */
 void		exec_nodes(t_node_list	*node_list);
+
 #endif

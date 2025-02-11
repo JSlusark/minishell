@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:23:42 by stefanodipu       #+#    #+#             */
-/*   Updated: 2025/02/10 19:45:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:34:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int	ft_dprintf(const char *format, ...)
     if (!format)
         return (-1);
     fd = open ("Log_file.txt", O_WRONLY | O_CREAT | O_APPEND, 0777);
-	if (fd == -1)
+    if (fd == -1)
     {
-        // perror("Error opening fd in ft_dpldrintf"); //// <-------------------------------------------- JESS: INTERAGISCE CON LO SHELL MENTRE NON DOVREBBE
         return (-1);
     }
     while (*format)

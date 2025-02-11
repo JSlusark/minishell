@@ -31,7 +31,7 @@ void	print_redir_file(t_redir *head)
 		ft_dprintf("			  ");
 		ft_dprintf("- int type: %s\n", return_token_enum(current->type));
 		ft_dprintf("			  ");
-		ft_dprintf("- char *target: %s (%s)\n", current->target_name,
+		ft_dprintf("- char *target: %s (%s)\n", current->target,
 			return_token_enum(current->type));
 		ft_dprintf("			  ");
 		ft_dprintf("- int target_type: %s\n",

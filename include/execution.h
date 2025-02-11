@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 21:05:04 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:36:18 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 typedef struct s_exec
 {
-	int				fd [2];
-	t_node_list		*action;
-	struct s_exec	*next;
+	int			stds_cpy[2];
+	int			exit_code;
+	int			last_pid;
 }	t_exec;
 
 /************************************************************/
@@ -34,6 +34,8 @@ int		find_ext_cmd(t_node_list *node);
 int		find_builtin(t_node_list	*node);
 int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
+void	reset_in_out(int *stds_cpy);
+void	exec_cmd(t_node_list *node, int **pipes, int node_amount);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
@@ -67,9 +69,14 @@ void	sort_env_vars(char **env);
 
 /******************EXTERNAL********************/
 int		exec_external(t_cmd *cmd, t_msh *msh);
+void	print_error(char *str, char *message, int err);
+void	free_results(char **results);
 int		exec_child(t_node_list *node, int **pipe,
 			int node_amount, int position);
 char	*find_path(char *cmd, char **envp);
+int		check_access(char **path, t_cmd *cmd);
+char	**cmd_str(t_cmd *cmd);
+char	*ft_eiterate(char **path, char **envp_paths, char *cmd);
 
 /********************PIPES**********************/
 int		**pipe_init(int n_pipes);
