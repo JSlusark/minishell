@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 18:44:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:49:27 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ char	*expanded_line(char *line, t_msh *msh)
 	int		i;
 	char	*buff;
 	int		j;
+	int		size;
 
 	j = 0;
 	i = 0;
-	buff = malloc(ft_strlen(line) + 1024);
+	size = ft_strlen(line) + 1024;
+	buff = malloc(size);
+	if (!buff)
+		return (NULL);
+	ft_bzero(buff, size);
+
 	while (line[i] != '\0')
 	{
 		if (line[i] == '$')
@@ -29,13 +35,17 @@ char	*expanded_line(char *line, t_msh *msh)
 			i++;
 			j = ft_strlen(buff);
 		}
-		buff[j] = line[i];
-		i++;
-		j++;
+		else
+		{
+			buff[j] = line[i];
+			i++;
+			j++;
+		}
 	}
 	buff[j] = '\0';
 	return (buff);
 }
+
 
 bool	add_line_to_doc(char *line, t_node_list *node, char **doc)
 {
@@ -69,6 +79,7 @@ char	*handle_heredoc(t_node_list *node)
 	char	*line;
 	char	*doc;
 
+	// line = malloc(ft_strlen(line) + 1024);
 	doc = NULL;
 	run_signals(3, NULL);
 	while (1)
