@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 12:36:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:33:08 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int		env_compare(char **env, char **av, int i);
 /****************REDIRECTIONS*******************/
 int		set_redirection(t_node_list *node);
 char	*handle_heredoc(t_node_list *node);
+void	exec_heredoc(t_node_list *node);
 
 /******************BUILTINS********************/
 int		exec_builtin(t_node_list	*node_list);

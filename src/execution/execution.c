@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 02:10:02 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:34:56 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	exec_nodes(t_node_list *node_list)
 	if (set_and_init(node_list, &exec, &node_amount, &pipes) == 1)
 		return ;
 	i = 0;
+	//exec_heredoc(node_list);
 	head = node_list;
 	while (head)
 	{
