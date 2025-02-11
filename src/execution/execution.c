@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 02:10:02 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:26:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 		node_list->msh->exit_code = 0;
 	else
 		node_list->msh->exit_code = exec->exit_code;
+	free(exec);
 }
 
-int	exec_child(t_node_list *node, int **pipes, int node_amount, int position)
+int	exec_child(t_node_list *node, int **pipes, int node_amount, int position, t_exec *exec)
 {
 	pid_t	pid;
 	int		exit_code;
@@ -48,7 +49,7 @@ int	exec_child(t_node_list *node, int **pipes, int node_amount, int position)
 				exit(-1);
 		}
 		if (node->cmd != NULL)
-			exec_cmd(node, pipes, node_amount);
+			exec_cmd(node, pipes, node_amount, exec);
 		exit(0);
 	}
 	return (pid);
@@ -77,7 +78,7 @@ int	single_node(t_node_list *head, int **pipes, int node_amount, int *stds_cpy)
 	return (1);
 }
 
-int	set_and_init(t_node_list *node_list, t_exec **exec, 
+int	set_and_init(t_node_list *node_list, t_exec **exec,
 	int *node_amount, int ***pipes)
 {
 	*exec = malloc(sizeof(t_exec));
@@ -117,7 +118,7 @@ void	exec_nodes(t_node_list *node_list)
 		exec->exit_code = single_node(head, pipes, node_amount, exec->stds_cpy);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
 			return ;
-		exec->last_pid = exec_child(head, pipes, node_amount, i);
+		exec->last_pid = exec_child(head, pipes, node_amount, i, exec);
 		if (exec->last_pid == -1)
 			break ;
 		head = head->next;

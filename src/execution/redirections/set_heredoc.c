@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 20:39:03 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:44:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,5 @@ char	*handle_heredoc(t_node_list *node)
 		if (!add_line_to_doc(line, node, &doc))
 			break ;
 	}
-	if (!doc)
-		doc[0] = '\0';
 	return (doc);
 }

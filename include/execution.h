@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 12:36:18 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:26:50 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		find_builtin(t_node_list	*node);
 int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
 void	reset_in_out(int *stds_cpy);
-void	exec_cmd(t_node_list *node, int **pipes, int node_amount);
+void	exec_cmd(t_node_list *node, int **pipes, int node_amount, t_exec *exec);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
@@ -72,7 +72,7 @@ int		exec_external(t_cmd *cmd, t_msh *msh);
 void	print_error(char *str, char *message, int err);
 void	free_results(char **results);
 int		exec_child(t_node_list *node, int **pipe,
-			int node_amount, int position);
+			int node_amount, int position, t_exec *exec);
 char	*find_path(char *cmd, char **envp);
 int		check_access(char **path, t_cmd *cmd);
 char	**cmd_str(t_cmd *cmd);

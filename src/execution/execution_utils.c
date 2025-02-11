@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 02:03:06 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:27:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	reset_in_out(int *stds_cpy)
 	close(stds_cpy[1]);
 }
 
-void	exec_cmd(t_node_list *node, int **pipes, int node_amount)
+void	exec_cmd(t_node_list *node, int **pipes, int node_amount, t_exec *exec)
 {
 	int	exit_code;
 
@@ -34,6 +34,7 @@ void	exec_cmd(t_node_list *node, int **pipes, int node_amount)
 		clear_history();
 		close_pipes(pipes, node_amount - 1);
 		free_pipes(pipes, node_amount - 1);
+		free(exec);
 		free_msh(node->msh);
 		free_node_list(node);
 		exit(exit_code);
@@ -72,7 +73,7 @@ int	close_wait_free(int **pipes, int node_amount, int last_pid)
 		close_pipes(pipes, node_amount - 1);
 	}
 	j = 0;
-	while (j < node_amount) 
+	while (j < node_amount)
 	{
 		signal = handle_error_signal(&exit_code, &signal, last_pid);
 		if (signal > 0)
