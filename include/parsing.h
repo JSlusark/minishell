@@ -117,24 +117,24 @@ void	end_new_node(bool *start_node, t_node_list **head, t_node_list *new_node); 
 
 // PARSE NODE ERRORS - error_handling.c stops node creation and prints error to the terminal
 bool	pipe_error(t_tokens *token, bool check_pipestart, t_node_list *head, t_node_list *new_node); // gives error when CL starts with pipe, pipe is followed by \n or anothe pipe
-bool	redir_error(t_tokens *token); // gives an error to when redir symbol is followed by |, another redir symbol and \n
-// bool	unknown_token(t_tokens *token, t_node_list *head, t_node_list * new_node); // gives errors with unknown tokens
+bool	redir_error(t_tokens *token);
 
-// REDIR LIST CREATION - alloc_redir.c creates a linked list of redirection structs for each node
-bool	parse_redir(t_tokens **token, t_node_list *new_node, int *redir_i, int *exit_code); // creates redir data to add to the node
-t_redir	*init_new_redir(t_tokens **token, int *exit_code); // allocates redirection struct and writes the redir type and target (token after the redir symbol) to the redir struct.
-bool	add_target(t_tokens *token, t_redir *redir); // adds the token that follows the redirection symbol a target of the redirection
-void	append_new_redir(t_redir **head_redir, t_redir *curr_redir); // appends the redir struct to the redir linked list
 
-// CMD STRUCT CREATION - after we parsed pipes and redird we create the cmd struct and assign cmd, args and n_option (if the command is echo)
-bool parse_rest(t_tokens **token, t_node_list *new_node, t_msh **msh);
-bool alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh);
-bool add_argument(char ***args, char *new_arg); // new function to allocat arg as array and not ll
-void add_option_n(t_tokens **token, t_node_list *new_node);
+// REDIR LIST CREATION
+bool	parse_redir(t_tokens **token, t_node_list *new_node, int *redir_i, int *exit_code);
+t_redir	*init_new_redir(t_tokens **token, int *exit_code);
+bool	add_target(t_tokens *token, t_redir *redir);
+void	append_new_redir(t_redir **head_redir, t_redir *curr_redir);
+
+// CMD STRUCT CREATION
+bool	parse_rest(t_tokens **token, t_node_list *new_node, t_msh **msh);
+bool	alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh);
+bool	add_argument(char ***args, char *new_arg);
+void	add_option_n(t_tokens **token, t_node_list *new_node);
 
 //FREEING FUNCTIONS FOR NODE AND MSH
-void free_msh(t_msh *msh); // needs to be called independently from the free node list
-void free_node_list(t_node_list *node_list);
+void	free_msh(t_msh *msh);
+void	free_node_list(t_node_list *node_list);
 void	free_cmd_struct(t_cmd *cmd);
 void	free_redir_list(t_redir *head);
 
@@ -152,7 +152,9 @@ void	print_null_cmd_file(void);
 void	print_cmd_struct_file(t_cmd *cmd);
 void	print_redir_file(t_redir *head);
 
+//ASCII ART
+void	print_banner(void);
 // COMMUNICATION BETWEEN PARSING AND EXECUTION
 void	exec_nodes(t_node_list	*node_list);
-#endif
 
+# endif

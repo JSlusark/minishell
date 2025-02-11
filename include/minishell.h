@@ -6,47 +6,37 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/02/07 20:54:28 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:33:29 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include	<stdio.h>
-#include	<stdlib.h>
-#include	<string.h>
-#include	<unistd.h>
-#include    <signal.h>
-#include    <sys/wait.h>
-#include	<sys/types.h>
-#include	<readline/readline.h>
-#include	<readline/history.h>
-#include	"../lib/libft/libft.h"
-#include    "../lib/dprintf/ft_dprintf.h"
-#include	"stdbool.h"
-#include	<errno.h>
-#include	<sys/stat.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../lib/libft/libft.h"
+# include "../lib/dprintf/ft_dprintf.h"
+# include "stdbool.h"
+# include <errno.h>
+# include <sys/stat.h>
+# include "./execution.h"
+# include "./parsing.h"
 
-// CALL VALGRIND SUPPRESSION:
-// valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
-
-// ANSI color codes (added them just to test for now, we shouldn't lose time with making it pretty)
-#define COLOR_GREEN  "\x1b[32m"
-#define COLOR_RED    "\x1b[31m"
-#define COLOR_YELLOW "\x1b[33m"
-#define COLOR_BLUE "\x1b[34m"
-#define COLOR_CYAN   "\x1b[36m"
-#define COLOR_ORANGE "\x1b[38;5;208m"
-#define COLOR_RESET  "\x1b[0m"
-
-// Parsing header
-#include	"./parsing.h"
-void print_banner(void);
-
-//Execution header
-#include    "./execution.h" // parsing functions
-
-//signal variable
+// ANSI color codes
+# define COLOR_GREEN  "\x1b[32m"
+# define COLOR_RED    "\x1b[31m"
+# define COLOR_YELLOW "\x1b[33m"
+# define COLOR_BLUE "\x1b[34m"
+# define COLOR_CYAN   "\x1b[36m"
+# define COLOR_ORANGE "\x1b[38;5;208m"
+# define COLOR_RESET  "\x1b[0m"
 
 #endif

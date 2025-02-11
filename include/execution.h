@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
+/*   Updated: 2025/02/11 13:29:23 by stdi-pum         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXEC_H
-#define EXEC_H
+# define EXEC_H
 
 /**************************************/
 /*              STRUCTS               */
@@ -35,10 +47,10 @@ void	exec_cmd(t_node_list *node, int **pipes, int node_amount);
 
 /*******************ENV************************/
 char	**ms_matrix_add_line(char **matrix, char *new_line);
-void    ft_free_tab(char **tab);
-void    ms_env_init(t_msh **msh, char**envp);
-char    *ms_get_env(t_msh *msh, char *av);
-void    ms_set_env(t_msh *msh, char *value);
+void	ft_free_tab(char **tab);
+void	ms_env_init(t_msh **msh, char**envp);
+char	*ms_get_env(t_msh *msh, char *av);
+void	ms_set_env(t_msh *msh, char *value);
 
 /****************REDIRECTIONS*******************/
 int		set_redirection(t_node_list *node);
