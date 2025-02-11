@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 11:53:39 by jessica           #+#    #+#             */
-/*   Updated: 2025/01/15 10:32:09 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:53:47 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char		*ft_itoa(int n);
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		**ft_split(char const *s, char c);
-int			ft_strcmp(const char *s1, const char *s2); // Newly introduced function - jess
+int			ft_strcmp(const char *s1, const char *s2);
 int			ft_isllong(char *str);
 long long	ft_atoll(const char *nptr);
 

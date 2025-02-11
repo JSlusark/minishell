@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 14:41:56 by jadyar            #+#    #+#             */
-/*   Updated: 2024/10/01 18:41:02 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:26:15 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <fcntl.h>
 
 char	*ft_itoa(int n);
-int     ft_dprintf(const char *format, ...);
+int		ft_dprintf(const char *format, ...);
 int		ft_dprint_format(const char specifier, va_list ap, int fd, int *count);
 int		ft_dprint_unsigned(unsigned int n, int fd, int *count);
 int		ft_dprint_number(int n, int fd, int *count);

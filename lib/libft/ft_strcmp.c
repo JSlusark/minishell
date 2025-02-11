@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:27:08 by jslusark          #+#    #+#             */
-/*   Updated: 2024/11/18 15:27:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:27:19 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-int ft_strcmp(const char *s1, const char *s2)
+
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 && *s2 && (*s1 == *s2))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:49:27 by jslusark          #+#    #+#             */
-/*   Updated: 2025/01/31 22:21:20 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:27:01 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
-	// if (!s)
-	// 	return (0); // <---- JESS: Ste perche' lo hai messo? len 0 dovrebbe tornare gia'
 	len = 0;
 	while (s[len] != '\0')
 		len++;

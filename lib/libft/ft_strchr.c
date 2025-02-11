@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 15:49:18 by jslusark          #+#    #+#             */
-/*   Updated: 2024/12/10 15:46:04 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:27:27 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_strchr(const char *s, int c)
 	c = (unsigned char)c;
 	while (*s != c)
 	{
-		// write(1, &c,1);
 		if (*s == '\0')
 			return (NULL);
 		s++;

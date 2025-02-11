@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:55:51 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 12:34:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:52:10 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	**pipe_init(int n_pipes)
 		}
 		i++;
 	}
-	ft_dprintf("pipes initialized\n");
 	return (pipes);
 }
 
