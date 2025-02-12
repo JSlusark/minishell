@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:43:06 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/07 17:14:00 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:27:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_tokens	*tokenize(char *input, int *i, t_msh *msh, t_tokens *tokens)
 			return (tokens);
 		append_token(&tokens, create_token(buff, ARG));
 	}
-	else if (!valid_bound(input, i, &tokens))
+	else if (!valid_bound(input, i, &tokens, msh))
 	{
 		msh->exit_code = 2;
 		return (tokens);

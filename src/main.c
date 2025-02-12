@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/12 10:35:51 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:48:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,19 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		run_signals(1, msh);
-		if (g_sig == 3)
+		if (g_sig == 3 && msh->in_heredoc == false)
 		{
 			printf("Quit (core dumped)\n");
 			msh->prev_exit = 131;
 			g_sig = 0;
 		}
+		else if (g_sig == 3 && msh->in_heredoc == true)
+		{
+			msh->in_heredoc = false;
+			msh->prev_exit = 0;
+			g_sig = 0;
+		}
+		msh->in_heredoc = false;
 		input = readline(COLOR_GREEN "Minishell> " COLOR_RESET);
 		if (!input)
 			handle_eof(msh);

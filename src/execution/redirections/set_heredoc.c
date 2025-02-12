@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/12 12:12:26 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:50:15 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*handle_heredoc(t_node_list *node)
 	run_signals(3, NULL);
 	while (1)
 	{
+		node->msh->in_heredoc = true;
 		if (g_sig == SIGINT)
 		{
 			node->msh->exit_code = 130;

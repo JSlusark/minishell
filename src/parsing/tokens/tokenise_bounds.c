@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:11:09 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/03 15:46:12 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:28:13 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ void	handle_right(char *input, int *i, t_tokens **tokens)
 		append_token(tokens, create_token(">", REDIR_OUT));
 }
 
-void	handle_left(char *input, int *i, t_tokens **tokens)
+void	handle_left(char *input, int *i, t_tokens **tokens, t_msh *msh)
 {
 	int	k;
 
 	k = *i + 1;
 	if (input[k] != '\0' && input[k] == '<')
 	{
+		 msh->in_heredoc = true;
 		append_token(tokens, create_token("<<", HEREDOC));
 		(*i)++;
 	}
@@ -40,7 +41,7 @@ void	handle_left(char *input, int *i, t_tokens **tokens)
 		append_token(tokens, create_token("<", REDIR_IN));
 }
 
-bool	valid_bound(char *input, int *i, t_tokens **tokens)
+bool	valid_bound(char *input, int *i, t_tokens **tokens, t_msh *msh)
 {
 	int	k;
 
@@ -58,6 +59,6 @@ bool	valid_bound(char *input, int *i, t_tokens **tokens)
 	else if (input[*i] == '>')
 		handle_right(input, i, tokens);
 	else if (input[*i] == '<')
-		handle_left(input, i, tokens);
+		handle_left(input, i, tokens, msh);
 	return (true);
 }

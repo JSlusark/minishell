@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 15:46:57 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 16:23:09 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:58:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	ms_env_init(t_msh **msh, char **envp)
 	}
 	(*msh)->exit_code = 0;
 	(*msh)->prev_exit = 0;
+	(*msh)->in_heredoc = false;
 	init_env_vars(&(*msh)->ms_env, envp);
 	init_env_vars(&(*msh)->env_exp, envp);
 }

@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:02:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 12:37:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:28:43 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_msh
 	bool	find_cmd;
 	bool	pipestart;
 	bool	found_echo;
+	bool	in_heredoc;
 }	t_msh;
 
 typedef struct s_redir
@@ -92,8 +93,8 @@ t_tokens	*create_token(const char *value, int type);
 void		free_tokens(t_tokens *head);
 
 /* tokenize_bounds.c : creates and appends tokens for | > < << and >> */
-bool		valid_bound(char *input, int *i, t_tokens **tokens);
-void		handle_left(char *input, int *i, t_tokens **tokens);
+bool		valid_bound(char *input, int *i, t_tokens **tokens, t_msh *msh);
+void		handle_left(char *input, int *i, t_tokens **tokens, t_msh *msh);
 void		handle_right(char *input, int *i, t_tokens **tokens);
 
 /* tokenize strings ( I define strings anything between
