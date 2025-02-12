@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/10 21:46:35 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:33:00 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,18 @@ int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
 
 int	set_redirection(t_node_list *node)
 {
-	char	*doc;
-	int		heredoc_buffer;
+	char		*doc;
+	int			heredoc_buffer;
+	t_node_list	*head;
 
+	head = node;
 	doc = NULL;
 	heredoc_buffer = 1;
-	while (node->redir)
+	while (head)
 	{
 		if (exec_redir(node, &doc, &heredoc_buffer) == -1)
 			return (-1);
-		node->redir = node->redir->next;
+		head = head->next;
 	}
 	if (heredoc_buffer == 0)
 	{
@@ -117,5 +119,6 @@ int	set_redirection(t_node_list *node)
 		}
 		free(doc);
 	}
+	free(node->redir);
 	return (0);
 }

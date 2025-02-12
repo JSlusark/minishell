@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_externals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 00:00:42 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:45:43 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ char	*find_path(char *cmd, char **envp)
 char	**get_cmds(t_cmd *cmd)
 {
 	char	**cmds;
-	int		i;
 
-	i = 0;
 	cmds = NULL;
 	if (cmd->args)
 		cmds = cmd_str(cmd);

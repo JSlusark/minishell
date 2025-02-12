@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 13:29:23 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:02:21 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_exec
 	int			stds_cpy[2];
 	int			exit_code;
 	int			last_pid;
+	int			node_amount;
 }
     t_exec;
 
@@ -43,7 +44,8 @@ int		find_builtin(t_node_list	*node);
 int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
 void	reset_in_out(int *stds_cpy);
-void	exec_cmd(t_node_list *node, int **pipes, int node_amount);
+void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
+void	close_execution(t_node_list *node_list, t_exec *exec, int **pipes);
 
 /*******************ENV************************/
 char	**ms_matrix_add_line(char **matrix, char *new_line);
@@ -70,7 +72,7 @@ void    exec_unset (char **av, t_node_list *node);
 int		exec_external(t_cmd *cmd, t_msh *msh);
 void	print_error(char *str, char *message, int err);
 void	free_results(char **results);
-int		exec_child(t_node_list *node, int **pipe, int node_amount, int position);
+int		exec_child(t_node_list *node, int **pipes, t_exec *exec, int position);
 char	*find_path(char *cmd, char **envp);
 int		check_access(char **path, t_cmd *cmd);
 char	**cmd_str(t_cmd *cmd);

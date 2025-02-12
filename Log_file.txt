@@ -360,3 +360,6 @@ exec_nodes
 exec_nodes
 exec_nodes
 exec_nodes
+set redir OUT
+set redir IN
+set redir IN

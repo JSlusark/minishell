@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 15:17:33 by alramire          #+#    #+#             */
-/*   Updated: 2025/02/11 13:33:29 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:44:45 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include "stdbool.h"
 # include <errno.h>
 # include <sys/stat.h>
-# include "./execution.h"
 # include "./parsing.h"
+# include "./execution.h"
 
 // ANSI color codes
 # define COLOR_GREEN  "\x1b[32m"
