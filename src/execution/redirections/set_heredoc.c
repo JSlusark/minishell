@@ -6,46 +6,46 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/12 13:50:15 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:24:39 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+void	process_expansion_or_copy(char *line, int *i, char *buff, t_msh *msh)
+{
+	int	j;
+
+	j = ft_strlen(buff);
+	if (line[*i] == '$')
+	{
+		collect_expansion(line, i, buff, msh);
+		(*i)++;
+	}
+	else
+	{
+		buff[j] = line[*i];
+		(*i)++;
+		buff[j + 1] = '\0';
+	}
+}
+
 char	*expanded_line(char *line, t_msh *msh)
 {
 	int		i;
-	char	*buff;
-	int		j;
 	int		size;
+	char	*buff;
 
-	j = 0;
 	i = 0;
 	size = ft_strlen(line) + 1024;
 	buff = malloc(size);
 	if (!buff)
 		return (NULL);
 	ft_bzero(buff, size);
-
 	while (line[i] != '\0')
-	{
-		if (line[i] == '$')
-		{
-			collect_expansion(line, &i, buff, msh);
-			i++;
-			j = ft_strlen(buff);
-		}
-		else
-		{
-			buff[j] = line[i];
-			i++;
-			j++;
-		}
-	}
-	buff[j] = '\0';
+		process_expansion_or_copy(line, &i, buff, msh);
 	return (buff);
 }
-
 
 bool	add_line_to_doc(char *line, t_node_list *node, char **doc)
 {

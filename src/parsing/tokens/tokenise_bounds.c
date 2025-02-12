@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:11:09 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/12 13:28:13 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:25:44 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	handle_left(char *input, int *i, t_tokens **tokens, t_msh *msh)
 	k = *i + 1;
 	if (input[k] != '\0' && input[k] == '<')
 	{
-		 msh->in_heredoc = true;
+		msh->in_heredoc = true;
 		append_token(tokens, create_token("<<", HEREDOC));
 		(*i)++;
 	}
