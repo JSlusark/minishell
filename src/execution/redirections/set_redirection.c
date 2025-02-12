@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/10 21:46:35 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:11:36 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
 		(*doc) = handle_heredoc(node);
 		if ((*doc) != NULL)
 			*heredoc_buffer = 0;
+		else
+			return (-1);  /////// <---------------------- JESS: non funzionava ctrl in heredoc e ho dovuto mettere questo, rovina qualcosa? MEGLIO 0 ?
 	}
 	if (node->redir->type == REDIR_IN)
 	{
