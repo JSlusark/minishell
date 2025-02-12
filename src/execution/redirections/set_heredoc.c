@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 19:49:27 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:21:24 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ char	*handle_heredoc(t_node_list *node)
 	char	*line;
 	char	*doc;
 
-	// line = malloc(ft_strlen(line) + 1024);
 	doc = NULL;
 	run_signals(3, NULL);
 	while (1)

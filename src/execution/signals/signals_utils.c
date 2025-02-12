@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:37:19 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 21:40:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:30:43 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void	ctrl_c(int sig)
 void	back_slash(int sig)
 {
 	g_sig = SIGQUIT;
-	printf("Quit (core dumped)\n");
 	(void)sig;
 }
