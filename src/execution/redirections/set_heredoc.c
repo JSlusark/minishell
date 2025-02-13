@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/12 17:24:39 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:28:21 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,7 @@ char	*handle_heredoc(t_node_list *node)
 		if (!add_line_to_doc(line, node, &doc))
 			break ;
 	}
+	if(doc == NULL)
+		doc=ft_strdup("");
 	return (doc);
 }
