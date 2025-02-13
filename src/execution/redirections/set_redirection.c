@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/12 13:43:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:44:58 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
 		(*doc) = handle_heredoc(node);
 		if ((*doc) != NULL)
 			*heredoc_buffer = 0;
-		else
-			return (-1);  /////// <---------------------- JESS: non funzionava ctrl in heredoc e ho dovuto mettere questo, rovina qualcosa? MEGLIO 0 ?
 	}
 	if (node->redir->type == REDIR_IN)
 	{
