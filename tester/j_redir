@@ -1,0 +1,19 @@
+echo "Hello, World!" > output.txt
+cat < input.txt
+echo "Appending this line" >> output.txt
+cat < input.txt > output.txt
+cat < input.txt >> output.txt
+echo "Hello, World!" | tee output.txt
+cat < input.txt | grep "pattern"
+echo "Appending this line" | tee -a output.txt
+cat < non_existent_file.txt
+echo "Hello, World!" > /root/output.txt
+invalid_command > output.txt
+echo "Hello" > output1.txt 2> error.txt
+echo $(cat input.txt) > output.txt
+echo "Special characters" > "output file with spaces.txt"
+echo "Quoted string" > 'output.txt'
+ls non_existent_file > error.txt
+ls non_existent_file > output.txt >yo
+echo "First" > output.txt "Second" >> output.txt
+echo "First" > output1.txt | echo "Second command" > output2.txt
