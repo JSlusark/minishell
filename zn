@@ -1,0 +1,14 @@
+include
+lib
+Log_file.txt
+Makefile
+minishell
+obj
+readline.supp
+src
+tester
+za
+zi
+zn
+zo
+zu

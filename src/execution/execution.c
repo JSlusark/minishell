@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 12:05:48 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:27:22 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 		node_list->msh->exit_code = 0;
 	else
 		node_list->msh->exit_code = exec->exit_code;
-	free(exec);
+	free_exec(exec);
 }
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
@@ -68,7 +68,7 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 			else
 				return (2);
 		}
-		if ((exec_builtin(head)) == 0)
+		if ((exec_builtin(head, exec)) == 0)
 		{
 			free_pipes(pipes, exec->node_amount - 1);
 			reset_in_out(exec->stds_cpy);
@@ -116,7 +116,8 @@ void	exec_nodes(t_node_list *node_list)
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
 			return ;
-		exec->last_pid = exec_child(head, pipes, exec, i);
+		if (head->cmd)
+			exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;
 		head = head->next;

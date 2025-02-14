@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 12:12:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:02:54 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec)
 {
 	int	exit_code;
 
-	if (exec_builtin(node) == 0)
+	if (exec_builtin(node, exec) == 0)
 		exit(0);
 	exit_code = exec_external(node->cmd, node->msh);
 	if (exit_code != 0)
@@ -34,9 +34,9 @@ void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec)
 		clear_history();
 		close_pipes(pipes, exec->node_amount - 1);
 		free_pipes(pipes, exec->node_amount - 1);
-		free (exec);
 		free_msh(node->msh);
 		free_node_list(node);
+		free_exec(exec);
 		exit(exit_code);
 	}
 }

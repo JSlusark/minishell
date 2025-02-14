@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 12:12:11 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:15:17 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		close_wait_free(int **pipes, int node_amount, int last_pid);
 void	reset_in_out(int *stds_cpy);
 void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
 void	close_execution(t_node_list *node_list, t_exec *exec, int **pipes);
+void	free_exec(t_exec *exec);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
@@ -57,11 +58,11 @@ int		set_redirection(t_node_list *node);
 char	*handle_heredoc(t_node_list *node);
 
 /******************BUILTINS********************/
-int		exec_builtin(t_node_list	*node_list);
+int		exec_builtin(t_node_list	*node_list, t_exec *exec);
 int		exec_cd(t_node_list *node);
 int		handle_pwd(t_node_list *node);
 int		handle_env(t_node_list	*node_l);
-int		exec_exit(t_node_list *node);
+int		exec_exit(t_node_list *node, t_exec *exec);
 int		handle_echo(t_node_list *node);
 void	exec_unset(char **av, t_node_list *node);
 void	exec_export(char **av, t_node_list *node);

@@ -1,1 +1,26 @@
 pipes initialized
+set_redirection
+handle_heredoc
+set_redirection
+handle_heredoc
+set_redirection
+handle_heredoc
+set_redirection
+handle_heredoc
+set_redirection
+handle_heredoc
+set_redirection
+handle_heredoc
+pipes initialized
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
+set redir IN
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir OUT
+set redir IN
