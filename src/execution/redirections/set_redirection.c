@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:07 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:33:18 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	redir_in(t_node_list *node)
 	return (0);
 }
 
-int	feed_heredoc_to_pipe(char *doc)
+int	feed_heredoc_to_pipe(char *doc, t_exec *exec)
 {
 	int	fd[2];
 
@@ -66,11 +66,22 @@ int	feed_heredoc_to_pipe(char *doc)
 		perror("pipe");
 		return (-1);
 	}
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
+    // if (dup2(fd[0], exec->stds_cpy[0]) == -1)
+    // {
+    //     perror("dup2");
+    //     close(fd[0]);
+    //     close(fd[1]);
+    //     return (-1);
+    // }
+	// if (dup2(fd[1], exec->stds_cpy[1]) == -1)
+    // {
+    //     perror("dup2");
+    //     close(fd[0]);
+    //     close(fd[1]);
+    //     return (-1);
+    // }
 	write(fd[1], doc, ft_strlen(doc));
 	close(fd[1]);
-	close(fd[0]);
 	return (0);
 }
 
@@ -95,7 +106,7 @@ int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
 	return (0);
 }
 
-int	set_redirection(t_node_list *node)
+int	set_redirection(t_node_list *node, t_exec *exec)
 {
 	char	*doc;
 	int		heredoc_buffer;
@@ -110,7 +121,7 @@ int	set_redirection(t_node_list *node)
 	}
 	if (heredoc_buffer == 0)
 	{
-		if (feed_heredoc_to_pipe(doc) == -1)
+		if (feed_heredoc_to_pipe(doc, exec) == -1)
 		{
 			free(doc);
 			return (-1);

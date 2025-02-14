@@ -24,3 +24,33 @@ set redir OUT
 set redir OUT
 set redir OUT
 set redir IN
+builtin
+builtin
+builtin
+builtin
+pre close
+pipes initialized
+builtin
+set redir OUT
+builtin
+builtin
+enter if builtin node single
+set redir OUT
+enter if builtin node single
+enter if builtin node single
+set redir OUT
+enter if builtin node single
+set redir OUT
+enter if builtin node single
+set redir OUT
+pipes initialized
+enter if builtin node single
+pipes initialized
+pipes initialized
+enter if builtin node single
+pipes initialized
+pipes initialized
+enter if builtin node single
+pipes initialized
+pipes initialized
+enter if builtin node single

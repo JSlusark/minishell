@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:17 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:22:57 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_free_tab(char **tab);
 int		env_compare(char **env, char **av, int i);
 
 /****************REDIRECTIONS*******************/
-int		set_redirection(t_node_list *node);
+int		set_redirection(t_node_list *node, t_exec *exec);
 char	*handle_heredoc(t_node_list *node);
 
 /******************BUILTINS********************/

@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:27:22 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/14 18:22:41 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->redir)
 		{
-			if (set_redirection(node) == -1)
+			if (set_redirection(node, exec) == -1)
 				exit(-1);
 		}
 		if (node->cmd != NULL)
@@ -57,19 +57,19 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 {
 	if (exec->node_amount == 1 && (find_builtin(head) == 0))
 	{
+		ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
-			if (set_redirection(head) == -1)
+			if (set_redirection(head, exec) == -1)
 			{
 				free_pipes(pipes, exec->node_amount - 1);
 				reset_in_out(exec->stds_cpy);
 				return (-1);
 			}
-			else
-				return (2);
 		}
 		if ((exec_builtin(head, exec)) == 0)
 		{
+			ft_dprintf("enter exec_builtin node single\n");
 			free_pipes(pipes, exec->node_amount - 1);
 			reset_in_out(exec->stds_cpy);
 			return (0);
@@ -115,9 +115,8 @@ void	exec_nodes(t_node_list *node_list)
 	{
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
-			return ;
-		if (head->cmd)
-			exec->last_pid = exec_child(head, pipes, exec, i);
+			break ;
+		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;
 		head = head->next;
