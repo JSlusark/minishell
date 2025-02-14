@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 18:27:10 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:12:25 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	reset_in_out(int *stds_cpy)
 	close(stds_cpy[1]);
 }
 
-void	exec_cmd(t_node_list *node, int **pipes, int node_amount, t_exec *exec)
+void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec)
 {
 	int	exit_code;
 
@@ -32,9 +32,9 @@ void	exec_cmd(t_node_list *node, int **pipes, int node_amount, t_exec *exec)
 	if (exit_code != 0)
 	{
 		clear_history();
-		close_pipes(pipes, node_amount - 1);
-		free_pipes(pipes, node_amount - 1);
-		free(exec);
+		close_pipes(pipes, exec->node_amount - 1);
+		free_pipes(pipes, exec->node_amount - 1);
+		free (exec);
 		free_msh(node->msh);
 		free_node_list(node);
 		exit(exit_code);

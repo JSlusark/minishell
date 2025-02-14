@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 18:26:50 by jslusark         ###   ########.fr       */
+/*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
+/*   Updated: 2025/02/14 12:12:11 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_exec
 	int			stds_cpy[2];
 	int			exit_code;
 	int			last_pid;
+	int			node_amount;
 }	t_exec;
 
 /************************************************************/
@@ -35,7 +36,8 @@ int		find_builtin(t_node_list	*node);
 int		check_cmds(t_node_list *node_list);
 int		close_wait_free(int **pipes, int node_amount, int last_pid);
 void	reset_in_out(int *stds_cpy);
-void	exec_cmd(t_node_list *node, int **pipes, int node_amount, t_exec *exec);
+void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
+void	close_execution(t_node_list *node_list, t_exec *exec, int **pipes);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
@@ -71,8 +73,8 @@ void	sort_env_vars(char **env);
 int		exec_external(t_cmd *cmd, t_msh *msh);
 void	print_error(char *str, char *message, int err);
 void	free_results(char **results);
-int		exec_child(t_node_list *node, int **pipe,
-			int node_amount, int position, t_exec *exec);
+int		exec_child(t_node_list *node, int **pipes,
+			t_exec *exec, int position);
 char	*find_path(char *cmd, char **envp);
 int		check_access(char **path, t_cmd *cmd);
 char	**cmd_str(t_cmd *cmd);
