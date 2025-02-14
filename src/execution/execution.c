@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:27:22 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:53:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,7 @@ void	exec_nodes(t_node_list *node_list)
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
 			return ;
-		if (head->cmd)
-			exec->last_pid = exec_child(head, pipes, exec, i);
+		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;
 		head = head->next;
