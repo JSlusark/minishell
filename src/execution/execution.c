@@ -24,11 +24,13 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 	else
 		node_list->msh->exit_code = exec->exit_code;
 	free_exec(exec);
+	free_node_list(node_list);
 }
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 {
-	ft_dprintf("enter exec_child  ya\n");
+	printf("enter exec_child  ya\n");
+	//print_nodes(node);
 
 	pid_t	pid;
 	t_node_list	*head;
@@ -43,14 +45,15 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	}
 	if (pid == 0)
 	{
-		if (node->redir)
+		if (head->redir)
 		{
+
 			if (set_redirection(node, exec) == -1)
 			{
 				clear_history();
                 close_pipes(pipes, exec->node_amount - 1);
                 free_pipes(pipes, exec->node_amount - 1);
-                free_msh(node->msh);
+                free_msh(head->msh);
                 free_node_list(node);
                 free_exec(exec);
 				exit(-1);
@@ -58,16 +61,31 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 		}
 		if (pipes)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
-		if (node->cmd != NULL)
+		if (head->cmd != NULL)
 			exec_cmd(node, pipes, exec);
+		printf("exec child:free after node->cmd == NULL\n");
 		clear_history();
 		close_pipes(pipes, exec->node_amount - 1);
 		free_pipes(pipes, exec->node_amount - 1);
-		free_msh(node->msh);
+		free_msh(head->msh);
 		free_node_list(head);
 		free_exec(exec);
 		exit(0);
 	}
+	else
+    {
+        // Chiudi i file descriptor delle pipe nel processo padre
+        if (position > 0)
+        {
+            close(pipes[position - 1][0]);
+            close(pipes[position - 1][1]);
+        }
+        if (position < exec->node_amount - 1)
+        {
+            close(pipes[position][0]);
+            close(pipes[position][1]);
+        }
+    }
 	return (pid);
 }
 
@@ -103,9 +121,11 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 
 int	set_and_init(t_node_list *node_list, t_exec **exec, int ***pipes)
 {
-	*exec = malloc(sizeof(t_exec));
+	(*exec) = malloc(sizeof(t_exec));
 	if (!*exec)
 		return (node_list->msh->exit_code = 1);
+	(*exec)->exit_code = 0;
+	(*exec)->last_pid = 0;
 	(*exec)->node_amount = count_nodes(node_list);
 	(*exec)->stds_cpy[0] = dup(STDIN_FILENO);
 	(*exec)->stds_cpy[1] = dup(STDOUT_FILENO);
@@ -128,17 +148,17 @@ void	exec_nodes(t_node_list *node_list)
 	int			**pipes;
 	int			i;
 	t_exec		*exec;
-
+	//print_nodes	(node_list);
 	exec = NULL;
-	if (set_and_init(node_list, &exec, &pipes) == 1)
+	head = node_list;
+	if (set_and_init(head, &exec, &pipes) == 1)
 		return ;
 	i = 0;
-	head = node_list;
 	while (head)
 	{
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
-			return ;
+			break ;
 		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;

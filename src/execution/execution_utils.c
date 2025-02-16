@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:02:54 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/16 22:57:56 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,25 @@ int	close_wait_free(int **pipes, int node_amount, int last_pid)
 	int		exit_code;
 	int		signal;
 	int		j;
+	int		main_pid;
 
+	main_pid = getpid();
+	exit_code = 0;
 	signal = 0;
 	if (pipes)
 	{
 		close_pipes(pipes, node_amount - 1);
 	}
-	j = 0;
-	while (j < node_amount)
+	if(last_pid != main_pid)
 	{
-		signal = handle_error_signal(&exit_code, &signal, last_pid);
-		if (signal > 0)
-			return (signal);
-		j++;
+		j = 0;
+		while (j < node_amount)
+		{
+			signal = handle_error_signal(&exit_code, &signal, last_pid);
+			if (signal > 0)
+				return (signal);
+			j++;
+		}
 	}
 	if (pipes)
 	{

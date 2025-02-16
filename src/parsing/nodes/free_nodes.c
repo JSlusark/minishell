@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_nodes.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:57:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/16 18:58:51 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:19:13 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	free_cmd_struct(t_cmd *cmd)
 {
 	if (!cmd)
 		return ;
-	if (cmd->cmd)
-		free(cmd->cmd);
 	if (cmd->args)
 		free_arg_array(cmd->args);
+	if (cmd->cmd)
+		free(cmd->cmd);
 	free(cmd);
 }
 
@@ -70,7 +70,7 @@ void	free_node_list(t_node_list *head)
 		if (curr->redir)
 			free_redir_list (curr->redir);
 		temp = curr->next;
-		//free(curr);
+		free(curr);
 		curr = temp;
 	}
 }

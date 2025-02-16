@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:59:20 by jslusark          #+#    #+#             */
-/*   Updated: 2024/05/07 14:05:34 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/16 18:48:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 char	*ft_strdup(const char *s)
 {
 	char	*duplicate;
-
+	if (!s)
+		return (NULL);
 	duplicate = (char *)malloc(ft_strlen(s) + 1);
 	if (!duplicate)
 		return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/16 17:51:54 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:25:12 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	redir_out_append(t_node_list *node, t_redir *redir)
 		return (-1);
 	}
 	close(redir->fd);
+	close(redir->fd);
 	return (0);
 }
 
@@ -54,6 +55,7 @@ int	redir_in(t_node_list *node)
 		return (-1);
 	}
 	close(node->redir->fd);
+	close(node->redir->fd);
 	return (0);
 }
 
@@ -66,11 +68,18 @@ int	feed_heredoc_to_pipe(char *doc, t_exec *exec)
 		perror("pipe");
 		return (-1);
 	}
-	close(exec->stds_cpy[0]);
-	exec->stds_cpy[0] = fd[0];
-	write(fd[1], doc, ft_strlen(doc));
-	close(fd[1]);
-	return (0);
+    write(fd[1], doc, ft_strlen(doc));
+    close(fd[1]);
+	printf("ëxec place holder %i\n", exec->exit_code);
+    // Reindirizza stdin alla pipe
+    if (dup2(fd[0], STDIN_FILENO) == -1)
+    {
+        perror("dup2");
+        close(fd[0]);
+        return (-1);
+    }
+    close(fd[0]);
+    return (0);
 }
 
 int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)

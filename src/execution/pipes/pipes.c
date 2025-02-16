@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:55:51 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 12:34:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:20:53 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	set_pipe_ends(int **pipes, int position, int n_pipe)
 		{
 			dup2(pipes[position - 1][0], STDIN_FILENO);
 			dup2(pipes[position][1], STDOUT_FILENO);
+	
 		}
 		i = 0;
 		while (i < n_pipe)
