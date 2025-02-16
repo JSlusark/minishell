@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 18:33:18 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:33:50 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,8 @@ int	feed_heredoc_to_pipe(char *doc, t_exec *exec)
 		perror("pipe");
 		return (-1);
 	}
-    // if (dup2(fd[0], exec->stds_cpy[0]) == -1)
-    // {
-    //     perror("dup2");
-    //     close(fd[0]);
-    //     close(fd[1]);
-    //     return (-1);
-    // }
-	// if (dup2(fd[1], exec->stds_cpy[1]) == -1)
-    // {
-    //     perror("dup2");
-    //     close(fd[0]);
-    //     close(fd[1]);
-    //     return (-1);
-    // }
+	close(exec->stds_cpy[0]);
+	exec->stds_cpy[0] = fd[0];
 	write(fd[1], doc, ft_strlen(doc));
 	close(fd[1]);
 	return (0);

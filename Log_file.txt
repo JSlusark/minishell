@@ -54,3 +54,41 @@ enter if builtin node single
 pipes initialized
 pipes initialized
 enter if builtin node single
+pipes initialized
+enter if builtin node single
+pipes initialized
+pipes initialized
+pipes initialized
+enter if builtin node single
+set redir OUT
+enter exec_builtin node single
+enter if builtin node single
+set redir OUT
+enter exec_builtin node single
+enter if builtin node single
+set redir IN
+enter exec_builtin node single
+set redir IN
+set redir OUT
+set redir OUT
+enter if builtin node single
+pipes initialized
+pipes initialized
+enter if builtin node single
+enter if builtin node single
+enter if builtin node single
+enter if builtin node single
+enter if builtin node single
+enter if builtin node single
+enter exec_childenter exec_childenter if builtin node single
+enter exec_childenter if builtin node single
+enter exec_child
+enter exec_child
+enter if builtin node single
+enter exec_child  ya
+enter exec_child  ya
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter if builtin node single
+enter if builtin node single

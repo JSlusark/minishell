@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
@@ -28,6 +28,7 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 {
+	ft_dprintf("enter exec_child  ya\n");
 	pid_t	pid;
 
 	pid = fork();
@@ -39,13 +40,13 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	}
 	if (pid == 0)
 	{
-		if (pipes)
-			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->redir)
 		{
 			if (set_redirection(node, exec) == -1)
 				exit(-1);
 		}
+		if (pipes)
+			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->cmd != NULL)
 			exec_cmd(node, pipes, exec);
 		exit(0);
@@ -54,8 +55,8 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 }
 
 int	single_node(t_node_list *head, int **pipes, t_exec *exec)
-{
-	if (exec->node_amount == 1 && (find_builtin(head) == 0))
+{  
+	if (exec->node_amount == 1 && head->redir)
 	{
 		ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
@@ -67,11 +68,14 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 				return (-1);
 			}
 		}
+	}
+	if (exec->node_amount == 1 && find_builtin(head) == 0)
+	{
 		if ((exec_builtin(head, exec)) == 0)
 		{
 			ft_dprintf("enter exec_builtin node single\n");
-			free_pipes(pipes, exec->node_amount - 1);
-			reset_in_out(exec->stds_cpy);
+			// free_pipes(pipes, exec->node_amount - 1);
+			// reset_in_out(exec->stds_cpy);
 			return (0);
 		}
 	}
@@ -115,7 +119,7 @@ void	exec_nodes(t_node_list *node_list)
 	{
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
-			break ;
+			return ;
 		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;
