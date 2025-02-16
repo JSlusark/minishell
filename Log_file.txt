@@ -92,3 +92,110 @@ enter exec_child  ya
 enter if builtin node single
 enter if builtin node single
 enter if builtin node single
+enter if builtin node single
+enter if builtin node single
+enter exec_child  ya
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+set redir IN
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+set redir OUT
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter if builtin node single
+enter exec_child  ya
+enter if builtin node single
+enter if builtin node single
+enter exec_child  ya
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+enter if builtin node single
+enter exec_child  ya
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
+pipes initialized
+enter exec_child  ya
+enter exec_child  ya
+enter if builtin node single
