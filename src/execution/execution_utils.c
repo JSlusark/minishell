@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 14:02:54 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:13:40 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,17 @@ void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec)
 	int	exit_code;
 
 	if (exec_builtin(node, exec) == 0)
-		exit(0);
+	{
+		printf("heyo\n");
+		close_pipes(pipes, exec->node_amount - 1); // added
+		free_pipes(pipes, exec->node_amount - 1); // added
+		// reset_in_out(exec->stds_cpy);
+		free_msh(node->msh);// added
+		// free_cmd_struct(node->cmd);
+		free_exec(exec);// added
+		free_node_list(node); // added
+		exit(0); // added the freeing fucntions to decrea
+	}
 	exit_code = exec_external(node->cmd, node->msh);
 	if (exit_code != 0)
 	{
