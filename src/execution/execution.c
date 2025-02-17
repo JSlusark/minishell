@@ -29,7 +29,7 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 {
-	printf("enter exec_child  ya\n");
+	//printf("enter exec_child  ya\n");
 	//print_nodes(node);
 
 	pid_t	pid;
@@ -63,14 +63,17 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (head->cmd != NULL)
 			exec_cmd(node, pipes, exec);
-		printf("exec child:free after node->cmd == NULL\n");
-		clear_history();
-		close_pipes(pipes, exec->node_amount - 1);
-		free_pipes(pipes, exec->node_amount - 1);
-		free_msh(head->msh);
-		free_node_list(head);
-		free_exec(exec);
-		exit(0);
+		else
+		{
+			//printf("exec child:free after node->cmd == NULL\n");
+			clear_history();
+			close_pipes(pipes, exec->node_amount - 1);
+			free_pipes(pipes, exec->node_amount - 1);
+			free_msh(head->msh);
+			free_node_list(head);
+			free_exec(exec);
+		}
+			exit(0);
 	}
 	else
     {
@@ -93,7 +96,7 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 {  
 	if(exec->node_amount == 1)
 	{
-		ft_dprintf("enter if builtin node single\n");
+		//ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
 			if (set_redirection(head, exec) == -1)
@@ -107,7 +110,7 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 		{
 			if ((exec_builtin(head, exec)) == 0)
 			{
-				ft_dprintf("enter exec_builtin node single\n");
+				//ft_dprintf("enter exec_builtin node single\n");
 				free_pipes(pipes, exec->node_amount - 1);
 				reset_in_out(exec->stds_cpy);
 			}

@@ -643,3 +643,34 @@ pipes initialized
 enter if builtin node single
 pipes initialized
 enter if builtin node single
+pipes initialized
+pipes initialized
+pipes initialized
+enter if builtin node single
+enter if builtin node single
+pipes initialized
+pipes initialized
+enter if builtin node single
+enter if builtin node single
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+enter if builtin node single
+pipes initialized
+enter if builtin node single
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+set redir IN
+enter if builtin node single
+pipes initialized
+set redir IN
+enter if builtin node single
+pipes initialized
+set redir IN
+pipes initialized
+enter if builtin node single
+enter if builtin node single

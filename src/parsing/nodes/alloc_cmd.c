@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:07:26 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/16 22:01:31 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:47:15 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ bool	alloc_cmd(t_node_list *curr_node, t_tokens *token, t_msh **msh)
 	t_cmd	*cmd;
 
 	cmd = ft_calloc(1, sizeof(t_cmd));
-	printf("alloc cmd\n");
 	if (!cmd)
 	{
 		printf("Failed to allocate cmd in node\n");

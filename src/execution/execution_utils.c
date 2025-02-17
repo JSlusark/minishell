@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/16 22:57:56 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:46:37 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,15 @@ void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec)
 	int	exit_code;
 
 	if (exec_builtin(node, exec) == 0)
+	{
+		clear_history();
+		close_pipes(pipes, exec->node_amount - 1);
+		free_pipes(pipes, exec->node_amount - 1);
+		free_msh(node->msh);
+		free_node_list(node);
+		free_exec(exec);
 		exit(0);
+	}
 	exit_code = exec_external(node->cmd, node->msh);
 	if (exit_code != 0)
 	{
