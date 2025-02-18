@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/06 17:54:08 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:13:13 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../../include/minishell.h"
 
 #include "../../../include/minishell.h"
 
@@ -55,7 +57,7 @@ int	check_exit(t_msh *msh, char **av)
 	return (0);
 }
 
-int	exec_exit(t_node_list *node)
+int	exec_exit(t_node_list *node, t_exec *exec)
 {
 	int	exit_code;
 
@@ -63,6 +65,7 @@ int	exec_exit(t_node_list *node)
 		exit_code = check_exit(node->msh, node->cmd->args);
 	exit_code = node->msh->exit_code;
 	clear_history();
+	free_exec(exec);
 	free_msh(node->msh);
 	free_node_list(node);
 	exit (exit_code);

@@ -6,84 +6,88 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 17:35:48 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:06:38 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-char	*expanded_line(char *line, t_msh *msh)
+void    process_expansion_or_copy(char *line, int *i, char *buff, t_msh *msh)
 {
-	int		i;
-	char	*buff;
-	int		j;
-
-	j = 0;
-	i = 0;
-	buff = malloc(ft_strlen(line) + 1024);
-	while (line[i] != '\0')
-	{
-		if (line[i] == '$')
-		{
-			collect_expansion(line, &i, buff, msh);
-			i++;
-			j = ft_strlen(buff);
-		}
-		buff[j] = line[i];
-		i++;
-		j++;
-	}
-	buff[j] = '\0';
-	return (buff);
+    int j;
+    j = ft_strlen(buff);
+    if (line[*i] == '$')
+    {
+        collect_expansion(line, i, buff, msh);
+        (*i)++;
+    }
+    else
+    {
+        buff[j] = line[*i];
+        (*i)++;
+        buff[j + 1] = '\0';
+    }
 }
-
-bool	add_line_to_doc(char *line, t_node_list *node, char **doc)
+char    *expanded_line(char *line, t_msh *msh)
 {
-	char	*temp;
-
-	if (!line)
-		return (false);
-	line = expanded_line(line, node->msh);
-	if (strcmp(line, node->redir->target) == 0)
-	{
-		free(line);
-		return (false);
-	}
-	if (*doc == NULL)
-		*doc = ft_strdup(line);
-	else
-	{
-		temp = ft_strjoin(*doc, line);
-		free(*doc);
-		*doc = temp;
-	}
-	temp = ft_strjoin(*doc, "\n");
-	free(*doc);
-	*doc = temp;
-	free(line);
-	return (true);
+    int     i;
+    int     size;
+    char    *buff;
+    i = 0;
+    size = ft_strlen(line) + 1024;
+    buff = malloc(size);
+    if (!buff)
+        return (NULL);
+    ft_bzero(buff, size);
+    while (line[i] != '\0')
+        process_expansion_or_copy(line, &i, buff, msh);
+    return (buff);
 }
-
-char	*handle_heredoc(t_node_list *node)
+bool    add_line_to_doc(char *line, t_node_list *node, char **doc)
 {
-	char	*line;
-	char	*doc;
-
-	doc = NULL;
-	run_signals(3, NULL);
-	while (1)
-	{
-		if (g_sig == SIGINT)
-		{
-			node->msh->exit_code = 130;
-			g_sig = 0;
-			break ;
-		}
-		line = readline("> ");
-		if (!add_line_to_doc(line, node, &doc))
-			break ;
-	}
-	if (!doc)
-		doc[0] = '\0';
-	return (doc);
+    char    *temp;
+    if (!line)
+        return (false);
+    line = expanded_line(line, node->msh);
+    if (strcmp(line, node->redir->target) == 0)
+    {
+        free(line);
+        return (false);
+    }
+    if (*doc == NULL)
+        *doc = ft_strdup(line);
+    else
+    {
+        temp = ft_strjoin(*doc, line);
+        free(*doc);
+        *doc = temp;
+    }
+    temp = ft_strjoin(*doc, "\n");
+    free(*doc);
+    *doc = temp;
+    free(line);
+    return (true);
+}
+char    *handle_heredoc(t_node_list *node)
+{
+    char    *line;
+    char    *doc;
+    doc = NULL;
+    run_signals(3, NULL);
+    while (1)
+    {
+        //node->msh->in_heredoc = true;
+        if (g_sig == SIGINT)
+        {
+            node->msh->exit_code = 130;
+            g_sig = 0;
+            break ;
+        }
+        line = readline("> ");
+        if (!add_line_to_doc(line, node, &doc))
+            break ;
+    }
+    if(doc == NULL)
+        doc = ft_strdup("");
+    return (doc);
 }

@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 01:57:17 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/11 02:03:41 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:08:58 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ int	find_ext_cmd(t_node_list *node)
 		return (1);
 	free(path);
 	return (0);
+}
+
+void	free_exec(t_exec *exec)
+{
+	if (exec)
+	{
+		close(exec->stds_cpy[0]);
+		close(exec->stds_cpy[1]);
+		free(exec->stds_cpy);
+	}
 }
