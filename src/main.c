@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 02:10:23 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:27:41 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	ms_env_init(&msh, envp);
 	nodes = NULL;
-	print_banner();
+	//print_banner();
 	while (1)
 	{
 		run_signals(1, msh);
