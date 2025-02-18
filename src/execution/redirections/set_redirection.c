@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 16:19:04 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:33:59 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,11 +218,16 @@ int	set_redirection(t_node_list *node)
 
 	doc = NULL;
 	heredoc_buffer = 1;
+	t_redir	*temp = node->redir;
+
 	while (node->redir)
 	{
 		if (exec_redir(node, &doc, &heredoc_buffer) == -1)
 			return (-1);
+		temp = node->redir;
 		node->redir = node->redir->next;
+		free(temp->target);
+		free(temp);
 	}
 	if (heredoc_buffer == 0)
 	{

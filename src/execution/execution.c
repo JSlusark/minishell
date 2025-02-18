@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 16:22:20 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:13:34 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	close_execution(t_exec *exec, int **pipes)
 		exec->msh->exit_code = 0;
 	else
 		exec->msh->exit_code = exec->exit_code;
-	free_exec(exec);
 }
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
@@ -55,16 +54,14 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->cmd != NULL)
 			exec_cmd(node, pipes, exec);
-		else
-		{
-			//printf("exec child:free after node->cmd == NULL\n");
-			clear_history();
-			close_pipes(pipes, exec->node_amount - 1);
-			free_pipes(pipes, exec->node_amount - 1);
-			free_msh(node->msh);
-			free_node_list(node);
-			free_exec(exec);
-		}
+		//printf("exec child:free after node->cmd == NULL\n");
+		clear_history();
+		close_pipes(pipes, exec->node_amount - 1);
+		free_pipes(pipes, exec->node_amount - 1);
+		free_msh(node->msh);
+		free_redir_list(node->redir);
+		free_node_list(node);
+		free_exec(exec);
 		exit(0);
 	}
 	// else
@@ -168,4 +165,5 @@ void	exec_nodes(t_node_list *node_list)
 		i++;
 	}
 	close_execution(exec, pipes);
+	free_exec(exec);
 }
