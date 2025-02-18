@@ -24,7 +24,7 @@ void	close_execution(t_node_list *node_list, t_exec *exec,
 	else
 		node_list->msh->exit_code = exec->exit_code;
 	free_exec(exec);
-	free_node_list(node_list);
+	//free_node_list(node_list);
 }
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
@@ -151,6 +151,7 @@ void	exec_nodes(t_node_list *node_list)
 	int			**pipes;
 	int			i;
 	t_exec		*exec;
+	t_node_list *temp;
 	//print_nodes	(node_list);
 	exec = NULL;
 	head = node_list;
@@ -162,9 +163,14 @@ void	exec_nodes(t_node_list *node_list)
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
 			break ;
+		//node_copy = duplicate_node_list(head);
 		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
 			break ;
+		temp = head;
+		free_cmd_struct(temp->cmd);
+		free_redir_list(temp->redir);
+		free(temp);
 		head = head->next;
 		i++;
 	}

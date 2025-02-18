@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:28:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/14 18:22:57 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:53:21 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ typedef struct s_exec
 /************************************************************/
 
 /*******************EXEC***********************/
-int		count_nodes(t_node_list	*node_list);
-int		find_ext_cmd(t_node_list *node);
-int		find_builtin(t_node_list	*node);
-int		check_cmds(t_node_list *node_list);
-int		close_wait_free(int **pipes, int node_amount, int last_pid);
-void	reset_in_out(int *stds_cpy);
-void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
-void	close_execution(t_node_list *node_list, t_exec *exec, int **pipes);
-void	free_exec(t_exec *exec);
+t_node_list *duplicate_node_list(t_node_list *node);
+int			count_nodes(t_node_list	*node_list);
+int			find_ext_cmd(t_node_list *node);
+int			find_builtin(t_node_list	*node);
+int			check_cmds(t_node_list *node_list);
+int			close_wait_free(int **pipes, int node_amount, int last_pid);
+void		reset_in_out(int *stds_cpy);
+void		exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
+void		close_execution(t_node_list *node_list, t_exec *exec, int **pipes);
+void		free_exec(t_exec *exec);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);

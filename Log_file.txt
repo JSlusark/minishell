@@ -674,3 +674,16 @@ set redir IN
 pipes initialized
 enter if builtin node single
 enter if builtin node single
+pipes initialized
+set redir IN
+pipes initialized
+pipes initialized
+pipes initialized
+pipes initialized
+set redir IN
+pipes initialized
+pipes initialized
+pipes initialized
+set redir IN
+pipes initialized
+set redir IN
