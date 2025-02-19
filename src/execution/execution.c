@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 12:19:49 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:50:21 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,13 +180,23 @@ void	exec_nodes(t_node_list *node_list)
 	head = node_list;
 	while (head)
 	{
+		temp = head;
 		exec->exit_code = single_node(head, pipes, exec);
 		if (exec->exit_code == -1 || exec->exit_code == 0)
+		{
+			free_cmd_struct(temp->cmd);
+			free_redir_list(temp->redir);
+			free(temp);
 			break ;
+		}
 		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
+		{		
+			free_cmd_struct(temp->cmd);
+			free_redir_list(temp->redir);
+			free(temp);
 			break ;
-		temp = head;
+		}
 		head = head->next;
 		free_cmd_struct(temp->cmd);
 		free_redir_list(temp->redir);

@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/18 19:42:02 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:47:15 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,11 @@ char *handle_heredoc(t_node_list *node)
 	while (node->redir)
 	{
 		if(node->redir->type == HEREDOC)
+		{	
+			if(doc != NULL)
+				free(doc);
 			doc = exec_heredoc(node);
-		temp = node->redir;
+		}temp = node->redir;
 		node->redir = node->redir->next;
 		free(temp->target);
 		free(temp);
