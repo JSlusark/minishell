@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/18 16:19:48 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:44:39 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		env_compare(char **env, char **av, int i);
 /****************REDIRECTIONS*******************/
 int		set_redirection(t_node_list *node);
 char	*handle_heredoc(t_node_list *node);
-void	exec_heredoc(t_node_list *node);
+int		feed_heredoc_to_pipe(char *doc);
 
 /******************BUILTINS********************/
 int		exec_builtin(t_node_list	*node_list, t_exec *exec);

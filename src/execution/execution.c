@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 17:13:34 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:19:49 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,28 @@ void	close_execution(t_exec *exec, int **pipes)
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 {
 	pid_t	pid;
+	int heredoc_pipe[2];
+	char *doc;
+	int heredoc_flag;
 
+	heredoc_flag = 0;
+	doc = NULL;
+	if (node->redir && node->redir->type == HEREDOC)
+	{
+		printf("heredoc in exec_child\n");
+		heredoc_flag = 1;
+		doc = handle_heredoc(node);
+        if (pipe(heredoc_pipe) == -1)
+        {
+            perror("pipe");
+            free(doc);
+            return -1;
+        }
+        write(heredoc_pipe[1], doc, ft_strlen(doc));
+        close(heredoc_pipe[1]);
+        free(doc);
+	}
+	//printf("exec child: before fork\n");
 	pid = fork();
 	run_signals(2, node->msh);
 	if (pid < 0)
@@ -37,6 +58,7 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	}
 	if (pid == 0)
 	{
+		//printf("we we 1\n");
 		if (node->redir)
 		{
 			if (set_redirection(node) == -1)
@@ -50,8 +72,22 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 				exit(-1);
 			}
 		}
+		//printf("we we 2\n");
+
 		if (pipes)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
+		if (heredoc_flag == 1)
+		{	printf("heredoc pipe\n");
+			close(heredoc_pipe[1]);
+			dup2(heredoc_pipe[0], STDIN_FILENO);
+			close(heredoc_pipe[0]);
+		}
+		//printf("we we 3\n");
+			// if (node->redir->type == HEREDOC)
+		// {
+		// 	close(pipes[position-1][1]);
+		// 	close(pipes[position-1][0]);
+		// }
 		if (node->cmd != NULL)
 			exec_cmd(node, pipes, exec);
 		//printf("exec child:free after node->cmd == NULL\n");
@@ -64,30 +100,23 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 		free_exec(exec);
 		exit(0);
 	}
-	// else
-    // {
-    //     // Chiudi i file descriptor delle pipe nel processo padre
-    //     if (position > 0)
-    //     {
-    //         close(pipes[position - 1][0]);
-    //         close(pipes[position - 1][1]);
-    //     }
-    //     if (position < exec->node_amount - 1)
-    //     {
-    //         close(pipes[position][0]);
-    //         close(pipes[position][1]);
-    //     }
-    // }
 	return (pid);
 }
 
 int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 {
-	if(exec->node_amount == 1)
+	if(exec->node_amount == 1 && find_builtin(head) == 0)
 	{
 		//ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
+			if(head->redir->type == HEREDOC)
+			{	printf("heredoc in single node\n");
+				char *doc;
+				doc = handle_heredoc(head);
+				write(1, doc, ft_strlen(doc));
+				free(doc);
+			}
 			if (set_redirection(head) == -1)
 			{
 				free_pipes(pipes, exec->node_amount - 1);

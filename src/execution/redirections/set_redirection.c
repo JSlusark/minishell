@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 17:33:59 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:36:04 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,31 +173,15 @@ int	redir_in(t_node_list *node)
 	return (0);
 }
 
-int	feed_heredoc_to_pipe(char *doc)
+int	exec_redir(t_node_list *node)
 {
-	int	fd[2];
 
-	if (pipe(fd) == -1)
-	{
-		perror("pipe");
-		return (-1);
-	}
-	dup2(fd[0], STDIN_FILENO);
-	close(fd[0]);
-	write(fd[1], doc, ft_strlen(doc));
-	close(fd[1]);
-	close(fd[0]);
-	return (0);
-}
-
-int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
-{
-	if (node->redir->type == HEREDOC)
-	{
-		(*doc) = handle_heredoc(node);
-		if ((*doc) != NULL)
-			*heredoc_buffer = 0;
-	}
+	// if (node->redir->type == HEREDOC)
+	// {
+	// 	(*doc) = handle_heredoc(node);
+	// 	if ((*doc) != NULL)
+	// 		*heredoc_buffer = 0;
+	// }
 	if (node->redir->type == REDIR_IN)
 	{
 		if (redir_in(node) == -1)
@@ -213,30 +197,30 @@ int	exec_redir(t_node_list *node, char **doc, int *heredoc_buffer)
 
 int	set_redirection(t_node_list *node)
 {
-	char	*doc;
-	int		heredoc_buffer;
+	//char	*doc;
+	//int		heredoc_buffer;
 
-	doc = NULL;
-	heredoc_buffer = 1;
+	//doc = NULL;
+	//heredoc_buffer = 1;
 	t_redir	*temp = node->redir;
 
 	while (node->redir)
 	{
-		if (exec_redir(node, &doc, &heredoc_buffer) == -1)
+		if (exec_redir(node) == -1)
 			return (-1);
 		temp = node->redir;
 		node->redir = node->redir->next;
 		free(temp->target);
 		free(temp);
 	}
-	if (heredoc_buffer == 0)
-	{
-		if (feed_heredoc_to_pipe(doc) == -1)
-		{
-			free(doc);
-			return (-1);
-		}
-		free(doc);
-	}
+	// if (heredoc_buffer == 0)
+	// {
+	// 	if (feed_heredoc_to_pipe(doc) == -1)
+	// 	{
+	// 		free(doc);
+	// 		return (-1);
+	// 	}
+	// 	free(doc);
+	// }
 	return (0);
 }
