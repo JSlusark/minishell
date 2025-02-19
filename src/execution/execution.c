@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 12:50:21 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:59:59 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	if (pid == 0)
 	{
 		//printf("we we 1\n");
+		if (pipes)
+			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->redir)
 		{
 			if (set_redirection(node) == -1)
@@ -73,11 +75,9 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 			}
 		}
 		//printf("we we 2\n");
-
-		if (pipes)
-			set_pipe_ends(pipes, position, exec->node_amount - 1);
+		
 		if (heredoc_flag == 1)
-		{	printf("heredoc pipe\n");
+		{	//printf("heredoc pipe\n");
 			close(heredoc_pipe[1]);
 			dup2(heredoc_pipe[0], STDIN_FILENO);
 			close(heredoc_pipe[0]);
