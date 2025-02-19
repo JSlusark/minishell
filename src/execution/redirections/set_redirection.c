@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 18:33:18 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:01:17 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	redir_in(t_node_list *node)
 	node->redir->fd = open(node->redir->target, O_RDONLY, 0777);
 	if (node->redir->fd == -1)
 	{
+		printf("print exit code redir_in\n"); // AGGIUNTO PER CONTROLLO
 		perror("open");
 		node->msh->exit_code = 1;
 		return (-1);
