@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 15:40:47 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:16:08 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,11 @@ void	close_execution(t_exec *exec, int **pipes)
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 {
 	pid_t	pid;
-	int heredoc_pipe[2];
-	char *doc;
-	int heredoc_flag;
+	int		heredoc_pipe[2];
 
-	heredoc_flag = 0;
-	doc = NULL;
-	if (node->redir && node->redir->type == HEREDOC)
-	{
-		//printf("heredoc in exec_child\n");
-		heredoc_flag = 1;
-		doc = handle_heredoc(node);
-        if (pipe(heredoc_pipe) == -1)
-        {
-            perror("pipe");
-            free(doc);
-            return -1;
-        }
-        write(heredoc_pipe[1], doc, ft_strlen(doc));
-        close(heredoc_pipe[1]);
-        free(doc);
-	}
+	heredoc_pipe[0] = -1;
+	if(node->redir)
+		handle_heredoc(node, heredoc_pipe, exec);
 	//printf("exec child: before fork\n");
 	pid = fork();
 	run_signals(2, node->msh);
@@ -58,7 +42,8 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	}
 	if (pid == 0)
 	{
-		//printf("we we 1\n");
+		//print_nodes(node);
+		//printf("enter child process\n");
 		if (pipes)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->redir)
@@ -76,7 +61,7 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 		}
 		//printf("we we 2\n");
 		
-		if (heredoc_flag == 1)
+		if (heredoc_pipe[0] != -1)
 		{	//printf("heredoc pipe\n");
 			close(heredoc_pipe[1]);
 			dup2(heredoc_pipe[0], STDIN_FILENO);
@@ -106,43 +91,27 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 {
 	int heredoc_pipe[2];
-	char *doc;
-	
-	doc = NULL;
+
+	heredoc_pipe[0] = -1;
 	if(exec->node_amount == 1 && find_builtin(head) == 0)
 	{
 		//ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
-			if (head->redir && head->redir->type == HEREDOC)
-			{
-				//printf("heredoc in builtin\n");
-				doc = handle_heredoc(head);
-				if (pipe(heredoc_pipe) == -1)
-				{
-					perror("pipe");
-					free(doc);
-					return -1;
-				}
-				write(heredoc_pipe[1], doc, ft_strlen(doc));
-				close(heredoc_pipe[1]);
-				close(heredoc_pipe[1]);
-				dup2(heredoc_pipe[0], STDIN_FILENO);
-				close(heredoc_pipe[0]);
-				free(doc);
-			}
+			handle_heredoc(head, heredoc_pipe, exec);
 			if (set_redirection(head) == -1)
 			{
-				close(heredoc_pipe[0]);
+				if (heredoc_pipe[0] != -1)
+					close(heredoc_pipe[0]);
 				free_pipes(pipes, exec->node_amount - 1);
 				reset_in_out(exec->stds_cpy);
 				return (-1);
 			}
 		}
-		if ((exec_builtin(head, exec)) == 0)
+		if ((exec_builtin(head, exec, pipes)) == 0)
 		{
-			close(heredoc_pipe[0]);
-			//ft_dprintf("enter exec_builtin node single\n");
+			if (heredoc_pipe[0] != -1)
+				close(heredoc_pipe[0]);
 			free_pipes(pipes, exec->node_amount - 1);
 			reset_in_out(exec->stds_cpy);
 		}

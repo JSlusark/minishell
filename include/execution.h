@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/18 19:44:39 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:16:35 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,15 @@ int		env_compare(char **env, char **av, int i);
 
 /****************REDIRECTIONS*******************/
 int		set_redirection(t_node_list *node);
-char	*handle_heredoc(t_node_list *node);
+void	handle_heredoc(t_node_list *node, int *heredoc_pipe, t_exec *exec);
 int		feed_heredoc_to_pipe(char *doc);
 
 /******************BUILTINS********************/
-int		exec_builtin(t_node_list	*node_list, t_exec *exec);
+int		exec_builtin(t_node_list	*node_list, t_exec *exec, int **pipes);
 int		exec_cd(t_node_list *node);
 int		handle_pwd(t_node_list *node);
 int		handle_env(t_node_list	*node_l);
-int		exec_exit(t_node_list *node, t_exec *exec);
+int		exec_exit(t_node_list *node, t_exec *exec, int **pipes);
 int		handle_echo(t_node_list *node);
 void	exec_unset(char **av, t_node_list *node);
 void	exec_export(char **av, t_node_list *node);

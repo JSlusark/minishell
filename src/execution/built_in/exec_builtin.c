@@ -6,13 +6,13 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:25:47 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 15:12:44 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:17:45 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void	exec_builtin_two(t_node_list *node_list, int *exit, t_exec *exec)
+void	exec_builtin_two(t_node_list *node_list, int *exit)
 {
 	if (ft_strcmp(node_list->cmd->cmd, "unset") == 0)
 	{
@@ -24,11 +24,6 @@ void	exec_builtin_two(t_node_list *node_list, int *exit, t_exec *exec)
 		*exit = 0;
 		handle_env(node_list);
 	}
-	else if (ft_strcmp(node_list->cmd->cmd, "exit") == 0)
-	{
-		*exit = 0;
-		exec_exit(node_list, exec);
-	}
 	else if (ft_strcmp(node_list->cmd->cmd, "export") == 0)
 	{
 		*exit = 0;
@@ -36,7 +31,7 @@ void	exec_builtin_two(t_node_list *node_list, int *exit, t_exec *exec)
 	}
 }
 
-int	exec_builtin(t_node_list	*node_list, t_exec *exec)
+int	exec_builtin(t_node_list	*node_list, t_exec *exec, int **pipes)
 {
 	int	exit;
 
@@ -50,11 +45,16 @@ int	exec_builtin(t_node_list	*node_list, t_exec *exec)
 		exit = 0;
 		exec_cd(node_list);
 	}
+	else if (ft_strcmp(node_list->cmd->cmd, "exit") == 0)
+	{
+		exit = 0;
+		exec_exit(node_list, exec, pipes);
+	}
 	else if (ft_strcmp(node_list->cmd->cmd, "pwd") == 0)
 	{
 		exit = 0;
 		handle_pwd(node_list);
 	}
-	exec_builtin_two(node_list, &exit, exec);
+	exec_builtin_two(node_list, &exit);
 	return (exit);
 }

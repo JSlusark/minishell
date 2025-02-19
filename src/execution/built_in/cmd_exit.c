@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/18 15:13:13 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:22:03 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_exit(t_msh *msh, char **av)
 	return (0);
 }
 
-int	exec_exit(t_node_list *node, t_exec *exec)
+int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 {
 	int	exit_code;
 
@@ -65,8 +65,10 @@ int	exec_exit(t_node_list *node, t_exec *exec)
 		exit_code = check_exit(node->msh, node->cmd->args);
 	exit_code = node->msh->exit_code;
 	clear_history();
-	free_exec(exec);
+	close_pipes(pipes, exec->node_amount - 1);
+	free_pipes(pipes, exec->node_amount - 1);
 	free_msh(node->msh);
+	free_exec(exec);
 	free_node_list(node);
 	exit (exit_code);
 }
