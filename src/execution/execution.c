@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 14:59:59 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:40:47 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	doc = NULL;
 	if (node->redir && node->redir->type == HEREDOC)
 	{
-		printf("heredoc in exec_child\n");
+		//printf("heredoc in exec_child\n");
 		heredoc_flag = 1;
 		doc = handle_heredoc(node);
         if (pipe(heredoc_pipe) == -1)
@@ -105,33 +105,46 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 
 int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 {
+	int heredoc_pipe[2];
+	char *doc;
+	
+	doc = NULL;
 	if(exec->node_amount == 1 && find_builtin(head) == 0)
 	{
 		//ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
-			if(head->redir->type == HEREDOC)
-			{	printf("heredoc in single node\n");
-				char *doc;
+			if (head->redir && head->redir->type == HEREDOC)
+			{
+				//printf("heredoc in builtin\n");
 				doc = handle_heredoc(head);
-				write(1, doc, ft_strlen(doc));
+				if (pipe(heredoc_pipe) == -1)
+				{
+					perror("pipe");
+					free(doc);
+					return -1;
+				}
+				write(heredoc_pipe[1], doc, ft_strlen(doc));
+				close(heredoc_pipe[1]);
+				close(heredoc_pipe[1]);
+				dup2(heredoc_pipe[0], STDIN_FILENO);
+				close(heredoc_pipe[0]);
 				free(doc);
 			}
 			if (set_redirection(head) == -1)
 			{
+				close(heredoc_pipe[0]);
 				free_pipes(pipes, exec->node_amount - 1);
 				reset_in_out(exec->stds_cpy);
 				return (-1);
 			}
 		}
-		if (head->cmd && find_builtin(head) == 0)
+		if ((exec_builtin(head, exec)) == 0)
 		{
-			if ((exec_builtin(head, exec)) == 0)
-			{
-				//ft_dprintf("enter exec_builtin node single\n");
-				free_pipes(pipes, exec->node_amount - 1);
-				reset_in_out(exec->stds_cpy);
-			}
+			close(heredoc_pipe[0]);
+			//ft_dprintf("enter exec_builtin node single\n");
+			free_pipes(pipes, exec->node_amount - 1);
+			reset_in_out(exec->stds_cpy);
 		}
 		else if (head->cmd && find_builtin(head) == 1)
 			return (2);
