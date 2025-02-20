@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 19:01:03 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:16:08 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 		{
 			if (set_redirection(node) == -1)
 			{
-				exec->msh->exit_code = 1; // AGGIUNTO PER CONTROLLO
 				clear_history();
                 close_pipes(pipes, exec->node_amount - 1);
                 free_pipes(pipes, exec->node_amount - 1);
@@ -164,8 +163,8 @@ void	exec_nodes(t_node_list *node_list)
 	while (head)
 	{
 		temp = head;
-		exec->msh->exit_code = single_node(head, pipes, exec); // AGGIUNTO PER CONTROLLO
-		if (exec->msh->exit_code == -1 || exec->msh->exit_code == 0) // AGGIUNTO PER CONTROLLO
+		exec->exit_code = single_node(head, pipes, exec);
+		if (exec->exit_code == -1 || exec->exit_code == 0)
 		{
 			free_cmd_struct(temp->cmd);
 			free_redir_list(temp->redir);
@@ -188,5 +187,4 @@ void	exec_nodes(t_node_list *node_list)
 	}
 	close_execution(exec, pipes);
 	free_exec(exec);
-	//printf("exit code: %d\n", node_list->msh->exit_code);
 }
