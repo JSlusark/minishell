@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:02:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/11 12:37:36 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:26:20 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,6 @@ void		print_cmd_struct_file(t_cmd *cmd);
 void		print_redir_file(t_redir *head);
 
 /* COMMUNICATION BETWEEN PARSING AND EXECUTION */
-void		exec_nodes(t_node_list	*node_list);
+void		exec_nodes(t_node_list	*node_list, int *msh_exit);
 
 #endif

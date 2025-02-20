@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 18:16:08 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:25:03 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 			}
 		}
 		//printf("we we 2\n");
-		
+
 		if (heredoc_pipe[0] != -1)
 		{	//printf("heredoc pipe\n");
 			close(heredoc_pipe[1]);
@@ -88,19 +88,20 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	return (pid);
 }
 
-int	single_node(t_node_list *head, int **pipes, t_exec *exec)
+int	single_node(t_node_list *head, int **pipes, t_exec *exec, int *flag)
 {
 	int heredoc_pipe[2];
 
 	heredoc_pipe[0] = -1;
 	if(exec->node_amount == 1 && find_builtin(head) == 0)
 	{
-		//ft_dprintf("enter if builtin node single\n");
+		// ft_dprintf("enter if builtin node single\n");
 		if (head->redir)
 		{
 			handle_heredoc(head, heredoc_pipe, exec);
 			if (set_redirection(head) == -1)
 			{
+				// printf("Single node 1 - exit %d\n", head->msh->exit_code);
 				if (heredoc_pipe[0] != -1)
 					close(heredoc_pipe[0]);
 				free_pipes(pipes, exec->node_amount - 1);
@@ -108,15 +109,25 @@ int	single_node(t_node_list *head, int **pipes, t_exec *exec)
 				return (-1);
 			}
 		}
-		if ((exec_builtin(head, exec, pipes)) == 0)
+		if ((exec_builtin(head, exec, pipes)) == 0) // QUA e' il builtin con le pipes?
 		{
+			// printf("Single node 2 - exit %d\n", head->msh->exit_code);
 			if (heredoc_pipe[0] != -1)
 				close(heredoc_pipe[0]);
+			// printf("Single node 3 - exit %d\n", head->msh->exit_code);
 			free_pipes(pipes, exec->node_amount - 1);
 			reset_in_out(exec->stds_cpy);
+			// printf("Single node 4 - exit %d\n", head->msh->exit_code);
+			if(head->msh->exit_code != 0)
+				*flag = 1;
+			// printf("flag %d\n", *flag);
+			// DEVE RITORNARE QUALCOSA E FERMARSI NO?
 		}
 		else if (head->cmd && find_builtin(head) == 1)
+		{
+			// printf("Single node 5 - exit %d\n", head->msh->exit_code);
 			return (2);
+		}
 		return (0);
 	}
 	return (1);
@@ -146,37 +157,46 @@ int	set_and_init(t_node_list *node_list, t_exec **exec, int ***pipes)
 	return (0);
 }
 
-void	exec_nodes(t_node_list *node_list)
+void	exec_nodes(t_node_list *node_list, int *msh_exit)
 {
 	t_node_list	*head;
 	int			**pipes;
 	int			i;
 	t_exec		*exec;
 	t_node_list *temp;
+	int flag;
 
+	flag = 0;
 	exec = NULL;
 	if (set_and_init(node_list, &exec, &pipes) == 1)
 		return ;
 	i = 0;
-	//exec_heredoc(node_list);
 	head = node_list;
 	while (head)
 	{
 		temp = head;
-		exec->exit_code = single_node(head, pipes, exec);
-		if (exec->exit_code == -1 || exec->exit_code == 0)
+		exec->msh->exit_code = single_node(head, pipes, exec, &flag); // AGGIUNTO PER CONTROLLO
+		// printf("BUILTIN EXEC->MSH->EXIT_CODE %d \n", exec->msh->exit_code);
+		if (exec->msh->exit_code == -1 || exec->msh->exit_code == 0) // AGGIUNTO PER CONTROLLO
 		{
 			free_cmd_struct(temp->cmd);
 			free_redir_list(temp->redir);
 			free(temp);
+			// if(exec->msh->exit_code == -1)
+			// {
+				// *msh_exit = 1;
+				// return;
+			// }
+			// printf("BREAK FROM -1/ 0 | EXEC->MSH->EXIT_CODE %d \n", exec->msh->exit_code);
 			break ;
 		}
 		exec->last_pid = exec_child(head, pipes, exec, i);
 		if (exec->last_pid == -1)
-		{		
+		{
 			free_cmd_struct(temp->cmd);
 			free_redir_list(temp->redir);
 			free(temp);
+			// printf("BREAK FROM EXEC->LAST_PID - 1 | EXEC->MSH->EXIT_CODE %d \n", exec->msh->exit_code);
 			break ;
 		}
 		head = head->next;
@@ -185,6 +205,15 @@ void	exec_nodes(t_node_list *node_list)
 		free(temp);
 		i++;
 	}
+	// printf("EXEC exit before close execution %d \n", exec->msh->exit_code);
+	if(exec->msh->exit_code == -1 || flag == 1)
+	{
+		*msh_exit = 1;
+		return;
+	}
 	close_execution(exec, pipes);
+	// printf("EXEC exit AFETR close execution %d \n", exec->msh->exit_code);
+	// printf("MSH %d \n", *msh_exit);
 	free_exec(exec);
+	// printf("exit code: %d\n", node_list->msh->exit_code);
 }
