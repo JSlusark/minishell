@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/20 14:07:07 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:06:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	redir_in(t_node_list *node)
 	node->redir->fd = open(node->redir->target, O_RDONLY, 0777);
 	if (node->redir->fd == -1)
 	{
-		printf("print exit code redir_in\n"); // AGGIUNTO PER CONTROLLO
+		// printf("print exit code redir_in\n"); // AGGIUNTO PER CONTROLLO
 		perror("open");
 		node->msh->exit_code = 1;
 		return (-1);
