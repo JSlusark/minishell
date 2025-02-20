@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:02:51 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/20 15:14:12 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:26:39 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,6 @@ void		print_cmd_struct_file(t_cmd *cmd);
 void		print_redir_file(t_redir *head);
 
 /* COMMUNICATION BETWEEN PARSING AND EXECUTION */
-void		exec_nodes(t_node_list	*node_list, int *msh_exit);
+void		exec_node_list(t_node_list *node);
 
 #endif

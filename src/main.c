@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/20 12:25:44 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/20 20:26:20 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	handle_input(char *input, t_node_list *nodes, t_msh *msh)
 	nodes = parse(input, nodes, msh);
 	if (nodes)
 	{
-		exec_nodes(nodes, &msh->exit_code);
-	//	free_node_list(nodes);
+		exec_node_list(nodes);
 	}
 }
 

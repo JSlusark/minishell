@@ -6,7 +6,7 @@
 /*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/19 18:16:35 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/20 21:06:22 by stdi-pum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int		close_wait_free(int **pipes, int node_amount, int last_pid);
 void	reset_in_out(int *stds_cpy);
 void	exec_cmd(t_node_list *node, int **pipes, t_exec *exec);
 void	free_exec(t_exec *exec);
+void	clean_exit(t_exec *exec, int **pipes, t_node_list *node, int flag);
+int		set_and_init(t_node_list *node_list, t_exec **exec, int ***pipes);
+void	clean_exec_node(t_node_list *temp);
+void	close_execution(t_exec *exec, int **pipes);
+int		exec_node_redir(t_node_list *head, int **pipes, int *heredoc_pipe, 
+			t_exec *exec);
 
 /*******************ENV************************/
 void	ms_env_init(t_msh **msh, char **envp);
@@ -57,6 +63,7 @@ int		env_compare(char **env, char **av, int i);
 int		set_redirection(t_node_list *node);
 void	handle_heredoc(t_node_list *node, int *heredoc_pipe, t_exec *exec);
 int		feed_heredoc_to_pipe(char *doc);
+bool	add_line_to_doc(char *line, t_redir *redir, t_exec *exec, char **doc);
 
 /******************BUILTINS********************/
 int		exec_builtin(t_node_list	*node_list, t_exec *exec, int **pipes);
@@ -75,8 +82,8 @@ void	sort_env_vars(char **env);
 int		exec_external(t_cmd *cmd, t_msh *msh);
 void	print_error(char *str, char *message, int err);
 void	free_results(char **results);
-int		exec_child(t_node_list *node, int **pipes,
-		t_exec *exec, int position);
+void	exec_child(t_node_list *node, int **pipes, 
+			t_exec *exec, int *heredoc_pipe);
 char	*find_path(char *cmd, char **envp);
 int		check_access(char **path, t_cmd *cmd);
 char	**cmd_str(t_cmd *cmd);
