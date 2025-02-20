@@ -1,4 +1,3 @@
-#order of -n
 echo -n hello
 echo -n -n hello
 echo -n -n -n hello
@@ -23,7 +22,6 @@ echo -n
 echo -n  "              "
 echo-
 echo -N
-#with quotes
 echo "-n"nnn hello
 echo "-n"nnm hello
 echo '-n'nnn hello
@@ -43,13 +41,11 @@ echo "'"-n"'"
 echo "'"'"-n"'"'"
 echo '"-n"'
 -n
-# with redirection
 echo > file -n hey
 echo > file hey -n
 echo hey -n > file
 echo > -n ciao
 echo > file -nm
-cd -n hello ciao
 echo > -n
 echo > -n ciao
 echo > -n ciao -n

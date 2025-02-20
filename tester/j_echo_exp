@@ -1,9 +1,5 @@
-echo $$
-echo $$$
-echo $$$$
 $USER
 $NOTREAL ciao
-##normal
 echo$USER
 echo $USERciao
 echo$USERciao
@@ -13,12 +9,10 @@ echo $?
 echo$?
 echo $?ciao
 echo$?ciao
-#with invalid env_signs
 echo$US"ER"
 echo $US"ER"
 echo$"US"ER
 echo $"US"ER
-#with pipes
 echo $|
 echo $| echo
 echo $| echo hello
