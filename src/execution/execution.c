@@ -6,22 +6,33 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/20 12:25:03 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:50:06 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	close_execution(t_exec *exec, int **pipes)
+void	close_execution(t_exec *exec, int **pipes, int bn_flag)
 {
+	// printf("CLOSE EXECUTION EXIT BEFORE RESET 1  %d \n", exec->exit_code);
 	reset_in_out(exec->stds_cpy);
+	// printf("CLOSE EXECUTION EXIT AFTER RESET 2 %d \n", exec->exit_code);
 	exec->exit_code = close_wait_free(pipes, exec->node_amount, exec->last_pid);
+	// printf("CLOSE EXECUTION EXIT AFTER CLOSE_WAIT FREE 3 %d \n", exec->exit_code);
+	if (exec->msh->exit_code == -1 || bn_flag == 1)
+	{
+		exec->msh->exit_code = 1;
+		return;
+	}
 	if (exec->exit_code == 255)
 		exec->msh->exit_code = 1;
 	else if (exec->exit_code == 13)
 		exec->msh->exit_code = 0;
+	else if (exec->exit_code == 1)
+		exec->msh->exit_code = 1;
 	else
 		exec->msh->exit_code = exec->exit_code;
+	// printf("CLOSE EXECUTION 4 MSH %d \n", exec->msh->exit_code);
 }
 
 int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
@@ -42,8 +53,6 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 	}
 	if (pid == 0)
 	{
-		//print_nodes(node);
-		//printf("enter child process\n");
 		if (pipes)
 			set_pipe_ends(pipes, position, exec->node_amount - 1);
 		if (node->redir)
@@ -59,23 +68,14 @@ int	exec_child(t_node_list *node, int **pipes, t_exec *exec, int position)
 				exit(-1);
 			}
 		}
-		//printf("we we 2\n");
-
 		if (heredoc_pipe[0] != -1)
-		{	//printf("heredoc pipe\n");
+		{
 			close(heredoc_pipe[1]);
 			dup2(heredoc_pipe[0], STDIN_FILENO);
 			close(heredoc_pipe[0]);
 		}
-		//printf("we we 3\n");
-			// if (node->redir->type == HEREDOC)
-		// {
-		// 	close(pipes[position-1][1]);
-		// 	close(pipes[position-1][0]);
-		// }
 		if (node->cmd != NULL)
 			exec_cmd(node, pipes, exec);
-		//printf("exec child:free after node->cmd == NULL\n");
 		clear_history();
 		close_pipes(pipes, exec->node_amount - 1);
 		free_pipes(pipes, exec->node_amount - 1);
@@ -164,9 +164,10 @@ void	exec_nodes(t_node_list *node_list, int *msh_exit)
 	int			i;
 	t_exec		*exec;
 	t_node_list *temp;
-	int flag;
-
-	flag = 0;
+	int redir_exit_flag;
+	int stored_exit;
+	redir_exit_flag = 0;
+	stored_exit = 0;
 	exec = NULL;
 	if (set_and_init(node_list, &exec, &pipes) == 1)
 		return ;
@@ -175,18 +176,13 @@ void	exec_nodes(t_node_list *node_list, int *msh_exit)
 	while (head)
 	{
 		temp = head;
-		exec->msh->exit_code = single_node(head, pipes, exec, &flag); // AGGIUNTO PER CONTROLLO
+		exec->msh->exit_code = single_node(head, pipes, exec, &redir_exit_flag); // AGGIUNTO PER CONTROLLO
 		// printf("BUILTIN EXEC->MSH->EXIT_CODE %d \n", exec->msh->exit_code);
 		if (exec->msh->exit_code == -1 || exec->msh->exit_code == 0) // AGGIUNTO PER CONTROLLO
 		{
 			free_cmd_struct(temp->cmd);
 			free_redir_list(temp->redir);
 			free(temp);
-			// if(exec->msh->exit_code == -1)
-			// {
-				// *msh_exit = 1;
-				// return;
-			// }
 			// printf("BREAK FROM -1/ 0 | EXEC->MSH->EXIT_CODE %d \n", exec->msh->exit_code);
 			break ;
 		}
@@ -205,15 +201,16 @@ void	exec_nodes(t_node_list *node_list, int *msh_exit)
 		free(temp);
 		i++;
 	}
-	// printf("EXEC exit before close execution %d \n", exec->msh->exit_code);
-	if(exec->msh->exit_code == -1 || flag == 1)
-	{
-		*msh_exit = 1;
-		return;
-	}
-	close_execution(exec, pipes);
-	// printf("EXEC exit AFETR close execution %d \n", exec->msh->exit_code);
-	// printf("MSH %d \n", *msh_exit);
+	// printf("redir in exit_flag %d \n", redir_exit_flag);
+	// printf("exec->msh->exit_code BEFORE close_exec %d \n", exec->msh->exit_code);
+	// printf("exec->exit_code BEFORE close_exec: %d\n", exec->exit_code);
+	close_execution(exec, pipes, redir_exit_flag);
+	// printf("exec->msh->exit_code AFTER close_exec %d \n", exec->msh->exit_code);
+	// printf("exec->exit_code AFTER close_exec: %d\n", exec->exit_code);
+	stored_exit = exec->msh->exit_code;
+	// printf("Stored exit AFTER close execution %d \n",stored_exit);
 	free_exec(exec);
-	// printf("exit code: %d\n", node_list->msh->exit_code);
+	// printf("exec->msh->exit_code AFTER free_exec %d \n", exec->msh->exit_code);
+	// printf("exec->exit_code AFTER free_exec %d\n", exec->exit_code);
+	*msh_exit = stored_exit;
 }
