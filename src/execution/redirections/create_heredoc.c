@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_heredoc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:45:13 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/20 20:45:42 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:08:34 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	add_line_to_doc(char *line, t_redir *redir, t_exec *exec, char **doc)
 	if (!line)
 		return (false);
 	line = expanded_line(line, exec->msh);
-	if (strcmp(line, redir->target) == 0)
+	if (ft_strcmp(line, redir->target) == 0)
 	{
 		free(line);
 		return (false);

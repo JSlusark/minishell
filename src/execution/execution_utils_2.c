@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils_2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 01:57:17 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/18 15:08:58 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:02:12 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ int	find_builtin(t_node_list	*node)
 {
 	if (!node->cmd)
 		return (1);
-	if (strcmp(node->cmd->cmd, "cd") == 0)
+	if (ft_strcmp(node->cmd->cmd, "cd") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "env") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "env") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "echo") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "echo") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "exit") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "exit") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "export") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "export") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "pwd") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "pwd") == 0)
 		return (0);
-	else if (strcmp(node->cmd->cmd, "unset") == 0)
+	else if (ft_strcmp(node->cmd->cmd, "unset") == 0)
 		return (0);
 	return (1);
 }

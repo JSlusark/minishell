@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 20:52:18 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/21 15:08:16 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:00:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	exec_external(t_cmd *cmd, t_msh *msh)
 	{
 		return (1);
 	}
-	if (strchr(cmds[0], '/') != NULL)
+	if (ft_strchr(cmds[0], '/') != NULL)
 		path = cmds[0];
 	else
 		path = find_path (cmds[0], msh->ms_env);

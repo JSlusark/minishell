@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:50:52 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 17:58:15 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:01:08 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	bubble_sort(char **env, int j)
 		min_len = len_a;
 	else
 		min_len = len_b;
-	if (strncmp(var_a, var_b, min_len) > 0)
+	if (ft_strncmp(var_a, var_b, min_len) > 0)
 		swap_strings(&env[j], &env[j + 1]);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_export_print.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:13:01 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 17:52:31 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:01:31 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	print_exp_error(const char *identifier)
 {
 	write(2, "export: `", 9);
 	if (identifier)
-		write(2, identifier, strlen(identifier));
+		write(2, identifier, ft_strlen(identifier));
 	write(2, "': not a valid identifier", 25);
 	write(2, "\n", 1);
 }
