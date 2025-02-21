@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/20 21:11:12 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:22:45 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,17 @@ void	advance_redir(t_redir **current_redir, t_redir **prev_redir)
 	*current_redir = (*current_redir)->next;
 }
 
-void	erase_heredoc_update_redir_list(t_node_list *node, 
-	t_redir *current_redir, t_redir *prev_redir, t_redir *temp_redir)
+void	erase_heredoc_update_redir_list(t_node_list *node,
+	t_redir **current_redir, t_redir **prev_redir)
 {
-	if (prev_redir)
-		prev_redir->next = current_redir->next;
+	t_redir	*temp_redir;
+
+	if (*prev_redir)
+		(*prev_redir)->next = (*current_redir)->next;
 	else
-		node->redir = current_redir->next;
-	temp_redir = current_redir;
-	current_redir = current_redir->next;
+		node->redir = (*current_redir)->next;
+	temp_redir = *current_redir;
+	*current_redir = (*current_redir)->next;
 	free(temp_redir->target);
 	free(temp_redir);
 }
@@ -60,22 +62,18 @@ void	piping_heredoc(int *heredoc_pipe, char *doc)
 	if (pipe(heredoc_pipe) == -1)
 	{
 		perror("pipe");
-		free(doc);
 		return ;
 	}
 	write(heredoc_pipe[1], doc, ft_strlen(doc));
 	close(heredoc_pipe[1]);
-	free(doc);
 }
 
 void	handle_heredoc(t_node_list *node, int *heredoc_pipe, t_exec *exec)
 {
 	t_redir	*current_redir;
 	t_redir	*prev_redir;
-	t_redir	*temp_redir;
 	char	*doc;
 
-	temp_redir = NULL;
 	current_redir = node->redir;
 	prev_redir = NULL;
 	doc = NULL;
@@ -87,10 +85,11 @@ void	handle_heredoc(t_node_list *node, int *heredoc_pipe, t_exec *exec)
 				free(doc);
 			doc = exec_heredoc(current_redir, exec);
 			piping_heredoc(heredoc_pipe, doc);
-			erase_heredoc_update_redir_list(node, current_redir, 
-				prev_redir, temp_redir);
+			erase_heredoc_update_redir_list(node, &current_redir, &prev_redir);
 		}
 		else
 			advance_redir(&current_redir, &prev_redir);
 	}
+	if (doc != NULL)
+		free(doc);
 }
