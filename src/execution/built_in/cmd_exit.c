@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/19 18:22:03 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 15:55:49 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,21 @@ bool	invalid_exit(char **av, t_msh *msh)
 
 int	check_exit(t_msh *msh, char **av)
 {
+	int	i;
+
+	i = 0;
 	if (av[1])
 	{
-		write(2, "exit: too many arguments\n", 25);
-		msh->exit_code = 1;
-		return (1);
+		while (av[0][i] != '\0')
+		{
+			if (ft_isdigit(av[0][i]))
+			{
+				write(2, "exit: too many arguments\n", 25);
+				msh->exit_code = 1;
+				return (-1);
+			}
+			i++;
+		}
 	}
 	if (invalid_exit(av, msh))
 		return (1);
@@ -63,6 +73,8 @@ int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 
 	if (node->cmd->args)
 		exit_code = check_exit(node->msh, node->cmd->args);
+	if (exit_code == -1)
+		return (1);
 	exit_code = node->msh->exit_code;
 	clear_history();
 	close_pipes(pipes, exec->node_amount - 1);
@@ -70,5 +82,5 @@ int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 	free_msh(node->msh);
 	free_exec(exec);
 	free_node_list(node);
-	exit (exit_code);
+	exit(exit_code);
 }
