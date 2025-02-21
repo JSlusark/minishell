@@ -34,7 +34,55 @@ DPRINTF := $(DPRINTF_DIR)/libdprintf.a
 NAME := minishell
 
 # Source files and object files
-SRC := $(shell find $(SRC_DIR) -type f -name "*.c")
+SRC := \
+	$(SRC_DIR)/main.c \
+	$(SRC_DIR)/execution/execution.c \
+	$(SRC_DIR)/execution/execution2.c \
+	$(SRC_DIR)/execution/execution_utils.c \
+	$(SRC_DIR)/execution/execution_utils_2.c \
+	$(SRC_DIR)/execution/pipes/pipes.c \
+	$(SRC_DIR)/execution/redirections/create_heredoc.c \
+	$(SRC_DIR)/execution/redirections/set_heredoc.c \
+	$(SRC_DIR)/execution/redirections/set_redirection.c \
+	$(SRC_DIR)/execution/signals/signals.c \
+	$(SRC_DIR)/execution/signals/signals_utils.c \
+	$(SRC_DIR)/execution/external_cmds/exec_externals.c \
+	$(SRC_DIR)/execution/external_cmds/exec_externals_utils.c \
+	$(SRC_DIR)/execution/built_in/cmd_cd.c \
+	$(SRC_DIR)/execution/built_in/cmd_echo.c \
+	$(SRC_DIR)/execution/built_in/cmd_env.c \
+	$(SRC_DIR)/execution/built_in/cmd_exit.c \
+	$(SRC_DIR)/execution/built_in/cmd_export.c \
+	$(SRC_DIR)/execution/built_in/cmd_export_print.c \
+	$(SRC_DIR)/execution/built_in/cmd_export_utils.c \
+	$(SRC_DIR)/execution/built_in/cmd_pwd.c \
+	$(SRC_DIR)/execution/built_in/cmd_unset.c \
+	$(SRC_DIR)/execution/built_in/env/env_init.c \
+	$(SRC_DIR)/execution/built_in/env/get_env.c \
+	$(SRC_DIR)/execution/built_in/env/store_home.c \
+	$(SRC_DIR)/execution/built_in/exec_builtin.c \
+	$(SRC_DIR)/parsing/nodes/alloc_args.c \
+	$(SRC_DIR)/parsing/nodes/alloc_cmd.c \
+	$(SRC_DIR)/parsing/nodes/alloc_nodes.c \
+	$(SRC_DIR)/parsing/nodes/alloc_option.c \
+	$(SRC_DIR)/parsing/nodes/alloc_redir.c \
+	$(SRC_DIR)/parsing/nodes/error_handling.c \
+	$(SRC_DIR)/parsing/nodes/free_msh.c \
+	$(SRC_DIR)/parsing/nodes/free_nodes.c \
+	$(SRC_DIR)/parsing/nodes/print_nodes.c \
+	$(SRC_DIR)/parsing/nodes/print_on_cli_utils.c \
+	$(SRC_DIR)/parsing/nodes/print_on_file_utils.c \
+	$(SRC_DIR)/parsing/nodes/return_nodes.c \
+	$(SRC_DIR)/parsing/tokens/allocate_tokens.c \
+	$(SRC_DIR)/parsing/tokens/handle_expansions.c \
+	$(SRC_DIR)/parsing/tokens/handle_expansion_utils.c \
+	$(SRC_DIR)/parsing/tokens/handle_nonquoted.c \
+	$(SRC_DIR)/parsing/tokens/handle_quoted.c \
+	$(SRC_DIR)/parsing/tokens/print_tokens.c \
+	$(SRC_DIR)/parsing/tokens/return_tokens.c \
+	$(SRC_DIR)/parsing/tokens/tokenise_bounds.c \
+	$(SRC_DIR)/parsing/tokens/tokenize_strings.c
+
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # Rules
