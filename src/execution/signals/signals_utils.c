@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 21:37:19 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 21:40:25 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_eof(t_msh *msh)
 {
 	printf("exit\n");
 	free_msh(msh);
-	clear_history();
+	rl_clear_history();
 	exit(0);
 }
 

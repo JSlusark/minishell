@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:31:51 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/20 20:34:01 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	clean_exit(t_exec *exec, int **pipes, t_node_list *node, int flag)
 	if (flag == 1)
 	{
 		exec->msh->exit_code = 1;
-		clear_history();
+		rl_clear_history();
 		close_pipes(pipes, exec->node_amount - 1);
 		free_pipes(pipes, exec->node_amount - 1);
 		free_msh(node->msh);
@@ -27,7 +27,7 @@ void	clean_exit(t_exec *exec, int **pipes, t_node_list *node, int flag)
 	}
 	if (flag == 2)
 	{
-		clear_history();
+		rl_clear_history();
 		close_pipes(pipes, exec->node_amount - 1);
 		free_pipes(pipes, exec->node_amount - 1);
 		free_msh(node->msh);
@@ -77,7 +77,7 @@ void	close_execution(t_exec *exec, int **pipes)
 		exec->msh->exit_code = 1;
 	else if (exec->exit_code == 13)
 		exec->msh->exit_code = 0;
-	else if (exec->exit_code == 1 || exec->msh->exit_code == 1 || 
+	else if (exec->exit_code == 1 || exec->msh->exit_code == 1 ||
 		exec->msh->exit_code == -1)
 		exec->msh->exit_code = 1;
 	else

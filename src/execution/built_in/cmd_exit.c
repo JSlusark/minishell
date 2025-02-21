@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/21 16:55:56 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 	if (exit_code == -1)
 		return (1);
 	exit_code = node->msh->exit_code;
-	clear_history();
+	rl_clear_history();
 	close_pipes(pipes, exec->node_amount - 1);
 	free_pipes(pipes, exec->node_amount - 1);
 	free_msh(node->msh);
