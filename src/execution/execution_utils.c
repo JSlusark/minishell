@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:19:56 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/19 18:14:31 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:08:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,8 @@ int	close_wait_free(int **pipes, int node_amount, int last_pid)
 	exit_code = 0;
 	signal = 0;
 	if (pipes)
-	{
 		close_pipes(pipes, node_amount - 1);
-	}
-	if(last_pid != main_pid)
+	if (last_pid != main_pid)
 	{
 		j = 0;
 		while (j < node_amount)
@@ -95,9 +93,7 @@ int	close_wait_free(int **pipes, int node_amount, int last_pid)
 		}
 	}
 	if (pipes)
-	{
 		free_pipes(pipes, node_amount - 1);
-	}
 	return (exit_code);
 }
 
