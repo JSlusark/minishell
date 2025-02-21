@@ -78,3 +78,7 @@ exit $USER
 exit $HOME
 exit $SHELL
 exit $RANDOM
+exit +42 +42
+exit -42 +42
+exit +42 -42
+exit -42 -42

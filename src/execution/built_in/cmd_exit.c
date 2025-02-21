@@ -6,46 +6,49 @@
 /*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/21 16:17:53 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:55:56 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
+bool	is_non_numeric(char *av)
+{
+	bool		spaces;
+	int			i;
+
+	i = 0;
+	spaces = true;
+	while (av[i] == ' ')
+		i++;
+	if (av[i] == '+' || av[i] == '-')
+		i++;
+	while (av[i])
+	{
+		if (av[i] == ' ')
+			i++;
+		else if (ft_isdigit(av[i]))
+			spaces = false;
+		else if (!ft_isdigit(av[i]))
+			return (true);
+		i++;
+	}
+	if (spaces)
+		return (true);
+	return (false);
+}
+
 bool	invalid_exit(char **av, t_msh *msh)
 {
 	long long	exit_code;
-	int			i;
-	bool		spaces;
 
-	spaces = true;
-	i = 0;
 	if (av[0][0] == '\0')
 	{
 		write(2, "exit: numeric argument required\n", 32);
 		msh->exit_code = 2;
 		return (true);
 	}
-
-	while (av[0][i] == ' ')
-		i++;
-	if (av[0][i] == '+' || av[0][i] == '-')
-		i++;
-	while (av[0][i])
-	{
-		if (av[0][i] == ' ')
-			i++;
-		else if (ft_isdigit(av[0][i]))
-			spaces = false;
-		else if (!ft_isdigit(av[0][i]))
-		{
-			write(2, "exit: numeric argument required\n", 32);
-			msh->exit_code = 2;
-			return (true);
-		}
-		i++;
-	}
-	if (spaces)
+	if (is_non_numeric(av[0]))
 	{
 		write(2, "exit: numeric argument required\n", 32);
 		msh->exit_code = 2;
