@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/23 19:17:05 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:49:53 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*exec_heredoc(t_redir *redir, t_exec *exec)
 		doc = ft_strdup("");
 	return (doc);
 }
-
 
 void	piping_heredoc(int *heredoc_pipe, char *doc)
 {

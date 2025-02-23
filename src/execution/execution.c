@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:54:49 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/23 18:50:17 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:49:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	fork_child(t_node_list *node, int **pipes, t_exec *exec)
 	heredoc_pipe[0] = -1;
 	if (node->redir)
 		handle_heredoc(node, heredoc_pipe, exec);
-	if(g_sig == SIGINT)
+	if (g_sig == SIGINT)
 		heredoc_pipe[0] = -1;
 	pid = fork();
 	run_signals(2, node->msh);
