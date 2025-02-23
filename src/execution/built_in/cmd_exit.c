@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:34:19 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 {
 	int	exit_code;
 
+	exit_code = 0;
 	if (node->cmd->args)
 		exit_code = check_exit(node->msh, node->cmd->args);
 	if (exit_code == -1)

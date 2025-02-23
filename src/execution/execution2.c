@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:31:51 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:28:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	close_execution(t_exec *exec, int **pipes)
 		exec->msh->exit_code = 1;
 	else if (exec->exit_code == 13)
 		exec->msh->exit_code = 0;
-	else if (exec->exit_code == 1 || exec->msh->exit_code == 1 ||
-		exec->msh->exit_code == -1)
+	else if (exec->exit_code == 1 || exec->msh->exit_code == 1
+		|| exec->msh->exit_code == -1)
 		exec->msh->exit_code = 1;
 	else
 		exec->msh->exit_code = exec->exit_code;

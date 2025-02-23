@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/20 21:06:22 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:28:35 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	clean_exit(t_exec *exec, int **pipes, t_node_list *node, int flag);
 int		set_and_init(t_node_list *node_list, t_exec **exec, int ***pipes);
 void	clean_exec_node(t_node_list *temp);
 void	close_execution(t_exec *exec, int **pipes);
-int		exec_node_redir(t_node_list *head, int **pipes, int *heredoc_pipe, 
+int		exec_node_redir(t_node_list *head, int **pipes, int *heredoc_pipe,
 			t_exec *exec);
 
 /*******************ENV************************/
@@ -82,7 +82,7 @@ void	sort_env_vars(char **env);
 int		exec_external(t_cmd *cmd, t_msh *msh);
 void	print_error(char *str, char *message, int err);
 void	free_results(char **results);
-void	exec_child(t_node_list *node, int **pipes, 
+void	exec_child(t_node_list *node, int **pipes,
 			t_exec *exec, int *heredoc_pipe);
 char	*find_path(char *cmd, char **envp);
 int		check_access(char **path, t_cmd *cmd);

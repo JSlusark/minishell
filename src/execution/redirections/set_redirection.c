@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_redirection.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stdi-pum <stdi-pum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 16:04:26 by stdi-pum          #+#    #+#             */
-/*   Updated: 2025/02/20 20:37:46 by stdi-pum         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:27:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	set_redirection(t_node_list *node)
 	return (0);
 }
 
-int	exec_node_redir(t_node_list *head, int **pipes, 
+int	exec_node_redir(t_node_list *head, int **pipes,
 	int *heredoc_pipe, t_exec *exec)
 {
 	handle_heredoc(head, heredoc_pipe, exec);
