@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/23 17:55:01 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 19:17:05 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,23 @@ char	*exec_heredoc(t_redir *redir, t_exec *exec)
 	run_signals(3, NULL);
 	while (1)
 	{
-		if (g_sig == SIGINT)
-		{
-			exec->msh->exit_code = 130;
-			break ;
-		}
 		line = readline("> ");
 		if (!add_line_to_doc(line, redir, exec, &doc))
 			break ;
+	}
+	if (g_sig == SIGINT)
+	{
+		if (doc != NULL)
+		{
+			free(doc);
+			doc = NULL;
+		}
 	}
 	if (doc == NULL)
 		doc = ft_strdup("");
 	return (doc);
 }
+
 
 void	piping_heredoc(int *heredoc_pipe, char *doc)
 {
