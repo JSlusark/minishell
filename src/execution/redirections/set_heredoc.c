@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_heredoc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 19:12:33 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/21 11:22:45 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:55:01 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	*exec_heredoc(t_redir *redir, t_exec *exec)
 		if (g_sig == SIGINT)
 		{
 			exec->msh->exit_code = 130;
-			g_sig = 0;
 			break ;
 		}
 		line = readline("> ");

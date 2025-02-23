@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 13:44:47 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/10 21:38:08 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:51:43 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	run_signals(int sig, t_msh *msh)
 	}
 	else if (sig == 3)
 	{
-		signal(SIGINT, SIG_DFL);
+		signal(SIGINT, exit_heredoc);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }

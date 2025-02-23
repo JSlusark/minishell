@@ -6,7 +6,7 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:21:55 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/23 12:28:35 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/02/23 17:43:42 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	handle_eof(t_msh *msh);
 void	ctrl_c(int sig);
 void	back_slash(int sig);
 void	restore_prompt(int sig);
+void	exit_heredoc(int sig);
 void	run_signals(int sig, t_msh *t_msh);
 
 #endif
