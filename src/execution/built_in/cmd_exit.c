@@ -6,11 +6,21 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 17:22:54 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/23 12:34:19 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:34:10 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+
+void message_end()
+{
+printf(COLOR_GREEN "\n\n╔═══════════════════════════════════════════════════════════════════════════╗\n" COLOR_RESET);
+printf(COLOR_GREEN "║" COLOR_YELLOW "                                                                           " COLOR_GREEN "║\n" COLOR_YELLOW);
+printf(COLOR_GREEN "║" COLOR_YELLOW "               Exit successfull and all memory has been freed.             " COLOR_GREEN "║\n" COLOR_YELLOW);
+printf(COLOR_GREEN "║" COLOR_YELLOW "                      Thank you for trying Minishell                       " COLOR_GREEN "║\n" COLOR_YELLOW);
+printf(COLOR_GREEN "║" COLOR_YELLOW "                                                                           " COLOR_GREEN "║\n" COLOR_YELLOW);
+printf(COLOR_GREEN "╚═══════════════════════════════════════════════════════════════════════════╝\n\n" COLOR_RESET);
+}
 
 bool	is_non_numeric(char *av)
 {
@@ -107,5 +117,6 @@ int	exec_exit(t_node_list *node, t_exec *exec, int **pipes)
 	free_msh(node->msh);
 	free_exec(exec);
 	free_node_list(node);
+	message_end();
 	exit(exit_code);
 }

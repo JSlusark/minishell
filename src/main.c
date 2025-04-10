@@ -3,16 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jslusark <jslusark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/02/21 18:11:38 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/04/10 21:25:23 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_sig;
+
+
+void message_start()
+{
+	printf(COLOR_GREEN "\n\n╔═══════════════════════════════════════════════════════════════════════════╗\n" COLOR_RESET);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "                                                                           " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗         " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║         " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║         " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║         " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗    " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "    ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝    " COLOR_GREEN "║\n" COLOR_YELLOW);
+	printf(COLOR_GREEN "║" COLOR_YELLOW "                                                                           " COLOR_GREEN "║\n" COLOR_RESET);
+	printf(COLOR_GREEN "╚═══════════════════════════════════════════════════════════════════════════╝\n" COLOR_RESET);
+	printf(" ----- A custom Unix-like shell team project built in C at 42 Berlin. -----\n");
+	printf("\n");
+	printf(COLOR_GREEN "                                 Made by:          \n\n");
+
+	printf(COLOR_RESET "            Jessica Slusark                      Stefano A. Di Puma\n");
+	printf(COLOR_YELLOW "          github.com/JSlusark                   github.com/Berryfeels\n\n\n");
+}
 
 t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 {
@@ -68,6 +89,7 @@ int	main(int argc, char **argv, char **envp)
 	ms_env_init(&msh, envp);
 	store_home(msh->ms_env, msh);
 	nodes = NULL;
+	message_start();
 	while (1)
 	{
 		run_signals(1, msh);
