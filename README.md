@@ -3,8 +3,9 @@ Minishell is a command-line interpreter that mimics the behavior of popular UNIX
 Details about the assignment can be found [here]().
 
 
-A short demonstratuion is available in the video below:
-<video src="demo.mp4" controls width="600">
+A short demonstration is available in the video below:
+<video src="./demo.mp4" width="600" controls>
+video
 </video>
 
 # Parser
