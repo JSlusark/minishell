@@ -1,12 +1,9 @@
 # Minishell
-Minishell is a command-line interpreter that mimics the behavior of popular UNIX shells like bash. It is a project built in C as a part of the 42 Berlin curriculum.
-Details about the assignment can be found [here]().
+Minishell is a command-line interpreter that mimics the behavior of popular UNIX shells like bash. It is a project built in C as a part of the 42 Berlin curriculum, project requirements can be accessed [here](./minishell_requirements.pdf).
 
+![Demonstration GIF](./demo/demo.gif)
 
-A short demonstration is available in the video below:
-<video src="./demo.mp4" width="600" controls>
-video
-</video>
+The .mp4 version can be viewed [here](./demo/demo.mp4).
 
 # Parser
 The parser is the first stage in the Minishell program. Its job is to take the raw user input, interpret it, and transform it into a structured format that the executor can directly process.
