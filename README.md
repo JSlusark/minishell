@@ -1,31 +1,59 @@
 # Minishell
 
-Minishell is a command-line interpreter that mimics the behavior of popular UNIX shells like bash.
+A command-line interpreter that mimics the behavior of Bash unix shell.
+It implements essential shell features such as command execution, built-in commands, pipelines, redirections, and environment variable handling.
+
+The project is a collaboration between [Jessica Slusark]() and [Stefano Di Puma]().
+
 ![Demonstration GIF](./demo/demo.gif)
 
-It is a project built in C as a part of the 42 Berlin curriculum.
+[Here](https://docs.google.com/spreadsheets/d/1AUQk0Nrnvj7-9RQHEaSSQJgBb0VGlHvQt78khxBv5UQ/edit?gid=568298332#gid=568298332) you can find a list of tests we tracked to verify the shell's functionality, feel free to try them out.
+
+# Table of Contents
+
+-   [About.](#About)
+-   [Resources.](#Resources)
+-   [Implementation Overview](#Implementation_Overview):
+    -   [Parser](#Parser): [Tokenization.](#1-Tokenization), [Node Construction.](#2-Node-Construction)
+    -   [Execution.](#Execution)
+-   [Compilation.](#Compilation)
+-   [Memory Leaks.](#Memory_Leaks)
+
+# About
+
+Minishell is a project built in C as a part of the 42 Berlin curriculum.
 At 42, assignments are typically presented as requests to build projects that meet specific technical requirements without providing further instructions or external resources to the student. This approach is intentional: the school emphasizes preparing students from day one to tackle challenges just as they would need to do in a real-world work environment.
 Students are expected to independently research, experiment, and debug in order to deliver functional, well-structured solutions that will then be evaluated at school.
 In many cases, the specifications are also deliberately vague, encouraging deeper analysis, problem-solving, and realistic decision-making under uncertainty.
-More about the project requirements can be read [here](./minishell_requirements.pdf).
 
-# Resources used
+More about the project requirements can be read [here](./minishell_requirements.pdf).
+Below is a brief overview of the features we were required to replicate in our shell:
 
 ![Tokens Example](./demo/mapped_requirements.png)
+
+# Resources
+
+Before starting a project we documented ourself with the following resources to learn more about how bash works.
+Also playing with bash in the terminal and testing anything we could think of was a great way to try and grasp an understanding it behaves.
 
 -   [Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)
 -   [Shell & Utilities by Open Group](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html)
 -   [Unix Processes in C](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
--   [Shell progem explained](https://www.youtube.com/watch?v=ubt-UjcQUYg)
+-   [Shell program explained](https://www.youtube.com/watch?v=ubt-UjcQUYg)
 
-# Parser
+# Implementation Overview
+
+The Minishell project is structured into two main components: the **parser** and the **executor**.
+The parser is responsible for interpreting user input and transforming it into a structured format, which is then passed to the executor to process as commands.
+
+## Parser
 
 The parser is the first stage in the Minishell program. Its job is to take the raw user input, interpret it, and transform it into a linked list of command nodes that the executor can then trasverse and execute.
 Each node represents a single command along with its arguments, options, redirections and other metadata.
 
-**To prepare this structure, the parser acts in 2 main steps:**
+To prepare this structure, the parser acts in 2 main steps:
 
-## 1. **Tokenization**:
+### 1. **Tokenization**:
 
 The tokenization process is the first parsing step, responsible for scanning the raw input string and producing a linked list of tokens, each annotated with its type. This prepares the input for syntactic analysis in the node construction step.
 ![Tokens Example](./demo/tokeniser.png)
@@ -60,7 +88,7 @@ typedef struct s_tokens {
 
 The tokenizer processes the input character by character, building a list of tokens. Its logic is designed to identify and classify elements of the shell syntax in a single pass.
 
--   Whitespace characters are used as a delimiter between tokens, they skipped and not stored (unless it is part of a quoted string).
+-   Whitespace characters are used as a delimiter between tokens, they are skipped and not stored (unless it is part of a quoted string).
 
 -   The tokenizer pays special attention to metacharacters like `>`, `<`, `>>`, `<<`, and `|`, which are always treated as separate tokens with specific types (`REDIR_IN`, `REDIR_OUT`, `APPEND`, `HEREDOC`, `PIPE`).
 
@@ -68,11 +96,11 @@ The tokenizer processes the input character by character, building a list of tok
     This includes command names, filenames, options and any other meta characters besides the ones mentioned above (the project is called Minishell for a reason, it does not implement all shell features).
     During the `ARG` scan:
 
-    Quotes (`'`, `"`) are immediately processed as one single `ARG` token, even if it contains whitespaces or special characters. An odd number of quotes will result in an error, as the parser expects them to be balanced.
+    -   Quotes (`'`, `"`) are immediately processed as one single `ARG` token, even if it contains whitespaces or special characters. An odd number of quotes will result in an error, as the parser expects them to be balanced.
 
-    Environment variables are also already handled at this stage, so if the input contains `$VAR` or `$?`, they are replaced with their values from the environment or shell state, unless they are inside single quotes.
+    -   Environment variables are also already handled at this stage, so if the input contains `$VAR` or `$?`, they are already replaced with their values at this stage (unless they are inside single quotes).
 
-For a a more detailed overview on how our tokenizer works, you can uncomment the code at line 42 in `srcs/parser/main.c`:
+For a more detailed overview on how our tokenizer works, you can uncomment the code at line 42 in `srcs/parser/main.c`:
 
 ```
 print_tokens(tokens);
@@ -243,3 +271,5 @@ valgrind --leak-check=full --show-leak-kinds=all ./minishell
 ```
 
 This will report any memory leaks or invalid memory usage. If you see "All heap blocks were freed -- no leaks are possible", the shell is leak-free.
+
+⚠️ Note: Functions provided by the readline library (e.g., readline() and add_history()) are known to cause memory leaks that are not caused by our code. To avoid false positives, we provide a Valgrind suppression file that filters out these external leaks during testing.
