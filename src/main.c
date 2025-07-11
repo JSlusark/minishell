@@ -6,14 +6,13 @@
 /*   By: jslusark <jslusark@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:26:03 by jslusark          #+#    #+#             */
-/*   Updated: 2025/04/10 21:25:23 by jslusark         ###   ########.fr       */
+/*   Updated: 2025/07/11 15:13:54 by jslusark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	g_sig;
-
+int g_sig;
 
 void message_start()
 {
@@ -35,11 +34,12 @@ void message_start()
 	printf(COLOR_YELLOW "          github.com/JSlusark                   github.com/Berryfeels\n\n\n");
 }
 
-t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
+t_node_list *parse(char *input, t_node_list *nodes, t_msh *msh)
 {
-	t_tokens	*tokens;
+	t_tokens *tokens;
 
 	tokens = return_tokens(input, msh);
+	// print_tokens(tokens); // prints token list created from input
 	free(input);
 	if (!tokens)
 	{
@@ -57,7 +57,7 @@ t_node_list	*parse(char *input, t_node_list *nodes, t_msh *msh)
 	return (nodes);
 }
 
-void	handle_input(char *input, t_node_list *nodes, t_msh *msh)
+void handle_input(char *input, t_node_list *nodes, t_msh *msh)
 {
 	if (g_sig == SIGINT)
 	{
@@ -72,17 +72,18 @@ void	handle_input(char *input, t_node_list *nodes, t_msh *msh)
 	if (input && *input)
 		add_history(input);
 	nodes = parse(input, nodes, msh);
+	// print_nodes(nodes); // prints the node list created based on the token sequence from the input
 	if (nodes)
 	{
 		exec_node_list(nodes);
 	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char **envp)
 {
-	char			*input;
-	t_node_list		*nodes;
-	t_msh			*msh;
+	char *input;
+	t_node_list *nodes;
+	t_msh *msh;
 
 	(void)argc;
 	(void)argv;
